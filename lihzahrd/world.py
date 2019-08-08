@@ -172,7 +172,7 @@ class MoonStyle(enum.IntEnum):
     RINGED_GREEN = 2
 
     def __repr__(self):
-        return f"MoonStyle({self.value})"
+        return f"MoonStyle('{self.name}')"
 
 
 class FourPartSplit:
@@ -301,7 +301,7 @@ class MoonPhases(enum.IntEnum):
     WAXING_GIBBOUS = 7
 
     def __repr__(self):
-        return f"MoonPhases({self.value})"
+        return f"MoonPhases('{self.name}')"
 
 
 class WorldTime:
@@ -337,22 +337,25 @@ class InvasionType(enum.IntEnum):
     MARTIAN_MADNESS = 4
 
     def __repr__(self):
-        return f"InvasionType({self.value})"
+        return f"InvasionType('{self.name}')"
 
 
 class WorldInvasion:
     """Invasions (goblin army, pirates, martian madness...) related information."""
-    def __init__(self, delay: int, size: int, type_: InvasionType, position: float):
+    def __init__(self, delay: int, size: int, type_: InvasionType, position: float, size_start: int):
         self.delay: int = delay
         self.size: int = size
 
         self.type: InvasionType = type_
-        """The type of the current invasion (goblin army / pirates / martian madness...). If InvasionType.NONE, no invasion will currently be active in the world."""
+        """The type of the current invasion (goblin army / pirates / martian madness...).
+        
+        If InvasionType.NONE, no invasion will be active in the world."""
 
         self.position: float = position
+        self.size_start: int = size_start
 
     def __repr__(self):
-        return f"WorldInvasion(delay={self.delay}, size={self.size}, type_={self.type}, position={self.position})"
+        return f"WorldInvasion(delay={self.delay}, size={self.size}, type_={self.type}, position={self.position}, size_start={self.size_start})"
 
 
 class WorldRain:
@@ -417,35 +420,31 @@ class WorldSandstorm:
         return f"WorldSandstorm(is_active={self.is_active}, time_left={self.time_left}, severity={self.severity}, intended_severity={self.intended_severity})"
 
 
+class PillarsInfo:
+    """A container for information associated with the Lunar Pillars."""
+    def __init__(self, solar, vortex, nebula, stardust):
+        self.solar = solar
+        self.vortex = vortex
+        self.nebula = nebula
+        self.stardust = stardust
+
+    def __repr__(self):
+        return f"PillarsInfo(solar={self.solar}, vortex={self.vortex}, nebula={self.nebula}, stardust={self.stardust})"
+
+
 class WorldLunarEvents:
     """Lunar Events (Lunar Pillars) related information."""
     def __init__(self,
                  are_active: bool,
-                 solar: bool,
-                 vortex: bool,
-                 nebula: bool,
-                 stardust: bool):
+                 pillars_present: PillarsInfo):
         self.are_active: bool = are_active
         """If the Lunar Events are active or not."""
 
-        self.solar: bool = solar
-        """If the Solar Pillar is present in the world."""
-
-        self.vortex: bool = vortex
-        """If the Vortex Pillar is present in the world."""
-
-        self.nebula: bool = nebula
-        """If the Nebula Pillar is present in the world."""
-
-        self.stardust: bool = stardust
-        """If the Stardust Pillar is present in the world."""
+        self.pillars_present: PillarsInfo = pillars_present
+        """Which pillars are currently present in the world."""
 
     def __repr__(self):
-        return f"WorldLunarEvents(are_active={self.are_active}, solar={self.solar}, vortex={self.vortex}, nebula={self.nebula}, stardust={self.stardust})"
-
-    @property
-    def pillar_count(self):
-        return self.solar + self.vortex + self.nebula + self.stardust
+        return f"WorldLunarEvents(are_active={self.are_active}, pillars_present={repr(self.pillars_present)})"
 
 
 class WorldEvents:
@@ -495,6 +494,185 @@ class WorldEvilType(enum.Enum):
         return f"CorruptionType('{self.name}')"
 
 
+class OldOnesArmyTiers:
+    def __init__(self, tier1, tier2, tier3):
+        self.tier1: bool = tier1
+        self.tier2: bool = tier2
+        self.tier3: bool = tier3
+
+    def __repr__(self):
+        return f"OldOneArmyTiers({self.tier1}, {self.tier2}, {self.tier3})"
+
+
+class Tier1Ore(enum.IntEnum):
+    NOT_DETERMINED = -1
+    COBALT = 107
+    PALLADIUM = 221
+
+    def __repr__(self):
+        return f"Tier1Ore('{self.name}')"
+
+
+class Tier2Ore(enum.IntEnum):
+    NOT_DETERMINED = -1
+    MYTHRIL = 108
+    ORICHALCUM = 222
+
+    def __repr__(self):
+        return f"Tier2Ore('{self.name}')"
+
+
+class Tier3Ore(enum.IntEnum):
+    NOT_DETERMINED = -1
+    NOT_DETERMINED_TOO = 16785407  # ???
+    ADAMANTITE = 111
+    TITANIUM = 223
+
+    def __repr__(self):
+        return f"Tier3Ore('{self.name}')"
+
+
+class WorldAltarsSmashed:
+    """Information related to the first three hardmode ores."""
+    def __init__(self,
+                 count: int,
+                 ore_tier1: Tier1Ore,
+                 ore_tier2: Tier2Ore,
+                 ore_tier3: Tier3Ore):
+        self.count: int = count
+        """The number of altars smashed."""
+
+        self.ore_tier1: Tier1Ore = ore_tier1
+        self.ore_tier2: Tier2Ore = ore_tier2
+        self.ore_tier3: Tier3Ore = ore_tier3
+
+    def __repr__(self):
+        return f"WorldAltars(count={self.count}, ore_tier1={self.ore_tier1}, ore_tier2={self.ore_tier2}, ore_tier3={self.ore_tier3})"
+
+
+class AnglersQuest(enum.IntEnum):
+    BATFISH = 0
+    BUMBLEBEE_TUNA = 1
+    CATFISH = 2
+    CLOUDFISH = 3
+    CURSEDFISH = 4
+    DIRTFISH = 5
+    DYNAMITE_FISH = 6
+    EATER_OF_PLANKTON = 7
+    FALLEN_STARFISH = 8
+    THE_FISH_OF_CTHULHU = 9
+    FISHOTRON = 10
+    HARPYFISH = 11
+    HUNGERFISH = 12
+    ICHORFISH = 13
+    JEWELFISH = 14
+    MIRAGE_FISH = 15
+    MUTANT_FLINXFIN = 16
+    PENGFISH = 17
+    PIXIEFISH = 18
+    SPIDERFISH = 19
+    TUNDRA_TROUT = 20
+    UNICORN_FISH = 21
+    GUIDE_VOODOO_FISH = 22
+    WYVERNTAIL = 23
+    ZOMBIE_FISH = 24
+    AMANITIA_FUNGIFIN = 25
+    ANGELFISH = 26
+    BLOODY_MANOWAR = 27
+    BONEFISH = 28
+    BUNNYFISH = 29
+    CAPN_TUNABEARD = 30
+    CLOWNFISH = 31
+    DEMONIC_HELLFISH = 32
+    DERPFISH = 33
+    FISHRON = 34
+    INFECTED_SCABBARDFISH = 35
+    MUDFISH = 36
+    SLIMEFISH = 37
+    TROPICAL_BARRACUDA = 38
+
+    def __repr__(self):
+        return f"AnglersQuest('{self.name}')"
+
+
+class WorldSavedNPCs:
+    def __init__(self,
+                 goblin_tinkerer: bool,
+                 wizard: bool,
+                 mechanic: bool,
+                 angler: bool,
+                 stylist: bool,
+                 tax_collector: bool,
+                 bartender: bool):
+        self.goblin_tinkerer: bool = goblin_tinkerer
+        self.wizard: bool = wizard
+        self.mechanic: bool = mechanic
+        self.angler: bool = angler
+        self.stylist: bool = stylist
+        self.tax_collector: bool = tax_collector
+        self.bartender: bool = bartender
+
+    def __repr__(self):
+        return f"SavedNPCs(goblin_tinkerer={self.goblin_tinkerer}, wizard={self.wizard}, mechanic={self.mechanic}, angler={self.angler}, stylist={self.stylist}, tax_collector={self.tax_collector}, bartender={self.bartender})"
+
+
+class WorldBossesDefeated:
+    def __init__(self,
+                 eye_of_cthulhu: bool,
+                 eater_of_worlds: bool,
+                 skeletron: bool,
+                 queen_bee: bool,
+                 the_twins: bool,
+                 the_destroyer: bool,
+                 skeletron_prime: bool,
+                 any_mechnical_boss: bool,
+                 plantera: bool,
+                 golem: bool,
+                 king_slime: bool,
+                 goblin_army: bool,
+                 clown: bool,
+                 frost_moon: bool,
+                 pirates: bool,
+                 duke_fishron: bool,
+                 moon_lord: bool,
+                 pumpking: bool,
+                 mourning_wood: bool,
+                 ice_queen: bool,
+                 santa_nk1: bool,
+                 everscream: bool,
+                 lunar_pillars: PillarsInfo,
+                 old_ones_army: OldOnesArmyTiers):
+        self.eye_of_cthulhu: bool = eye_of_cthulhu
+        self.eater_of_worlds: bool = eater_of_worlds
+        self.skeletron: bool = skeletron
+        self.queen_bee: bool = queen_bee
+        self.the_twins: bool = the_twins
+        self.the_destroyer: bool = the_destroyer
+        self.skeletron_prime: bool = skeletron_prime
+
+        self.any_mechnical_boss: bool = any_mechnical_boss
+        """Appearently, there's a different flag for beating any mechanical boss and a specific mechanical boss."""
+
+        self.plantera: bool = plantera
+        self.golem: bool = golem
+        self.king_slime: bool = king_slime
+        self.goblin_army: bool = goblin_army
+        self.clown: bool = clown
+        self.frost_moon: bool = frost_moon
+        self.pirates: bool = pirates
+        self.duke_fishron: bool = duke_fishron
+        self.moon_lord: bool = moon_lord
+        self.pumpking: bool = pumpking
+        self.mourning_wood: bool = mourning_wood
+        self.ice_queen: bool = ice_queen
+        self.santa_nk1: bool = santa_nk1
+        self.everscream: bool = everscream
+        self.lunar_pillars: PillarsInfo = lunar_pillars
+        self.old_ones_army: OldOnesArmyTiers = old_ones_army
+
+    def __repr__(self):
+        return f"<WorldBossesDefeated>"
+
 
 class World:
     """The Python representation of a Terraria world."""
@@ -514,12 +692,14 @@ class World:
                  styles: WorldStyles,
                  backgrounds: WorldBackgrounds,
                  spawn_point: Coordinates,
-                 underground_level: int,
-                 cavern_level: int,
+                 underground_level: float,
+                 cavern_level: float,
                  time: WorldTime,
                  events: WorldEvents,
                  dungeon_point: Coordinates,
-                 world_evil: WorldEvilType):
+                 world_evil: WorldEvilType,
+                 saved_npcs: WorldSavedNPCs,
+                 altars_smashed: WorldAltarsSmashed):
 
         self.version: Version = version
         """The game version when this savefile was last saved."""
@@ -584,6 +764,12 @@ class World:
         self.world_evil: WorldEvilType = world_evil
         """Whether the world has Corruption or Crimson."""
 
+        self.saved_npcs: WorldSavedNPCs = saved_npcs
+        """The NPCs that were rescued by the player."""
+
+        self.altars_smashed: WorldAltarsSmashed = altars_smashed
+        """Information related to the destruction of Demon Altars with a Pwnhammer."""
+
     @classmethod
     def create_from_file(cls, file):
         f = FileReader(file)
@@ -605,8 +791,9 @@ class World:
             tileframeimportant = [*tileframeimportant, *current_bit]
 
         name = f.string()
-        seed = f.string()
-        generator_version = f.int4()
+
+        generator = GeneratorInfo(f.string(), f.int4())
+
         uuid_ = f.uuid()
         id_ = f.int8()
         bounds = f.rect()
@@ -649,20 +836,26 @@ class World:
         defeated_plantera = f.bool()
         defeated_golem = f.bool()
         defeated_king_slime = f.bool()
+
         saved_goblin_tinkerer = f.bool()
         saved_wizard = f.bool()
         saved_mechanic = f.bool()
+
         defeated_goblin_army = f.bool()
         defeated_clown = f.bool()
         defeated_frost_moon = f.bool()
         defeated_pirates = f.bool()
+
         smashed_shadow_orb = f.bool()
         spawn_meteor = f.bool()
         smashed_shadow_orb_mod3 = f.int4()
         smashed_altars_count = f.int4()
         is_hardmode = f.bool()
 
-        invasion = WorldInvasion(delay=f.int4(), size=f.int4(), type_=InvasionType(f.int4()), position=f.double())
+        invasion_delay = f.int4()
+        invasion_size = f.int4()
+        invasion_type = InvasionType(f.int4())
+        invasion_position = f.double()
 
         time_left_slime_rain = f.double()
 
@@ -670,9 +863,13 @@ class World:
 
         rain = WorldRain(is_active=f.bool(), time_left=f.int4(), max_rain=f.single())
 
-        hardmode_ore_1 = f.int4()
-        hardmode_ore_2 = f.int4()
-        hardmode_ore_3 = f.int4()
+        hardmode_ore_1 = Tier1Ore(f.int4())
+        hardmode_ore_2 = Tier2Ore(f.int4())
+        hardmode_ore_3 = Tier3Ore(f.int4())
+        altars_smashed = WorldAltarsSmashed(count=smashed_altars_count,
+                                            ore_tier1=hardmode_ore_1,
+                                            ore_tier2=hardmode_ore_2,
+                                            ore_tier3=hardmode_ore_3)
 
         bg_forest = f.int1()
         bg_corruption = f.int1()
@@ -701,13 +898,22 @@ class World:
         angler_today_quest_completed_by = []
         for _ in range(angler_today_quest_completed_by_count):
             angler_today_quest_completed_by.append(f.string())
+
         saved_angler = f.bool()
-        angler_today_quest_target = f.int4()
+
+        angler_today_quest_target = AnglersQuest(f.int4())
+
         saved_stylist = f.bool()
         saved_tax_collector = f.bool()
+
         invasion_size_start = f.int4()  # ???
+        invasion = WorldInvasion(delay=invasion_delay,
+                                 size=invasion_size,
+                                 type_=invasion_type,
+                                 position=invasion_position,
+                                 size_start=invasion_size_start)
+
         cultist_delay = f.int4()  # ???
-        ...
         mob_types_count = f.int2()
         mob_kills = {}
         for mob_id in range(mob_types_count):
@@ -727,15 +933,12 @@ class World:
         defeated_ice_queen = f.bool()
         defeated_santa_nk1 = f.bool()
         defeated_everscream = f.bool()
-        defeated_pillar_solar = f.bool()
-        defeated_pillar_vortex = f.bool()
-        defeated_pillar_nebula = f.bool()
-        defeated_pillar_stardust = f.bool()
+        defeated_pillars = PillarsInfo(solar=f.bool(), vortex=f.bool(), nebula=f.bool(), stardust=f.bool())
 
-        lunar_events = WorldLunarEvents(solar=f.bool(),
-                                        vortex=f.bool(),
-                                        nebula=f.bool(),
-                                        stardust=f.bool(),
+        lunar_events = WorldLunarEvents(pillars_present=PillarsInfo(solar=f.bool(),
+                                                                    vortex=f.bool(),
+                                                                    nebula=f.bool(),
+                                                                    stardust=f.bool()),
                                         are_active=f.bool())
 
         party_center_active = f.bool()
@@ -765,11 +968,48 @@ class World:
                              lunar_events=lunar_events)
 
         saved_bartender = f.bool()
-        defeated_old_ones_army_tier_1 = f.bool()
-        defeated_old_ones_army_tier_2 = f.bool()
-        defeated_old_ones_army_tier_3 = f.bool()
+        saved_npcs = WorldSavedNPCs(goblin_tinkerer=saved_goblin_tinkerer,
+                                    wizard=saved_wizard,
+                                    mechanic=saved_mechanic,
+                                    angler=saved_angler,
+                                    stylist=saved_stylist,
+                                    tax_collector=saved_tax_collector,
+                                    bartender=saved_bartender)
+
+        old_ones_army = OldOnesArmyTiers(f.bool(), f.bool(), f.bool())
+
+        bosses_defeated = WorldBossesDefeated(eye_of_cthulhu=defeated_eye_of_cthulhu,
+                                              eater_of_worlds=defeated_eater_of_worlds,
+                                              skeletron=defeated_skeletron,
+                                              queen_bee=defeated_queen_bee,
+                                              the_twins=defeated_the_twins,
+                                              the_destroyer=defeated_the_destroyer,
+                                              skeletron_prime=defeated_skeletron_prime,
+                                              any_mechnical_boss=defeated_any_mechnical_boss,
+                                              plantera=defeated_plantera,
+                                              golem=defeated_golem,
+                                              king_slime=defeated_king_slime,
+                                              goblin_army=defeated_goblin_army,
+                                              clown=defeated_clown,
+                                              frost_moon=defeated_frost_moon,
+                                              pirates=defeated_pirates,
+                                              duke_fishron=defeated_duke_fishron,
+                                              moon_lord=defeated_moon_lord,
+                                              pumpking=defeated_pumpking,
+                                              mourning_wood=defeated_mourning_wood,
+                                              ice_queen=defeated_ice_queen,
+                                              santa_nk1=defeated_santa_nk1,
+                                              everscream=defeated_everscream,
+                                              lunar_pillars=defeated_pillars,
+                                              old_ones_army=old_ones_army)
         # Tile data starts here
-        ...
+        world = World(version=version, savefile_type=savefile_type, revision=revision, is_favorite=is_favorite,
+                      name=name, generator=generator, uuid_=uuid_, id_=id_, bounds=bounds, size=world_size,
+                      is_expert=is_expert, created_on=created_on, styles=world_styles, backgrounds=backgrounds,
+                      spawn_point=spawn_point, underground_level=underground_level, cavern_level=cavern_level,
+                      time=time, events=events, dungeon_point=dungeon_point, world_evil=world_evil,
+                      saved_npcs=saved_npcs, altars_smashed=altars_smashed)
+        breakpoint()
 
 
 if __name__ == "__main__":
