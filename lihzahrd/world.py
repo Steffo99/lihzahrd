@@ -21,40 +21,40 @@ class FileReader:
     def __init__(self, file):
         self.file = file
 
-    def bool(self):
+    def bool(self) -> bool:
         return struct.unpack("?", self.file.read(1))[0]
 
-    def int1(self):
+    def int1(self) -> int:
         return struct.unpack("B", self.file.read(1))[0]
 
-    def uint1(self):
+    def uint1(self) -> int:
         return struct.unpack("B", self.file.read(1))[0]
 
-    def int2(self):
+    def int2(self) -> int:
         return struct.unpack("h", self.file.read(2))[0]
 
-    def uint2(self):
+    def uint2(self) -> int:
         return struct.unpack("H", self.file.read(2))[0]
 
-    def int4(self):
+    def int4(self) -> int:
         return struct.unpack("i", self.file.read(4))[0]
 
-    def uint4(self):
+    def uint4(self) -> int:
         return struct.unpack("I", self.file.read(4))[0]
 
-    def int8(self):
+    def int8(self) -> int:
         return struct.unpack("q", self.file.read(8))[0]
 
-    def uint8(self):
+    def uint8(self) -> int:
         return struct.unpack("Q", self.file.read(8))[0]
 
-    def single(self):
+    def single(self) -> float:
         return struct.unpack("f", self.file.read(4))[0]
 
-    def double(self):
+    def double(self) -> float:
         return struct.unpack("d", self.file.read(8))[0]
 
-    def bit(self):
+    def bit(self) -> typing.Tuple[bool, bool, bool, bool, bool, bool, bool, bool]:
         data = struct.unpack("B", self.file.read(1))[0]
         return (bool(data & 0b1000_0000),
                 bool(data & 0b0100_0000),
@@ -65,22 +65,22 @@ class FileReader:
                 bool(data & 0b0000_0010),
                 bool(data & 0b0000_0001))
 
-    def rect(self):
+    def rect(self) -> Rect:
         left, right, top, bottom = struct.unpack("iiii", self.file.read(16))
         return Rect(left, right, top, bottom)
 
-    def string(self, size=None):
+    def string(self, size=None) -> str:
         if size is None:
             size = self.uint1()
         return str(self.file.read(size), encoding="latin1")
 
-    def uuid(self):
+    def uuid(self) -> uuid.UUID:
         # TODO: convert to uuid
         # https://docs.microsoft.com/en-us/dotnet/api/system.guid.tobytearray?view=netframework-4.8
         uuid_bytes = self.file.read(16)
         return uuid_bytes
 
-    def datetime(self):
+    def datetime(self) -> datetime.datetime:
         # TODO: convert to datetime
         # https://docs.microsoft.com/it-it/dotnet/api/system.datetime.kind?view=netframework-4.8#System_DateTime_Kind
         datetime_bytes = self.file.read(8)
@@ -192,9 +192,6 @@ class FourPartSplit:
     def __repr__(self):
         return f"FourPartSplit({repr(self.separators)}, {repr(self.properties)})"
 
-    def __str__(self):
-        return f"{self.far_left} [{self.separators[0]}] {self.nearby_left} [{self.separators[1]}] {self.nearby_right} [{self.separators[2]}] {self.far_right}"
-
     def get_property_at_x(self, x: int):
         if x < self.separators[0]:
             return self.properties[0]
@@ -282,6 +279,223 @@ class WorldBackgrounds:
         return f"WorldBackgrounds({self.bg_underground_snow}, {self.bg_underground_jungle}, {self.bg_hell}, {self.bg_forest}, {self.bg_corruption}, {self.bg_jungle}, {self.bg_snow}, {self.bg_hallow}, {self.bg_crimson}, {self.bg_desert}, {self.bg_ocean})"
 
 
+class WorldClouds:
+    """Information about... the clouds in the world?"""
+    def __init__(self, bg_cloud: int, cloud_number: int, wind_speed: float):
+        self.bg_cloud: int = bg_cloud
+        self.cloud_number: int = cloud_number
+        self.wind_speed: float = wind_speed
+
+    def __repr__(self):
+        return f"WorldClouds(bg_cloud={self.bg_cloud}, cloud_number={self.cloud_number}, wind_speed={self.wind_speed})"
+
+
+class MoonPhases(enum.IntEnum):
+    FULL_MOON = 0
+    WANING_GIBBOUS = 1
+    THIRD_QUARTER = 2
+    WANING_CRESCENT = 3
+    NEW_MOON = 4
+    WAXING_CRESCENT = 5
+    FIRST_QUARTER = 6
+    WAXING_GIBBOUS = 7
+
+    def __repr__(self):
+        return f"MoonPhases({self.value})"
+
+
+class WorldTime:
+    """Game time related information."""
+    def __init__(self, current: float,
+                 is_daytime: bool,
+                 moon_phase: int,
+                 sundial_cooldown: int,
+                 fast_forward_time: bool):
+        self.current: float = current
+        """The current game time."""
+
+        self.is_daytime: bool = is_daytime
+        """If the current time represents a day or a night."""
+
+        self.moon_phase: int = moon_phase
+        """The current moon phase."""
+
+        self.sundial_cooldown: int = sundial_cooldown
+        """The number of days the Enchanted Sundial can't be used for."""
+
+        self.fast_forward_time: bool = fast_forward_time
+
+    def __repr__(self):
+        return f"WorldTime(current={self.current}, is_daytime={self.is_daytime}, moon_phase={self.moon_phase}, sundial_cooldown={self.sundial_cooldown}, fast_forward_time={self.fast_forward_time})"
+
+
+class InvasionType(enum.IntEnum):
+    NONE = 0
+    GOBLIN_INVASION = 1
+    FROST_LEGION = 2
+    PIRATE_INVASION = 3
+    MARTIAN_MADNESS = 4
+
+    def __repr__(self):
+        return f"InvasionType({self.value})"
+
+
+class WorldInvasion:
+    """Invasions (goblin army, pirates, martian madness...) related information."""
+    def __init__(self, delay: int, size: int, type_: InvasionType, position: float):
+        self.delay: int = delay
+        self.size: int = size
+
+        self.type: InvasionType = type_
+        """The type of the current invasion (goblin army / pirates / martian madness...). If InvasionType.NONE, no invasion will currently be active in the world."""
+
+        self.position: float = position
+
+    def __repr__(self):
+        return f"WorldInvasion(delay={self.delay}, size={self.size}, type_={self.type}, position={self.position})"
+
+
+class WorldRain:
+    """Rain related information."""
+    def __init__(self, is_active: bool, time_left: int, max_rain: float):
+        self.is_active: bool = is_active
+        """If it is currently raining in the world."""
+
+        self.time_left: int = time_left
+        """How long it will continue to rain for."""
+
+        self.max_rain: float = max_rain
+
+    def __repr__(self):
+        return f"WorldRain(is_active={self.is_active}, time_left={self.time_left}, max_rain={self.max_rain})"
+
+
+class WorldParty:
+    """NPC Party related information."""
+    def __init__(self,
+                 thrown_by_party_center: bool,
+                 thrown_by_npcs: bool,
+                 cooldown: int,
+                 partying_npcs: typing.List[int]):
+        self.thrown_by_party_center: bool = thrown_by_party_center
+        """If the party was started by right-clicking a Party Center."""
+
+        self.thrown_by_npcs: bool = thrown_by_npcs
+        """If the item was spontaneously thrown by NPCs."""
+
+        self.cooldown: int = cooldown
+        """How long a party cannot be started for."""
+
+        self.partying_npcs: typing.List[int] = partying_npcs
+        """The list of NPC IDs that threw the party."""
+
+    def __repr__(self):
+        return f"WorldParty(thrown_by_party_center={self.thrown_by_party_center}, thrown_by_npcs={self.thrown_by_npcs}, cooldown={self.cooldown}, partying_npcs={self.partying_npcs})"
+
+    @property
+    def is_active(self):
+        return self.thrown_by_party_center or self.thrown_by_npcs
+
+
+class WorldSandstorm:
+    """Sandstorm related information."""
+    def __init__(self,
+                 is_active: bool,
+                 time_left: int,
+                 severity: float,
+                 intended_severity: float):
+        self.is_active: bool = is_active
+        """If a sandstorm is currently ongoing in the desert."""
+
+        self.time_left: int = time_left
+        """How long the sandstorm will continue for."""
+
+        self.severity: float = severity
+        self.intended_severity: float = intended_severity
+
+    def __repr__(self):
+        return f"WorldSandstorm(is_active={self.is_active}, time_left={self.time_left}, severity={self.severity}, intended_severity={self.intended_severity})"
+
+
+class WorldLunarEvents:
+    """Lunar Events (Lunar Pillars) related information."""
+    def __init__(self,
+                 are_active: bool,
+                 solar: bool,
+                 vortex: bool,
+                 nebula: bool,
+                 stardust: bool):
+        self.are_active: bool = are_active
+        """If the Lunar Events are active or not."""
+
+        self.solar: bool = solar
+        """If the Solar Pillar is present in the world."""
+
+        self.vortex: bool = vortex
+        """If the Vortex Pillar is present in the world."""
+
+        self.nebula: bool = nebula
+        """If the Nebula Pillar is present in the world."""
+
+        self.stardust: bool = stardust
+        """If the Stardust Pillar is present in the world."""
+
+    def __repr__(self):
+        return f"WorldLunarEvents(are_active={self.are_active}, solar={self.solar}, vortex={self.vortex}, nebula={self.nebula}, stardust={self.stardust})"
+
+    @property
+    def pillar_count(self):
+        return self.solar + self.vortex + self.nebula + self.stardust
+
+
+class WorldEvents:
+    """Information about the ongoing world events."""
+    def __init__(self,
+                 blood_moon: bool,
+                 solar_eclipse: bool,
+                 invasion: WorldInvasion,
+                 slime_rain: float,
+                 rain: WorldRain,
+                 party: WorldParty,
+                 sandstorm: WorldSandstorm,
+                 lunar_events: WorldLunarEvents):
+        self.blood_moon: bool = blood_moon
+        """If the current moon is a Blood Moon."""
+
+        self.solar_eclipse: bool = solar_eclipse
+        """If the current day is a Solar Eclipse."""
+
+        self.invasion: WorldInvasion = invasion
+        """Information about the currently ongoing invasion."""
+
+        self.slime_rain: float = slime_rain
+        """How long the slime rain will go on for."""
+
+        self.rain: WorldRain = rain
+        """Information about the currently ongoing rain."""
+
+        self.party: WorldParty = party
+        """Information about the currently ongoing party."""
+
+        self.sandstorm: WorldSandstorm = sandstorm
+        """Information about the currently ongoing sandstorm."""
+
+        self.lunar_events: WorldLunarEvents = lunar_events
+        """Information about the currently ongoing Lunar Events."""
+
+    def __repr__(self):
+        return f"<WorldEvents>"
+
+
+class WorldEvilType(enum.Enum):
+    CORRUPTION = False
+    CRIMSON = True
+
+    def __repr__(self):
+        return f"CorruptionType('{self.name}')"
+
+
+
 class World:
     """The Python representation of a Terraria world."""
     def __init__(self,
@@ -301,7 +515,11 @@ class World:
                  backgrounds: WorldBackgrounds,
                  spawn_point: Coordinates,
                  underground_level: int,
-                 cavern_level: int):
+                 cavern_level: int,
+                 time: WorldTime,
+                 events: WorldEvents,
+                 dungeon_point: Coordinates,
+                 world_evil: WorldEvilType):
 
         self.version: Version = version
         """The game version when this savefile was last saved."""
@@ -354,6 +572,18 @@ class World:
         self.cavern_level: float = cavern_level
         """The depth at which the cavern biome starts."""
 
+        self.time: WorldTime = time
+        """Game time related information."""
+
+        self.events: WorldEvents = events
+        """Currently ongoing world events."""
+
+        self.dungeon_point: Coordinates = dungeon_point
+        """The Old Man spawn point."""
+
+        self.world_evil: WorldEvilType = world_evil
+        """Whether the world has Corruption or Crimson."""
+
     @classmethod
     def create_from_file(cls, file):
         f = FileReader(file)
@@ -395,15 +625,19 @@ class World:
         bg_hell = f.int4()
 
         spawn_point = Coordinates(f.int4(), f.int4())
-        underground_level = int(f.double())
-        cavern_level = int(f.double())
+        underground_level = f.double()
+        cavern_level = f.double()
+
         current_time = f.double()
         is_daytime = f.bool()
-        moon_phase = f.uint4()
+        moon_phase = MoonPhases(f.uint4())
+
         blood_moon = f.bool()
         eclipse = f.bool()
-        dungeon_point = (f.int4(), f.int4())
-        is_crimson = f.bool()
+
+        dungeon_point = Coordinates(f.int4(), f.int4())
+        world_evil = WorldEvilType(f.bool())
+
         defeated_eye_of_cthulhu = f.bool()  # Possibly. I'm not sure.
         defeated_eater_of_worlds = f.bool()  # Possibly. I'm not sure.
         defeated_skeletron = f.bool()  # Possibly. I'm not sure.
@@ -427,15 +661,15 @@ class World:
         smashed_shadow_orb_mod3 = f.int4()
         smashed_altars_count = f.int4()
         is_hardmode = f.bool()
-        invasion_delay = f.int4()
-        invasion_size = f.int4()
-        invasion_type = f.int4()
-        invasion_position = f.double()
+
+        invasion = WorldInvasion(delay=f.int4(), size=f.int4(), type_=InvasionType(f.int4()), position=f.double())
+
         time_left_slime_rain = f.double()
-        cooldown_sundial = f.uint1()
-        is_raining = f.bool()
-        time_left_rain = f.int4()
-        max_rain = f.single()  # ???
+
+        sundial_cooldown = f.uint1()
+
+        rain = WorldRain(is_active=f.bool(), time_left=f.int4(), max_rain=f.single())
+
         hardmode_ore_1 = f.int4()
         hardmode_ore_2 = f.int4()
         hardmode_ore_3 = f.int4()
@@ -461,9 +695,8 @@ class World:
                                        bg_desert=bg_desert,
                                        bg_ocean=bg_ocean)
 
-        bg_cloud = f.int4()  # ???
-        cloud_number = f.int2()  # ???
-        wind_speed = f.single()  # ???
+        clouds = WorldClouds(bg_cloud=f.int4(), cloud_number=f.int2(), wind_speed=f.single())
+
         angler_today_quest_completed_by_count = f.uint1()
         angler_today_quest_completed_by = []
         for _ in range(angler_today_quest_completed_by_count):
@@ -479,7 +712,14 @@ class World:
         mob_kills = {}
         for mob_id in range(mob_types_count):
             mob_kills[mob_id] = f.int4()
+
         fast_forward_time = f.bool()
+        time = WorldTime(current=current_time,
+                         is_daytime=is_daytime,
+                         moon_phase=moon_phase,
+                         sundial_cooldown=sundial_cooldown,
+                         fast_forward_time=fast_forward_time)
+
         defeated_duke_fishron = f.bool()
         defeated_moon_lord = f.bool()
         defeated_pumpking = f.bool()
@@ -491,11 +731,13 @@ class World:
         defeated_pillar_vortex = f.bool()
         defeated_pillar_nebula = f.bool()
         defeated_pillar_stardust = f.bool()
-        solar_pillar_active = f.bool()
-        vortex_pillar_active = f.bool()
-        nebula_pillar_active = f.bool()
-        stardust_pillar_active = f.bool()
-        lunar_events_active = f.bool()
+
+        lunar_events = WorldLunarEvents(solar=f.bool(),
+                                        vortex=f.bool(),
+                                        nebula=f.bool(),
+                                        stardust=f.bool(),
+                                        are_active=f.bool())
+
         party_center_active = f.bool()
         party_natural_active = f.bool()
         party_cooldown = f.int4()
@@ -503,10 +745,25 @@ class World:
         partying_npcs = []
         for _ in range(partying_npcs_count):
             partying_npcs.append(f.int4())
-        is_sandstorm = f.bool()
-        time_left_sandstorm = f.int4()
-        sandstorm_severity = f.single()  # ???
-        sandstorm_intended_severity = f.single()  # ???
+        party = WorldParty(thrown_by_party_center=party_center_active,
+                           thrown_by_npcs=party_natural_active,
+                           cooldown=party_cooldown,
+                           partying_npcs=partying_npcs)
+
+        sandstorm = WorldSandstorm(is_active=f.bool(),
+                                   time_left=f.int4(),
+                                   severity=f.single(),
+                                   intended_severity=f.single())
+
+        events = WorldEvents(blood_moon=blood_moon,
+                             solar_eclipse=eclipse,
+                             invasion=invasion,
+                             slime_rain=time_left_slime_rain,
+                             rain=rain,
+                             party=party,
+                             sandstorm=sandstorm,
+                             lunar_events=lunar_events)
+
         saved_bartender = f.bool()
         defeated_old_ones_army_tier_1 = f.bool()
         defeated_old_ones_army_tier_2 = f.bool()
