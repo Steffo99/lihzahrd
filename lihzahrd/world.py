@@ -171,6 +171,9 @@ class MoonStyle(enum.IntEnum):
     ORANGE = 1
     RINGED_GREEN = 2
 
+    def __repr__(self):
+        return f"MoonStyle({self.value})"
+
 
 class FourPartSplit:
     """A world property split in four parts, separated by three vertical lines at a certain x coordinate."""
@@ -245,35 +248,38 @@ class WorldStyles:
         self.trees: FourPartSplit = trees
         self.moss: FourPartSplit = moss
 
+    def __repr__(self):
+        return f"WorldStyles(moon={repr(self.moon)}, trees={repr(self.trees)}, moss={repr(self.moss)})"
+
 
 class WorldBackgrounds:
     """The backgrounds of various world biomes."""
     def __init__(self,
-                 bg_underground_snow,
-                 bg_underground_jungle,
-                 bg_hell,
-                 bg_forest,
-                 bg_corruption,
-                 bg_jungle,
-                 bg_snow,
-                 bg_hallow,
-                 bg_crimson,
-                 bg_desert,
-                 bg_ocean,
-                 bg_cloud):
-        self.bg_underground_snow = bg_underground_snow
-        self.bg_underground_jungle = bg_underground_jungle
-        self.bg_hell = bg_hell
-        self.bg_forest = bg_forest
-        self.bg_corruption = bg_corruption
-        self.bg_jungle = bg_jungle
-        self.bg_snow = bg_snow
-        self.bg_hallow = bg_hallow
-        self.bg_crimson = bg_crimson
-        self.bg_desert = bg_desert
-        self.bg_ocean = bg_ocean
-        self.bg_cloud = bg_cloud
+                 bg_underground_snow: int,
+                 bg_underground_jungle: int,
+                 bg_hell: int,
+                 bg_forest: int,
+                 bg_corruption: int,
+                 bg_jungle: int,
+                 bg_snow: int,
+                 bg_hallow: int,
+                 bg_crimson: int,
+                 bg_desert: int,
+                 bg_ocean: int):
+        self.bg_underground_snow: int = bg_underground_snow
+        self.bg_underground_jungle: int = bg_underground_jungle
+        self.bg_hell: int = bg_hell
+        self.bg_forest: int = bg_forest
+        self.bg_corruption: int = bg_corruption
+        self.bg_jungle: int = bg_jungle
+        self.bg_snow: int = bg_snow
+        self.bg_hallow: int = bg_hallow
+        self.bg_crimson: int = bg_crimson
+        self.bg_desert: int = bg_desert
+        self.bg_ocean: int = bg_ocean
 
+    def __repr__(self):
+        return f"WorldBackgrounds({self.bg_underground_snow}, {self.bg_underground_jungle}, {self.bg_hell}, {self.bg_forest}, {self.bg_corruption}, {self.bg_jungle}, {self.bg_snow}, {self.bg_hallow}, {self.bg_crimson}, {self.bg_desert}, {self.bg_ocean})"
 
 
 class World:
@@ -291,7 +297,11 @@ class World:
                  size: Coordinates,
                  is_expert: bool,
                  created_on,
-                 ):
+                 styles: WorldStyles,
+                 backgrounds: WorldBackgrounds,
+                 spawn_point: Coordinates,
+                 underground_level: int,
+                 cavern_level: int):
 
         self.version: Version = version
         """The game version when this savefile was last saved."""
@@ -328,6 +338,21 @@ class World:
 
         self.created_on = created_on
         """The date and time this world was created in."""
+
+        self.styles: WorldStyles = styles
+        """The styles of various world elements."""
+
+        self.backgrounds: WorldBackgrounds = backgrounds
+        """The backgrounds of the various biomes."""
+
+        self.spawn_point: Coordinates = spawn_point
+        """The coordinates of the spawn point."""
+
+        self.underground_level: float = underground_level
+        """The depth at which the underground biome starts."""
+
+        self.cavern_level: float = cavern_level
+        """The depth at which the cavern biome starts."""
 
     @classmethod
     def create_from_file(cls, file):
@@ -368,9 +393,10 @@ class World:
         bg_underground_snow = f.int4()
         bg_underground_jungle = f.int4()
         bg_hell = f.int4()
-        spawn_point = (f.int4(), f.int4())
-        underground_level = f.double()
-        cavern_level = f.double()
+
+        spawn_point = Coordinates(f.int4(), f.int4())
+        underground_level = int(f.double())
+        cavern_level = int(f.double())
         current_time = f.double()
         is_daytime = f.bool()
         moon_phase = f.uint4()
@@ -413,6 +439,7 @@ class World:
         hardmode_ore_1 = f.int4()
         hardmode_ore_2 = f.int4()
         hardmode_ore_3 = f.int4()
+
         bg_forest = f.int1()
         bg_corruption = f.int1()
         bg_jungle = f.int1()
@@ -421,6 +448,19 @@ class World:
         bg_crimson = f.int1()
         bg_desert = f.int1()
         bg_ocean = f.int1()
+
+        backgrounds = WorldBackgrounds(bg_underground_snow=bg_underground_snow,
+                                       bg_underground_jungle=bg_underground_jungle,
+                                       bg_hell=bg_hell,
+                                       bg_forest=bg_forest,
+                                       bg_corruption=bg_corruption,
+                                       bg_jungle=bg_jungle,
+                                       bg_snow=bg_snow,
+                                       bg_hallow=bg_hallow,
+                                       bg_crimson=bg_crimson,
+                                       bg_desert=bg_desert,
+                                       bg_ocean=bg_ocean)
+
         bg_cloud = f.int4()  # ???
         cloud_number = f.int2()  # ???
         wind_speed = f.single()  # ???
