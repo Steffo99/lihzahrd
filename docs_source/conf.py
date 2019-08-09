@@ -29,6 +29,7 @@ author = 'Stefano Pigozzi'
 extensions = ["sphinx.ext.autodoc", "sphinx.ext.napoleon", "sphinx.ext.intersphinx"]
 
 intersphinx_mapping = {"python": ("https://docs.python.org/3.7", None)}
+napoleon_use_param = True
 
 
 def skip(app, what, name: str, obj, would_skip, options):
