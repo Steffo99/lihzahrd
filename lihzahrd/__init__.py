@@ -550,7 +550,7 @@ class WorldAltarsSmashed:
         return f"WorldAltars(count={self.count}, ore_tier1={self.ore_tier1}, ore_tier2={self.ore_tier2}, ore_tier3={self.ore_tier3})"
 
 
-class AnglersQuest(enum.IntEnum):
+class AnglersQuestFish(enum.IntEnum):
     BATFISH = 0
     BUMBLEBEE_TUNA = 1
     CATFISH = 2
@@ -592,7 +592,7 @@ class AnglersQuest(enum.IntEnum):
     TROPICAL_BARRACUDA = 38
 
     def __repr__(self):
-        return f"AnglersQuest('{self.name}')"
+        return f"AnglersQuestFish('{self.name}')"
 
 
 class WorldSavedNPCs:
@@ -614,6 +614,29 @@ class WorldSavedNPCs:
 
     def __repr__(self):
         return f"SavedNPCs(goblin_tinkerer={self.goblin_tinkerer}, wizard={self.wizard}, mechanic={self.mechanic}, angler={self.angler}, stylist={self.stylist}, tax_collector={self.tax_collector}, bartender={self.bartender})"
+
+
+class WorldShadowOrbs:
+    """Information related to the Shadow Orbs (or the Crimson Hearts) smashed in the world."""
+    def __init__(self,
+                 smashed_at_least_once: bool,
+                 spawn_meteorite: bool,
+                 evil_boss_counter: int):
+        self.smashed_at_least_once: bool = smashed_at_least_once
+        """If a Shadow Orb has ever been smashed in this world."""
+
+        self.spawn_meteorite: bool = spawn_meteorite
+        """If a Meteorite should land in the world at midnight.
+        
+        It is set to True when a Shadow Orb is smashed, then it is set to False when the meteorite actually lands."""
+
+        self.evil_boss_counter: int = evil_boss_counter
+        """If it is 2, the Eater of Worlds will spawn when a Shadow Orb is smashed.
+        
+        It is the number of Shadow Orbs broken, modulo 3."""
+
+    def __repr__(self):
+        return f"WorldShadowOrbs(smashed_at_least_once={self.smashed_at_least_once}, spawn_meteorite={self.spawn_meteorite}, evil_boss_counter={self.evil_boss_counter})"
 
 
 class WorldBossesDefeated:
@@ -674,6 +697,20 @@ class WorldBossesDefeated:
         return f"<WorldBossesDefeated>"
 
 
+class WorldAnglersQuest:
+    """Information about today's Angler's quest."""
+
+    def __init__(self, current_goal: AnglersQuestFish, completed_by: typing.List[str]):
+        self.current_goal: AnglersQuestFish = current_goal
+        """The fish currently requested by the angler."""
+
+        self.completed_by: typing.List[str] = completed_by
+        """A list of player names who completed the angler's quest today."""
+
+    def __repr__(self):
+        return f"WorldAnglersQuest(current_goal={self.current_goal}, completed_by={self.completed_by})"
+
+
 class World:
     """The Python representation of a Terraria world."""
     def __init__(self,
@@ -699,7 +736,13 @@ class World:
                  dungeon_point: Coordinates,
                  world_evil: WorldEvilType,
                  saved_npcs: WorldSavedNPCs,
-                 altars_smashed: WorldAltarsSmashed):
+                 altars_smashed: WorldAltarsSmashed,
+                 is_hardmode: bool,
+                 shadow_orbs: WorldShadowOrbs,
+                 bosses_defeated: WorldBossesDefeated,
+                 anglers_quest: WorldAnglersQuest,
+                 clouds: WorldClouds,
+                 cultist_delay: int):
 
         self.version: Version = version
         """The game version when this savefile was last saved."""
@@ -769,6 +812,32 @@ class World:
 
         self.altars_smashed: WorldAltarsSmashed = altars_smashed
         """Information related to the destruction of Demon Altars with a Pwnhammer."""
+
+        self.is_hardmode: bool = is_hardmode
+        """Whether or not the world is in hardmode."""
+
+        self.shadow_orbs: WorldShadowOrbs = shadow_orbs
+        """Information related to the Shadow Orbs or Crimson Hearts in the world."""
+
+        self.bosses_defeated: WorldBossesDefeated = bosses_defeated
+        """Which bosses have been defeated in the world."""
+
+        self.anglers_quest: WorldAnglersQuest = anglers_quest
+        """Information about today's Angler's Quest."""
+
+        self.clouds: WorldClouds = clouds
+        self.cultist_delay: int = cultist_delay
+
+    def __repr__(self):
+        return f'<World "{self.name}">'
+
+    @property
+    def crimson_hearts(self) -> WorldShadowOrbs:
+        return self.shadow_orbs
+
+    @crimson_hearts.setter
+    def crimson_hearts(self, value):
+        self.shadow_orbs = value
 
     @classmethod
     def create_from_file(cls, file):
@@ -846,10 +915,12 @@ class World:
         defeated_frost_moon = f.bool()
         defeated_pirates = f.bool()
 
-        smashed_shadow_orb = f.bool()
-        spawn_meteor = f.bool()
-        smashed_shadow_orb_mod3 = f.int4()
+        shadow_orbs = WorldShadowOrbs(smashed_at_least_once=f.bool(),
+                                      spawn_meteorite=f.bool(),
+                                      evil_boss_counter=f.int4())
+
         smashed_altars_count = f.int4()
+
         is_hardmode = f.bool()
 
         invasion_delay = f.int4()
@@ -901,7 +972,9 @@ class World:
 
         saved_angler = f.bool()
 
-        angler_today_quest_target = AnglersQuest(f.int4())
+        angler_today_quest_target = AnglersQuestFish(f.int4())
+        anglers_quest = WorldAnglersQuest(current_goal=angler_today_quest_target,
+                                          completed_by=angler_today_quest_completed_by)
 
         saved_stylist = f.bool()
         saved_tax_collector = f.bool()
@@ -1008,8 +1081,11 @@ class World:
                       is_expert=is_expert, created_on=created_on, styles=world_styles, backgrounds=backgrounds,
                       spawn_point=spawn_point, underground_level=underground_level, cavern_level=cavern_level,
                       time=time, events=events, dungeon_point=dungeon_point, world_evil=world_evil,
-                      saved_npcs=saved_npcs, altars_smashed=altars_smashed)
+                      saved_npcs=saved_npcs, altars_smashed=altars_smashed, is_hardmode=is_hardmode,
+                      shadow_orbs=shadow_orbs, bosses_defeated=bosses_defeated, anglers_quest=anglers_quest,
+                      clouds=clouds, cultist_delay=cultist_delay)
         breakpoint()
+        return world
 
 
 if __name__ == "__main__":
