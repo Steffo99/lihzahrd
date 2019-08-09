@@ -42,7 +42,7 @@ class FileReader:
     def double(self) -> float:
         return struct.unpack("d", self.file.read(8))[0]
 
-    def bit(self) -> typing.Tuple[bool, bool, bool, bool, bool, bool, bool, bool]:
+    def bits(self) -> typing.Tuple[bool, bool, bool, bool, bool, bool, bool, bool]:
         data = struct.unpack("B", self.file.read(1))[0]
         return (bool(data & 0b1000_0000),
                 bool(data & 0b0100_0000),

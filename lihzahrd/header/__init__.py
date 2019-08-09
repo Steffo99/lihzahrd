@@ -6,7 +6,6 @@ from .bossesdefeated import BossesDefeated
 from .clouds import Clouds
 from .coordinates import Coordinates
 from .events import Events
-from .filereader import FileReader
 from .fourpartsplit import FourPartSplit
 from .generatorinfo import GeneratorInfo
 from .hardmodeore import HardmodeTier1Ore, HardmodeTier2Ore, HardmodeTier3Ore
@@ -19,7 +18,6 @@ from .oldonesarmytiers import OldOnesArmyTiers
 from .party import Party
 from .pillarsinfo import PillarsInfo
 from .rain import Rain
-from .rect import Rect
 from .sandstorm import Sandstorm
 from .savednpcs import SavedNPCs
 from .shadoworbs import ShadowOrbs
