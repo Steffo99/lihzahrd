@@ -44,14 +44,14 @@ class FileReader:
 
     def bits(self) -> typing.Tuple[bool, bool, bool, bool, bool, bool, bool, bool]:
         data = struct.unpack("B", self.file.read(1))[0]
-        return (bool(data & 0b1000_0000),
-                bool(data & 0b0100_0000),
-                bool(data & 0b0010_0000),
-                bool(data & 0b0001_0000),
-                bool(data & 0b0000_1000),
-                bool(data & 0b0000_0100),
+        return (bool(data & 0b0000_0001),
                 bool(data & 0b0000_0010),
-                bool(data & 0b0000_0001))
+                bool(data & 0b0000_0100),
+                bool(data & 0b0000_1000),
+                bool(data & 0b0001_0000),
+                bool(data & 0b0010_0000),
+                bool(data & 0b0100_0000),
+                bool(data & 0b1000_0000))
 
     def rect(self) -> Rect:
         left, right, top, bottom = struct.unpack("iiii", self.file.read(16))
@@ -73,3 +73,12 @@ class FileReader:
         # https://docs.microsoft.com/it-it/dotnet/api/system.datetime.kind?view=netframework-4.8#System_DateTime_Kind
         datetime_bytes = self.file.read(8)
         return datetime_bytes
+
+    def read_until(self, address: int) -> bytearray:
+        data = bytearray()
+        while self.file.tell() < address:
+            data += self.file.read(1)
+        return data
+
+    def __repr__(self):
+        return f"<FileReader at {hex(self.file.tell())}>"

@@ -25,4 +25,6 @@ class Backgrounds:
         self.bg_ocean: int = bg_ocean
 
     def __repr__(self):
-        return f"WorldBackgrounds({self.bg_underground_snow}, {self.bg_underground_jungle}, {self.bg_hell}, {self.bg_forest}, {self.bg_corruption}, {self.bg_jungle}, {self.bg_snow}, {self.bg_hallow}, {self.bg_crimson}, {self.bg_desert}, {self.bg_ocean})"
+        return f"WorldBackgrounds({self.bg_underground_snow}, {self.bg_underground_jungle}, {self.bg_hell}," \
+               f" {self.bg_forest}, {self.bg_corruption}, {self.bg_jungle}, {self.bg_snow}, {self.bg_hallow}," \
+               f" {self.bg_crimson}, {self.bg_desert}, {self.bg_ocean})"

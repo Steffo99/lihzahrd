@@ -1,8 +1,10 @@
 import uuid
 import math
+import typing
 from .header import *
-from .savedata import filereader
+from .fileutils import *
 from .tiles import *
+from .timer import Timer
 
 
 class World:
@@ -135,12 +137,13 @@ class World:
         self.shadow_orbs = value
 
     @staticmethod
-    def _read_tiles(fr: FileReader, tileframeimportant):
+    def _read_tiles(fr: FileReader, tileframeimportant) -> typing.List:
+        # Once again, this code is a mess
         flags1 = fr.bits()
-        has_tile = flags1[1]
+        has_block = flags1[1]
         has_wall = flags1[2]
-        liquid = Liquid.from_flags(flags1)
-        extended_block_id = flags1[5]
+        liquid_type = LiquidType.from_flags(flags1)
+        has_extended_block_id = flags1[5]
         rle_compression = RLEEncoding.from_flags(flags1)
         if flags1[0]:
             flags2 = fr.bits()
@@ -149,278 +152,325 @@ class World:
                 flags3 = fr.bits()
                 is_active = not flags3[2]
                 wires = Wires(red=flags2[1], green=flags2[2], blue=flags2[3], yellow=flags3[5], actuator=flags3[1])
-                is_tile_painted = flags3[3]
+                is_block_painted = flags3[3]
                 is_wall_painted = flags3[4]
             else:
                 is_active = True
                 wires = Wires(red=flags2[1], green=flags2[2], blue=flags2[3])
-                is_tile_painted = False
+                is_block_painted = False
                 is_wall_painted = False
         else:
             shape = Shape.NORMAL
             is_active = True
             wires = Wires()
-            is_tile_painted = False
+            is_block_painted = False
             is_wall_painted = False
-        if has_tile:
-            if extended_block_id:
-                block_id = fr.uint2()
+        if has_block:
+            if has_extended_block_id:
+                block_id = BlockType(fr.uint2())
             else:
-                block_id = fr.uint1()
+                block_id = BlockType(fr.uint1())
+            if tileframeimportant[block_id]:
+                frame_x = fr.uint2()
+                frame_y = fr.uint2()
+            else:
+                frame_x = None
+                frame_y = None
+            if is_block_painted:
+                block_paint = fr.uint1()
+            else:
+                block_paint = None
+            block = Block(type_=block_id, frame=FrameImportantData(frame_x, frame_y), paint=block_paint)
         else:
-            block_id = None
-        if tileframeimportant:
-            ...
-        breakpoint()
+            block = None
+        if has_wall:
+            wall_id = WallType(fr.uint1())
+            if is_wall_painted:
+                wall_paint = fr.uint1()
+            else:
+                wall_paint = None
+            wall = Wall(type_=wall_id, paint=wall_paint)
+        else:
+            wall = None
+        if liquid_type != LiquidType.NO_LIQUID:
+            liquid = Liquid(type_=liquid_type, volume=fr.uint1())
+        else:
+            liquid = None
+        if rle_compression == RLEEncoding.DOUBLE_BYTE:
+            multiply_by = fr.uint2() + 1
+        elif rle_compression == RLEEncoding.SINGLE_BYTE:
+            multiply_by = fr.uint1() + 1
+        else:
+            multiply_by = 1
+        tile = Tile(block=block, wall=wall, liquid=liquid)
+        return [tile] * multiply_by
 
     @classmethod
     def create_from_file(cls, file):
         """Create a World object from a .wld file."""
         # This code is a mess.
 
-        f = filereader.FileReader(file)
+        f = FileReader(file)
 
-        version = Version(f.int4())
-        relogic = f.string(7)
-        savefile_type = f.uint1()
-        if version != Version("1.3.5.3") or relogic != "relogic" or savefile_type != 2:
-            raise NotImplementedError("This parser can only read Terraria 1.3.5.3 save files.")
+        with Timer("File Format", display=True):
+            version = Version(f.int4())
+            relogic = f.string(7)
+            savefile_type = f.uint1()
+            if version != Version("1.3.5.3") or relogic != "relogic" or savefile_type != 2:
+                raise NotImplementedError("This parser can only read Terraria 1.3.5.3 save files.")
 
-        revision = f.uint4()
-        is_favorite = f.uint8() != 0
+            revision = f.uint4()
+            is_favorite = f.uint8() != 0
 
-        # Pointers and tileframeimportant
-        _ = [f.int4() for _ in range(f.int2())]
-        tileframeimportant_size = math.ceil(f.int2() / 8)
-        tileframeimportant = []
-        for _ in range(tileframeimportant_size):
-            current_bit = f.bits()
-            tileframeimportant = [*tileframeimportant, *current_bit]
+            # Pointers and tileframeimportant
+            pointers = Pointers(*[f.int4() for _ in range(f.int2())])
+            tileframeimportant_size = math.ceil(f.int2() / 8)
+            tileframeimportant = []
+            for _ in range(tileframeimportant_size):
+                current_bit = f.bits()
+                tileframeimportant = [*tileframeimportant, *current_bit]
 
-        name = f.string()
+            unknown_file_format_data = f.read_until(pointers.world_header)
 
-        generator = GeneratorInfo(f.string(), f.int4())
+        with Timer("World Header", display=True):
+            name = f.string()
 
-        uuid_ = f.uuid()
-        id_ = f.int8()
-        bounds = f.rect()
-        world_size = Coordinates(y=f.int4(), x=f.int4())
-        is_expert = f.bool()
-        created_on = f.datetime()
+            generator = GeneratorInfo(f.string(), f.int4())
 
-        world_styles = Styles(moon=MoonStyle(f.uint1()),
-                              trees=FourPartSplit(separators=[f.int4(), f.int4(), f.int4()],
-                                                  properties=[f.int4(),
-                                                              f.int4(),
-                                                              f.int4(),
-                                                              f.int4()]),
-                              moss=FourPartSplit(separators=[f.int4(), f.int4(), f.int4()],
-                                                 properties=[f.int4(),
-                                                             f.int4(),
-                                                             f.int4(),
-                                                             f.int4()]))
+            uuid_ = f.uuid()
+            id_ = f.int8()
+            bounds = f.rect()
+            world_size = Coordinates(y=f.int4(), x=f.int4())
+            is_expert = f.bool()
+            created_on = f.datetime()
 
-        bg_underground_snow = f.int4()
-        bg_underground_jungle = f.int4()
-        bg_hell = f.int4()
+            world_styles = Styles(moon=MoonStyle(f.uint1()),
+                                  trees=FourPartSplit(separators=[f.int4(), f.int4(), f.int4()],
+                                                      properties=[f.int4(),
+                                                                  f.int4(),
+                                                                  f.int4(),
+                                                                  f.int4()]),
+                                  moss=FourPartSplit(separators=[f.int4(), f.int4(), f.int4()],
+                                                     properties=[f.int4(),
+                                                                 f.int4(),
+                                                                 f.int4(),
+                                                                 f.int4()]))
 
-        spawn_point = Coordinates(f.int4(), f.int4())
-        underground_level = f.double()
-        cavern_level = f.double()
+            bg_underground_snow = f.int4()
+            bg_underground_jungle = f.int4()
+            bg_hell = f.int4()
 
-        current_time = f.double()
-        is_daytime = f.bool()
-        moon_phase = MoonPhase(f.uint4())
+            spawn_point = Coordinates(f.int4(), f.int4())
+            underground_level = f.double()
+            cavern_level = f.double()
 
-        blood_moon = f.bool()
-        eclipse = f.bool()
+            current_time = f.double()
+            is_daytime = f.bool()
+            moon_phase = MoonPhase(f.uint4())
 
-        dungeon_point = Coordinates(f.int4(), f.int4())
-        world_evil = WorldEvilType(f.bool())
+            blood_moon = f.bool()
+            eclipse = f.bool()
 
-        defeated_eye_of_cthulhu = f.bool()  # Possibly. I'm not sure.
-        defeated_eater_of_worlds = f.bool()  # Possibly. I'm not sure.
-        defeated_skeletron = f.bool()  # Possibly. I'm not sure.
-        defeated_queen_bee = f.bool()
-        defeated_the_twins = f.bool()
-        defeated_the_destroyer = f.bool()
-        defeated_skeletron_prime = f.bool()
-        defeated_any_mechnical_boss = f.bool()
-        defeated_plantera = f.bool()
-        defeated_golem = f.bool()
-        defeated_king_slime = f.bool()
+            dungeon_point = Coordinates(f.int4(), f.int4())
+            world_evil = WorldEvilType(f.bool())
 
-        saved_goblin_tinkerer = f.bool()
-        saved_wizard = f.bool()
-        saved_mechanic = f.bool()
+            defeated_eye_of_cthulhu = f.bool()  # Possibly. I'm not sure.
+            defeated_eater_of_worlds = f.bool()  # Possibly. I'm not sure.
+            defeated_skeletron = f.bool()  # Possibly. I'm not sure.
+            defeated_queen_bee = f.bool()
+            defeated_the_twins = f.bool()
+            defeated_the_destroyer = f.bool()
+            defeated_skeletron_prime = f.bool()
+            defeated_any_mechnical_boss = f.bool()
+            defeated_plantera = f.bool()
+            defeated_golem = f.bool()
+            defeated_king_slime = f.bool()
 
-        defeated_goblin_army = f.bool()
-        defeated_clown = f.bool()
-        defeated_frost_moon = f.bool()
-        defeated_pirates = f.bool()
+            saved_goblin_tinkerer = f.bool()
+            saved_wizard = f.bool()
+            saved_mechanic = f.bool()
 
-        shadow_orbs = ShadowOrbs(smashed_at_least_once=f.bool(),
-                                 spawn_meteorite=f.bool(),
-                                 evil_boss_counter=f.int4())
+            defeated_goblin_army = f.bool()
+            defeated_clown = f.bool()
+            defeated_frost_moon = f.bool()
+            defeated_pirates = f.bool()
 
-        smashed_altars_count = f.int4()
+            shadow_orbs = ShadowOrbs(smashed_at_least_once=f.bool(),
+                                     spawn_meteorite=f.bool(),
+                                     evil_boss_counter=f.int4())
 
-        is_hardmode = f.bool()
+            smashed_altars_count = f.int4()
 
-        invasion_delay = f.int4()
-        invasion_size = f.int4()
-        invasion_type = InvasionType(f.int4())
-        invasion_position = f.double()
+            is_hardmode = f.bool()
 
-        time_left_slime_rain = f.double()
+            invasion_delay = f.int4()
+            invasion_size = f.int4()
+            invasion_type = InvasionType(f.int4())
+            invasion_position = f.double()
 
-        sundial_cooldown = f.uint1()
+            time_left_slime_rain = f.double()
 
-        rain = Rain(is_active=f.bool(), time_left=f.int4(), max_rain=f.single())
+            sundial_cooldown = f.uint1()
 
-        hardmode_ore_1 = HardmodeTier1Ore(f.int4())
-        hardmode_ore_2 = HardmodeTier2Ore(f.int4())
-        hardmode_ore_3 = HardmodeTier3Ore(f.int4())
-        altars_smashed = AltarsSmashed(count=smashed_altars_count,
-                                       ore_tier1=hardmode_ore_1,
-                                       ore_tier2=hardmode_ore_2,
-                                       ore_tier3=hardmode_ore_3)
+            rain = Rain(is_active=f.bool(), time_left=f.int4(), max_rain=f.single())
 
-        bg_forest = f.int1()
-        bg_corruption = f.int1()
-        bg_jungle = f.int1()
-        bg_snow = f.int1()
-        bg_hallow = f.int1()
-        bg_crimson = f.int1()
-        bg_desert = f.int1()
-        bg_ocean = f.int1()
+            hardmode_ore_1 = HardmodeTier1Ore(f.int4())
+            hardmode_ore_2 = HardmodeTier2Ore(f.int4())
+            hardmode_ore_3 = HardmodeTier3Ore(f.int4())
+            altars_smashed = AltarsSmashed(count=smashed_altars_count,
+                                           ore_tier1=hardmode_ore_1,
+                                           ore_tier2=hardmode_ore_2,
+                                           ore_tier3=hardmode_ore_3)
 
-        backgrounds = Backgrounds(bg_underground_snow=bg_underground_snow,
-                                  bg_underground_jungle=bg_underground_jungle,
-                                  bg_hell=bg_hell,
-                                  bg_forest=bg_forest,
-                                  bg_corruption=bg_corruption,
-                                  bg_jungle=bg_jungle,
-                                  bg_snow=bg_snow,
-                                  bg_hallow=bg_hallow,
-                                  bg_crimson=bg_crimson,
-                                  bg_desert=bg_desert,
-                                  bg_ocean=bg_ocean)
+            bg_forest = f.int1()
+            bg_corruption = f.int1()
+            bg_jungle = f.int1()
+            bg_snow = f.int1()
+            bg_hallow = f.int1()
+            bg_crimson = f.int1()
+            bg_desert = f.int1()
+            bg_ocean = f.int1()
 
-        clouds = Clouds(bg_cloud=f.int4(), cloud_number=f.int2(), wind_speed=f.single())
+            backgrounds = Backgrounds(bg_underground_snow=bg_underground_snow,
+                                      bg_underground_jungle=bg_underground_jungle,
+                                      bg_hell=bg_hell,
+                                      bg_forest=bg_forest,
+                                      bg_corruption=bg_corruption,
+                                      bg_jungle=bg_jungle,
+                                      bg_snow=bg_snow,
+                                      bg_hallow=bg_hallow,
+                                      bg_crimson=bg_crimson,
+                                      bg_desert=bg_desert,
+                                      bg_ocean=bg_ocean)
 
-        angler_today_quest_completed_by_count = f.uint1()
-        angler_today_quest_completed_by = []
-        for _ in range(angler_today_quest_completed_by_count):
-            angler_today_quest_completed_by.append(f.string())
+            clouds = Clouds(bg_cloud=f.int4(), cloud_number=f.int2(), wind_speed=f.single())
 
-        saved_angler = f.bool()
+            angler_today_quest_completed_by_count = f.uint1()
+            angler_today_quest_completed_by = []
+            for _ in range(angler_today_quest_completed_by_count):
+                angler_today_quest_completed_by.append(f.string())
 
-        angler_today_quest_target = AnglerQuestFish(f.int4())
-        anglers_quest = AnglerQuest(current_goal=angler_today_quest_target,
-                                    completed_by=angler_today_quest_completed_by)
+            saved_angler = f.bool()
 
-        saved_stylist = f.bool()
-        saved_tax_collector = f.bool()
+            angler_today_quest_target = AnglerQuestFish(f.int4())
+            anglers_quest = AnglerQuest(current_goal=angler_today_quest_target,
+                                        completed_by=angler_today_quest_completed_by)
 
-        invasion_size_start = f.int4()  # ???
-        invasion = Invasion(delay=invasion_delay,
-                            size=invasion_size,
-                            type_=invasion_type,
-                            position=invasion_position,
-                            size_start=invasion_size_start)
+            saved_stylist = f.bool()
+            saved_tax_collector = f.bool()
 
-        cultist_delay = f.int4()  # ???
-        mob_types_count = f.int2()
-        mob_kills = {}
-        for mob_id in range(mob_types_count):
-            mob_kills[mob_id] = f.int4()
+            invasion_size_start = f.int4()  # ???
+            invasion = Invasion(delay=invasion_delay,
+                                size=invasion_size,
+                                type_=invasion_type,
+                                position=invasion_position,
+                                size_start=invasion_size_start)
 
-        fast_forward_time = f.bool()
-        time = Time(current=current_time,
-                    is_daytime=is_daytime,
-                    moon_phase=moon_phase,
-                    sundial_cooldown=sundial_cooldown,
-                    fast_forward_time=fast_forward_time)
+            cultist_delay = f.int4()  # ???
+            mob_types_count = f.int2()
+            mob_kills = {}
+            for mob_id in range(mob_types_count):
+                mob_kills[mob_id] = f.int4()
 
-        defeated_duke_fishron = f.bool()
-        defeated_moon_lord = f.bool()
-        defeated_pumpking = f.bool()
-        defeated_mourning_wood = f.bool()
-        defeated_ice_queen = f.bool()
-        defeated_santa_nk1 = f.bool()
-        defeated_everscream = f.bool()
-        defeated_pillars = PillarsInfo(solar=f.bool(), vortex=f.bool(), nebula=f.bool(), stardust=f.bool())
+            fast_forward_time = f.bool()
+            time = Time(current=current_time,
+                        is_daytime=is_daytime,
+                        moon_phase=moon_phase,
+                        sundial_cooldown=sundial_cooldown,
+                        fast_forward_time=fast_forward_time)
 
-        lunar_events = LunarEvents(pillars_present=PillarsInfo(solar=f.bool(),
-                                                               vortex=f.bool(),
-                                                               nebula=f.bool(),
-                                                               stardust=f.bool()),
-                                   are_active=f.bool())
+            defeated_duke_fishron = f.bool()
+            defeated_moon_lord = f.bool()
+            defeated_pumpking = f.bool()
+            defeated_mourning_wood = f.bool()
+            defeated_ice_queen = f.bool()
+            defeated_santa_nk1 = f.bool()
+            defeated_everscream = f.bool()
+            defeated_pillars = PillarsInfo(solar=f.bool(), vortex=f.bool(), nebula=f.bool(), stardust=f.bool())
 
-        party_center_active = f.bool()
-        party_natural_active = f.bool()
-        party_cooldown = f.int4()
-        partying_npcs_count = f.int4()
-        partying_npcs = []
-        for _ in range(partying_npcs_count):
-            partying_npcs.append(f.int4())
-        party = Party(thrown_by_party_center=party_center_active,
-                      thrown_by_npcs=party_natural_active,
-                      cooldown=party_cooldown,
-                      partying_npcs=partying_npcs)
+            lunar_events = LunarEvents(pillars_present=PillarsInfo(solar=f.bool(),
+                                                                   vortex=f.bool(),
+                                                                   nebula=f.bool(),
+                                                                   stardust=f.bool()),
+                                       are_active=f.bool())
 
-        sandstorm = Sandstorm(is_active=f.bool(),
-                              time_left=f.int4(),
-                              severity=f.single(),
-                              intended_severity=f.single())
+            party_center_active = f.bool()
+            party_natural_active = f.bool()
+            party_cooldown = f.int4()
+            partying_npcs_count = f.int4()
+            partying_npcs = []
+            for _ in range(partying_npcs_count):
+                partying_npcs.append(f.int4())
+            party = Party(thrown_by_party_center=party_center_active,
+                          thrown_by_npcs=party_natural_active,
+                          cooldown=party_cooldown,
+                          partying_npcs=partying_npcs)
 
-        events = Events(blood_moon=blood_moon,
-                        solar_eclipse=eclipse,
-                        invasion=invasion,
-                        slime_rain=time_left_slime_rain,
-                        rain=rain,
-                        party=party,
-                        sandstorm=sandstorm,
-                        lunar_events=lunar_events)
+            sandstorm = Sandstorm(is_active=f.bool(),
+                                  time_left=f.int4(),
+                                  severity=f.single(),
+                                  intended_severity=f.single())
 
-        saved_bartender = f.bool()
-        saved_npcs = SavedNPCs(goblin_tinkerer=saved_goblin_tinkerer,
-                               wizard=saved_wizard,
-                               mechanic=saved_mechanic,
-                               angler=saved_angler,
-                               stylist=saved_stylist,
-                               tax_collector=saved_tax_collector,
-                               bartender=saved_bartender)
+            events = Events(blood_moon=blood_moon,
+                            solar_eclipse=eclipse,
+                            invasion=invasion,
+                            slime_rain=time_left_slime_rain,
+                            rain=rain,
+                            party=party,
+                            sandstorm=sandstorm,
+                            lunar_events=lunar_events)
 
-        old_ones_army = OldOnesArmyTiers(f.bool(), f.bool(), f.bool())
+            saved_bartender = f.bool()
+            saved_npcs = SavedNPCs(goblin_tinkerer=saved_goblin_tinkerer,
+                                   wizard=saved_wizard,
+                                   mechanic=saved_mechanic,
+                                   angler=saved_angler,
+                                   stylist=saved_stylist,
+                                   tax_collector=saved_tax_collector,
+                                   bartender=saved_bartender)
 
-        bosses_defeated = BossesDefeated(eye_of_cthulhu=defeated_eye_of_cthulhu,
-                                         eater_of_worlds=defeated_eater_of_worlds,
-                                         skeletron=defeated_skeletron,
-                                         queen_bee=defeated_queen_bee,
-                                         the_twins=defeated_the_twins,
-                                         the_destroyer=defeated_the_destroyer,
-                                         skeletron_prime=defeated_skeletron_prime,
-                                         any_mechnical_boss=defeated_any_mechnical_boss,
-                                         plantera=defeated_plantera,
-                                         golem=defeated_golem,
-                                         king_slime=defeated_king_slime,
-                                         goblin_army=defeated_goblin_army,
-                                         clown=defeated_clown,
-                                         frost_moon=defeated_frost_moon,
-                                         pirates=defeated_pirates,
-                                         duke_fishron=defeated_duke_fishron,
-                                         moon_lord=defeated_moon_lord,
-                                         pumpking=defeated_pumpking,
-                                         mourning_wood=defeated_mourning_wood,
-                                         ice_queen=defeated_ice_queen,
-                                         santa_nk1=defeated_santa_nk1,
-                                         everscream=defeated_everscream,
-                                         lunar_pillars=defeated_pillars,
-                                         old_ones_army=old_ones_army)
-        # Tile data starts here
-        first_tile = cls._read_tiles(f)
+            old_ones_army = OldOnesArmyTiers(f.bool(), f.bool(), f.bool())
+
+            bosses_defeated = BossesDefeated(eye_of_cthulhu=defeated_eye_of_cthulhu,
+                                             eater_of_worlds=defeated_eater_of_worlds,
+                                             skeletron=defeated_skeletron,
+                                             queen_bee=defeated_queen_bee,
+                                             the_twins=defeated_the_twins,
+                                             the_destroyer=defeated_the_destroyer,
+                                             skeletron_prime=defeated_skeletron_prime,
+                                             any_mechnical_boss=defeated_any_mechnical_boss,
+                                             plantera=defeated_plantera,
+                                             golem=defeated_golem,
+                                             king_slime=defeated_king_slime,
+                                             goblin_army=defeated_goblin_army,
+                                             clown=defeated_clown,
+                                             frost_moon=defeated_frost_moon,
+                                             pirates=defeated_pirates,
+                                             duke_fishron=defeated_duke_fishron,
+                                             moon_lord=defeated_moon_lord,
+                                             pumpking=defeated_pumpking,
+                                             mourning_wood=defeated_mourning_wood,
+                                             ice_queen=defeated_ice_queen,
+                                             santa_nk1=defeated_santa_nk1,
+                                             everscream=defeated_everscream,
+                                             lunar_pillars=defeated_pillars,
+                                             old_ones_army=old_ones_army)
+
+            unknown_world_header_data = f.read_until(pointers.world_tiles)
+
+        with Timer("World Tiles", display=True):
+            tiledata = []
+            while len(tiledata) < world_size.x:
+                # Read a column
+                column = []
+                while len(column) < world_size.y:
+                    tiles = cls._read_tiles(f, tileframeimportant)
+                    column = [*column, *tiles]
+                tiledata.append(column)
+
+            unknown_world_tiles_data = f.read_until(pointers.chests)
+
+        breakpoint()
 
         world = World(version=version, savefile_type=savefile_type, revision=revision, is_favorite=is_favorite,
                       name=name, generator=generator, uuid_=uuid_, id_=id_, bounds=bounds, size=world_size,
@@ -430,5 +480,4 @@ class World:
                       saved_npcs=saved_npcs, altars_smashed=altars_smashed, is_hardmode=is_hardmode,
                       shadow_orbs=shadow_orbs, bosses_defeated=bosses_defeated, anglers_quest=anglers_quest,
                       clouds=clouds, cultist_delay=cultist_delay)
-        breakpoint()
         return world

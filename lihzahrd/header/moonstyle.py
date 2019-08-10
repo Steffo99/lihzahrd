@@ -8,4 +8,4 @@ class MoonStyle(enum.IntEnum):
     RINGED_GREEN = 2
 
     def __repr__(self):
-        return f"MoonStyle('{self.name}')"
+        return f"{self.__class__.__name__}.{self.name}"

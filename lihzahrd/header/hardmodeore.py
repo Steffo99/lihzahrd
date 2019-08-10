@@ -7,7 +7,7 @@ class HardmodeTier1Ore(enum.IntEnum):
     PALLADIUM = 221
 
     def __repr__(self):
-        return f"HardmodeTier1Ore('{self.name}')"
+        return f"{self.__class__.__name__}.{self.name}"
 
 
 class HardmodeTier2Ore(enum.IntEnum):
@@ -16,7 +16,7 @@ class HardmodeTier2Ore(enum.IntEnum):
     ORICHALCUM = 222
 
     def __repr__(self):
-        return f"HardmodeTier2Ore('{self.name}')"
+        return f"{self.__class__.__name__}.{self.name}"
 
 
 class HardmodeTier3Ore(enum.IntEnum):
@@ -26,4 +26,4 @@ class HardmodeTier3Ore(enum.IntEnum):
     TITANIUM = 223
 
     def __repr__(self):
-        return f"HardmodeTier3Ore('{self.name}')"
+        return f"{self.__class__.__name__}.{self.name}"

@@ -43,4 +43,4 @@ class AnglerQuestFish(enum.IntEnum):
     TROPICAL_BARRACUDA = 38
 
     def __repr__(self):
-        return f"AnglerQuestFish('{self.name}')"
+        return f"{self.__class__.__name__}.{self.name}"

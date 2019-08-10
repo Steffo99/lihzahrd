@@ -1,18 +1,15 @@
-import enum
+import typing
+from .block import Block
+from .wall import Wall
+from .liquid import Liquid
 
 
-class Liquid(enum.IntEnum):
-    NO_LIQUID = 0
-    WATER = 1
-    LAVA = 2
-    HONEY = 3
+class Tile:
 
-    @classmethod
-    def from_flags(cls, flags13, flags14):
-        if flags13 and flags14:
-            return cls.HONEY
-        if flags14:
-            return cls.LAVA
-        if flags13:
-            return cls.WATER
-        return cls.NO_LIQUID
+    def __init__(self, block: typing.Optional[Block], wall: typing.Optional[Wall], liquid: typing.Optional[Liquid]):
+        self.block: typing.Optional[Block] = block
+        self.wall: typing.Optional[Wall] = wall
+        self.liquid: typing.Optional[Liquid] = liquid
+
+    def __repr__(self):
+        return f"<Tile {'B' if self.block else '_'}{'W' if self.wall else '_'}{'L' if self.liquid else '_'}>"
