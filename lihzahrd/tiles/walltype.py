@@ -2,6 +2,9 @@ import enum
 
 
 class WallType(enum.IntEnum):
+    """All possible wall types.
+
+    Data from https://github.com/tModLoader/tModLoader/wiki/Vanilla-Wall-IDs."""
     STONE = 1
     DIRT_UNSAFE = 2
     EBONSTONE_UNSAFE = 3

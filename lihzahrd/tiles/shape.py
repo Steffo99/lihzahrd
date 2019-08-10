@@ -2,6 +2,10 @@ import enum
 
 
 class Shape(enum.IntEnum):
+    """The shape of a block, given to it with an hammer.
+
+    The directions refer to the missing slope corner."""
+
     NORMAL = 0
     HALF_TILE = 1
     TOP_RIGHT_SLOPE = 2

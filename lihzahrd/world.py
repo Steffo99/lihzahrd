@@ -151,18 +151,18 @@ class World:
             if flags2[0]:
                 flags3 = fr.bits()
                 is_active = not flags3[2]
-                wires = Wires(red=flags2[1], green=flags2[2], blue=flags2[3], yellow=flags3[5], actuator=flags3[1])
+                wiring = Wiring(red=flags2[1], green=flags2[2], blue=flags2[3], yellow=flags3[5], actuator=flags3[1])
                 is_block_painted = flags3[3]
                 is_wall_painted = flags3[4]
             else:
                 is_active = True
-                wires = Wires(red=flags2[1], green=flags2[2], blue=flags2[3])
+                wiring = Wiring(red=flags2[1], green=flags2[2], blue=flags2[3])
                 is_block_painted = False
                 is_wall_painted = False
         else:
             shape = Shape.NORMAL
             is_active = True
-            wires = Wires()
+            wiring = Wiring()
             is_block_painted = False
             is_wall_painted = False
         if has_block:
@@ -180,7 +180,11 @@ class World:
                 block_paint = fr.uint1()
             else:
                 block_paint = None
-            block = Block(type_=block_id, frame=FrameImportantData(frame_x, frame_y), paint=block_paint)
+            block = Block(type_=block_id,
+                          frame=FrameImportantData(frame_x, frame_y),
+                          paint=block_paint,
+                          is_active=is_active,
+                          shape=shape)
         else:
             block = None
         if has_wall:
@@ -202,7 +206,7 @@ class World:
             multiply_by = fr.uint1() + 1
         else:
             multiply_by = 1
-        tile = Tile(block=block, wall=wall, liquid=liquid)
+        tile = Tile(block=block, wall=wall, liquid=liquid, wiring=wiring)
         return [tile] * multiply_by
 
     @classmethod
