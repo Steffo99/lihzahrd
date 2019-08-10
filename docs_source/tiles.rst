@@ -1,4 +1,4 @@
-lihzahrd.header
+lihzahrd.tiles
 ====================================
 
 .. toctree::
