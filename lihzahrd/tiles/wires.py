@@ -1,4 +1,6 @@
 class Wires:
+    __slots__ = "red", "green", "blue", "yellow", "actuator"
+
     def __init__(self,
                  red: bool = False,
                  green: bool = False,

@@ -4,6 +4,8 @@ from .frameimportantdata import FrameImportantData
 
 
 class Block:
+    __slots__ = "type", "frame", "paint", "is_active"
+
     def __init__(self,
                  type_: BlockType,
                  frame: typing.Optional[FrameImportantData],

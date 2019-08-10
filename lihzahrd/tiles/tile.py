@@ -5,6 +5,7 @@ from .liquid import Liquid
 
 
 class Tile:
+    __slots__ = "block", "wall", "liquid"
 
     def __init__(self, block: typing.Optional[Block], wall: typing.Optional[Wall], liquid: typing.Optional[Liquid]):
         self.block: typing.Optional[Block] = block
