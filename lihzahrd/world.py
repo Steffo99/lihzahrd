@@ -1,9 +1,10 @@
 import uuid
 import math
 import typing
-from .header import *
 from .fileutils import *
+from .header import *
 from .tiles import *
+from .chests import *
 from .timer import Timer
 
 
@@ -39,7 +40,11 @@ class World:
                  bosses_defeated: BossesDefeated,
                  anglers_quest: AnglerQuest,
                  clouds: Clouds,
-                 cultist_delay: int):
+                 cultist_delay: int,
+                 tiles: typing.List[typing.List[Tile]],
+                 unknown_file_format_data: bytearray,
+                 unknown_world_header_data: bytearray,
+                 unknown_world_tiles_data: bytearray):
 
         self.version: Version = version
         """The game version when this savefile was last saved."""
@@ -122,8 +127,13 @@ class World:
         self.anglers_quest: AnglerQuest = anglers_quest
         """Information about today's Angler's Quest."""
 
+        self.tiles: typing.List[typing.List[Tile]] = tiles
+
         self.clouds: Clouds = clouds
         self.cultist_delay: int = cultist_delay
+        self.unknown_file_format_data: bytearray = unknown_file_format_data
+        self.unknown_world_header_data: bytearray = unknown_world_header_data
+        self.unknown_world_tiles_data: bytearray = unknown_world_tiles_data
 
     def __repr__(self):
         return f'<World "{self.name}">'
@@ -463,16 +473,32 @@ class World:
             unknown_world_header_data = f.read_until(pointers.world_tiles)
 
         with Timer("World Tiles", display=True):
-            tiledata = []
-            while len(tiledata) < world_size.x:
+            tiles = []
+            while len(tiles) < world_size.x:
                 # Read a column
                 column = []
                 while len(column) < world_size.y:
-                    tiles = cls._read_tiles(f, tileframeimportant)
-                    column = [*column, *tiles]
-                tiledata.append(column)
+                    readtiles = cls._read_tiles(f, tileframeimportant)
+                    column = [*column, *readtiles]
+                tiles.append(column)
 
             unknown_world_tiles_data = f.read_until(pointers.chests)
+
+        with Timer("Chests", display=True):
+            chests = []
+
+            chests_count = f.int2()
+            chests_max_items = f.int2()
+
+            for _ in range(chests_max_items):
+                chest_x = f.int4()
+                chest_y = f.int4()
+                chest_name = f.string()
+
+                item_count = f.int2()
+                if item_count > 0:
+                    item_id = f.int4()
+                    item_prefix = f.uint1()
 
         breakpoint()
 
@@ -483,5 +509,8 @@ class World:
                       time=time, events=events, dungeon_point=dungeon_point, world_evil=world_evil,
                       saved_npcs=saved_npcs, altars_smashed=altars_smashed, is_hardmode=is_hardmode,
                       shadow_orbs=shadow_orbs, bosses_defeated=bosses_defeated, anglers_quest=anglers_quest,
-                      clouds=clouds, cultist_delay=cultist_delay)
+                      clouds=clouds, cultist_delay=cultist_delay, tiles=tiles,
+                      unknown_file_format_data=unknown_file_format_data,
+                      unknown_world_header_data=unknown_world_header_data,
+                      unknown_world_tiles_data=unknown_world_tiles_data)
         return world
