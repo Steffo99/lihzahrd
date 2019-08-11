@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>lihzahrd.header &mdash; lihzahrd  documentation</title>
+  <title>lihzahrd.tiles &mdash; lihzahrd  documentation</title>
   
 
   
@@ -35,6 +35,7 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="lihzahrd.chests" href="chests.html" />
     <link rel="prev" title="lihzahrd.header" href="header.html" /> 
 </head>
 
@@ -82,9 +83,10 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="world.html">lihzahrd.World</a></li>
 <li class="toctree-l1"><a class="reference internal" href="header.html">lihzahrd.header</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">lihzahrd.header</a><ul class="simple">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">lihzahrd.tiles</a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="chests.html">lihzahrd.chests</a></li>
 </ul>
 
             
@@ -130,7 +132,7 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>lihzahrd.header</li>
+      <li>lihzahrd.tiles</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -149,8 +151,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="lihzahrd-header">
-<h1>lihzahrd.header<a class="headerlink" href="#lihzahrd-header" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="lihzahrd-tiles">
+<h1>lihzahrd.tiles<a class="headerlink" href="#lihzahrd-tiles" title="Permalink to this headline">¶</a></h1>
 <div class="toctree-wrapper compound">
 </div>
 <span class="target" id="module-lihzahrd.tiles"></span><dl class="class">
@@ -3830,7 +3832,7 @@ the save file.</p>
 
 <dl class="class">
 <dt id="lihzahrd.tiles.Block">
-<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.tiles.</code><code class="sig-name descname">Block</code><span class="sig-paren">(</span><em class="sig-param">type_: lihzahrd.tiles.blocktype.BlockType, frame: Optional[lihzahrd.tiles.frameimportantdata.FrameImportantData], shape: lihzahrd.tiles.shape.Shape, paint: Optional[int], is_active: bool = True</em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.tiles.Block" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.tiles.</code><code class="sig-name descname">Block</code><span class="sig-paren">(</span><em class="sig-param">type_: lihzahrd.tiles.blocktype.BlockType</em>, <em class="sig-param">shape: lihzahrd.tiles.shape.Shape = &lt;Shape.NORMAL: 0&gt;</em>, <em class="sig-param">frame: Optional[lihzahrd.tiles.frameimportantdata.FrameImportantData] = None</em>, <em class="sig-param">paint: Optional[int] = None</em>, <em class="sig-param">is_active: bool = True</em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.tiles.Block" title="Permalink to this definition">¶</a></dt>
 <dd><p>A block that has been placed in the world.</p>
 <dl class="attribute">
 <dt id="lihzahrd.tiles.Block.frame">
@@ -3853,7 +3855,8 @@ the save file.</p>
 <dl class="attribute">
 <dt id="lihzahrd.tiles.Block.shape">
 <code class="sig-name descname">shape</code><a class="headerlink" href="#lihzahrd.tiles.Block.shape" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>The shape of the block, is changed with an hammer.</p>
+</dd></dl>
 
 <dl class="attribute">
 <dt id="lihzahrd.tiles.Block.type">
@@ -3865,7 +3868,7 @@ the save file.</p>
 
 <dl class="class">
 <dt id="lihzahrd.tiles.Wall">
-<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.tiles.</code><code class="sig-name descname">Wall</code><span class="sig-paren">(</span><em class="sig-param">type_: lihzahrd.tiles.walltype.WallType, paint: Optional[int]</em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.tiles.Wall" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.tiles.</code><code class="sig-name descname">Wall</code><span class="sig-paren">(</span><em class="sig-param">type_: lihzahrd.tiles.walltype.WallType</em>, <em class="sig-param">paint: Optional[int] = None</em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.tiles.Wall" title="Permalink to this definition">¶</a></dt>
 <dd><p>A wall that has been placed in the world.</p>
 <dl class="attribute">
 <dt id="lihzahrd.tiles.Wall.paint">
@@ -3881,7 +3884,7 @@ the save file.</p>
 
 <dl class="class">
 <dt id="lihzahrd.tiles.Liquid">
-<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.tiles.</code><code class="sig-name descname">Liquid</code><span class="sig-paren">(</span><em class="sig-param">type_: lihzahrd.tiles.liquidtype.LiquidType</em>, <em class="sig-param">volume: int</em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.tiles.Liquid" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.tiles.</code><code class="sig-name descname">Liquid</code><span class="sig-paren">(</span><em class="sig-param">type_: lihzahrd.tiles.liquidtype.LiquidType</em>, <em class="sig-param">volume: int = 255</em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.tiles.Liquid" title="Permalink to this definition">¶</a></dt>
 <dd><p>A liquid present in a tile.</p>
 <dl class="attribute">
 <dt id="lihzahrd.tiles.Liquid.type">
@@ -3901,7 +3904,7 @@ the save file.</p>
 
 <dl class="class">
 <dt id="lihzahrd.tiles.Tile">
-<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.tiles.</code><code class="sig-name descname">Tile</code><span class="sig-paren">(</span><em class="sig-param">block: Optional[lihzahrd.tiles.block.Block], wall: Optional[lihzahrd.tiles.wall.Wall], liquid: Optional[lihzahrd.tiles.liquid.Liquid], wiring: lihzahrd.tiles.wiring.Wiring</em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.tiles.Tile" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.tiles.</code><code class="sig-name descname">Tile</code><span class="sig-paren">(</span><em class="sig-param">block: Optional[lihzahrd.tiles.block.Block] = None</em>, <em class="sig-param">wall: Optional[lihzahrd.tiles.wall.Wall] = None</em>, <em class="sig-param">liquid: Optional[lihzahrd.tiles.liquid.Liquid] = None</em>, <em class="sig-param">wiring: lihzahrd.tiles.wiring.Wiring = None</em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.tiles.Tile" title="Permalink to this definition">¶</a></dt>
 <dd><p>A tile, composed by a block, a wall, a liquid and wires.</p>
 <dl class="attribute">
 <dt id="lihzahrd.tiles.Tile.block">
@@ -3934,6 +3937,8 @@ the save file.</p>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="chests.html" class="btn btn-neutral float-right" title="lihzahrd.chests" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="header.html" class="btn btn-neutral float-left" title="lihzahrd.header" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

@@ -7,6 +7,7 @@ lihzahrd
    world
    header
    tiles
+   chests
 
 
 Some useful links
