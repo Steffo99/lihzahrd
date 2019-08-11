@@ -6,7 +6,7 @@ class Liquid:
 
     __slots__ = "type", "volume"
 
-    def __init__(self, type_: LiquidType, volume: int):
+    def __init__(self, type_: LiquidType, volume: int = 255):
         self.type: LiquidType = type_
         """The type of liquid present in the tile."""
 

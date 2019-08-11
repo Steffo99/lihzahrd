@@ -11,10 +11,13 @@ class Tile:
     __slots__ = "block", "wall", "liquid", "wiring"
 
     def __init__(self,
-                 block: typing.Optional[Block],
-                 wall: typing.Optional[Wall],
-                 liquid: typing.Optional[Liquid],
-                 wiring: Wiring):
+                 block: typing.Optional[Block] = None,
+                 wall: typing.Optional[Wall] = None,
+                 liquid: typing.Optional[Liquid] = None,
+                 wiring: Wiring = None):
+        if wiring is None:
+            wiring = Wiring()
+
         self.block: typing.Optional[Block] = block
         self.wall: typing.Optional[Wall] = wall
         self.liquid: typing.Optional[Liquid] = liquid

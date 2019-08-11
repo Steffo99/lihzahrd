@@ -7,6 +7,6 @@ class Wall:
 
     __slots__ = "type", "paint"
 
-    def __init__(self, type_: WallType, paint: typing.Optional[int]):
+    def __init__(self, type_: WallType, paint: typing.Optional[int] = None):
         self.type: WallType = type_
         self.paint: typing.Optional[int] = paint

@@ -11,9 +11,9 @@ class Block:
 
     def __init__(self,
                  type_: BlockType,
-                 frame: typing.Optional[FrameImportantData],
-                 shape: Shape,
-                 paint: typing.Optional[int],
+                 shape: Shape = Shape.NORMAL,
+                 frame: typing.Optional[FrameImportantData] = None,
+                 paint: typing.Optional[int] = None,
                  is_active: bool = True):
         self.type: BlockType = type_
         """The type of the block (dirt, stone, ...)."""
@@ -22,6 +22,7 @@ class Block:
         """The framedata of the block, if present."""
 
         self.shape: Shape = shape
+        """The shape of the block, is changed with an hammer."""
 
         self.paint: typing.Optional[int] = paint
         """The paint color of a block."""
