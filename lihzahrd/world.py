@@ -42,9 +42,11 @@ class World:
                  clouds: Clouds,
                  cultist_delay: int,
                  tiles: typing.List[typing.List[Tile]],
+                 chests: typing.List[Chest],
                  unknown_file_format_data: bytearray,
                  unknown_world_header_data: bytearray,
-                 unknown_world_tiles_data: bytearray):
+                 unknown_world_tiles_data: bytearray,
+                 unknown_chests_data: bytearray):
 
         self.version: Version = version
         """The game version when this savefile was last saved."""
@@ -127,6 +129,8 @@ class World:
         self.anglers_quest: AnglerQuest = anglers_quest
         """Information about today's Angler's Quest."""
 
+        self.chests: typing.List[Chest] = chests
+
         self.tiles: typing.List[typing.List[Tile]] = tiles
 
         self.clouds: Clouds = clouds
@@ -134,6 +138,7 @@ class World:
         self.unknown_file_format_data: bytearray = unknown_file_format_data
         self.unknown_world_header_data: bytearray = unknown_world_header_data
         self.unknown_world_tiles_data: bytearray = unknown_world_tiles_data
+        self.unknown_chests_data: bytearray = unknown_chests_data
 
     def __repr__(self):
         return f'<World "{self.name}">'
@@ -490,15 +495,28 @@ class World:
             chests_count = f.int2()
             chests_max_items = f.int2()
 
-            for _ in range(chests_max_items):
-                chest_x = f.int4()
-                chest_y = f.int4()
+            for _ in range(chests_count):
+                chest_position = Coordinates(x=f.int4(), y=f.int4())
                 chest_name = f.string()
+                chest_contents = []
 
-                item_count = f.int2()
-                if item_count > 0:
-                    item_id = f.int4()
-                    item_prefix = f.uint1()
+                for _ in range(chests_max_items):
+                    item_quantity = f.int2()
+                    if item_quantity > 0:
+                        item_type = ItemType(f.int4())
+                        item_modifier = f.uint1()
+                        item = ItemStack(quantity=item_quantity,
+                                         type_=item_type,
+                                         modifier=item_modifier)
+                    else:
+                        item = None
+                    chest_contents.append(item)
+                chest = Chest(position=chest_position,
+                              name=chest_name,
+                              contents=chest_contents)
+                chests.append(chest)
+
+            unknown_chests_data = f.read_until(pointers.signs)
 
         breakpoint()
 
@@ -509,8 +527,9 @@ class World:
                       time=time, events=events, dungeon_point=dungeon_point, world_evil=world_evil,
                       saved_npcs=saved_npcs, altars_smashed=altars_smashed, is_hardmode=is_hardmode,
                       shadow_orbs=shadow_orbs, bosses_defeated=bosses_defeated, anglers_quest=anglers_quest,
-                      clouds=clouds, cultist_delay=cultist_delay, tiles=tiles,
+                      clouds=clouds, cultist_delay=cultist_delay, tiles=tiles, chests=chests,
                       unknown_file_format_data=unknown_file_format_data,
                       unknown_world_header_data=unknown_world_header_data,
-                      unknown_world_tiles_data=unknown_world_tiles_data)
+                      unknown_world_tiles_data=unknown_world_tiles_data,
+                      unknown_chests_data=unknown_chests_data)
         return world

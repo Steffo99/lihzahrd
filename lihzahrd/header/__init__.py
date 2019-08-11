@@ -4,7 +4,6 @@ from .anglerquestfish import AnglerQuestFish
 from .backgrounds import Backgrounds
 from .bossesdefeated import BossesDefeated
 from .clouds import Clouds
-from .coordinates import Coordinates
 from .events import Events
 from .fourpartsplit import FourPartSplit
 from .generatorinfo import GeneratorInfo
@@ -33,7 +32,6 @@ __all__ = [
     "Backgrounds",
     "BossesDefeated",
     "Clouds",
-    "Coordinates",
     "Events",
     "FourPartSplit",
     "GeneratorInfo",
@@ -57,17 +55,3 @@ __all__ = [
     "Version",
     "WorldEvilType"
 ]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
