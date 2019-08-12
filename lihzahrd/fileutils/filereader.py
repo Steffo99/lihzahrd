@@ -80,5 +80,8 @@ class FileReader:
             data += self.file.read(1)
         return data
 
+    def skip_until(self, address: int) -> None:
+        self.file.seek(address)
+
     def __repr__(self):
         return f"<FileReader at {hex(self.file.tell())}>"

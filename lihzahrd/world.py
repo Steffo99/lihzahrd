@@ -6,6 +6,7 @@ from .header import *
 from .tiles import *
 from .chests import *
 from .signs import *
+from .npcs import *
 from .timer import Timer
 
 
@@ -526,6 +527,24 @@ class World:
                             position=Coordinates(f.int4(), f.int4()))
 
             unknown_signs_data = f.read_until(pointers.npcs)
+
+        with Timer("NPCs", display=True):
+            npcs = []
+
+            while f.bool():
+                npc_sprite_id = f.int4()
+                npc_name = f.string()
+                npc_position = Coordinates(f.single(), f.single())
+                is_homeless = f.bool()
+                npc_home = Coordinates(f.int4(), f.int4())
+                if is_homeless:
+                    npc_home = None
+
+                npc = NPC(sprite_id=npc_sprite_id,
+                          name=npc_name,
+                          position=npc_position,
+                          home=npc_home)
+                npcs.append(npc)
 
         world = World(version=version, savefile_type=savefile_type, revision=revision, is_favorite=is_favorite,
                       name=name, generator=generator, uuid_=uuid_, id_=id_, bounds=bounds, size=world_size,
