@@ -5,6 +5,7 @@ from .fileutils import *
 from .header import *
 from .tiles import *
 from .chests import *
+from .signs import *
 from .timer import Timer
 
 
@@ -514,6 +515,17 @@ class World:
                 chests.append(chest)
 
             unknown_chests_data = f.read_until(pointers.signs)
+
+        with Timer("Signs", display=True):
+            signs = []
+
+            signs_count = f.int2()
+
+            for _ in range(signs_count):
+                sign = Sign(text=f.string(),
+                            position=Coordinates(f.int4(), f.int4()))
+
+            unknown_signs_data = f.read_until(pointers.npcs)
 
         world = World(version=version, savefile_type=savefile_type, revision=revision, is_favorite=is_favorite,
                       name=name, generator=generator, uuid_=uuid_, id_=id_, bounds=bounds, size=world_size,
