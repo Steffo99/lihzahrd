@@ -152,7 +152,7 @@ class World:
         self.shadow_orbs = value
 
     @staticmethod
-    def _read_tiles(fr: FileReader, tileframeimportant) -> typing.List:
+    def _read_tile_block(fr: FileReader, tileframeimportant) -> typing.List:
         # Once again, this code is a mess
         flags1 = fr.bits()
         has_block = flags1[1]
@@ -162,44 +162,42 @@ class World:
         rle_compression = RLEEncoding.from_flags(flags1)
         if flags1[0]:
             flags2 = fr.bits()
-            shape = Shape.from_flags(flags2)
+            block_shape = Shape.from_flags(flags2)
             if flags2[0]:
                 flags3 = fr.bits()
-                is_active = not flags3[2]
-                wiring = Wiring(red=flags2[1], green=flags2[2], blue=flags2[3], yellow=flags3[5], actuator=flags3[1])
+                is_block_active = not flags3[2]
+                wiring = Wiring.from_flags(flags2, flags3)
                 is_block_painted = flags3[3]
                 is_wall_painted = flags3[4]
             else:
-                is_active = True
-                wiring = Wiring(red=flags2[1], green=flags2[2], blue=flags2[3])
+                is_block_active = True
+                wiring = Wiring.from_flags(flags2)
                 is_block_painted = False
                 is_wall_painted = False
         else:
-            shape = Shape.NORMAL
-            is_active = True
-            wiring = Wiring()
+            block_shape = Shape.NORMAL
+            is_block_active = True
+            wiring = None
             is_block_painted = False
             is_wall_painted = False
         if has_block:
             if has_extended_block_id:
-                block_id = BlockType(fr.uint2())
+                block_type = BlockType(fr.uint2())
             else:
-                block_id = BlockType(fr.uint1())
-            if tileframeimportant[block_id]:
-                frame_x = fr.uint2()
-                frame_y = fr.uint2()
+                block_type = BlockType(fr.uint1())
+            if tileframeimportant[block_type]:
+                frame = FrameImportantData(fr.uint2(), fr.uint2())
             else:
-                frame_x = None
-                frame_y = None
+                frame = None
             if is_block_painted:
                 block_paint = fr.uint1()
             else:
                 block_paint = None
-            block = Block(type_=block_id,
-                          frame=FrameImportantData(frame_x, frame_y),
+            block = Block(type_=block_type,
+                          frame=frame,
                           paint=block_paint,
-                          is_active=is_active,
-                          shape=shape)
+                          is_active=is_block_active,
+                          shape=block_shape)
         else:
             block = None
         if has_wall:
@@ -480,10 +478,9 @@ class World:
         with Timer("World Tiles", display=True):
             tiles = []
             while len(tiles) < world_size.x:
-                # Read a column
                 column = []
                 while len(column) < world_size.y:
-                    readtiles = cls._read_tiles(f, tileframeimportant)
+                    readtiles = cls._read_tile_block(f, tileframeimportant)
                     column = [*column, *readtiles]
                 tiles.append(column)
 
@@ -517,8 +514,6 @@ class World:
                 chests.append(chest)
 
             unknown_chests_data = f.read_until(pointers.signs)
-
-        breakpoint()
 
         world = World(version=version, savefile_type=savefile_type, revision=revision, is_favorite=is_favorite,
                       name=name, generator=generator, uuid_=uuid_, id_=id_, bounds=bounds, size=world_size,

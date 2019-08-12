@@ -27,3 +27,14 @@ class Wiring:
     def __repr__(self):
         return f"Wires(red={self.red}, green={self.green}, blue={self.blue}, yellow={self.yellow}," \
                f" actuator={self.actuator})"
+
+    def __bool__(self):
+        return self.red or self.green or self.blue or self.yellow or self.actuator
+
+    @classmethod
+    def from_flags(cls, flags2=None, flags3=None):
+        if flags2 is not None:
+            if flags3 is not None:
+                return cls(red=flags2[1], green=flags2[2], blue=flags2[3], yellow=flags3[5], actuator=flags3[1])
+            return cls(red=flags2[1], green=flags2[2], blue=flags2[3])
+        return None

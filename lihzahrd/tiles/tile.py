@@ -14,14 +14,14 @@ class Tile:
                  block: typing.Optional[Block] = None,
                  wall: typing.Optional[Wall] = None,
                  liquid: typing.Optional[Liquid] = None,
-                 wiring: Wiring = None):
+                 wiring: typing.Optional[Wiring] = None):
         if wiring is None:
             wiring = Wiring()
 
         self.block: typing.Optional[Block] = block
         self.wall: typing.Optional[Wall] = wall
         self.liquid: typing.Optional[Liquid] = liquid
-        self.wiring: Wiring = wiring
+        self.wiring: typing.Optional[Wiring] = wiring
 
     def __repr__(self):
-        return f"<Tile {'B' if self.block else '_'}{'W' if self.wall else '_'}{'L' if self.liquid else '_'}>"
+        return f"<Tile {'B' if self.block else '_'}{'W' if self.wall else '_'}{'L' if self.liquid else '_'}{'W' if self.wiring else '_'}>"
