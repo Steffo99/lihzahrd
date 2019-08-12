@@ -6,7 +6,9 @@ from .header import *
 from .tiles import *
 from .chests import *
 from .signs import *
-from .entities import *
+from .npcs import *
+from .tileentities import *
+from .pressureplates import *
 from .timer import Timer
 
 
@@ -48,10 +50,18 @@ class World:
                  signs: typing.List[Sign],
                  npcs: typing.List[NPC],
                  mobs: typing.List[Mob],
-                 unknown_file_format_data: bytearray,
-                 unknown_world_header_data: bytearray,
-                 unknown_world_tiles_data: bytearray,
-                 unknown_chests_data: bytearray):
+                 tile_entities: typing.List[TileEntity],
+                 weighed_pressure_plates: typing.List[WeighedPressurePlate],
+                 unknown_file_format_data: bytes = b"",
+                 unknown_world_header_data: bytes = b"",
+                 unknown_world_tiles_data: bytes = b"",
+                 unknown_chests_data: bytes = b"",
+                 unknown_signs_data: bytes = b"",
+                 unknown_npcs_data: bytes = b"",
+                 unknown_tile_entities_data: bytes = b"",
+                 unknown_pressure_plates_data: bytes = b"",
+                 unknown_town_manager_data: bytes = b"",
+                 unknown_footer_data: bytes = b""):
 
         self.version: Version = version
         """The game version when this savefile was last saved."""
@@ -147,13 +157,26 @@ class World:
         """A list of all the NPCs currently living in the world, including the Old Man."""
 
         self.mobs: typing.List[Mob] = mobs
+        """A list of mobs in the world...?"""
+
+        self.tile_entities: typing.List[TileEntity] = tile_entities
+        """A list of tile entities in the world, such as Training Dummies, Item Frames and Logic Sensors."""
+
+        self.weighed_pressure_plates: typing.List[WeighedPressurePlate] = weighed_pressure_plates
+        """A list of all Weighed Pressure Plates in the world."""
 
         self.clouds: Clouds = clouds
         self.cultist_delay: int = cultist_delay
-        self.unknown_file_format_data: bytearray = unknown_file_format_data
-        self.unknown_world_header_data: bytearray = unknown_world_header_data
-        self.unknown_world_tiles_data: bytearray = unknown_world_tiles_data
-        self.unknown_chests_data: bytearray = unknown_chests_data
+        self.unknown_file_format_data: bytes = unknown_file_format_data
+        self.unknown_world_header_data: bytes = unknown_world_header_data
+        self.unknown_world_tiles_data: bytes = unknown_world_tiles_data
+        self.unknown_chests_data: bytes = unknown_chests_data
+        self.unknown_signs_data: bytes = unknown_signs_data
+        self.unknown_npcs_data: bytes = unknown_npcs_data
+        self.unknown_tile_entities_data: bytes = unknown_tile_entities_data
+        self.unknown_pressure_plates_data: bytes = unknown_pressure_plates_data
+        self.unknown_town_manager_data: bytes = unknown_town_manager_data
+        self.unknown_footer_data: bytes = unknown_footer_data
 
     def __repr__(self):
         return f'<World "{self.name}">'
@@ -568,7 +591,41 @@ class World:
                           position=npc_position)
                 mobs.append(mob)
 
-            unknown_npcs_data = f.read_until(pointers)
+            unknown_npcs_data = f.read_until(pointers.tile_entities)
+
+        with Timer("Tile Entities", display=True):
+            tile_entities_count = f.int4()
+            tile_entities = []
+
+            for _ in range(tile_entities_count):
+                te_type = f.uint1()
+                te_id = f.int4()
+                te_position = Coordinates(f.int2(), f.int2())
+                if te_type == 0:
+                    te_extra = TargetDummy(npc=f.int2())
+                elif te_type == 1:
+                    te_extra = ItemFrame(item=ItemStack(type_=ItemType(f.int2()),
+                                                        modifier=f.uint1(),
+                                                        quantity=f.int2()))
+                elif te_type == 2:
+                    te_extra = LogicSensor(logic_check=f.uint1(), enabled=f.bool())
+                tile_entity = TileEntity(id_=te_id, position=te_position, extra=te_extra)
+                tile_entities.append(tile_entity)
+
+            unknown_tile_entities_data = f.read_until(pointers.pressure_plates)
+
+        with Timer("Weighed Pressure Plates", display=True):
+            weighed_pressure_plates_count = f.int4()
+            weighed_pressure_plates = []
+
+            for _ in range(weighed_pressure_plates_count):
+                wpp = WeighedPressurePlate(position=Coordinates(f.int4(), f.int4()))
+                weighed_pressure_plates.append(wpp)
+
+            unknown_pressure_plates_data = f.read_until(pointers.town_manager)
+
+        # with Timer("Town Manager", display=True):
+
 
         world = World(version=version, savefile_type=savefile_type, revision=revision, is_favorite=is_favorite,
                       name=name, generator=generator, uuid_=uuid_, id_=id_, bounds=bounds, size=world_size,
@@ -577,9 +634,16 @@ class World:
                       time=time, events=events, dungeon_point=dungeon_point, world_evil=world_evil,
                       saved_npcs=saved_npcs, altars_smashed=altars_smashed, is_hardmode=is_hardmode,
                       shadow_orbs=shadow_orbs, bosses_defeated=bosses_defeated, anglers_quest=anglers_quest,
-                      clouds=clouds, cultist_delay=cultist_delay, tiles=tiles, chests=chests,
+                      clouds=clouds, cultist_delay=cultist_delay, tiles=tiles, chests=chests, npcs=npcs, mobs=mobs,
+                      tile_entities=tile_entities, weighed_pressure_plates=weighed_pressure_plates,
                       unknown_file_format_data=unknown_file_format_data,
                       unknown_world_header_data=unknown_world_header_data,
                       unknown_world_tiles_data=unknown_world_tiles_data,
-                      unknown_chests_data=unknown_chests_data)
+                      unknown_chests_data=unknown_chests_data,
+                      unknown_signs_data=unknown_signs_data,
+                      unknown_npcs_data=unknown_npcs_data,
+                      unknown_tile_entities_data=unknown_tile_entities_data,
+                      unknown_pressure_plates_data=unknown_pressure_plates_data,
+                      unknown_town_manager_data=unknown_town_manager_data,
+                      unknown_footer_data=unknown_footer_data)
         return world

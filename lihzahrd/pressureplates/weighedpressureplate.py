@@ -1,0 +1,13 @@
+from ..fileutils import Coordinates
+
+
+class WeighedPressurePlate:
+    """A single pressure plate placed in the world."""
+
+    __slots__ = "position"
+
+    def __init__(self, position: Coordinates):
+        self.position: Coordinates = position
+
+    def __repr__(self):
+        return f"PressurePlate(position={self.position})"

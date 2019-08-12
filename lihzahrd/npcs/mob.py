@@ -1,10 +1,13 @@
 import typing
-from .entitytype import EntityType
+from .npctype import EntityType
 from ..fileutils import Coordinates
 
 
 class Mob:
     """A Mob somewhere in the world."""
+
+    __slots__ = "type", "position"
+
     def __init__(self,
                  type_: int,
                  position: Coordinates, ):

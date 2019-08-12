@@ -1,10 +1,13 @@
 import typing
-from .entitytype import EntityType
+from .npctype import EntityType
 from ..fileutils import Coordinates
 
 
 class NPC:
     """A NPC somewhere in the world."""
+
+    __slots__ = "type", "name", "position", "home"
+
     def __init__(self,
                  type_: EntityType,
                  name: str,
