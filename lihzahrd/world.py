@@ -9,6 +9,7 @@ from .signs import *
 from .npcs import *
 from .tileentities import *
 from .pressureplates import *
+from .townmanager import *
 from .timer import Timer
 
 
@@ -52,6 +53,7 @@ class World:
                  mobs: typing.List[Mob],
                  tile_entities: typing.List[TileEntity],
                  weighed_pressure_plates: typing.List[WeighedPressurePlate],
+                 rooms: typing.List[Room],
                  unknown_file_format_data: bytes = b"",
                  unknown_world_header_data: bytes = b"",
                  unknown_world_tiles_data: bytes = b"",
@@ -60,8 +62,7 @@ class World:
                  unknown_npcs_data: bytes = b"",
                  unknown_tile_entities_data: bytes = b"",
                  unknown_pressure_plates_data: bytes = b"",
-                 unknown_town_manager_data: bytes = b"",
-                 unknown_footer_data: bytes = b""):
+                 unknown_town_manager_data: bytes = b""):
 
         self.version: Version = version
         """The game version when this savefile was last saved."""
@@ -165,6 +166,7 @@ class World:
         self.weighed_pressure_plates: typing.List[WeighedPressurePlate] = weighed_pressure_plates
         """A list of all Weighed Pressure Plates in the world."""
 
+        self.rooms: typing.List[Room] = rooms
         self.clouds: Clouds = clouds
         self.cultist_delay: int = cultist_delay
         self.unknown_file_format_data: bytes = unknown_file_format_data
@@ -176,7 +178,6 @@ class World:
         self.unknown_tile_entities_data: bytes = unknown_tile_entities_data
         self.unknown_pressure_plates_data: bytes = unknown_pressure_plates_data
         self.unknown_town_manager_data: bytes = unknown_town_manager_data
-        self.unknown_footer_data: bytes = unknown_footer_data
 
     def __repr__(self):
         return f'<World "{self.name}">'
@@ -290,10 +291,10 @@ class World:
         with Timer("World Header", display=True):
             name = f.string()
 
-            generator = GeneratorInfo(f.string(), f.int4())
+            generator = GeneratorInfo(f.string(), f.uint8())
 
             uuid_ = f.uuid()
-            id_ = f.int8()
+            id_ = f.int4()
             bounds = f.rect()
             world_size = Coordinates(y=f.int4(), x=f.int4())
             is_expert = f.bool()
@@ -624,8 +625,15 @@ class World:
 
             unknown_pressure_plates_data = f.read_until(pointers.town_manager)
 
-        # with Timer("Town Manager", display=True):
+        with Timer("Town Manager", display=True):
+            rooms_count = f.int4()
+            rooms = []
 
+            for _ in range(rooms_count):
+                room = Room(npc=EntityType(f.int4()), position=Coordinates(f.int4(), f.int4()))
+                rooms.append(room)
+
+            unknown_town_manager_data = f.read_until(pointers.footer)
 
         world = World(version=version, savefile_type=savefile_type, revision=revision, is_favorite=is_favorite,
                       name=name, generator=generator, uuid_=uuid_, id_=id_, bounds=bounds, size=world_size,
@@ -634,8 +642,9 @@ class World:
                       time=time, events=events, dungeon_point=dungeon_point, world_evil=world_evil,
                       saved_npcs=saved_npcs, altars_smashed=altars_smashed, is_hardmode=is_hardmode,
                       shadow_orbs=shadow_orbs, bosses_defeated=bosses_defeated, anglers_quest=anglers_quest,
-                      clouds=clouds, cultist_delay=cultist_delay, tiles=tiles, chests=chests, npcs=npcs, mobs=mobs,
-                      tile_entities=tile_entities, weighed_pressure_plates=weighed_pressure_plates,
+                      clouds=clouds, cultist_delay=cultist_delay, tiles=tiles, chests=chests, signs=signs,
+                      npcs=npcs, mobs=mobs, tile_entities=tile_entities,
+                      weighed_pressure_plates=weighed_pressure_plates, rooms=rooms,
                       unknown_file_format_data=unknown_file_format_data,
                       unknown_world_header_data=unknown_world_header_data,
                       unknown_world_tiles_data=unknown_world_tiles_data,
@@ -644,6 +653,14 @@ class World:
                       unknown_npcs_data=unknown_npcs_data,
                       unknown_tile_entities_data=unknown_tile_entities_data,
                       unknown_pressure_plates_data=unknown_pressure_plates_data,
-                      unknown_town_manager_data=unknown_town_manager_data,
-                      unknown_footer_data=unknown_footer_data)
+                      unknown_town_manager_data=unknown_town_manager_data)
+
+        with Timer("Footer", display=True):
+            if not f.bool():
+                raise Exception("Invalid footer")
+            if not f.string() == world.name:
+                raise Exception("Invalid footer")
+            if not f.int4() == world.id:
+                raise Exception("Invalid footer")
+
         return world
