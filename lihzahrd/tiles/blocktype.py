@@ -475,7 +475,6 @@ class BlockType(enum.IntEnum):
     CONTAINERS2 = 467
     FAKE_CONTAINERS2 = 468
     TABLES2 = 469
-    COUNT = 470
 
     def __repr__(self):
         return f"{self.__class__.__name__}.{self.name}"

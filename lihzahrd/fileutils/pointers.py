@@ -8,7 +8,9 @@ class Pointers:
                  chests: int,
                  signs: int,
                  npcs: int,
-                 entities: int,
+                 tile_entities: int,
+                 pressure_plates: int,
+                 town_manager: int,
                  footer: int,
                  *unknown):
         self.file_format: int = 0
@@ -17,6 +19,8 @@ class Pointers:
         self.chests: int = chests
         self.signs: int = signs
         self.npcs: int = npcs
-        self.entities: int = entities
+        self.tile_entities: int = tile_entities
+        self.pressure_plates: int = pressure_plates
+        self.town_manager: int = town_manager
         self.footer: int = footer
         self.unknown: typing.List[int] = list(unknown)

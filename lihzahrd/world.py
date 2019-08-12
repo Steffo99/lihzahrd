@@ -6,7 +6,7 @@ from .header import *
 from .tiles import *
 from .chests import *
 from .signs import *
-from .npcs import *
+from .entities import *
 from .timer import Timer
 
 
@@ -45,6 +45,9 @@ class World:
                  cultist_delay: int,
                  tiles: typing.List[typing.List[Tile]],
                  chests: typing.List[Chest],
+                 signs: typing.List[Sign],
+                 npcs: typing.List[NPC],
+                 mobs: typing.List[Mob],
                  unknown_file_format_data: bytearray,
                  unknown_world_header_data: bytearray,
                  unknown_world_tiles_data: bytearray,
@@ -131,9 +134,19 @@ class World:
         self.anglers_quest: AnglerQuest = anglers_quest
         """Information about today's Angler's Quest."""
 
-        self.chests: typing.List[Chest] = chests
-
         self.tiles: typing.List[typing.List[Tile]] = tiles
+        """A matrix of all the tiles present in the world."""
+
+        self.chests: typing.List[Chest] = chests
+        """A list of all the containers (chests, barrels) in the world."""
+
+        self.signs: typing.List[Sign] = signs
+        """A list of all non-empty signs in the world."""
+
+        self.npcs: typing.List[NPC] = npcs
+        """A list of all the NPCs currently living in the world, including the Old Man."""
+
+        self.mobs: typing.List[Mob] = mobs
 
         self.clouds: Clouds = clouds
         self.cultist_delay: int = cultist_delay
@@ -528,11 +541,12 @@ class World:
 
             unknown_signs_data = f.read_until(pointers.npcs)
 
-        with Timer("NPCs", display=True):
+        with Timer("Entities", display=True):
             npcs = []
+            mobs = []
 
             while f.bool():
-                npc_sprite_id = f.int4()
+                npc_type = EntityType(f.int4())
                 npc_name = f.string()
                 npc_position = Coordinates(f.single(), f.single())
                 is_homeless = f.bool()
@@ -540,11 +554,21 @@ class World:
                 if is_homeless:
                     npc_home = None
 
-                npc = NPC(sprite_id=npc_sprite_id,
+                npc = NPC(type_=npc_type,
                           name=npc_name,
                           position=npc_position,
                           home=npc_home)
                 npcs.append(npc)
+
+            while f.bool():
+                mob_type = EntityType(f.int4())
+                mob_position = Coordinates(f.single(), f.single())
+
+                mob = Mob(type_=npc_type,
+                          position=npc_position)
+                mobs.append(mob)
+
+            unknown_npcs_data = f.read_until(pointers)
 
         world = World(version=version, savefile_type=savefile_type, revision=revision, is_favorite=is_favorite,
                       name=name, generator=generator, uuid_=uuid_, id_=id_, bounds=bounds, size=world_size,
