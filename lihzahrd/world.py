@@ -11,6 +11,7 @@ from .tileentities import *
 from .pressureplates import *
 from .townmanager import *
 from .timer import Timer
+from .errors import InvalidFooterError
 
 
 class World:
@@ -46,7 +47,7 @@ class World:
                  anglers_quest: AnglerQuest,
                  clouds: Clouds,
                  cultist_delay: int,
-                 tiles: typing.List[typing.List[Tile]],
+                 tiles: TileMatrix,
                  chests: typing.List[Chest],
                  signs: typing.List[Sign],
                  npcs: typing.List[NPC],
@@ -145,7 +146,7 @@ class World:
         self.anglers_quest: AnglerQuest = anglers_quest
         """Information about today's Angler's Quest."""
 
-        self.tiles: typing.List[typing.List[Tile]] = tiles
+        self.tiles: TileMatrix = tiles
         """A matrix of all the tiles present in the world."""
 
         self.chests: typing.List[Chest] = chests
@@ -515,13 +516,13 @@ class World:
             unknown_world_header_data = f.read_until(pointers.world_tiles)
 
         with Timer("World Tiles", display=True):
-            tiles = []
-            while len(tiles) < world_size.x:
+            tm = TileMatrix()
+            while tm.size.x < world_size.x:
                 column = []
                 while len(column) < world_size.y:
                     readtiles = cls._read_tile_block(f, tileframeimportant)
                     column = [*column, *readtiles]
-                tiles.append(column)
+                tm.add_column(column)
 
             unknown_world_tiles_data = f.read_until(pointers.chests)
 
@@ -642,7 +643,7 @@ class World:
                       time=time, events=events, dungeon_point=dungeon_point, world_evil=world_evil,
                       saved_npcs=saved_npcs, altars_smashed=altars_smashed, is_hardmode=is_hardmode,
                       shadow_orbs=shadow_orbs, bosses_defeated=bosses_defeated, anglers_quest=anglers_quest,
-                      clouds=clouds, cultist_delay=cultist_delay, tiles=tiles, chests=chests, signs=signs,
+                      clouds=clouds, cultist_delay=cultist_delay, tiles=tm, chests=chests, signs=signs,
                       npcs=npcs, mobs=mobs, tile_entities=tile_entities,
                       weighed_pressure_plates=weighed_pressure_plates, rooms=rooms,
                       unknown_file_format_data=unknown_file_format_data,
@@ -657,10 +658,10 @@ class World:
 
         with Timer("Footer", display=True):
             if not f.bool():
-                raise Exception("Invalid footer")
+                raise InvalidFooterError("Invalid footer")
             if not f.string() == world.name:
-                raise Exception("Invalid footer")
+                raise InvalidFooterError("Invalid footer")
             if not f.int4() == world.id:
-                raise Exception("Invalid footer")
+                raise InvalidFooterError("Invalid footer")
 
         return world

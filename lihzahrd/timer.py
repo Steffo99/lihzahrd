@@ -3,7 +3,8 @@ import typing
 
 
 class Timer:
-    def __init__(self, name: str, display: bool = False):
+    """An object to track and print the time required to perform a section of code."""
+    def __init__(self, name: str, display: bool = True):
         self.name: str = name
         self.display: bool = display
         self._start_time: typing.Optional[float] = None

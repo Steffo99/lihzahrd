@@ -37,4 +37,4 @@ class Wiring:
             if flags3 is not None:
                 return cls(red=flags2[1], green=flags2[2], blue=flags2[3], yellow=flags3[5], actuator=flags3[1])
             return cls(red=flags2[1], green=flags2[2], blue=flags2[3])
-        return None
+        return cls()

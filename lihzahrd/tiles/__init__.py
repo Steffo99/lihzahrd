@@ -9,6 +9,7 @@ from .block import Block
 from .wall import Wall
 from .liquid import Liquid
 from .tile import Tile
+from .tilematrix import TileMatrix
 
 __all__ = ["LiquidType", "RLEEncoding", "Shape", "Wiring", "BlockType", "FrameImportantData", "WallType", "Block",
-           "Wall", "Liquid", "Tile"]
+           "Wall", "Liquid", "Tile", "TileMatrix"]
