@@ -1,0 +1,328 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>lihzahrd.fileutils &mdash; lihzahrd  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="lihzahrd.header" href="header.html" />
+    <link rel="prev" title="lihzahrd.chests" href="chests.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> lihzahrd
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="chests.html">lihzahrd.chests</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">lihzahrd.fileutils</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="header.html">lihzahrd.header</a></li>
+<li class="toctree-l1"><a class="reference internal" href="npcs.html">lihzahrd.npcs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pressureplates.html">lihzahrd.pressureplates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="signs.html">lihzahrd.signs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tileentities.html">lihzahrd.tileentities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tiles.html">lihzahrd.tiles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="timer.html">lihzahrd.timer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="townmanager.html">lihzahrd.townmanager</a></li>
+<li class="toctree-l1"><a class="reference internal" href="world.html">lihzahrd.World</a></li>
+<li class="toctree-l1"><a class="reference internal" href="errors.html">lihzahrd.errors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">lihzahrd</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>lihzahrd.fileutils</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/fileutils.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="lihzahrd-fileutils">
+<h1>lihzahrd.fileutils<a class="headerlink" href="#lihzahrd-fileutils" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<span class="target" id="module-lihzahrd.fileutils"></span><dl class="class">
+<dt id="lihzahrd.fileutils.FileReader">
+<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.fileutils.</code><code class="sig-name descname">FileReader</code><span class="sig-paren">(</span><em class="sig-param">file</em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.fileutils.FileReader" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="lihzahrd.fileutils.FileReader.bits">
+<code class="sig-name descname">bits</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Tuple[lihzahrd.fileutils.filereader.FileReader.bool, lihzahrd.fileutils.filereader.FileReader.bool, lihzahrd.fileutils.filereader.FileReader.bool, lihzahrd.fileutils.filereader.FileReader.bool, lihzahrd.fileutils.filereader.FileReader.bool, lihzahrd.fileutils.filereader.FileReader.bool, lihzahrd.fileutils.filereader.FileReader.bool, lihzahrd.fileutils.filereader.FileReader.bool]<a class="headerlink" href="#lihzahrd.fileutils.FileReader.bits" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="lihzahrd.fileutils.FileReader.bool">
+<code class="sig-name descname">bool</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#lihzahrd.fileutils.FileReader.bool" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="lihzahrd.fileutils.FileReader.datetime">
+<code class="sig-name descname">datetime</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; datetime.datetime<a class="headerlink" href="#lihzahrd.fileutils.FileReader.datetime" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="lihzahrd.fileutils.FileReader.double">
+<code class="sig-name descname">double</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#lihzahrd.fileutils.FileReader.double" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="lihzahrd.fileutils.FileReader.int1">
+<code class="sig-name descname">int1</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#lihzahrd.fileutils.FileReader.int1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="lihzahrd.fileutils.FileReader.int2">
+<code class="sig-name descname">int2</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#lihzahrd.fileutils.FileReader.int2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="lihzahrd.fileutils.FileReader.int4">
+<code class="sig-name descname">int4</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#lihzahrd.fileutils.FileReader.int4" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="lihzahrd.fileutils.FileReader.int8">
+<code class="sig-name descname">int8</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#lihzahrd.fileutils.FileReader.int8" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="lihzahrd.fileutils.FileReader.read_until">
+<code class="sig-name descname">read_until</code><span class="sig-paren">(</span><em class="sig-param">address: int</em><span class="sig-paren">)</span> &#x2192; bytearray<a class="headerlink" href="#lihzahrd.fileutils.FileReader.read_until" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="lihzahrd.fileutils.FileReader.rect">
+<code class="sig-name descname">rect</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; lihzahrd.fileutils.rect.Rect<a class="headerlink" href="#lihzahrd.fileutils.FileReader.rect" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="lihzahrd.fileutils.FileReader.single">
+<code class="sig-name descname">single</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#lihzahrd.fileutils.FileReader.single" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="lihzahrd.fileutils.FileReader.skip_until">
+<code class="sig-name descname">skip_until</code><span class="sig-paren">(</span><em class="sig-param">address: int</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#lihzahrd.fileutils.FileReader.skip_until" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="lihzahrd.fileutils.FileReader.string">
+<code class="sig-name descname">string</code><span class="sig-paren">(</span><em class="sig-param">size=None</em><span class="sig-paren">)</span> &#x2192; str<a class="headerlink" href="#lihzahrd.fileutils.FileReader.string" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="lihzahrd.fileutils.FileReader.uint1">
+<code class="sig-name descname">uint1</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#lihzahrd.fileutils.FileReader.uint1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="lihzahrd.fileutils.FileReader.uint2">
+<code class="sig-name descname">uint2</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#lihzahrd.fileutils.FileReader.uint2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="lihzahrd.fileutils.FileReader.uint4">
+<code class="sig-name descname">uint4</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#lihzahrd.fileutils.FileReader.uint4" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="lihzahrd.fileutils.FileReader.uint8">
+<code class="sig-name descname">uint8</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#lihzahrd.fileutils.FileReader.uint8" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="lihzahrd.fileutils.FileReader.uuid">
+<code class="sig-name descname">uuid</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; uuid.UUID<a class="headerlink" href="#lihzahrd.fileutils.FileReader.uuid" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="lihzahrd.fileutils.Rect">
+<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.fileutils.</code><code class="sig-name descname">Rect</code><span class="sig-paren">(</span><em class="sig-param">left</em>, <em class="sig-param">right</em>, <em class="sig-param">top</em>, <em class="sig-param">bottom</em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.fileutils.Rect" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="class">
+<dt id="lihzahrd.fileutils.Pointers">
+<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.fileutils.</code><code class="sig-name descname">Pointers</code><span class="sig-paren">(</span><em class="sig-param">world_header: int</em>, <em class="sig-param">world_tiles: int</em>, <em class="sig-param">chests: int</em>, <em class="sig-param">signs: int</em>, <em class="sig-param">npcs: int</em>, <em class="sig-param">tile_entities: int</em>, <em class="sig-param">pressure_plates: int</em>, <em class="sig-param">town_manager: int</em>, <em class="sig-param">footer: int</em>, <em class="sig-param">*unknown</em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.fileutils.Pointers" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="class">
+<dt id="lihzahrd.fileutils.Coordinates">
+<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.fileutils.</code><code class="sig-name descname">Coordinates</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">y</em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.fileutils.Coordinates" title="Permalink to this definition">¶</a></dt>
+<dd><p>A pair of coordinates.</p>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="header.html" class="btn btn-neutral float-right" title="lihzahrd.header" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="chests.html" class="btn btn-neutral float-left" title="lihzahrd.chests" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Stefano Pigozzi
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
