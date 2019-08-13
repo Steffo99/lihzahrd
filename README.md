@@ -1,4 +1,4 @@
-# ![](https://gamepedia.cursecdn.com/terraria_gamepedia/e/ee/Lihzahrd.png?version=b8e7ea78b2f9f27a46e2e70d5684b344) `lihzahrd` ![](https://img.shields.io/pypi/v/lihzahrd)
+# ![](https://gamepedia.cursecdn.com/terraria_gamepedia/e/ee/Lihzahrd.png?version=b8e7ea78b2f9f27a46e2e70d5684b344) `lihzahrd` [![](https://img.shields.io/pypi/v/lihzahrd)](https://pypi.org/project/lihzahrd/)
 
 A Terraria 1.3.5.3 world parser in Python.
 
