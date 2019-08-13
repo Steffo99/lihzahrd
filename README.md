@@ -41,5 +41,5 @@ If you know something that isn't present in the documentation, please let me kno
 
 ## License
 
-`lihzard` is licensed under the [AGPL 3.0](/LICENSE.txt).
+`lihzahrd` is licensed under the [AGPL 3.0](/LICENSE.txt).
 That means you have to publish under the same license the source code of any program you create that uses `lihzahrd`.
