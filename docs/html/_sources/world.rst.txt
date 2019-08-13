@@ -7,5 +7,4 @@ lihzahrd.World
 
 .. autoclass:: lihzahrd.World
    :members:
-   :private-members:
    :undoc-members:

@@ -57,4 +57,4 @@ class BossesDefeated:
         self.old_ones_army: OldOnesArmyTiers = old_ones_army
 
     def __repr__(self):
-        return f"<WorldBossesDefeated>"
+        return f"<BossesDefeated>"

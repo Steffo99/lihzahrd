@@ -8,7 +8,7 @@ if "%SPHINXBUILD%" == "" (
 	set SPHINXBUILD=sphinx-build
 )
 set SOURCEDIR=.
-set BUILDDIR=../docs
+set BUILDDIR=..\docs
 
 if "%1" == "" goto help
 
@@ -24,6 +24,9 @@ if errorlevel 9009 (
 	echo.http://sphinx-doc.org/
 	exit /b 1
 )
+
+del /f /q /s ..\docs\html\*.*
+del /f /q /s ..\docs\doctrees\*.*
 
 %SPHINXBUILD% -M %1 %SOURCEDIR% %BUILDDIR% %SPHINXOPTS%
 goto end

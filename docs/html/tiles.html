@@ -33,9 +33,10 @@
   
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/lihzahrd.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="lihzahrd.timer" href="timer.html" />
+    <link rel="next" title="lihzahrd.townmanager" href="townmanager.html" />
     <link rel="prev" title="lihzahrd.tileentities" href="tileentities.html" /> 
 </head>
 
@@ -81,20 +82,24 @@
             
             
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="chests.html">lihzahrd.chests</a></li>
-<li class="toctree-l1"><a class="reference internal" href="fileutils.html">lihzahrd.fileutils</a></li>
-<li class="toctree-l1"><a class="reference internal" href="header.html">lihzahrd.header</a></li>
-<li class="toctree-l1"><a class="reference internal" href="npcs.html">lihzahrd.npcs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pressureplates.html">lihzahrd.pressureplates</a></li>
-<li class="toctree-l1"><a class="reference internal" href="signs.html">lihzahrd.signs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tileentities.html">lihzahrd.tileentities</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">lihzahrd.tiles</a><ul class="simple">
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="reference.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="world.html">lihzahrd.World</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chests.html">lihzahrd.chests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="header.html">lihzahrd.header</a></li>
+<li class="toctree-l2"><a class="reference internal" href="npcs.html">lihzahrd.npcs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pressureplates.html">lihzahrd.pressureplates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="signs.html">lihzahrd.signs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tileentities.html">lihzahrd.tileentities</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">lihzahrd.tiles</a><ul class="simple">
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="timer.html">lihzahrd.timer</a></li>
-<li class="toctree-l1"><a class="reference internal" href="townmanager.html">lihzahrd.townmanager</a></li>
-<li class="toctree-l1"><a class="reference internal" href="world.html">lihzahrd.World</a></li>
-<li class="toctree-l1"><a class="reference internal" href="errors.html">lihzahrd.errors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="townmanager.html">lihzahrd.townmanager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="errors.html">lihzahrd.errors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fileutils.html">lihzahrd.fileutils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="timer.html">lihzahrd.timer</a></li>
+</ul>
+</li>
 </ul>
 
             
@@ -139,6 +144,8 @@
   <ul class="wy-breadcrumbs">
     
       <li><a href="index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="reference.html">API Reference</a> &raquo;</li>
         
       <li>lihzahrd.tiles</li>
     
@@ -3912,7 +3919,7 @@ the save file.</p>
 
 <dl class="class">
 <dt id="lihzahrd.tiles.Tile">
-<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.tiles.</code><code class="sig-name descname">Tile</code><span class="sig-paren">(</span><em class="sig-param">block: Optional[lihzahrd.tiles.block.Block] = None</em>, <em class="sig-param">wall: Optional[lihzahrd.tiles.wall.Wall] = None</em>, <em class="sig-param">liquid: Optional[lihzahrd.tiles.liquid.Liquid] = None</em>, <em class="sig-param">wiring: Optional[lihzahrd.tiles.wiring.Wiring] = None</em>, <em class="sig-param">extra: Optional[lihzahrd.chests.chest.Chest] = None</em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.tiles.Tile" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.tiles.</code><code class="sig-name descname">Tile</code><span class="sig-paren">(</span><em class="sig-param">block: Optional[lihzahrd.tiles.block.Block] = None</em>, <em class="sig-param">wall: Optional[lihzahrd.tiles.wall.Wall] = None</em>, <em class="sig-param">liquid: Optional[lihzahrd.tiles.liquid.Liquid] = None</em>, <em class="sig-param">wiring: Optional[lihzahrd.tiles.wiring.Wiring] = None</em>, <em class="sig-param">extra: Union[lihzahrd.chests.chest.Chest</em>, <em class="sig-param">lihzahrd.signs.sign.Sign</em>, <em class="sig-param">lihzahrd.pressureplates.weighedpressureplate.WeighedPressurePlate</em>, <em class="sig-param">lihzahrd.tileentities.tileentity.TileEntity</em>, <em class="sig-param">None] = None</em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.tiles.Tile" title="Permalink to this definition">¶</a></dt>
 <dd><p>A tile, composed by a block, a wall, a liquid and wires.</p>
 <dl class="attribute">
 <dt id="lihzahrd.tiles.Tile.block">
@@ -3922,7 +3929,8 @@ the save file.</p>
 <dl class="attribute">
 <dt id="lihzahrd.tiles.Tile.extra">
 <code class="sig-name descname">extra</code><a class="headerlink" href="#lihzahrd.tiles.Tile.extra" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>A reference to the extra data of this tile, such as Chest or Sign data.</p>
+</dd></dl>
 
 <dl class="attribute">
 <dt id="lihzahrd.tiles.Tile.liquid">
@@ -3945,15 +3953,6 @@ the save file.</p>
 <dt id="lihzahrd.tiles.TileMatrix">
 <em class="property">class </em><code class="sig-prename descclassname">lihzahrd.tiles.</code><code class="sig-name descname">TileMatrix</code><a class="headerlink" href="#lihzahrd.tiles.TileMatrix" title="Permalink to this definition">¶</a></dt>
 <dd><p>A huge matrix containing the tiles of a whole world.</p>
-<dl class="method">
-<dt id="lihzahrd.tiles.TileMatrix.__getitem__">
-<code class="sig-name descname">__getitem__</code><span class="sig-paren">(</span><em class="sig-param">item: Union[Tuple, lihzahrd.fileutils.coordinates.Coordinates]</em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.tiles.TileMatrix.__getitem__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get a tile at specific coordinates.</p>
-<p>(x=0, y=0) returns the top-left tile in the map.</p>
-<p>You can specify a negative coordinate to count tiles respectively from the right or from the bottom:
-(x=-1, y=-1) returns the bottom-right tile in the map.</p>
-</dd></dl>
-
 <dl class="method">
 <dt id="lihzahrd.tiles.TileMatrix.add_column">
 <code class="sig-name descname">add_column</code><span class="sig-paren">(</span><em class="sig-param">column: List[lihzahrd.tiles.tile.Tile]</em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.tiles.TileMatrix.add_column" title="Permalink to this definition">¶</a></dt>
@@ -3978,7 +3977,7 @@ the save file.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="timer.html" class="btn btn-neutral float-right" title="lihzahrd.timer" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="townmanager.html" class="btn btn-neutral float-right" title="lihzahrd.townmanager" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="tileentities.html" class="btn btn-neutral float-left" title="lihzahrd.tileentities" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

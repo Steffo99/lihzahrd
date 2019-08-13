@@ -4,6 +4,9 @@ from .wall import Wall
 from .liquid import Liquid
 from .wiring import Wiring
 from ..chests import Chest
+from ..signs import Sign
+from ..pressureplates import WeighedPressurePlate
+from ..tileentities import TileEntity
 
 
 class Tile:
@@ -16,7 +19,7 @@ class Tile:
                  wall: typing.Optional[Wall] = None,
                  liquid: typing.Optional[Liquid] = None,
                  wiring: typing.Optional[Wiring] = None,
-                 extra: typing.Optional[typing.Union[Chest]] = None):
+                 extra: typing.Optional[typing.Union[Chest, Sign, WeighedPressurePlate, TileEntity]] = None):
         if wiring is None:
             wiring = Wiring()
 
@@ -24,7 +27,9 @@ class Tile:
         self.wall: typing.Optional[Wall] = wall
         self.liquid: typing.Optional[Liquid] = liquid
         self.wiring: typing.Optional[Wiring] = wiring
-        self.extra: typing.Optional[typing.Union[Chest]] = extra
+
+        self.extra: typing.Optional[typing.Union[Chest, Sign, WeighedPressurePlate, TileEntity]] = extra
+        """A reference to the extra data of this tile, such as Chest or Sign data."""
 
     def __repr__(self):
-        return f"<Tile {'B' if self.block else '_'}{'W' if self.wall else '_'}{'L' if self.liquid else '_'}{'W' if self.wiring else '_'}{'E' if self.extra else '_'}>"
+        return f"<Tile {'B' if self.block else ''}{'W' if self.wall else ''}{'L' if self.liquid else ''}{'W' if self.wiring else ''}{'E' if self.extra else ''}>"

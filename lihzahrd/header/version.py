@@ -4,6 +4,8 @@ import typing
 class Version:
     """A Terraria version."""
 
+    __slots__ = ("id", )
+
     _version_ids = {
         71: "1.2.0.3.1",
         77: "1.2.2",

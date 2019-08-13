@@ -3,6 +3,8 @@ from ..npcs import EntityType
 
 
 class Room:
+    __slots__ = "npc", "position"
+
     def __init__(self, npc: EntityType, position: Coordinates):
         self.npc: EntityType = npc
         self.position: Coordinates = position

@@ -26,7 +26,7 @@ author = 'Stefano Pigozzi'
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = ["sphinx.ext.autodoc", "sphinx.ext.napoleon", "sphinx.ext.intersphinx"]
+extensions = ["sphinx.ext.napoleon", "sphinx.ext.intersphinx"]
 
 intersphinx_mapping = {"python": ("https://docs.python.org/3.7", None)}
 napoleon_use_param = True
@@ -39,7 +39,7 @@ def skip(app, what, name: str, obj, would_skip, options):
 
 
 def setup(app):
-    app.connect("autodoc-skip-member", skip)
+    app.add_stylesheet('lihzahrd.css')
 
 
 # Add any paths that contain templates here, relative to this directory.
