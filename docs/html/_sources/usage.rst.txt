@@ -26,7 +26,7 @@ To open a Terraria world file named ``terra.wld`` located in the current working
     import lihzahrd
     world = lihzahrd.World.create_from_file("terra.wld")
 
-It should take **up to a few minutes**, depending on the size of the world, and then return a
+It should take **a few minutes**, depending on the size of the world, and then return a
 :py:class:`World` object.
 
 Accessing the world properties
