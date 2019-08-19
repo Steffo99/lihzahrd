@@ -16,7 +16,7 @@ setuptools.setup(
     install_requires=[],
     python_requires=">=3.7",
     classifiers=[
-        "Development Status :: 3 - Alpha",
+        "Development Status :: 4 - Beta",
         "Operating System :: OS Independent",
         "Programming Language :: Python :: 3.7"
     ],
