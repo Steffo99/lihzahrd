@@ -43,3 +43,7 @@ If you know something that isn't present in the documentation, please let me kno
 
 `lihzahrd` is licensed under the [AGPL 3.0](/LICENSE.txt).
 That means you have to publish under the same license the source code of any program you create that uses `lihzahrd`.
+
+## See also
+
+- [flyingsnake](https://github.com/Steffo99/flyingsnake), a map renderer using this package

@@ -27,5 +27,6 @@ Some more links
 
 Here are some links that may be useful:
 
-* `Lihzahrd on GitHub <https://github.com/Steffo99/lihzahrd>`_
+* `lihzahrd on GitHub <https://github.com/Steffo99/lihzahrd>`_
+* `flyingsnake <https://github.com/Steffo99/flyingsnake>`_, a package using ``lihzahrd`` that may be a good example
 * :ref:`genindex`
