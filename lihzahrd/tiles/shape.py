@@ -12,6 +12,8 @@ class Shape(enum.IntEnum):
     TOP_LEFT_SLOPE = 3
     BOTTOM_RIGHT_SLOPE = 4
     BOTTOM_LEFT_SLOPE = 5
+    UNKNOWN_6 = 6
+    UNKNOWN_7 = 7
 
     @classmethod
     def from_flags(cls, flags2):
