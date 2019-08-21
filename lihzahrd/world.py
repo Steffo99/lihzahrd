@@ -391,21 +391,9 @@ class World:
 
         rain = Rain(is_active=f.bool(), time_left=f.int4(), max_rain=f.single())
 
-        try:
-            hardmode_ore_1 = HardmodeTier1Ore(f.int4())
-        except ValueError:
-            hardmode_ore_1 = HardmodeTier1Ore.NOT_DETERMINED
-
-        try:
-            hardmode_ore_2 = HardmodeTier2Ore(f.int4())
-        except ValueError:
-            hardmode_ore_2 = HardmodeTier2Ore.NOT_DETERMINED
-
-        try:
-            hardmode_ore_3 = HardmodeTier3Ore(f.int4())
-        except ValueError:
-            hardmode_ore_3 = HardmodeTier3Ore.NOT_DETERMINED
-
+        hardmode_ore_1 = HardmodeTier1Ore(f.int4())
+        hardmode_ore_2 = HardmodeTier2Ore(f.int4())
+        hardmode_ore_3 = HardmodeTier3Ore(f.int4())
         altars_smashed = AltarsSmashed(count=smashed_altars_count,
                                        ore_tier1=hardmode_ore_1,
                                        ore_tier2=hardmode_ore_2,
