@@ -1,7 +1,6 @@
 import uuid
 import math
 import typing
-import multiprocessing
 from .fileutils import *
 from .header import *
 from .tiles import *
@@ -11,7 +10,6 @@ from .npcs import *
 from .tileentities import *
 from .pressureplates import *
 from .townmanager import *
-from .timer import Timer
 from .errors import InvalidFooterError
 
 
@@ -255,7 +253,7 @@ class World:
             liquid = Liquid(type_=liquid_type, volume=fr.uint1())
         else:
             liquid = None
-        if rle_compression == RLEEncoding.DOUBLE_BYTE or rle_compression == RLEEncoding.UNKNOWN_3:
+        if rle_compression == RLEEncoding.DOUBLE_BYTE:
             multiply_by = fr.uint2() + 1
         elif rle_compression == RLEEncoding.SINGLE_BYTE:
             multiply_by = fr.uint1() + 1
@@ -391,9 +389,18 @@ class World:
 
         rain = Rain(is_active=f.bool(), time_left=f.int4(), max_rain=f.single())
 
-        hardmode_ore_1 = HardmodeTier1Ore(f.int4())
-        hardmode_ore_2 = HardmodeTier2Ore(f.int4())
-        hardmode_ore_3 = HardmodeTier3Ore(f.int4())
+        try:
+            hardmode_ore_1 = HardmodeTier1Ore(f.int4())
+        except ValueError:
+            hardmode_ore_1 = HardmodeTier1Ore.NOT_DETERMINED
+        try:
+            hardmode_ore_2 = HardmodeTier2Ore(f.int4())
+        except ValueError:
+            hardmode_ore_2 = HardmodeTier2Ore.NOT_DETERMINED
+        try:
+            hardmode_ore_3 = HardmodeTier3Ore(f.int4())
+        except ValueError:
+            hardmode_ore_3 = HardmodeTier3Ore.NOT_DETERMINED
         altars_smashed = AltarsSmashed(count=smashed_altars_count,
                                        ore_tier1=hardmode_ore_1,
                                        ore_tier2=hardmode_ore_2,
@@ -458,6 +465,7 @@ class World:
 
         defeated_duke_fishron = f.bool()
         defeated_martian_madness = f.bool()
+        defeated_lunatic_cultist = f.bool()
         defeated_moon_lord = f.bool()
         defeated_pumpking = f.bool()
         defeated_mourning_wood = f.bool()
@@ -533,7 +541,8 @@ class World:
                                          everscream=defeated_everscream,
                                          lunar_pillars=defeated_pillars,
                                          old_ones_army=old_ones_army,
-                                         martian_madness=defeated_martian_madness)
+                                         martian_madness=defeated_martian_madness,
+                                         lunatic_cultist=defeated_lunatic_cultist)
 
         unknown_world_header_data = f.read_until(pointers.world_tiles)
 

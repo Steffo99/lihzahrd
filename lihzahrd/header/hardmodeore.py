@@ -21,7 +21,6 @@ class HardmodeTier2Ore(enum.IntEnum):
 
 class HardmodeTier3Ore(enum.IntEnum):
     NOT_DETERMINED = -1
-    NOT_DETERMINED_TOO = 16785407  # ???
     ADAMANTITE = 111
     TITANIUM = 223
 
