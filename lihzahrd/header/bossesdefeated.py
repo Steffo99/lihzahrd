@@ -26,6 +26,7 @@ class BossesDefeated:
                  ice_queen: bool,
                  santa_nk1: bool,
                  everscream: bool,
+                 martian_madness: bool,
                  lunar_pillars: PillarsInfo,
                  old_ones_army: OldOnesArmyTiers):
         self.eye_of_cthulhu: bool = eye_of_cthulhu
@@ -53,6 +54,7 @@ class BossesDefeated:
         self.ice_queen: bool = ice_queen
         self.santa_nk1: bool = santa_nk1
         self.everscream: bool = everscream
+        self.martian_madness: bool = martian_madness
         self.lunar_pillars: PillarsInfo = lunar_pillars
         self.old_ones_army: OldOnesArmyTiers = old_ones_army
 

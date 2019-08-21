@@ -1,6 +1,7 @@
 import uuid
 import math
 import typing
+import multiprocessing
 from .fileutils import *
 from .header import *
 from .tiles import *
@@ -264,6 +265,18 @@ class World:
         return [tile] * multiply_by
 
     @classmethod
+    def _create_tilematrix(cls, f, world_size: Coordinates, tileframeimportant: typing.List[bool]):
+        """Create a TileMatrix object from a file."""
+        tm = TileMatrix()
+        while tm.size.x < world_size.x:
+            column = []
+            while len(column) < world_size.y:
+                readtiles = cls._read_tile_block(f, tileframeimportant)
+                column = [*column, *readtiles]
+            tm.add_column(column)
+        return tm
+
+    @classmethod
     def create_from_file(cls, filename: str):
         """Create a World object from a .wld file.
 
@@ -456,6 +469,7 @@ class World:
                     fast_forward_time=fast_forward_time)
 
         defeated_duke_fishron = f.bool()
+        defeated_martian_madness = f.bool()
         defeated_moon_lord = f.bool()
         defeated_pumpking = f.bool()
         defeated_mourning_wood = f.bool()
@@ -530,18 +544,13 @@ class World:
                                          santa_nk1=defeated_santa_nk1,
                                          everscream=defeated_everscream,
                                          lunar_pillars=defeated_pillars,
-                                         old_ones_army=old_ones_army)
+                                         old_ones_army=old_ones_army,
+                                         martian_madness=defeated_martian_madness)
 
         unknown_world_header_data = f.read_until(pointers.world_tiles)
 
         # Tiles
-        tm = TileMatrix()
-        while tm.size.x < world_size.x:
-            column = []
-            while len(column) < world_size.y:
-                readtiles = cls._read_tile_block(f, tileframeimportant)
-                column = [*column, *readtiles]
-            tm.add_column(column)
+        tm = cls._create_tilematrix(f, world_size, tileframeimportant)
 
         unknown_world_tiles_data = f.read_until(pointers.chests)
 

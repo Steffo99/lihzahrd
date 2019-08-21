@@ -76,6 +76,8 @@ class FileReader:
 
     def read_until(self, address: int) -> bytearray:
         data = bytearray()
+        if self.file.tell() > address:
+            raise ValueError("Can't read backwards")
         while self.file.tell() < address:
             data += self.file.read(1)
         return data
