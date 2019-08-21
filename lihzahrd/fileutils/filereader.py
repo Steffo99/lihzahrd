@@ -57,9 +57,18 @@ class FileReader:
         left, right, top, bottom = struct.unpack("iiii", self.file.read(16))
         return Rect(left, right, top, bottom)
 
+    def leb128(self) -> int:
+        byte = self.uint1()
+        while byte & 0b1000_0000:
+            byte = byte & 0b0111_1111
+            byte = byte << 7
+            byte = byte | self.uint1()
+        # TODO
+        raise NotImplementedError("TODO")
+
     def string(self, size=None) -> str:
         if size is None:
-            size = self.uint1()
+            size = self.leb128()
         return str(self.file.read(size), encoding="latin1")
 
     def uuid(self) -> uuid.UUID:
