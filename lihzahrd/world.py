@@ -254,7 +254,7 @@ class World:
             liquid = Liquid(type_=liquid_type, volume=fr.uint1())
         else:
             liquid = None
-        if rle_compression == RLEEncoding.DOUBLE_BYTE:
+        if rle_compression == RLEEncoding.DOUBLE_BYTE or rle_compression == RLEEncoding.UNKNOWN_3:
             multiply_by = fr.uint2() + 1
         elif rle_compression == RLEEncoding.SINGLE_BYTE:
             multiply_by = fr.uint1() + 1
