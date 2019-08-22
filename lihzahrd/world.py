@@ -547,7 +547,7 @@ class World:
         unknown_world_header_data = f.read_until(pointers.world_tiles)
 
         # Tiles
-        #`tm = cls._create_tilematrix(f, world_size, tileframeimportant)
+        tm = cls._create_tilematrix(f, world_size, tileframeimportant)
 
         unknown_world_tiles_data = f.read_until(pointers.chests)
 
@@ -577,7 +577,7 @@ class World:
                           name=chest_name,
                           contents=chest_contents)
             chests.append(chest)
-            #`tm[chest.position].extra = chest
+            tm[chest.position].extra = chest
 
         unknown_chests_data = f.read_until(pointers.signs)
 
@@ -590,7 +590,7 @@ class World:
             sign = Sign(text=f.string(),
                         position=Coordinates(f.int4(), f.int4()))
             signs.append(sign)
-            #`tm[sign.position].extra = sign
+            tm[sign.position].extra = sign
 
         unknown_signs_data = f.read_until(pointers.npcs)
 
