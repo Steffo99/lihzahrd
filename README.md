@@ -39,6 +39,19 @@ If you know something that isn't present in the documentation, please let me kno
 - A [JS World Parser](https://github.com/cokolele/terraria-world-parser/) on GitHub.
 - A [Background Guide](https://steamcommunity.com/sharedfiles/filedetails/?id=841032800) on Steam that displays all possible world backgrounds.
 
+## PyPy
+
+`lihzahrd` is compatible with [PyPy](https://www.pypy.org), a faster implementation of Python!
+
+If you think that parsing a world takes too much time, you can use PyPy to reduce the required time by a factor of ~3!
+
+### Benchmarks
+
+Time to parse the same large world:
+
+- CPython took 11.45 s.
+- Pypy took 3.57 s!
+
 ## License
 
 `lihzahrd` is licensed under the [AGPL 3.0](/LICENSE.txt).
