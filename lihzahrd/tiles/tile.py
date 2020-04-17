@@ -32,4 +32,9 @@ class Tile:
         """A reference to the extra data of this tile, such as Chest or Sign data."""
 
     def __repr__(self):
-        return f"<Tile {'B' if self.block else ''}{'W' if self.wall else ''}{'L' if self.liquid else ''}{'W' if self.wiring else ''}{'E' if self.extra else ''}>"
+        tile_status = f"{'B' if self.block else ''}" \
+                      f"{'W' if self.wall else ''}" \
+                      f"{'L' if self.liquid else ''}" \
+                      f"{'W' if self.wiring else ''}" \
+                      f"{'E' if self.extra else ''}"
+        return f"<Tile{' ' if tile_status else ''}{tile_status}>"

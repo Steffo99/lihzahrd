@@ -21,10 +21,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script type="text/javascript" src="_static/language_data.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
@@ -216,7 +216,7 @@ attribute.</p>
 </div>
 <p>You can access them by using the <code class="docutils literal notranslate"><span class="pre">tiles</span></code> attribute as a two-dimensional array, where (0, 0) is the top-left block:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">world</span><span class="o">.</span><span class="n">tiles</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
-<span class="c1"># &lt;Tile &gt;</span>
+<span class="c1"># &lt;Tile&gt;</span>
 </pre></div>
 </div>
 <p>You can also use <a class="reference internal" href="fileutils.html#lihzahrd.fileutils.Coordinates" title="lihzahrd.fileutils.Coordinates"><code class="xref py py-class docutils literal notranslate"><span class="pre">fileutils.Coordinates</span></code></a> instead of a <a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#tuple" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a> to fetch a specific tile:</p>
@@ -229,7 +229,7 @@ attribute.</p>
 </div>
 <p>Counting tiles from the bottom-right is possible too:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">world</span><span class="o">.</span><span class="n">tiles</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">])</span>
-<span class="c1"># &lt;Tile &gt;</span>
+<span class="c1"># &lt;Tile&gt;</span>
 </pre></div>
 </div>
 <p>A single <a class="reference internal" href="tiles.html#lihzahrd.tiles.Tile" title="lihzahrd.tiles.Tile"><code class="xref py py-class docutils literal notranslate"><span class="pre">tiles.Tile</span></code></a> has five attributes that you can access:</p>

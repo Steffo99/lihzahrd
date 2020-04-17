@@ -66,7 +66,7 @@ attribute. ::
 You can access them by using the ``tiles`` attribute as a two-dimensional array, where (0, 0) is the top-left block: ::
 
     print(world.tiles[0, 0])
-    # <Tile >
+    # <Tile>
 
 You can also use :py:class:`fileutils.Coordinates` instead of a :py:class:`tuple` to fetch a specific tile: ::
 
@@ -79,7 +79,7 @@ You can also use :py:class:`fileutils.Coordinates` instead of a :py:class:`tuple
 Counting tiles from the bottom-right is possible too: ::
 
     print(world.tiles[-1, -1])
-    # <Tile >
+    # <Tile>
 
 A single :py:class:`tiles.Tile` has five attributes that you can access:
 

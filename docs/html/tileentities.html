@@ -21,10 +21,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script type="text/javascript" src="_static/language_data.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
@@ -170,57 +170,57 @@
 <h1>lihzahrd.tileentities<a class="headerlink" href="#lihzahrd-tileentities" title="Permalink to this headline">¶</a></h1>
 <div class="toctree-wrapper compound">
 </div>
-<span class="target" id="module-lihzahrd.tileentities"></span><dl class="class">
+<span class="target" id="module-lihzahrd.tileentities"></span><dl class="py class">
 <dt id="lihzahrd.tileentities.TileEntity">
-<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.tileentities.</code><code class="sig-name descname">TileEntity</code><span class="sig-paren">(</span><em class="sig-param">id_: int, position: lihzahrd.fileutils.coordinates.Coordinates, extra: Union[lihzahrd.tileentities.targetdummy.TargetDummy, lihzahrd.tileentities.itemframe.ItemFrame, lihzahrd.tileentities.logicsensor.LogicSensor]</em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.tileentities.TileEntity" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.tileentities.</code><code class="sig-name descname">TileEntity</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">id_</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)">int</a></span></em>, <em class="sig-param"><span class="n">position</span><span class="p">:</span> <span class="n">lihzahrd.fileutils.coordinates.Coordinates</span></em>, <em class="sig-param"><span class="n">extra</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>lihzahrd.tileentities.targetdummy.TargetDummy<span class="p">, </span>lihzahrd.tileentities.itemframe.ItemFrame<span class="p">, </span>lihzahrd.tileentities.logicsensor.LogicSensor<span class="p">]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.tileentities.TileEntity" title="Permalink to this definition">¶</a></dt>
 <dd><p>A TileEntity, such as a Training Dummy, an Item Frame or a Logic Sensor.</p>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.tileentities.TileEntity.data">
 <code class="sig-name descname">data</code><a class="headerlink" href="#lihzahrd.tileentities.TileEntity.data" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.tileentities.TileEntity.id">
 <code class="sig-name descname">id</code><a class="headerlink" href="#lihzahrd.tileentities.TileEntity.id" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.tileentities.TileEntity.position">
 <code class="sig-name descname">position</code><a class="headerlink" href="#lihzahrd.tileentities.TileEntity.position" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="lihzahrd.tileentities.ItemFrame">
-<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.tileentities.</code><code class="sig-name descname">ItemFrame</code><span class="sig-paren">(</span><em class="sig-param">item: lihzahrd.chests.itemstack.ItemStack</em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.tileentities.ItemFrame" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.tileentities.</code><code class="sig-name descname">ItemFrame</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">item</span><span class="p">:</span> <span class="n">lihzahrd.chests.itemstack.ItemStack</span></em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.tileentities.ItemFrame" title="Permalink to this definition">¶</a></dt>
 <dd><p>Data pertaining to an <a class="reference external" href="https://terraria.gamepedia.com/Item_Frame">https://terraria.gamepedia.com/Item_Frame</a> .</p>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.tileentities.ItemFrame.item">
 <code class="sig-name descname">item</code><a class="headerlink" href="#lihzahrd.tileentities.ItemFrame.item" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="lihzahrd.tileentities.LogicSensor">
-<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.tileentities.</code><code class="sig-name descname">LogicSensor</code><span class="sig-paren">(</span><em class="sig-param">logic_check: int</em>, <em class="sig-param">enabled: bool</em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.tileentities.LogicSensor" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.tileentities.</code><code class="sig-name descname">LogicSensor</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">logic_check</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)">int</a></span></em>, <em class="sig-param"><span class="n">enabled</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#bool" title="(in Python v3.7)">bool</a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.tileentities.LogicSensor" title="Permalink to this definition">¶</a></dt>
 <dd><p>Data pertaining to a Logic Sensor (<a class="reference external" href="https://terraria.gamepedia.com/Sensors">https://terraria.gamepedia.com/Sensors</a>).</p>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.tileentities.LogicSensor.enabled">
 <code class="sig-name descname">enabled</code><a class="headerlink" href="#lihzahrd.tileentities.LogicSensor.enabled" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.tileentities.LogicSensor.logic_check">
 <code class="sig-name descname">logic_check</code><a class="headerlink" href="#lihzahrd.tileentities.LogicSensor.logic_check" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="lihzahrd.tileentities.TargetDummy">
-<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.tileentities.</code><code class="sig-name descname">TargetDummy</code><span class="sig-paren">(</span><em class="sig-param">npc: int</em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.tileentities.TargetDummy" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.tileentities.</code><code class="sig-name descname">TargetDummy</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">npc</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)">int</a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.tileentities.TargetDummy" title="Permalink to this definition">¶</a></dt>
 <dd><p>Data pertaining to a Target Dummy (<a class="reference external" href="https://terraria.gamepedia.com/Target_Dummy">https://terraria.gamepedia.com/Target_Dummy</a>)</p>
 </dd></dl>
 

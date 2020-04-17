@@ -21,10 +21,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script type="text/javascript" src="_static/language_data.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
@@ -170,346 +170,346 @@
 <h1>lihzahrd.header<a class="headerlink" href="#lihzahrd-header" title="Permalink to this headline">¶</a></h1>
 <div class="toctree-wrapper compound">
 </div>
-<span class="target" id="module-lihzahrd.header"></span><dl class="class">
+<span class="target" id="module-lihzahrd.header"></span><dl class="py class">
 <dt id="lihzahrd.header.AltarsSmashed">
-<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.header.</code><code class="sig-name descname">AltarsSmashed</code><span class="sig-paren">(</span><em class="sig-param">count: int</em>, <em class="sig-param">ore_tier1: lihzahrd.header.hardmodeore.HardmodeTier1Ore</em>, <em class="sig-param">ore_tier2: lihzahrd.header.hardmodeore.HardmodeTier2Ore</em>, <em class="sig-param">ore_tier3: lihzahrd.header.hardmodeore.HardmodeTier3Ore</em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.header.AltarsSmashed" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.header.</code><code class="sig-name descname">AltarsSmashed</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">count</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)">int</a></span></em>, <em class="sig-param"><span class="n">ore_tier1</span><span class="p">:</span> <span class="n">lihzahrd.header.hardmodeore.HardmodeTier1Ore</span></em>, <em class="sig-param"><span class="n">ore_tier2</span><span class="p">:</span> <span class="n">lihzahrd.header.hardmodeore.HardmodeTier2Ore</span></em>, <em class="sig-param"><span class="n">ore_tier3</span><span class="p">:</span> <span class="n">lihzahrd.header.hardmodeore.HardmodeTier3Ore</span></em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.header.AltarsSmashed" title="Permalink to this definition">¶</a></dt>
 <dd><p>Information related to the first three hardmode ores.</p>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.AltarsSmashed.count">
-<code class="sig-name descname">count</code><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.header.AltarsSmashed.count" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">count</code><em class="property">: int</em><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.header.AltarsSmashed.count" title="Permalink to this definition">¶</a></dt>
 <dd><p>The number of altars smashed.</p>
 </dd></dl>
 
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="lihzahrd.header.AnglerQuest">
-<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.header.</code><code class="sig-name descname">AnglerQuest</code><span class="sig-paren">(</span><em class="sig-param">current_goal: lihzahrd.header.anglerquestfish.AnglerQuestFish, completed_by: List[str]</em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.header.AnglerQuest" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.header.</code><code class="sig-name descname">AnglerQuest</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">current_goal</span><span class="p">:</span> <span class="n">lihzahrd.header.anglerquestfish.AnglerQuestFish</span></em>, <em class="sig-param"><span class="n">completed_by</span><span class="p">:</span> <span class="n">List<span class="p">[</span><a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#str" title="(in Python v3.7)">str</a><span class="p">]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.header.AnglerQuest" title="Permalink to this definition">¶</a></dt>
 <dd><p>Information about today’s Angler’s quest.</p>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.AnglerQuest.completed_by">
-<code class="sig-name descname">completed_by</code><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.header.AnglerQuest.completed_by" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">completed_by</code><em class="property">: typing.List[str]</em><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.header.AnglerQuest.completed_by" title="Permalink to this definition">¶</a></dt>
 <dd><p>A list of player names who completed the angler’s quest today.</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.AnglerQuest.current_goal">
-<code class="sig-name descname">current_goal</code><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.header.AnglerQuest.current_goal" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">current_goal</code><em class="property">: AnglerQuestFish</em><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.header.AnglerQuest.current_goal" title="Permalink to this definition">¶</a></dt>
 <dd><p>The fish currently requested by the angler.</p>
 </dd></dl>
 
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="lihzahrd.header.AnglerQuestFish">
 <em class="property">class </em><code class="sig-prename descclassname">lihzahrd.header.</code><code class="sig-name descname">AnglerQuestFish</code><a class="headerlink" href="#lihzahrd.header.AnglerQuestFish" title="Permalink to this definition">¶</a></dt>
 <dd><p>An enumeration.</p>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.AnglerQuestFish.AMANITIA_FUNGIFIN">
 <code class="sig-name descname">AMANITIA_FUNGIFIN</code><em class="property"> = 25</em><a class="headerlink" href="#lihzahrd.header.AnglerQuestFish.AMANITIA_FUNGIFIN" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.AnglerQuestFish.ANGELFISH">
 <code class="sig-name descname">ANGELFISH</code><em class="property"> = 26</em><a class="headerlink" href="#lihzahrd.header.AnglerQuestFish.ANGELFISH" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.AnglerQuestFish.BATFISH">
 <code class="sig-name descname">BATFISH</code><em class="property"> = 0</em><a class="headerlink" href="#lihzahrd.header.AnglerQuestFish.BATFISH" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.AnglerQuestFish.BLOODY_MANOWAR">
 <code class="sig-name descname">BLOODY_MANOWAR</code><em class="property"> = 27</em><a class="headerlink" href="#lihzahrd.header.AnglerQuestFish.BLOODY_MANOWAR" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.AnglerQuestFish.BONEFISH">
 <code class="sig-name descname">BONEFISH</code><em class="property"> = 28</em><a class="headerlink" href="#lihzahrd.header.AnglerQuestFish.BONEFISH" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.AnglerQuestFish.BUMBLEBEE_TUNA">
 <code class="sig-name descname">BUMBLEBEE_TUNA</code><em class="property"> = 1</em><a class="headerlink" href="#lihzahrd.header.AnglerQuestFish.BUMBLEBEE_TUNA" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.AnglerQuestFish.BUNNYFISH">
 <code class="sig-name descname">BUNNYFISH</code><em class="property"> = 29</em><a class="headerlink" href="#lihzahrd.header.AnglerQuestFish.BUNNYFISH" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.AnglerQuestFish.CAPN_TUNABEARD">
 <code class="sig-name descname">CAPN_TUNABEARD</code><em class="property"> = 30</em><a class="headerlink" href="#lihzahrd.header.AnglerQuestFish.CAPN_TUNABEARD" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.AnglerQuestFish.CATFISH">
 <code class="sig-name descname">CATFISH</code><em class="property"> = 2</em><a class="headerlink" href="#lihzahrd.header.AnglerQuestFish.CATFISH" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.AnglerQuestFish.CLOUDFISH">
 <code class="sig-name descname">CLOUDFISH</code><em class="property"> = 3</em><a class="headerlink" href="#lihzahrd.header.AnglerQuestFish.CLOUDFISH" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.AnglerQuestFish.CLOWNFISH">
 <code class="sig-name descname">CLOWNFISH</code><em class="property"> = 31</em><a class="headerlink" href="#lihzahrd.header.AnglerQuestFish.CLOWNFISH" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.AnglerQuestFish.CURSEDFISH">
 <code class="sig-name descname">CURSEDFISH</code><em class="property"> = 4</em><a class="headerlink" href="#lihzahrd.header.AnglerQuestFish.CURSEDFISH" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.AnglerQuestFish.DEMONIC_HELLFISH">
 <code class="sig-name descname">DEMONIC_HELLFISH</code><em class="property"> = 32</em><a class="headerlink" href="#lihzahrd.header.AnglerQuestFish.DEMONIC_HELLFISH" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.AnglerQuestFish.DERPFISH">
 <code class="sig-name descname">DERPFISH</code><em class="property"> = 33</em><a class="headerlink" href="#lihzahrd.header.AnglerQuestFish.DERPFISH" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.AnglerQuestFish.DIRTFISH">
 <code class="sig-name descname">DIRTFISH</code><em class="property"> = 5</em><a class="headerlink" href="#lihzahrd.header.AnglerQuestFish.DIRTFISH" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.AnglerQuestFish.DYNAMITE_FISH">
 <code class="sig-name descname">DYNAMITE_FISH</code><em class="property"> = 6</em><a class="headerlink" href="#lihzahrd.header.AnglerQuestFish.DYNAMITE_FISH" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.AnglerQuestFish.EATER_OF_PLANKTON">
 <code class="sig-name descname">EATER_OF_PLANKTON</code><em class="property"> = 7</em><a class="headerlink" href="#lihzahrd.header.AnglerQuestFish.EATER_OF_PLANKTON" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.AnglerQuestFish.FALLEN_STARFISH">
 <code class="sig-name descname">FALLEN_STARFISH</code><em class="property"> = 8</em><a class="headerlink" href="#lihzahrd.header.AnglerQuestFish.FALLEN_STARFISH" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.AnglerQuestFish.FISHOTRON">
 <code class="sig-name descname">FISHOTRON</code><em class="property"> = 10</em><a class="headerlink" href="#lihzahrd.header.AnglerQuestFish.FISHOTRON" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.AnglerQuestFish.FISHRON">
 <code class="sig-name descname">FISHRON</code><em class="property"> = 34</em><a class="headerlink" href="#lihzahrd.header.AnglerQuestFish.FISHRON" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.AnglerQuestFish.GUIDE_VOODOO_FISH">
 <code class="sig-name descname">GUIDE_VOODOO_FISH</code><em class="property"> = 22</em><a class="headerlink" href="#lihzahrd.header.AnglerQuestFish.GUIDE_VOODOO_FISH" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.AnglerQuestFish.HARPYFISH">
 <code class="sig-name descname">HARPYFISH</code><em class="property"> = 11</em><a class="headerlink" href="#lihzahrd.header.AnglerQuestFish.HARPYFISH" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.AnglerQuestFish.HUNGERFISH">
 <code class="sig-name descname">HUNGERFISH</code><em class="property"> = 12</em><a class="headerlink" href="#lihzahrd.header.AnglerQuestFish.HUNGERFISH" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.AnglerQuestFish.ICHORFISH">
 <code class="sig-name descname">ICHORFISH</code><em class="property"> = 13</em><a class="headerlink" href="#lihzahrd.header.AnglerQuestFish.ICHORFISH" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.AnglerQuestFish.INFECTED_SCABBARDFISH">
 <code class="sig-name descname">INFECTED_SCABBARDFISH</code><em class="property"> = 35</em><a class="headerlink" href="#lihzahrd.header.AnglerQuestFish.INFECTED_SCABBARDFISH" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.AnglerQuestFish.JEWELFISH">
 <code class="sig-name descname">JEWELFISH</code><em class="property"> = 14</em><a class="headerlink" href="#lihzahrd.header.AnglerQuestFish.JEWELFISH" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.AnglerQuestFish.MIRAGE_FISH">
 <code class="sig-name descname">MIRAGE_FISH</code><em class="property"> = 15</em><a class="headerlink" href="#lihzahrd.header.AnglerQuestFish.MIRAGE_FISH" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.AnglerQuestFish.MUDFISH">
 <code class="sig-name descname">MUDFISH</code><em class="property"> = 36</em><a class="headerlink" href="#lihzahrd.header.AnglerQuestFish.MUDFISH" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.AnglerQuestFish.MUTANT_FLINXFIN">
 <code class="sig-name descname">MUTANT_FLINXFIN</code><em class="property"> = 16</em><a class="headerlink" href="#lihzahrd.header.AnglerQuestFish.MUTANT_FLINXFIN" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.AnglerQuestFish.PENGFISH">
 <code class="sig-name descname">PENGFISH</code><em class="property"> = 17</em><a class="headerlink" href="#lihzahrd.header.AnglerQuestFish.PENGFISH" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.AnglerQuestFish.PIXIEFISH">
 <code class="sig-name descname">PIXIEFISH</code><em class="property"> = 18</em><a class="headerlink" href="#lihzahrd.header.AnglerQuestFish.PIXIEFISH" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.AnglerQuestFish.SLIMEFISH">
 <code class="sig-name descname">SLIMEFISH</code><em class="property"> = 37</em><a class="headerlink" href="#lihzahrd.header.AnglerQuestFish.SLIMEFISH" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.AnglerQuestFish.SPIDERFISH">
 <code class="sig-name descname">SPIDERFISH</code><em class="property"> = 19</em><a class="headerlink" href="#lihzahrd.header.AnglerQuestFish.SPIDERFISH" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.AnglerQuestFish.THE_FISH_OF_CTHULHU">
 <code class="sig-name descname">THE_FISH_OF_CTHULHU</code><em class="property"> = 9</em><a class="headerlink" href="#lihzahrd.header.AnglerQuestFish.THE_FISH_OF_CTHULHU" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.AnglerQuestFish.TROPICAL_BARRACUDA">
 <code class="sig-name descname">TROPICAL_BARRACUDA</code><em class="property"> = 38</em><a class="headerlink" href="#lihzahrd.header.AnglerQuestFish.TROPICAL_BARRACUDA" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.AnglerQuestFish.TUNDRA_TROUT">
 <code class="sig-name descname">TUNDRA_TROUT</code><em class="property"> = 20</em><a class="headerlink" href="#lihzahrd.header.AnglerQuestFish.TUNDRA_TROUT" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.AnglerQuestFish.UNICORN_FISH">
 <code class="sig-name descname">UNICORN_FISH</code><em class="property"> = 21</em><a class="headerlink" href="#lihzahrd.header.AnglerQuestFish.UNICORN_FISH" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.AnglerQuestFish.WYVERNTAIL">
 <code class="sig-name descname">WYVERNTAIL</code><em class="property"> = 23</em><a class="headerlink" href="#lihzahrd.header.AnglerQuestFish.WYVERNTAIL" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.AnglerQuestFish.ZOMBIE_FISH">
 <code class="sig-name descname">ZOMBIE_FISH</code><em class="property"> = 24</em><a class="headerlink" href="#lihzahrd.header.AnglerQuestFish.ZOMBIE_FISH" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="lihzahrd.header.Backgrounds">
-<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.header.</code><code class="sig-name descname">Backgrounds</code><span class="sig-paren">(</span><em class="sig-param">bg_underground_snow: int</em>, <em class="sig-param">bg_underground_jungle: int</em>, <em class="sig-param">bg_hell: int</em>, <em class="sig-param">bg_forest: int</em>, <em class="sig-param">bg_corruption: int</em>, <em class="sig-param">bg_jungle: int</em>, <em class="sig-param">bg_snow: int</em>, <em class="sig-param">bg_hallow: int</em>, <em class="sig-param">bg_crimson: int</em>, <em class="sig-param">bg_desert: int</em>, <em class="sig-param">bg_ocean: int</em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.header.Backgrounds" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.header.</code><code class="sig-name descname">Backgrounds</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">bg_underground_snow</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)">int</a></span></em>, <em class="sig-param"><span class="n">bg_underground_jungle</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)">int</a></span></em>, <em class="sig-param"><span class="n">bg_hell</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)">int</a></span></em>, <em class="sig-param"><span class="n">bg_forest</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)">int</a></span></em>, <em class="sig-param"><span class="n">bg_corruption</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)">int</a></span></em>, <em class="sig-param"><span class="n">bg_jungle</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)">int</a></span></em>, <em class="sig-param"><span class="n">bg_snow</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)">int</a></span></em>, <em class="sig-param"><span class="n">bg_hallow</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)">int</a></span></em>, <em class="sig-param"><span class="n">bg_crimson</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)">int</a></span></em>, <em class="sig-param"><span class="n">bg_desert</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)">int</a></span></em>, <em class="sig-param"><span class="n">bg_ocean</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)">int</a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.header.Backgrounds" title="Permalink to this definition">¶</a></dt>
 <dd><p>The backgrounds of various world biomes.</p>
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="lihzahrd.header.BossesDefeated">
-<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.header.</code><code class="sig-name descname">BossesDefeated</code><span class="sig-paren">(</span><em class="sig-param">eye_of_cthulhu: bool</em>, <em class="sig-param">eater_of_worlds: bool</em>, <em class="sig-param">skeletron: bool</em>, <em class="sig-param">queen_bee: bool</em>, <em class="sig-param">the_twins: bool</em>, <em class="sig-param">the_destroyer: bool</em>, <em class="sig-param">skeletron_prime: bool</em>, <em class="sig-param">any_mechnical_boss: bool</em>, <em class="sig-param">plantera: bool</em>, <em class="sig-param">golem: bool</em>, <em class="sig-param">king_slime: bool</em>, <em class="sig-param">goblin_army: bool</em>, <em class="sig-param">clown: bool</em>, <em class="sig-param">frost_moon: bool</em>, <em class="sig-param">pirates: bool</em>, <em class="sig-param">duke_fishron: bool</em>, <em class="sig-param">moon_lord: bool</em>, <em class="sig-param">pumpking: bool</em>, <em class="sig-param">mourning_wood: bool</em>, <em class="sig-param">ice_queen: bool</em>, <em class="sig-param">santa_nk1: bool</em>, <em class="sig-param">everscream: bool</em>, <em class="sig-param">lunar_pillars: lihzahrd.header.pillarsinfo.PillarsInfo</em>, <em class="sig-param">old_ones_army: lihzahrd.header.oldonesarmytiers.OldOnesArmyTiers</em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.header.BossesDefeated" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="attribute">
+<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.header.</code><code class="sig-name descname">BossesDefeated</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">eye_of_cthulhu</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#bool" title="(in Python v3.7)">bool</a></span></em>, <em class="sig-param"><span class="n">eater_of_worlds</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#bool" title="(in Python v3.7)">bool</a></span></em>, <em class="sig-param"><span class="n">skeletron</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#bool" title="(in Python v3.7)">bool</a></span></em>, <em class="sig-param"><span class="n">queen_bee</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#bool" title="(in Python v3.7)">bool</a></span></em>, <em class="sig-param"><span class="n">the_twins</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#bool" title="(in Python v3.7)">bool</a></span></em>, <em class="sig-param"><span class="n">the_destroyer</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#bool" title="(in Python v3.7)">bool</a></span></em>, <em class="sig-param"><span class="n">skeletron_prime</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#bool" title="(in Python v3.7)">bool</a></span></em>, <em class="sig-param"><span class="n">any_mechnical_boss</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#bool" title="(in Python v3.7)">bool</a></span></em>, <em class="sig-param"><span class="n">plantera</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#bool" title="(in Python v3.7)">bool</a></span></em>, <em class="sig-param"><span class="n">golem</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#bool" title="(in Python v3.7)">bool</a></span></em>, <em class="sig-param"><span class="n">king_slime</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#bool" title="(in Python v3.7)">bool</a></span></em>, <em class="sig-param"><span class="n">goblin_army</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#bool" title="(in Python v3.7)">bool</a></span></em>, <em class="sig-param"><span class="n">clown</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#bool" title="(in Python v3.7)">bool</a></span></em>, <em class="sig-param"><span class="n">frost_moon</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#bool" title="(in Python v3.7)">bool</a></span></em>, <em class="sig-param"><span class="n">pirates</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#bool" title="(in Python v3.7)">bool</a></span></em>, <em class="sig-param"><span class="n">duke_fishron</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#bool" title="(in Python v3.7)">bool</a></span></em>, <em class="sig-param"><span class="n">moon_lord</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#bool" title="(in Python v3.7)">bool</a></span></em>, <em class="sig-param"><span class="n">pumpking</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#bool" title="(in Python v3.7)">bool</a></span></em>, <em class="sig-param"><span class="n">mourning_wood</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#bool" title="(in Python v3.7)">bool</a></span></em>, <em class="sig-param"><span class="n">ice_queen</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#bool" title="(in Python v3.7)">bool</a></span></em>, <em class="sig-param"><span class="n">santa_nk1</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#bool" title="(in Python v3.7)">bool</a></span></em>, <em class="sig-param"><span class="n">everscream</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#bool" title="(in Python v3.7)">bool</a></span></em>, <em class="sig-param"><span class="n">martian_madness</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#bool" title="(in Python v3.7)">bool</a></span></em>, <em class="sig-param"><span class="n">lunatic_cultist</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#bool" title="(in Python v3.7)">bool</a></span></em>, <em class="sig-param"><span class="n">lunar_pillars</span><span class="p">:</span> <span class="n">lihzahrd.header.pillarsinfo.PillarsInfo</span></em>, <em class="sig-param"><span class="n">old_ones_army</span><span class="p">:</span> <span class="n">lihzahrd.header.oldonesarmytiers.OldOnesArmyTiers</span></em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.header.BossesDefeated" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="py attribute">
 <dt id="lihzahrd.header.BossesDefeated.any_mechnical_boss">
-<code class="sig-name descname">any_mechnical_boss</code><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.header.BossesDefeated.any_mechnical_boss" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">any_mechnical_boss</code><em class="property">: bool</em><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.header.BossesDefeated.any_mechnical_boss" title="Permalink to this definition">¶</a></dt>
 <dd><p>Appearently, there’s a different flag for beating any mechanical boss and a specific mechanical boss.</p>
 </dd></dl>
 
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="lihzahrd.header.Clouds">
-<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.header.</code><code class="sig-name descname">Clouds</code><span class="sig-paren">(</span><em class="sig-param">bg_cloud: int</em>, <em class="sig-param">cloud_number: int</em>, <em class="sig-param">wind_speed: float</em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.header.Clouds" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.header.</code><code class="sig-name descname">Clouds</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">bg_cloud</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)">int</a></span></em>, <em class="sig-param"><span class="n">cloud_number</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)">int</a></span></em>, <em class="sig-param"><span class="n">wind_speed</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#float" title="(in Python v3.7)">float</a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.header.Clouds" title="Permalink to this definition">¶</a></dt>
 <dd><p>Information about… the clouds in the world?</p>
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="lihzahrd.header.Events">
-<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.header.</code><code class="sig-name descname">Events</code><span class="sig-paren">(</span><em class="sig-param">blood_moon: bool</em>, <em class="sig-param">solar_eclipse: bool</em>, <em class="sig-param">invasion: lihzahrd.header.invasion.Invasion</em>, <em class="sig-param">slime_rain: float</em>, <em class="sig-param">rain: lihzahrd.header.rain.Rain</em>, <em class="sig-param">party: lihzahrd.header.party.Party</em>, <em class="sig-param">sandstorm: lihzahrd.header.sandstorm.Sandstorm</em>, <em class="sig-param">lunar_events: lihzahrd.header.lunarevents.LunarEvents</em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.header.Events" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.header.</code><code class="sig-name descname">Events</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">blood_moon</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#bool" title="(in Python v3.7)">bool</a></span></em>, <em class="sig-param"><span class="n">solar_eclipse</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#bool" title="(in Python v3.7)">bool</a></span></em>, <em class="sig-param"><span class="n">invasion</span><span class="p">:</span> <span class="n">lihzahrd.header.invasion.Invasion</span></em>, <em class="sig-param"><span class="n">slime_rain</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#float" title="(in Python v3.7)">float</a></span></em>, <em class="sig-param"><span class="n">rain</span><span class="p">:</span> <span class="n">lihzahrd.header.rain.Rain</span></em>, <em class="sig-param"><span class="n">party</span><span class="p">:</span> <span class="n">lihzahrd.header.party.Party</span></em>, <em class="sig-param"><span class="n">sandstorm</span><span class="p">:</span> <span class="n">lihzahrd.header.sandstorm.Sandstorm</span></em>, <em class="sig-param"><span class="n">lunar_events</span><span class="p">:</span> <span class="n">lihzahrd.header.lunarevents.LunarEvents</span></em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.header.Events" title="Permalink to this definition">¶</a></dt>
 <dd><p>Information about the ongoing world events.</p>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.Events.blood_moon">
-<code class="sig-name descname">blood_moon</code><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.header.Events.blood_moon" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">blood_moon</code><em class="property">: bool</em><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.header.Events.blood_moon" title="Permalink to this definition">¶</a></dt>
 <dd><p>If the current moon is a Blood Moon.</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.Events.invasion">
-<code class="sig-name descname">invasion</code><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.header.Events.invasion" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">invasion</code><em class="property">: Invasion</em><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.header.Events.invasion" title="Permalink to this definition">¶</a></dt>
 <dd><p>Information about the currently ongoing invasion.</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.Events.lunar_events">
-<code class="sig-name descname">lunar_events</code><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.header.Events.lunar_events" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">lunar_events</code><em class="property">: LunarEvents</em><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.header.Events.lunar_events" title="Permalink to this definition">¶</a></dt>
 <dd><p>Information about the currently ongoing Lunar Events.</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.Events.party">
-<code class="sig-name descname">party</code><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.header.Events.party" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">party</code><em class="property">: Party</em><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.header.Events.party" title="Permalink to this definition">¶</a></dt>
 <dd><p>Information about the currently ongoing party.</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.Events.rain">
-<code class="sig-name descname">rain</code><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.header.Events.rain" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">rain</code><em class="property">: Rain</em><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.header.Events.rain" title="Permalink to this definition">¶</a></dt>
 <dd><p>Information about the currently ongoing rain.</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.Events.sandstorm">
-<code class="sig-name descname">sandstorm</code><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.header.Events.sandstorm" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">sandstorm</code><em class="property">: Sandstorm</em><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.header.Events.sandstorm" title="Permalink to this definition">¶</a></dt>
 <dd><p>Information about the currently ongoing sandstorm.</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.Events.slime_rain">
-<code class="sig-name descname">slime_rain</code><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.header.Events.slime_rain" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">slime_rain</code><em class="property">: float</em><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.header.Events.slime_rain" title="Permalink to this definition">¶</a></dt>
 <dd><p>How long the slime rain will go on for.</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.Events.solar_eclipse">
-<code class="sig-name descname">solar_eclipse</code><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.header.Events.solar_eclipse" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">solar_eclipse</code><em class="property">: bool</em><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.header.Events.solar_eclipse" title="Permalink to this definition">¶</a></dt>
 <dd><p>If the current day is a Solar Eclipse.</p>
 </dd></dl>
 
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="lihzahrd.header.FourPartSplit">
-<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.header.</code><code class="sig-name descname">FourPartSplit</code><span class="sig-paren">(</span><em class="sig-param">separators: List[int], properties: List</em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.header.FourPartSplit" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.header.</code><code class="sig-name descname">FourPartSplit</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">separators</span><span class="p">:</span> <span class="n">List<span class="p">[</span><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)">int</a><span class="p">]</span></span></em>, <em class="sig-param"><span class="n">properties</span><span class="p">:</span> <span class="n">List</span></em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.header.FourPartSplit" title="Permalink to this definition">¶</a></dt>
 <dd><p>A world property split in four parts, separated by three vertical lines at a certain x coordinate.</p>
-<dl class="method">
+<dl class="py method">
 <dt id="lihzahrd.header.FourPartSplit.far_left">
 <em class="property">property </em><code class="sig-name descname">far_left</code><a class="headerlink" href="#lihzahrd.header.FourPartSplit.far_left" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="lihzahrd.header.FourPartSplit.far_right">
 <em class="property">property </em><code class="sig-name descname">far_right</code><a class="headerlink" href="#lihzahrd.header.FourPartSplit.far_right" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="lihzahrd.header.FourPartSplit.get_property_at_x">
-<code class="sig-name descname">get_property_at_x</code><span class="sig-paren">(</span><em class="sig-param">x: int</em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.header.FourPartSplit.get_property_at_x" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_property_at_x</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)">int</a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.header.FourPartSplit.get_property_at_x" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="lihzahrd.header.FourPartSplit.nearby_left">
 <em class="property">property </em><code class="sig-name descname">nearby_left</code><a class="headerlink" href="#lihzahrd.header.FourPartSplit.nearby_left" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="lihzahrd.header.FourPartSplit.nearby_right">
 <em class="property">property </em><code class="sig-name descname">nearby_right</code><a class="headerlink" href="#lihzahrd.header.FourPartSplit.nearby_right" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.FourPartSplit.properties">
-<code class="sig-name descname">properties</code><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.header.FourPartSplit.properties" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">properties</code><em class="property">: typing.List</em><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.header.FourPartSplit.properties" title="Permalink to this definition">¶</a></dt>
 <dd><p>The four properties, in order:</p>
 <ul class="simple">
 <li><p>The far left property, the one between the left world edge and the first separator.</p></li>
@@ -519,25 +519,25 @@
 </ul>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.FourPartSplit.separators">
-<code class="sig-name descname">separators</code><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.header.FourPartSplit.separators" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">separators</code><em class="property">: typing.List[int]</em><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.header.FourPartSplit.separators" title="Permalink to this definition">¶</a></dt>
 <dd><p>The three x coordinates of the vertical separators, in increasing order.</p>
 </dd></dl>
 
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="lihzahrd.header.GeneratorInfo">
-<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.header.</code><code class="sig-name descname">GeneratorInfo</code><span class="sig-paren">(</span><em class="sig-param">seed</em>, <em class="sig-param">version</em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.header.GeneratorInfo" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.header.</code><code class="sig-name descname">GeneratorInfo</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">seed</span></em>, <em class="sig-param"><span class="n">version</span></em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.header.GeneratorInfo" title="Permalink to this definition">¶</a></dt>
 <dd><p>Information about the world generator.</p>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.GeneratorInfo.seed">
 <code class="sig-name descname">seed</code><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.header.GeneratorInfo.seed" title="Permalink to this definition">¶</a></dt>
 <dd><p>The seed this world was generated with.</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.GeneratorInfo.version">
 <code class="sig-name descname">version</code><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.header.GeneratorInfo.version" title="Permalink to this definition">¶</a></dt>
 <dd><p>The version of the generator that created this world.</p>
@@ -545,383 +545,378 @@
 
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="lihzahrd.header.HardmodeTier1Ore">
 <em class="property">class </em><code class="sig-prename descclassname">lihzahrd.header.</code><code class="sig-name descname">HardmodeTier1Ore</code><a class="headerlink" href="#lihzahrd.header.HardmodeTier1Ore" title="Permalink to this definition">¶</a></dt>
 <dd><p>An enumeration.</p>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.HardmodeTier1Ore.COBALT">
 <code class="sig-name descname">COBALT</code><em class="property"> = 107</em><a class="headerlink" href="#lihzahrd.header.HardmodeTier1Ore.COBALT" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.HardmodeTier1Ore.NOT_DETERMINED">
 <code class="sig-name descname">NOT_DETERMINED</code><em class="property"> = -1</em><a class="headerlink" href="#lihzahrd.header.HardmodeTier1Ore.NOT_DETERMINED" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.HardmodeTier1Ore.PALLADIUM">
 <code class="sig-name descname">PALLADIUM</code><em class="property"> = 221</em><a class="headerlink" href="#lihzahrd.header.HardmodeTier1Ore.PALLADIUM" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="lihzahrd.header.HardmodeTier2Ore">
 <em class="property">class </em><code class="sig-prename descclassname">lihzahrd.header.</code><code class="sig-name descname">HardmodeTier2Ore</code><a class="headerlink" href="#lihzahrd.header.HardmodeTier2Ore" title="Permalink to this definition">¶</a></dt>
 <dd><p>An enumeration.</p>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.HardmodeTier2Ore.MYTHRIL">
 <code class="sig-name descname">MYTHRIL</code><em class="property"> = 108</em><a class="headerlink" href="#lihzahrd.header.HardmodeTier2Ore.MYTHRIL" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.HardmodeTier2Ore.NOT_DETERMINED">
 <code class="sig-name descname">NOT_DETERMINED</code><em class="property"> = -1</em><a class="headerlink" href="#lihzahrd.header.HardmodeTier2Ore.NOT_DETERMINED" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.HardmodeTier2Ore.ORICHALCUM">
 <code class="sig-name descname">ORICHALCUM</code><em class="property"> = 222</em><a class="headerlink" href="#lihzahrd.header.HardmodeTier2Ore.ORICHALCUM" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="lihzahrd.header.HardmodeTier3Ore">
 <em class="property">class </em><code class="sig-prename descclassname">lihzahrd.header.</code><code class="sig-name descname">HardmodeTier3Ore</code><a class="headerlink" href="#lihzahrd.header.HardmodeTier3Ore" title="Permalink to this definition">¶</a></dt>
 <dd><p>An enumeration.</p>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.HardmodeTier3Ore.ADAMANTITE">
 <code class="sig-name descname">ADAMANTITE</code><em class="property"> = 111</em><a class="headerlink" href="#lihzahrd.header.HardmodeTier3Ore.ADAMANTITE" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.HardmodeTier3Ore.NOT_DETERMINED">
 <code class="sig-name descname">NOT_DETERMINED</code><em class="property"> = -1</em><a class="headerlink" href="#lihzahrd.header.HardmodeTier3Ore.NOT_DETERMINED" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
-<dt id="lihzahrd.header.HardmodeTier3Ore.NOT_DETERMINED_TOO">
-<code class="sig-name descname">NOT_DETERMINED_TOO</code><em class="property"> = 16785407</em><a class="headerlink" href="#lihzahrd.header.HardmodeTier3Ore.NOT_DETERMINED_TOO" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.HardmodeTier3Ore.TITANIUM">
 <code class="sig-name descname">TITANIUM</code><em class="property"> = 223</em><a class="headerlink" href="#lihzahrd.header.HardmodeTier3Ore.TITANIUM" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="lihzahrd.header.Invasion">
-<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.header.</code><code class="sig-name descname">Invasion</code><span class="sig-paren">(</span><em class="sig-param">delay: int</em>, <em class="sig-param">size: int</em>, <em class="sig-param">type_: lihzahrd.header.invasiontype.InvasionType</em>, <em class="sig-param">position: float</em>, <em class="sig-param">size_start: int</em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.header.Invasion" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.header.</code><code class="sig-name descname">Invasion</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">delay</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)">int</a></span></em>, <em class="sig-param"><span class="n">size</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)">int</a></span></em>, <em class="sig-param"><span class="n">type_</span><span class="p">:</span> <span class="n">lihzahrd.header.invasiontype.InvasionType</span></em>, <em class="sig-param"><span class="n">position</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#float" title="(in Python v3.7)">float</a></span></em>, <em class="sig-param"><span class="n">size_start</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)">int</a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.header.Invasion" title="Permalink to this definition">¶</a></dt>
 <dd><p>Invasions (goblin army, pirates, martian madness…) related information.</p>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.Invasion.type">
-<code class="sig-name descname">type</code><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.header.Invasion.type" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">type</code><em class="property">: InvasionType</em><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.header.Invasion.type" title="Permalink to this definition">¶</a></dt>
 <dd><p>The type of the current invasion (goblin army / pirates / martian madness…).</p>
 <p>If InvasionType.NONE, no invasion will be active in the world.</p>
 </dd></dl>
 
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="lihzahrd.header.InvasionType">
 <em class="property">class </em><code class="sig-prename descclassname">lihzahrd.header.</code><code class="sig-name descname">InvasionType</code><a class="headerlink" href="#lihzahrd.header.InvasionType" title="Permalink to this definition">¶</a></dt>
 <dd><p>An enumeration.</p>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.InvasionType.FROST_LEGION">
 <code class="sig-name descname">FROST_LEGION</code><em class="property"> = 2</em><a class="headerlink" href="#lihzahrd.header.InvasionType.FROST_LEGION" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.InvasionType.GOBLIN_INVASION">
 <code class="sig-name descname">GOBLIN_INVASION</code><em class="property"> = 1</em><a class="headerlink" href="#lihzahrd.header.InvasionType.GOBLIN_INVASION" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.InvasionType.MARTIAN_MADNESS">
 <code class="sig-name descname">MARTIAN_MADNESS</code><em class="property"> = 4</em><a class="headerlink" href="#lihzahrd.header.InvasionType.MARTIAN_MADNESS" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.InvasionType.NONE">
 <code class="sig-name descname">NONE</code><em class="property"> = 0</em><a class="headerlink" href="#lihzahrd.header.InvasionType.NONE" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.InvasionType.PIRATE_INVASION">
 <code class="sig-name descname">PIRATE_INVASION</code><em class="property"> = 3</em><a class="headerlink" href="#lihzahrd.header.InvasionType.PIRATE_INVASION" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="lihzahrd.header.LunarEvents">
-<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.header.</code><code class="sig-name descname">LunarEvents</code><span class="sig-paren">(</span><em class="sig-param">are_active: bool</em>, <em class="sig-param">pillars_present: lihzahrd.header.pillarsinfo.PillarsInfo</em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.header.LunarEvents" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.header.</code><code class="sig-name descname">LunarEvents</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">are_active</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#bool" title="(in Python v3.7)">bool</a></span></em>, <em class="sig-param"><span class="n">pillars_present</span><span class="p">:</span> <span class="n">lihzahrd.header.pillarsinfo.PillarsInfo</span></em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.header.LunarEvents" title="Permalink to this definition">¶</a></dt>
 <dd><p>Lunar Events (Lunar Pillars) related information.</p>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.LunarEvents.are_active">
-<code class="sig-name descname">are_active</code><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.header.LunarEvents.are_active" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">are_active</code><em class="property">: bool</em><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.header.LunarEvents.are_active" title="Permalink to this definition">¶</a></dt>
 <dd><p>If the Lunar Events are active or not.</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.LunarEvents.pillars_present">
-<code class="sig-name descname">pillars_present</code><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.header.LunarEvents.pillars_present" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">pillars_present</code><em class="property">: PillarsInfo</em><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.header.LunarEvents.pillars_present" title="Permalink to this definition">¶</a></dt>
 <dd><p>Which pillars are currently present in the world.</p>
 </dd></dl>
 
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="lihzahrd.header.MoonPhase">
 <em class="property">class </em><code class="sig-prename descclassname">lihzahrd.header.</code><code class="sig-name descname">MoonPhase</code><a class="headerlink" href="#lihzahrd.header.MoonPhase" title="Permalink to this definition">¶</a></dt>
 <dd><p>An enumeration.</p>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.MoonPhase.FIRST_QUARTER">
 <code class="sig-name descname">FIRST_QUARTER</code><em class="property"> = 6</em><a class="headerlink" href="#lihzahrd.header.MoonPhase.FIRST_QUARTER" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.MoonPhase.FULL_MOON">
 <code class="sig-name descname">FULL_MOON</code><em class="property"> = 0</em><a class="headerlink" href="#lihzahrd.header.MoonPhase.FULL_MOON" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.MoonPhase.NEW_MOON">
 <code class="sig-name descname">NEW_MOON</code><em class="property"> = 4</em><a class="headerlink" href="#lihzahrd.header.MoonPhase.NEW_MOON" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.MoonPhase.THIRD_QUARTER">
 <code class="sig-name descname">THIRD_QUARTER</code><em class="property"> = 2</em><a class="headerlink" href="#lihzahrd.header.MoonPhase.THIRD_QUARTER" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.MoonPhase.WANING_CRESCENT">
 <code class="sig-name descname">WANING_CRESCENT</code><em class="property"> = 3</em><a class="headerlink" href="#lihzahrd.header.MoonPhase.WANING_CRESCENT" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.MoonPhase.WANING_GIBBOUS">
 <code class="sig-name descname">WANING_GIBBOUS</code><em class="property"> = 1</em><a class="headerlink" href="#lihzahrd.header.MoonPhase.WANING_GIBBOUS" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.MoonPhase.WAXING_CRESCENT">
 <code class="sig-name descname">WAXING_CRESCENT</code><em class="property"> = 5</em><a class="headerlink" href="#lihzahrd.header.MoonPhase.WAXING_CRESCENT" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.MoonPhase.WAXING_GIBBOUS">
 <code class="sig-name descname">WAXING_GIBBOUS</code><em class="property"> = 7</em><a class="headerlink" href="#lihzahrd.header.MoonPhase.WAXING_GIBBOUS" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="lihzahrd.header.MoonStyle">
 <em class="property">class </em><code class="sig-prename descclassname">lihzahrd.header.</code><code class="sig-name descname">MoonStyle</code><a class="headerlink" href="#lihzahrd.header.MoonStyle" title="Permalink to this definition">¶</a></dt>
 <dd><p>All possible moon styles.</p>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.MoonStyle.ORANGE">
 <code class="sig-name descname">ORANGE</code><em class="property"> = 1</em><a class="headerlink" href="#lihzahrd.header.MoonStyle.ORANGE" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.MoonStyle.RINGED_GREEN">
 <code class="sig-name descname">RINGED_GREEN</code><em class="property"> = 2</em><a class="headerlink" href="#lihzahrd.header.MoonStyle.RINGED_GREEN" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.MoonStyle.WHITE">
 <code class="sig-name descname">WHITE</code><em class="property"> = 0</em><a class="headerlink" href="#lihzahrd.header.MoonStyle.WHITE" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="lihzahrd.header.OldOnesArmyTiers">
-<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.header.</code><code class="sig-name descname">OldOnesArmyTiers</code><span class="sig-paren">(</span><em class="sig-param">tier1</em>, <em class="sig-param">tier2</em>, <em class="sig-param">tier3</em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.header.OldOnesArmyTiers" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.header.</code><code class="sig-name descname">OldOnesArmyTiers</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tier1</span></em>, <em class="sig-param"><span class="n">tier2</span></em>, <em class="sig-param"><span class="n">tier3</span></em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.header.OldOnesArmyTiers" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="lihzahrd.header.Party">
-<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.header.</code><code class="sig-name descname">Party</code><span class="sig-paren">(</span><em class="sig-param">thrown_by_party_center: bool, thrown_by_npcs: bool, cooldown: int, partying_npcs: List[int]</em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.header.Party" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.header.</code><code class="sig-name descname">Party</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">thrown_by_party_center</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#bool" title="(in Python v3.7)">bool</a></span></em>, <em class="sig-param"><span class="n">thrown_by_npcs</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#bool" title="(in Python v3.7)">bool</a></span></em>, <em class="sig-param"><span class="n">cooldown</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)">int</a></span></em>, <em class="sig-param"><span class="n">partying_npcs</span><span class="p">:</span> <span class="n">List<span class="p">[</span><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)">int</a><span class="p">]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.header.Party" title="Permalink to this definition">¶</a></dt>
 <dd><p>NPC Party related information.</p>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.Party.cooldown">
-<code class="sig-name descname">cooldown</code><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.header.Party.cooldown" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">cooldown</code><em class="property">: int</em><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.header.Party.cooldown" title="Permalink to this definition">¶</a></dt>
 <dd><p>How long a party cannot be started for.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="lihzahrd.header.Party.is_active">
 <em class="property">property </em><code class="sig-name descname">is_active</code><a class="headerlink" href="#lihzahrd.header.Party.is_active" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.Party.partying_npcs">
-<code class="sig-name descname">partying_npcs</code><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.header.Party.partying_npcs" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">partying_npcs</code><em class="property">: typing.List[int]</em><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.header.Party.partying_npcs" title="Permalink to this definition">¶</a></dt>
 <dd><p>The list of NPC IDs that threw the party.</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.Party.thrown_by_npcs">
-<code class="sig-name descname">thrown_by_npcs</code><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.header.Party.thrown_by_npcs" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">thrown_by_npcs</code><em class="property">: bool</em><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.header.Party.thrown_by_npcs" title="Permalink to this definition">¶</a></dt>
 <dd><p>If the item was spontaneously thrown by NPCs.</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.Party.thrown_by_party_center">
-<code class="sig-name descname">thrown_by_party_center</code><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.header.Party.thrown_by_party_center" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">thrown_by_party_center</code><em class="property">: bool</em><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.header.Party.thrown_by_party_center" title="Permalink to this definition">¶</a></dt>
 <dd><p>If the party was started by right-clicking a Party Center.</p>
 </dd></dl>
 
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="lihzahrd.header.PillarsInfo">
-<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.header.</code><code class="sig-name descname">PillarsInfo</code><span class="sig-paren">(</span><em class="sig-param">solar</em>, <em class="sig-param">vortex</em>, <em class="sig-param">nebula</em>, <em class="sig-param">stardust</em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.header.PillarsInfo" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.header.</code><code class="sig-name descname">PillarsInfo</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">solar</span></em>, <em class="sig-param"><span class="n">vortex</span></em>, <em class="sig-param"><span class="n">nebula</span></em>, <em class="sig-param"><span class="n">stardust</span></em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.header.PillarsInfo" title="Permalink to this definition">¶</a></dt>
 <dd><p>A container for information associated with the Lunar Pillars.</p>
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="lihzahrd.header.Rain">
-<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.header.</code><code class="sig-name descname">Rain</code><span class="sig-paren">(</span><em class="sig-param">is_active: bool</em>, <em class="sig-param">time_left: int</em>, <em class="sig-param">max_rain: float</em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.header.Rain" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.header.</code><code class="sig-name descname">Rain</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">is_active</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#bool" title="(in Python v3.7)">bool</a></span></em>, <em class="sig-param"><span class="n">time_left</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)">int</a></span></em>, <em class="sig-param"><span class="n">max_rain</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#float" title="(in Python v3.7)">float</a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.header.Rain" title="Permalink to this definition">¶</a></dt>
 <dd><p>Rain related information.</p>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.Rain.is_active">
-<code class="sig-name descname">is_active</code><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.header.Rain.is_active" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">is_active</code><em class="property">: bool</em><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.header.Rain.is_active" title="Permalink to this definition">¶</a></dt>
 <dd><p>If it is currently raining in the world.</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.Rain.time_left">
-<code class="sig-name descname">time_left</code><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.header.Rain.time_left" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">time_left</code><em class="property">: int</em><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.header.Rain.time_left" title="Permalink to this definition">¶</a></dt>
 <dd><p>How long it will continue to rain for.</p>
 </dd></dl>
 
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="lihzahrd.header.Sandstorm">
-<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.header.</code><code class="sig-name descname">Sandstorm</code><span class="sig-paren">(</span><em class="sig-param">is_active: bool</em>, <em class="sig-param">time_left: int</em>, <em class="sig-param">severity: float</em>, <em class="sig-param">intended_severity: float</em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.header.Sandstorm" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.header.</code><code class="sig-name descname">Sandstorm</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">is_active</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#bool" title="(in Python v3.7)">bool</a></span></em>, <em class="sig-param"><span class="n">time_left</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)">int</a></span></em>, <em class="sig-param"><span class="n">severity</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#float" title="(in Python v3.7)">float</a></span></em>, <em class="sig-param"><span class="n">intended_severity</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#float" title="(in Python v3.7)">float</a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.header.Sandstorm" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sandstorm related information.</p>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.Sandstorm.is_active">
-<code class="sig-name descname">is_active</code><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.header.Sandstorm.is_active" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">is_active</code><em class="property">: bool</em><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.header.Sandstorm.is_active" title="Permalink to this definition">¶</a></dt>
 <dd><p>If a sandstorm is currently ongoing in the desert.</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.Sandstorm.time_left">
-<code class="sig-name descname">time_left</code><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.header.Sandstorm.time_left" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">time_left</code><em class="property">: int</em><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.header.Sandstorm.time_left" title="Permalink to this definition">¶</a></dt>
 <dd><p>How long the sandstorm will continue for.</p>
 </dd></dl>
 
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="lihzahrd.header.SavedNPCs">
-<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.header.</code><code class="sig-name descname">SavedNPCs</code><span class="sig-paren">(</span><em class="sig-param">goblin_tinkerer: bool</em>, <em class="sig-param">wizard: bool</em>, <em class="sig-param">mechanic: bool</em>, <em class="sig-param">angler: bool</em>, <em class="sig-param">stylist: bool</em>, <em class="sig-param">tax_collector: bool</em>, <em class="sig-param">bartender: bool</em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.header.SavedNPCs" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.header.</code><code class="sig-name descname">SavedNPCs</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">goblin_tinkerer</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#bool" title="(in Python v3.7)">bool</a></span></em>, <em class="sig-param"><span class="n">wizard</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#bool" title="(in Python v3.7)">bool</a></span></em>, <em class="sig-param"><span class="n">mechanic</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#bool" title="(in Python v3.7)">bool</a></span></em>, <em class="sig-param"><span class="n">angler</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#bool" title="(in Python v3.7)">bool</a></span></em>, <em class="sig-param"><span class="n">stylist</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#bool" title="(in Python v3.7)">bool</a></span></em>, <em class="sig-param"><span class="n">tax_collector</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#bool" title="(in Python v3.7)">bool</a></span></em>, <em class="sig-param"><span class="n">bartender</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#bool" title="(in Python v3.7)">bool</a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.header.SavedNPCs" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="lihzahrd.header.ShadowOrbs">
-<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.header.</code><code class="sig-name descname">ShadowOrbs</code><span class="sig-paren">(</span><em class="sig-param">smashed_at_least_once: bool</em>, <em class="sig-param">spawn_meteorite: bool</em>, <em class="sig-param">evil_boss_counter: int</em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.header.ShadowOrbs" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.header.</code><code class="sig-name descname">ShadowOrbs</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">smashed_at_least_once</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#bool" title="(in Python v3.7)">bool</a></span></em>, <em class="sig-param"><span class="n">spawn_meteorite</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#bool" title="(in Python v3.7)">bool</a></span></em>, <em class="sig-param"><span class="n">evil_boss_counter</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)">int</a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.header.ShadowOrbs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Information related to the Shadow Orbs (or the Crimson Hearts) smashed in the world.</p>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.ShadowOrbs.evil_boss_counter">
-<code class="sig-name descname">evil_boss_counter</code><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.header.ShadowOrbs.evil_boss_counter" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">evil_boss_counter</code><em class="property">: int</em><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.header.ShadowOrbs.evil_boss_counter" title="Permalink to this definition">¶</a></dt>
 <dd><p>If it is 2, the Eater of Worlds will spawn when a Shadow Orb is smashed.</p>
 <p>It is the number of Shadow Orbs broken, modulo 3.</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.ShadowOrbs.smashed_at_least_once">
-<code class="sig-name descname">smashed_at_least_once</code><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.header.ShadowOrbs.smashed_at_least_once" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">smashed_at_least_once</code><em class="property">: bool</em><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.header.ShadowOrbs.smashed_at_least_once" title="Permalink to this definition">¶</a></dt>
 <dd><p>If a Shadow Orb has ever been smashed in this world.</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.ShadowOrbs.spawn_meteorite">
-<code class="sig-name descname">spawn_meteorite</code><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.header.ShadowOrbs.spawn_meteorite" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">spawn_meteorite</code><em class="property">: bool</em><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.header.ShadowOrbs.spawn_meteorite" title="Permalink to this definition">¶</a></dt>
 <dd><p>If a Meteorite should land in the world at midnight.</p>
 <p>It is set to True when a Shadow Orb is smashed, then it is set to False when the meteorite actually lands.</p>
 </dd></dl>
 
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="lihzahrd.header.Styles">
-<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.header.</code><code class="sig-name descname">Styles</code><span class="sig-paren">(</span><em class="sig-param">moon: lihzahrd.header.moonstyle.MoonStyle</em>, <em class="sig-param">trees: lihzahrd.header.fourpartsplit.FourPartSplit</em>, <em class="sig-param">moss: lihzahrd.header.fourpartsplit.FourPartSplit</em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.header.Styles" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.header.</code><code class="sig-name descname">Styles</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">moon</span><span class="p">:</span> <span class="n">lihzahrd.header.moonstyle.MoonStyle</span></em>, <em class="sig-param"><span class="n">trees</span><span class="p">:</span> <span class="n">lihzahrd.header.fourpartsplit.FourPartSplit</span></em>, <em class="sig-param"><span class="n">moss</span><span class="p">:</span> <span class="n">lihzahrd.header.fourpartsplit.FourPartSplit</span></em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.header.Styles" title="Permalink to this definition">¶</a></dt>
 <dd><p>The styles of various world elements.</p>
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="lihzahrd.header.Time">
-<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.header.</code><code class="sig-name descname">Time</code><span class="sig-paren">(</span><em class="sig-param">current: float</em>, <em class="sig-param">is_daytime: bool</em>, <em class="sig-param">moon_phase: int</em>, <em class="sig-param">sundial_cooldown: int</em>, <em class="sig-param">fast_forward_time: bool</em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.header.Time" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.header.</code><code class="sig-name descname">Time</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">current</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#float" title="(in Python v3.7)">float</a></span></em>, <em class="sig-param"><span class="n">is_daytime</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#bool" title="(in Python v3.7)">bool</a></span></em>, <em class="sig-param"><span class="n">moon_phase</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)">int</a></span></em>, <em class="sig-param"><span class="n">sundial_cooldown</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)">int</a></span></em>, <em class="sig-param"><span class="n">fast_forward_time</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#bool" title="(in Python v3.7)">bool</a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.header.Time" title="Permalink to this definition">¶</a></dt>
 <dd><p>Game time related information.</p>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.Time.current">
-<code class="sig-name descname">current</code><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.header.Time.current" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">current</code><em class="property">: float</em><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.header.Time.current" title="Permalink to this definition">¶</a></dt>
 <dd><p>The current game time.</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.Time.is_daytime">
-<code class="sig-name descname">is_daytime</code><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.header.Time.is_daytime" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">is_daytime</code><em class="property">: bool</em><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.header.Time.is_daytime" title="Permalink to this definition">¶</a></dt>
 <dd><p>If the current time represents a day or a night.</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.Time.moon_phase">
-<code class="sig-name descname">moon_phase</code><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.header.Time.moon_phase" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">moon_phase</code><em class="property">: int</em><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.header.Time.moon_phase" title="Permalink to this definition">¶</a></dt>
 <dd><p>The current moon phase.</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.Time.sundial_cooldown">
-<code class="sig-name descname">sundial_cooldown</code><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.header.Time.sundial_cooldown" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">sundial_cooldown</code><em class="property">: int</em><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.header.Time.sundial_cooldown" title="Permalink to this definition">¶</a></dt>
 <dd><p>The number of days the Enchanted Sundial can’t be used for.</p>
 </dd></dl>
 
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="lihzahrd.header.Version">
-<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.header.</code><code class="sig-name descname">Version</code><span class="sig-paren">(</span><em class="sig-param">data: Union[int, str]</em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.header.Version" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.header.</code><code class="sig-name descname">Version</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span><span class="p">:</span> <span class="n">Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)">int</a><span class="p">, </span><a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#str" title="(in Python v3.7)">str</a><span class="p">]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.header.Version" title="Permalink to this definition">¶</a></dt>
 <dd><p>A Terraria version.</p>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.Version._version_ids">
 <code class="sig-name descname">_version_ids</code><em class="property"> = {71: '1.2.0.3.1', 77: '1.2.2', 104: '1.2.3', 140: '1.3.0.1', 151: '1.3.0.4', 153: '1.3.0.5', 154: '1.3.0.6', 155: '1.3.0.7', 156: '1.3.0.8', 170: '1.3.2', 174: '1.3.3', 178: '1.3.4', 194: '1.3.5.3'}</em><a class="headerlink" href="#lihzahrd.header.Version._version_ids" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.Version.id">
 <code class="sig-name descname">id</code><a class="headerlink" href="#lihzahrd.header.Version.id" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="lihzahrd.header.Version.name">
 <em class="property">property </em><code class="sig-name descname">name</code><a class="headerlink" href="#lihzahrd.header.Version.name" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="lihzahrd.header.WorldEvilType">
 <em class="property">class </em><code class="sig-prename descclassname">lihzahrd.header.</code><code class="sig-name descname">WorldEvilType</code><a class="headerlink" href="#lihzahrd.header.WorldEvilType" title="Permalink to this definition">¶</a></dt>
 <dd><p>An enumeration.</p>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.WorldEvilType.CORRUPTION">
 <code class="sig-name descname">CORRUPTION</code><em class="property"> = False</em><a class="headerlink" href="#lihzahrd.header.WorldEvilType.CORRUPTION" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="lihzahrd.header.WorldEvilType.CRIMSON">
 <code class="sig-name descname">CRIMSON</code><em class="property"> = True</em><a class="headerlink" href="#lihzahrd.header.WorldEvilType.CRIMSON" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
