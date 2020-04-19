@@ -1,3 +1,5 @@
+from itertools import product
+
 class Wiring:
     """Wiring data for a certain tile."""
 
@@ -33,8 +35,16 @@ class Wiring:
 
     @classmethod
     def from_flags(cls, flags2=None, flags3=None):
+        return cls._CACHE[(flags2 or (False,) * 8) + (flags3 or (False,) * 8)]
+
+    @classmethod
+    def from_flags_no_cache(cls, flags2=None, flags3=None):
         if flags2 is not None:
             if flags3 is not None:
                 return cls(red=flags2[1], green=flags2[2], blue=flags2[3], yellow=flags3[5], actuator=flags3[1])
             return cls(red=flags2[1], green=flags2[2], blue=flags2[3])
         return cls()
+
+Wiring._CACHE = {
+    c: Wiring.from_flags_no_cache(c[0:8], c[8:16]) for c in product((True, False), repeat=16)
+}

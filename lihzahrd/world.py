@@ -12,6 +12,7 @@ from .pressureplates import *
 from .townmanager import *
 from .errors import InvalidFooterError
 
+NO_FLAGS = (False,) * 8
 
 class World:
     """The Python representation of a Terraria world."""
@@ -192,86 +193,84 @@ class World:
         self.shadow_orbs = value
 
     @staticmethod
-    def _read_tile_block(fr: FileReader, tileframeimportant) -> typing.List:
+    def _read_tile_block(fr: FileReader, tileframeimportant, max_count) -> typing.Iterator[Tile]:
         # Once again, this code is a mess
-        flags1 = fr.bits()
-        has_block = flags1[1]
-        has_wall = flags1[2]
-        liquid_type = LiquidType.from_flags(flags1)
-        has_extended_block_id = flags1[5]
-        rle_compression = RLEEncoding.from_flags(flags1)
-        if flags1[0]:
-            flags2 = fr.bits()
-            block_shape = Shape.from_flags(flags2)
-            if flags2[0]:
-                flags3 = fr.bits()
-                is_block_active = not flags3[2]
-                wiring = Wiring.from_flags(flags2, flags3)
-                is_block_painted = flags3[3]
-                is_wall_painted = flags3[4]
+        while max_count:
+            flags1 = fr.bits()
+            has_block = flags1[1]
+            has_wall = flags1[2]
+            liquid_type = LiquidType._CACHE[flags1]
+            has_extended_block_id = flags1[5]
+            rle_compression = RLEEncoding._CACHE[flags1]
+            if flags1[0]:
+                flags2 = fr.bits()
+                block_shape = Shape._CACHE[flags2]
+                if flags2[0]:
+                    flags3 = fr.bits()
+                    is_block_active = not flags3[2]
+                    wiring = Wiring._CACHE[flags2 + flags3]
+                    is_block_painted = flags3[3]
+                    is_wall_painted = flags3[4]
+                else:
+                    is_block_active = True
+                    wiring = Wiring._CACHE[flags2 + NO_FLAGS]
+                    is_block_painted = False
+                    is_wall_painted = False
             else:
+                block_shape = Shape.NORMAL
                 is_block_active = True
-                wiring = Wiring.from_flags(flags2)
+                wiring = None
                 is_block_painted = False
                 is_wall_painted = False
-        else:
-            block_shape = Shape.NORMAL
-            is_block_active = True
-            wiring = None
-            is_block_painted = False
-            is_wall_painted = False
-        if has_block:
-            if has_extended_block_id:
-                block_type = BlockType(fr.uint2())
+            if has_block:
+                if has_extended_block_id:
+                    block_type = BlockType(fr.uint2())
+                else:
+                    block_type = BlockType(fr.uint1())
+                if tileframeimportant[block_type]:
+                    frame = FrameImportantData(fr.uint2(), fr.uint2())
+                else:
+                    frame = None
+                if is_block_painted:
+                    block_paint = fr.uint1()
+                else:
+                    block_paint = None
+                block = Block(type_=block_type,
+                            frame=frame,
+                            paint=block_paint,
+                            is_active=is_block_active,
+                            shape=block_shape)
             else:
-                block_type = BlockType(fr.uint1())
-            if tileframeimportant[block_type]:
-                frame = FrameImportantData(fr.uint2(), fr.uint2())
+                block = None
+            if has_wall:
+                wall_id = WallType(fr.uint1())
+                if is_wall_painted:
+                    wall_paint = fr.uint1()
+                else:
+                    wall_paint = None
+                wall = Wall(type_=wall_id, paint=wall_paint)
             else:
-                frame = None
-            if is_block_painted:
-                block_paint = fr.uint1()
+                wall = None
+            if liquid_type != LiquidType.NO_LIQUID:
+                liquid = Liquid(type_=liquid_type, volume=fr.uint1())
             else:
-                block_paint = None
-            block = Block(type_=block_type,
-                          frame=frame,
-                          paint=block_paint,
-                          is_active=is_block_active,
-                          shape=block_shape)
-        else:
-            block = None
-        if has_wall:
-            wall_id = WallType(fr.uint1())
-            if is_wall_painted:
-                wall_paint = fr.uint1()
+                liquid = None
+            if rle_compression == RLEEncoding.DOUBLE_BYTE:
+                multiply_by = fr.uint2() + 1
+            elif rle_compression == RLEEncoding.SINGLE_BYTE:
+                multiply_by = fr.uint1() + 1
             else:
-                wall_paint = None
-            wall = Wall(type_=wall_id, paint=wall_paint)
-        else:
-            wall = None
-        if liquid_type != LiquidType.NO_LIQUID:
-            liquid = Liquid(type_=liquid_type, volume=fr.uint1())
-        else:
-            liquid = None
-        if rle_compression == RLEEncoding.DOUBLE_BYTE:
-            multiply_by = fr.uint2() + 1
-        elif rle_compression == RLEEncoding.SINGLE_BYTE:
-            multiply_by = fr.uint1() + 1
-        else:
-            multiply_by = 1
-        tile = Tile(block=block, wall=wall, liquid=liquid, wiring=wiring)
-        return [tile] * multiply_by
+                multiply_by = 1
+            tile = Tile(block=block, wall=wall, liquid=liquid, wiring=wiring)
+            max_count -= multiply_by
+            for _ in range(multiply_by):
+                yield tile
 
     @classmethod
     def _create_tilematrix(cls, f, world_size: Coordinates, tileframeimportant: typing.List[bool]):
         """Create a TileMatrix object from a file."""
-        tm = TileMatrix()
-        while tm.size.x < world_size.x:
-            column = []
-            while len(column) < world_size.y:
-                readtiles = cls._read_tile_block(f, tileframeimportant)
-                column = [*column, *readtiles]
-            tm.add_column(column)
+        tm = TileMatrix(world_size.x, world_size.y)
+        tm.fill(cls._read_tile_block(f, tileframeimportant, len(tm)))
         return tm
 
     @classmethod

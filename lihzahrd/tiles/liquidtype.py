@@ -1,3 +1,4 @@
+from itertools import product
 import enum
 
 
@@ -10,6 +11,10 @@ class LiquidType(enum.IntEnum):
 
     @classmethod
     def from_flags(cls, flags1):
+        return cls._CACHE[flags1]
+
+    @classmethod
+    def from_flags_no_cache(cls, flags1):
         if flags1[3] and flags1[4]:
             return cls.HONEY
         if flags1[4]:
@@ -20,3 +25,7 @@ class LiquidType(enum.IntEnum):
 
     def __repr__(self):
         return f"{self.__class__.__name__}.{self.name}"
+
+LiquidType._CACHE = {
+    c: LiquidType.from_flags_no_cache(c) for c in product((True, False), repeat=8)
+}
