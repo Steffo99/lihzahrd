@@ -27,7 +27,9 @@ class World:
                  id_: int,
                  bounds: Rect,
                  size: Coordinates,
-                 is_expert: bool,
+                 game_mode: int,
+                 drunk_world: bool,
+                 get_good_world: bool,
                  created_on,
                  styles: Styles,
                  backgrounds: Backgrounds,
@@ -54,6 +56,9 @@ class World:
                  tile_entities: typing.List[TileEntity],
                  weighed_pressure_plates: typing.List[WeighedPressurePlate],
                  rooms: typing.List[Room],
+                 pets: Pets,
+                 treetop_variants: TreetopVariants,
+                 saved_ore_tiers: SavedNPCs,
                  unknown_file_format_data: bytes = b"",
                  unknown_world_header_data: bytes = b"",
                  unknown_world_tiles_data: bytes = b"",
@@ -94,8 +99,17 @@ class World:
         self.size: Coordinates = size
         """The world size in tiles."""
 
-        self.is_expert: bool = is_expert
-        """If the world is in expert mode or not."""
+        self.game_mode: int = game_mode
+        """Which mode the game is in. 0=classic, 1=expert, 2=master, 3=journey"""
+
+        self.is_expert: bool = True if self.game_mode==1 else False
+        """If the world is in expert mode or not, no longer stored in worldfile."""
+
+        self.drunk_world: bool = drunk_world
+        """Was this world created with the drunk worldgen seed."""
+
+        self.get_good_world: bool = get_good_world
+        """Was this world created with the get good worldgen seed."""
 
         self.created_on = created_on
         """The date and time this world was created in."""
@@ -165,6 +179,15 @@ class World:
 
         self.weighed_pressure_plates: typing.List[WeighedPressurePlate] = weighed_pressure_plates
         """A list of all Weighed Pressure Plates in the world."""
+
+        self.pets: Pets = pets
+        """Which pets have bene purchased."""
+
+        self.treetop_variants: TreetopVariants = treetop_variants
+        """Treetops variants that can exist in the world."""
+
+        self.saved_ore_tiers: SavedOreTiers = saved_ore_tiers
+        """Probably related to drunk wordgen having both types of ores."""
 
         self.rooms: typing.List[Room] = rooms
         self.clouds: Clouds = clouds
@@ -292,8 +315,8 @@ class World:
         version = Version(f.int4())
         relogic = f.string(7)
         savefile_type = f.uint1()
-        if version != Version("1.3.5.3") or relogic != "relogic" or savefile_type != 2:
-            raise NotImplementedError("This parser can only read Terraria 1.3.5.3 save files.")
+        if version != Version("1.4.0.4") or relogic != "relogic" or savefile_type != 2:
+            raise NotImplementedError("This parser can only read Terraria 1.4.0.4 save files.")
 
         revision = f.uint4()
         is_favorite = f.uint8() != 0
@@ -309,14 +332,15 @@ class World:
         unknown_file_format_data = f.read_until(pointers.world_header)
 
         name = f.string()
-
         generator = GeneratorInfo(f.string(), f.uint8())
 
         uuid_ = f.uuid()
         id_ = f.int4()
         bounds = f.rect()
         world_size = Coordinates(y=f.int4(), x=f.int4())
-        is_expert = f.bool()
+        game_mode = f.int4()
+        drunk_world = f.bool()
+        get_good_world = f.bool()
         created_on = f.datetime()
 
         world_styles = Styles(moon=MoonStyle(f.uint1()),
@@ -415,18 +439,6 @@ class World:
         bg_desert = f.int1()
         bg_ocean = f.int1()
 
-        backgrounds = Backgrounds(bg_underground_snow=bg_underground_snow,
-                                  bg_underground_jungle=bg_underground_jungle,
-                                  bg_hell=bg_hell,
-                                  bg_forest=bg_forest,
-                                  bg_corruption=bg_corruption,
-                                  bg_jungle=bg_jungle,
-                                  bg_snow=bg_snow,
-                                  bg_hallow=bg_hallow,
-                                  bg_crimson=bg_crimson,
-                                  bg_desert=bg_desert,
-                                  bg_ocean=bg_ocean)
-
         clouds = Clouds(bg_cloud=f.int4(), cloud_number=f.int2(), wind_speed=f.single())
 
         angler_today_quest_completed_by_count = f.uint1()
@@ -442,6 +454,7 @@ class World:
 
         saved_stylist = f.bool()
         saved_tax_collector = f.bool()
+        saved_golfer = f.bool()
 
         invasion_size_start = f.int4()  # ???
         invasion = Invasion(delay=invasion_delay,
@@ -497,6 +510,49 @@ class World:
                               severity=f.single(),
                               intended_severity=f.single())
 
+        saved_bartender = f.bool()
+
+        old_ones_army = OldOnesArmyTiers(f.bool(), f.bool(), f.bool())
+
+        # ToDo: Figure out which biomes got new BGs.
+        # Oasis and Graveyard probably got new backgrounds.
+        new_bg_1 = f.int1()
+        new_bg_2 = f.int1()
+        new_bg_3 = f.int1() # Maybe oasis.
+        new_bg_4 = f.int1()
+        new_bg_5 = f.int1()
+
+        backgrounds = Backgrounds(bg_underground_snow=bg_underground_snow,
+                            bg_underground_jungle=bg_underground_jungle,
+                            bg_hell=bg_hell,
+                            bg_forest=bg_forest,
+                            bg_corruption=bg_corruption,
+                            bg_jungle=bg_jungle,
+                            bg_snow=bg_snow,
+                            bg_hallow=bg_hallow,
+                            bg_crimson=bg_crimson,
+                            bg_desert=bg_desert,
+                            bg_ocean=bg_ocean,
+                            new_bg_1=new_bg_1,
+                            new_bg_2=new_bg_2,
+                            new_bg_3=new_bg_3,
+                            new_bg_4=new_bg_4,
+                            new_bg_5=new_bg_5,)
+
+        combat_book_used = f.bool()
+
+        saved_npcs = SavedNPCs(goblin_tinkerer=saved_goblin_tinkerer,
+                        wizard=saved_wizard,
+                        mechanic=saved_mechanic,
+                        angler=saved_angler,
+                        stylist=saved_stylist,
+                        tax_collector=saved_tax_collector,
+                        bartender=saved_bartender,
+                        golfer=saved_golfer,
+                        advanced_combat=combat_book_used)
+
+        lantern_night = LanternEvent(f.int4(), f.bool(), f.bool(), f.bool())
+
         events = Events(blood_moon=blood_moon,
                         solar_eclipse=eclipse,
                         invasion=invasion,
@@ -504,18 +560,18 @@ class World:
                         rain=rain,
                         party=party,
                         sandstorm=sandstorm,
-                        lunar_events=lunar_events)
+                        lunar_events=lunar_events,
+                        lantern_night=lantern_night)
 
-        saved_bartender = f.bool()
-        saved_npcs = SavedNPCs(goblin_tinkerer=saved_goblin_tinkerer,
-                               wizard=saved_wizard,
-                               mechanic=saved_mechanic,
-                               angler=saved_angler,
-                               stylist=saved_stylist,
-                               tax_collector=saved_tax_collector,
-                               bartender=saved_bartender)
+        treetop_variant_count = f.int4()
+        treetop_variants = TreetopVariants([f.int4() for _ in range(treetop_variant_count)])
 
-        old_ones_army = OldOnesArmyTiers(f.bool(), f.bool(), f.bool())
+        saved_ore_tiers = SavedOreTiers(f.int4(), f.int4(), f.int4(), f.int4())
+
+        pets = Pets(f.bool(), f.bool(), f.bool())
+
+        defeated_empress_of_light = f.bool()
+        defeated_queen_slime = f.bool()
 
         bosses_defeated = BossesDefeated(eye_of_cthulhu=defeated_eye_of_cthulhu,
                                          eater_of_worlds=defeated_eater_of_worlds,
@@ -542,7 +598,9 @@ class World:
                                          lunar_pillars=defeated_pillars,
                                          old_ones_army=old_ones_army,
                                          martian_madness=defeated_martian_madness,
-                                         lunatic_cultist=defeated_lunatic_cultist)
+                                         lunatic_cultist=defeated_lunatic_cultist,
+                                         empress_of_light=defeated_empress_of_light,
+                                         queen_slime=defeated_queen_slime)
 
         unknown_world_header_data = f.read_until(pointers.world_tiles)
 
@@ -671,7 +729,8 @@ class World:
         # Object creation
         world = cls(version=version, savefile_type=savefile_type, revision=revision, is_favorite=is_favorite,
                     name=name, generator=generator, uuid_=uuid_, id_=id_, bounds=bounds, size=world_size,
-                    is_expert=is_expert, created_on=created_on, styles=world_styles, backgrounds=backgrounds,
+                    game_mode=game_mode, drunk_world=drunk_world, get_good_world=get_good_world,
+                    created_on=created_on, styles=world_styles, backgrounds=backgrounds,
                     spawn_point=spawn_point, underground_level=underground_level, cavern_level=cavern_level,
                     time=time, events=events, dungeon_point=dungeon_point, world_evil=world_evil,
                     saved_npcs=saved_npcs, altars_smashed=altars_smashed, is_hardmode=is_hardmode,
@@ -679,6 +738,7 @@ class World:
                     clouds=clouds, cultist_delay=cultist_delay, tiles=tm, chests=chests, signs=signs,
                     npcs=npcs, mobs=mobs, tile_entities=tile_entities,
                     weighed_pressure_plates=weighed_pressure_plates, rooms=rooms,
+                    treetop_variants=treetop_variants, saved_ore_tiers=saved_ore_tiers, pets=pets,
                     unknown_file_format_data=unknown_file_format_data,
                     unknown_world_header_data=unknown_world_header_data,
                     unknown_world_tiles_data=unknown_world_tiles_data,
