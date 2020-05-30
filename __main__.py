@@ -1,5 +1,5 @@
 import lihzahrd
 
-world = lihzahrd.World.create_from_file("Casarao.wld")
+world = lihzahrd.World.create_from_file("test-1404.wld")
 
 breakpoint()
