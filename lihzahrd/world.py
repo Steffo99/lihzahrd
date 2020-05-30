@@ -57,6 +57,8 @@ class World:
                  weighed_pressure_plates: typing.List[WeighedPressurePlate],
                  rooms: typing.List[Room],
                  pets: Pets,
+                 halloween_today: bool,
+                 xmas_today: bool,
                  treetop_variants: TreetopVariants,
                  saved_ore_tiers: SavedNPCs,
                  unknown_file_format_data: bytes = b"",
@@ -182,6 +184,12 @@ class World:
 
         self.pets: Pets = pets
         """Which pets have bene purchased."""
+
+        self.halloween_today: bool = halloween_today
+        """Is today an halloween reward day?"""
+
+        self.xmas_today: bool = xmas_today
+        """Is today an xmas reward day?"""
 
         self.treetop_variants: TreetopVariants = treetop_variants
         """Treetops variants that can exist in the world."""
@@ -566,6 +574,9 @@ class World:
         treetop_variant_count = f.int4()
         treetop_variants = TreetopVariants([f.int4() for _ in range(treetop_variant_count)])
 
+        halloween_today = f.bool()
+        xmas_today = f.bool()
+
         saved_ore_tiers = SavedOreTiers(f.int4(), f.int4(), f.int4(), f.int4())
 
         pets = Pets(f.bool(), f.bool(), f.bool())
@@ -738,6 +749,7 @@ class World:
                     clouds=clouds, cultist_delay=cultist_delay, tiles=tm, chests=chests, signs=signs,
                     npcs=npcs, mobs=mobs, tile_entities=tile_entities,
                     weighed_pressure_plates=weighed_pressure_plates, rooms=rooms,
+                    halloween_today=halloween_today, xmas_today=xmas_today,
                     treetop_variants=treetop_variants, saved_ore_tiers=saved_ore_tiers, pets=pets,
                     unknown_file_format_data=unknown_file_format_data,
                     unknown_world_header_data=unknown_world_header_data,
