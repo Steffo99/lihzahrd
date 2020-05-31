@@ -4,6 +4,8 @@ import typing
 from .fileutils import *
 from .header import *
 from .tiles import *
+from .bestiary import *
+from .journeypowers import *
 from .chests import *
 from .signs import *
 from .npcs import *
@@ -49,6 +51,8 @@ class World:
                  clouds: Clouds,
                  cultist_delay: int,
                  tiles: TileMatrix,
+                 bestiary: Bestiary,
+                 journey_powers: JourneyPowers,
                  chests: typing.List[Chest],
                  signs: typing.List[Sign],
                  npcs: typing.List[NPC],
@@ -69,7 +73,9 @@ class World:
                  unknown_npcs_data: bytes = b"",
                  unknown_tile_entities_data: bytes = b"",
                  unknown_pressure_plates_data: bytes = b"",
-                 unknown_town_manager_data: bytes = b""):
+                 unknown_town_manager_data: bytes = b"",
+                 unknown_bestiary_data: bytes = b"",
+                 unknown_journey_powers_data: bytes = b""):
 
         self.version: Version = version
         """The game version when this savefile was last saved."""
@@ -209,6 +215,12 @@ class World:
         self.unknown_tile_entities_data: bytes = unknown_tile_entities_data
         self.unknown_pressure_plates_data: bytes = unknown_pressure_plates_data
         self.unknown_town_manager_data: bytes = unknown_town_manager_data
+
+        self.bestiary: Bestiary = bestiary
+        """Information about the bestiary, including sightings, kills and takling to NPCs."""
+
+        self.journey_powers: JourneyPowers= journey_powers
+        """Status of powers available in Journey mode."""
 
     def __repr__(self):
         return f'<World "{self.name}">'
@@ -676,10 +688,14 @@ class World:
             if is_homeless:
                 npc_home = None
 
+            npc_flags = f.bits()
+            npc_variation_index = 0 if npc_flags[0] else f.int4()
+
             npc = NPC(type_=npc_type,
                       name=npc_name,
                       position=npc_position,
-                      home=npc_home)
+                      home=npc_home,
+                      variation_index=npc_variation_index)
             npcs.append(npc)
 
         while f.bool():
@@ -735,7 +751,56 @@ class World:
             room = Room(npc=EntityType(f.int4()), position=Coordinates(f.int4(), f.int4()))
             rooms.append(room)
 
-        unknown_town_manager_data = f.read_until(pointers.footer)
+        unknown_town_manager_data = f.read_until(pointers.bestiary)
+
+        bestiary_kill_count = f.int4()
+        bestiary_kill_data = {f.string(): f.int4() for _ in range(bestiary_kill_count)}
+        bestiary_sighting_count = f.int4()
+        bestiary_sighting_data = [f.string() for _ in range(bestiary_sighting_count)]
+        bestiary_chat_count = f.int4()
+        bestiary_chat_data = [f.string() for _ in range(bestiary_chat_count)]
+        bestiary = Bestiary(bestiary_chat_count,
+                            bestiary_chat_data,
+                            bestiary_kill_count,
+                            bestiary_kill_data,
+                            bestiary_sighting_count,
+                            bestiary_sighting_data)
+        unknown_bestiary_data = f.read_until(pointers.journey_powers)
+
+        while f.bool():
+            journey_powers = JourneyPowers()
+            power_id = f.int2()
+            if power_id == 0:
+                freeze_time = f.bool()
+                journey_powers.freeze_time = freeze_time
+            elif power_id == 5:
+                god_mode = f.bool()
+                journey_powers.god_mode = god_mode
+            elif power_id == 8:
+                time_rate = f.single()
+                journey_powers.time_rate = time_rate
+            elif power_id == 9:
+                freeze_rain = f.bool()
+                journey_powers.freeze_rain = freeze_rain
+            elif power_id == 10:
+                freeze_wind = f.bool()
+                journey_powers.freeze_wind = freeze_wind
+            elif power_id == 11:
+                far_placement_range = f.bool()
+                journey_powers.far_placement_range = far_placement_range
+            elif power_id == 12:
+                difficulty = f.single()
+                journey_powers.difficulty = difficulty
+            elif power_id == 13:
+                freeze_biome_spread = f.bool()
+                journey_powers.freeze_biome_spread = freeze_biome_spread
+            elif power_id == -1:
+                spawn_rate: f.single()
+                journey_powers.spawn_rate = spawn_rate
+            else:
+                print(f"Unknown id: {power_id}")
+
+        unknown_journey_powers_data = f.read_until(pointers.footer)
 
         # Object creation
         world = cls(version=version, savefile_type=savefile_type, revision=revision, is_favorite=is_favorite,
@@ -751,6 +816,7 @@ class World:
                     weighed_pressure_plates=weighed_pressure_plates, rooms=rooms,
                     halloween_today=halloween_today, xmas_today=xmas_today,
                     treetop_variants=treetop_variants, saved_ore_tiers=saved_ore_tiers, pets=pets,
+                    bestiary=bestiary, journey_powers=journey_powers,
                     unknown_file_format_data=unknown_file_format_data,
                     unknown_world_header_data=unknown_world_header_data,
                     unknown_world_tiles_data=unknown_world_tiles_data,
@@ -759,7 +825,9 @@ class World:
                     unknown_npcs_data=unknown_npcs_data,
                     unknown_tile_entities_data=unknown_tile_entities_data,
                     unknown_pressure_plates_data=unknown_pressure_plates_data,
-                    unknown_town_manager_data=unknown_town_manager_data)
+                    unknown_town_manager_data=unknown_town_manager_data,
+                    unknown_bestiary_data=unknown_bestiary_data,
+                    unknown_journey_powers_data=unknown_journey_powers_data)
 
         # Footer
         if not f.bool():

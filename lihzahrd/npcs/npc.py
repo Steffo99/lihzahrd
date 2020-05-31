@@ -6,13 +6,14 @@ from ..fileutils import Coordinates
 class NPC:
     """A NPC somewhere in the world."""
 
-    __slots__ = "type", "name", "position", "home"
+    __slots__ = "type", "name", "position", "home", "variation_index"
 
     def __init__(self,
-                 type_: EntityType,
-                 name: str,
-                 position: Coordinates,
-                 home: typing.Optional[Coordinates] = None):
+            type_: EntityType,
+            name: str,
+            position: Coordinates,
+            variation_index: int,
+            home: typing.Optional[Coordinates] = None,):
         self.type: EntityType = type_
         """The NPC this object represents."""
 
@@ -24,6 +25,9 @@ class NPC:
 
         self.home: typing.Optional[Coordinates] = home
         """The coordinates of the home of this NPC, or None if the NPC is homeless."""
+
+        self.variation_index: int = variation_index
+        """Unsure, but seems to be an index to different possible NPC variations."""
 
     def __repr__(self):
         return f"<NPC {repr(self.type)} at {self.position}>"
