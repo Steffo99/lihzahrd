@@ -689,7 +689,7 @@ class World:
                 npc_home = None
 
             npc_flags = f.bits()
-            npc_variation_index = 0 if npc_flags[0] else f.int4()
+            npc_variation_index = f.int4() if npc_flags[0] else 0
 
             npc = NPC(type_=npc_type,
                       name=npc_name,
