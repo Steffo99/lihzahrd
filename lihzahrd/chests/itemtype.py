@@ -4198,7 +4198,7 @@ class ItemType(enum.IntEnum):
     SPIDER_NEST_WALL = 4140
     METEOR_TOILET = 4141
     DECAY_CHAMBER = 4142
-    UNKNOWN_ITEM_1 = 4143
+    WHITE_STAR = 4143  # See: https://terraria.gamepedia.com/White_Star
     TERRAGRIM = 4144
     SOLAR_BATHTUB = 4145
     SOLAR_BED = 4146
