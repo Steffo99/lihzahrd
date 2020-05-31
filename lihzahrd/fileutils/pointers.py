@@ -11,6 +11,8 @@ class Pointers:
                  tile_entities: int,
                  pressure_plates: int,
                  town_manager: int,
+                 bestiary: int,
+                 journey_powers: int,
                  footer: int,
                  *unknown):
         self.file_format: int = 0
@@ -22,5 +24,7 @@ class Pointers:
         self.tile_entities: int = tile_entities
         self.pressure_plates: int = pressure_plates
         self.town_manager: int = town_manager
+        self.bestiary: int = bestiary
+        self.journey_powers: int = journey_powers
         self.footer: int = footer
         self.unknown: typing.List[int] = list(unknown)
