@@ -10,7 +10,7 @@ class SavedOreTiers:
         ):
         self.copper: int = saved_ore_tier_copper
         self.iron: int = saved_ore_tier_iron
-        self.silver: int = saved_ore_tier_copper
+        self.silver: int = saved_ore_tier_silver
         self.gold: int = saved_ore_tier_gold
 
     def __repr__(self):
