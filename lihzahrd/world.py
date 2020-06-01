@@ -243,7 +243,7 @@ class World:
         liquid_type = LiquidType.from_flags(flags1)
         has_extended_block_id = flags1[5]
         rle_compression = RLEEncoding.from_flags(flags1)
-        wall_id_extra = False
+        # Parse flags
         if flags1[0]:
             flags2 = fr.bits()
             block_shape = Shape.from_flags(flags2)
@@ -253,19 +253,21 @@ class World:
                 wiring = Wiring.from_flags(flags2, flags3)
                 is_block_painted = flags3[3]
                 is_wall_painted = flags3[4]
-                if flags3[5]:
-                    wall_id_extra = fr.int1()
+                has_extended_wall_id = flags3[6]
             else:
                 is_block_active = True
                 wiring = Wiring.from_flags(flags2)
                 is_block_painted = False
                 is_wall_painted = False
+                has_extended_wall_id = False
         else:
             block_shape = Shape.NORMAL
             is_block_active = True
             wiring = None
             is_block_painted = False
             is_wall_painted = False
+            has_extended_wall_id = False
+        # Parse block
         if has_block:
             if has_extended_block_id:
                 block_type = BlockType(fr.uint2())
@@ -286,29 +288,32 @@ class World:
                           shape=block_shape)
         else:
             block = None
+        # Parse wall
         if has_wall:
-            temp_wall_id = fr.uint1()
-            wall_id = WallType(x1)
-            if wall_id_extra:
-                new_id = (wall_id_extra << 8) | temp_wall_id
-                wall_id = WallType(new_id)
+            if has_extended_wall_id:
+                wall_type = WallType(fr.uint2())
+            else:
+                wall_type = WallType(fr.uint1())
             if is_wall_painted:
                 wall_paint = fr.uint1()
             else:
                 wall_paint = None
-            wall = Wall(type_=wall_id, paint=wall_paint)
+            wall = Wall(type_=wall_type, paint=wall_paint)
         else:
             wall = None
+        # Parse liquid
         if liquid_type != LiquidType.NO_LIQUID:
             liquid = Liquid(type_=liquid_type, volume=fr.uint1())
         else:
             liquid = None
+        # Find RLE Compression multiplier
         if rle_compression == RLEEncoding.DOUBLE_BYTE:
             multiply_by = fr.uint2() + 1
         elif rle_compression == RLEEncoding.SINGLE_BYTE:
             multiply_by = fr.uint1() + 1
         else:
             multiply_by = 1
+        # Create tile
         tile = Tile(block=block, wall=wall, liquid=liquid, wiring=wiring)
         return [tile] * multiply_by
 
