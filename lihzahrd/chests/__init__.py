@@ -1,6 +1,7 @@
 from .itemtype import ItemType
 from .itemstack import ItemStack
 from .chest import Chest
-from .mannequin import Mannequin
+from .clothingdisplay import ClothingDisplay
+from .singleitemdisplay import SingleItemDisplay
 
-__all__ = ["ItemType", "ItemStack", "Chest", "Mannequin"]
+__all__ = ["ItemType", "ItemStack", "Chest", "ClothingDisplay", "SingleItemDisplay"]
