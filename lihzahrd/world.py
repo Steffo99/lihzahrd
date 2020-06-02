@@ -821,7 +821,11 @@ class World:
         unknown_town_manager_data = f.read_until(pointers.bestiary)
 
         bestiary_kill_count = f.int4()
-        bestiary_kill_data = {f.string(): f.int4() for _ in range(bestiary_kill_count)}
+        bestiary_kill_data = {}
+        for _ in range(bestiary_kill_count):
+            beast = f.string()
+            beast_count = f.int4()
+            bestiary_kill_data[beast] = beast_count
         bestiary_sighting_count = f.int4()
         bestiary_sighting_data = [f.string() for _ in range(bestiary_sighting_count)]
         bestiary_chat_count = f.int4()
