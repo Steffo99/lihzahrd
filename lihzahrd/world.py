@@ -757,7 +757,38 @@ class World:
                         slot_item_modifier = f.int1()
                         slot_item_stack = f.int2()
                         mannequin_dyes[slot] = ItemStack(slot_item_id, slot_item_modifier, slot_item_stack)
-                te_extra = Mannequin(item_flags, dye_flags, mannequin_items, mannequin_dyes)
+                te_extra = ClothingDisplay(item_flags, dye_flags, mannequin_items, mannequin_dyes, "mannequin")
+            # Weapon Rack
+            elif te_type == 4:
+                rack_item = ItemStack(ItemType(f.int2()), f.int1(), f.int2())
+                te_extra = SingleItemDisplay(rack_item, "weapon_rack")
+            # Hat Rack
+            elif te_type == 5:
+                # This isn't 100% tested, but the first two flags should be items, and the second two should be dyes.
+                item_flags = f.bits()
+                # Maximum of two items slots and two dye slots.
+                rack_items = [None for _ in range(2)]
+                rack_dyes = [None for _ in range(2)]
+                for slot in range(2):
+                    if item_flags[slot]:
+                        slot_item_id = ItemType(f.int2())
+                        slot_item_modifier = f.int1()
+                        slot_item_stack = f.int2()
+                        rack_items[slot] = ItemStack(slot_item_id, slot_item_modifier, slot_item_stack)
+                for slot in range(2):
+                    if item_flags[slot + 2]:
+                        slot_item_id = ItemType(f.int2())
+                        slot_item_modifier = f.int1()
+                        slot_item_stack = f.int2()
+                        rack_dyes[slot] = ItemStack(slot_item_id, slot_item_modifier, slot_item_stack)
+                te_extra = ClothingDisplay(item_flags, dye_flags, mannequin_items, mannequin_dyes, "hat_rack")
+            # Food Plate
+            elif te_type == 6:
+                plate_item = ItemStack(ItemType(f.int2()), f.int1(), f.int2())
+                te_extra = SingleItemDisplay(plate_item, "food_plate")
+            # Teleport Pylon
+            elif te_type == 7:
+                te_extra = Pylon()
             else:
                 print(f"te_type:", te_type)
                 te_extra = None
