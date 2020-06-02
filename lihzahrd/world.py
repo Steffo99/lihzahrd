@@ -728,16 +728,40 @@ class World:
             te_type = f.uint1()
             te_id = f.int4()
             te_position = Coordinates(f.int2(), f.int2())
+            # Target Dummy
             if te_type == 0:
                 te_extra = TargetDummy(npc=f.int2())
+            # Item Frame
             elif te_type == 1:
                 te_extra = ItemFrame(item=ItemStack(type_=ItemType(f.int2()),
                                                     modifier=f.uint1(),
                                                     quantity=f.int2()))
+            # Logic Sensor
             elif te_type == 2:
                 te_extra = LogicSensor(logic_check=f.uint1(), enabled=f.bool())
+            # Mannequin
+            elif te_type == 3:
+                item_flags = f.bits()
+                dye_flags = f.bits()
+                mannequin_items = [None for _ in range(len(item_flags))]
+                mannequin_dyes = [None for _ in range(len(dye_flags))]
+                for slot in range(len(item_flags)):
+                    if item_flags[slot]:
+                        slot_item_id = ItemType(f.int2())
+                        slot_item_modifier = f.int1()
+                        slot_item_stack = f.int2()
+                        mannequin_items[slot] = ItemStack(slot_item_id, slot_item_modifier, slot_item_stack)
+                for slot in range(len(mannequin_dyes)):
+                    if dye_flags[slot]:
+                        slot_item_id = ItemType(f.int2())
+                        slot_item_modifier = f.int1()
+                        slot_item_stack = f.int2()
+                        mannequin_dyes[slot] = ItemStack(slot_item_id, slot_item_modifier, slot_item_stack)
+                te_extra = Mannequin(item_flags, dye_flags, mannequin_items, mannequin_dyes)
             else:
-                te_extra = ...
+                print(f"te_type:", te_type)
+                te_extra = None
+
             tile_entity = TileEntity(id_=te_id, position=te_position, extra=te_extra)
             tile_entities.append(tile_entity)
             tm[tile_entity.position].extra = tile_entity
