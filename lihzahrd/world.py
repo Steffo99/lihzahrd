@@ -743,21 +743,23 @@ class World:
             elif te_type == 3:
                 item_flags = f.bits()
                 dye_flags = f.bits()
-                mannequin_items = [None for _ in range(len(item_flags))]
-                mannequin_dyes = [None for _ in range(len(dye_flags))]
-                for slot in range(len(item_flags)):
-                    if item_flags[slot]:
-                        slot_item_id = ItemType(f.int2())
-                        slot_item_modifier = f.int1()
-                        slot_item_stack = f.int2()
-                        mannequin_items[slot] = ItemStack(slot_item_id, slot_item_modifier, slot_item_stack)
-                for slot in range(len(mannequin_dyes)):
-                    if dye_flags[slot]:
-                        slot_item_id = ItemType(f.int2())
-                        slot_item_modifier = f.int1()
-                        slot_item_stack = f.int2()
-                        mannequin_dyes[slot] = ItemStack(slot_item_id, slot_item_modifier, slot_item_stack)
-                te_extra = ClothingDisplay(item_flags, dye_flags, mannequin_items, mannequin_dyes, "mannequin")
+                mannequin_items: typing.List[typing.Optional[ItemStack]] = [None for _ in range(len(item_flags))]
+                mannequin_dyes: typing.List[typing.Optional[ItemStack]] = [None for _ in range(len(dye_flags))]
+                for index, flag in enumerate(item_flags):
+                    if not flag:
+                        continue
+                    slot_item_id = ItemType(f.int2())
+                    slot_item_modifier = f.int1()
+                    slot_item_stack = f.int2()
+                    mannequin_items[index] = ItemStack(slot_item_id, slot_item_modifier, slot_item_stack)
+                for index, flag in enumerate(dye_flags):
+                    if not flag:
+                        continue
+                    slot_item_id = ItemType(f.int2())
+                    slot_item_modifier = f.int1()
+                    slot_item_stack = f.int2()
+                    mannequin_dyes[index] = ItemStack(slot_item_id, slot_item_modifier, slot_item_stack)
+                te_extra = Mannequin(mannequin_items, mannequin_dyes)
             # Weapon Rack
             elif te_type == 4:
                 rack_item = ItemStack(ItemType(f.int2()), f.int1(), f.int2())
@@ -767,21 +769,23 @@ class World:
                 # This isn't 100% tested, but the first two flags should be items, and the second two should be dyes.
                 item_flags = f.bits()
                 # Maximum of two items slots and two dye slots.
-                rack_items = [None for _ in range(2)]
-                rack_dyes = [None for _ in range(2)]
-                for slot in range(2):
-                    if item_flags[slot]:
-                        slot_item_id = ItemType(f.int2())
-                        slot_item_modifier = f.int1()
-                        slot_item_stack = f.int2()
-                        rack_items[slot] = ItemStack(slot_item_id, slot_item_modifier, slot_item_stack)
-                for slot in range(2):
-                    if item_flags[slot + 2]:
-                        slot_item_id = ItemType(f.int2())
-                        slot_item_modifier = f.int1()
-                        slot_item_stack = f.int2()
-                        rack_dyes[slot] = ItemStack(slot_item_id, slot_item_modifier, slot_item_stack)
-                te_extra = ClothingDisplay(item_flags, dye_flags, mannequin_items, mannequin_dyes, "hat_rack")
+                rack_items: typing.List[typing.Optional[ItemStack]] = [None for _ in range(2)]
+                rack_dyes: typing.List[typing.Optional[ItemStack]] = [None for _ in range(2)]
+                for index, flag in enumerate(item_flags[0:2]):
+                    if not flag:
+                        continue
+                    slot_item_id = ItemType(f.int2())
+                    slot_item_modifier = f.int1()
+                    slot_item_stack = f.int2()
+                    rack_items[index] = ItemStack(slot_item_id, slot_item_modifier, slot_item_stack)
+                for index, flag in enumerate(item_flags[2:4]):
+                    if not flag:
+                        continue
+                    slot_item_id = ItemType(f.int2())
+                    slot_item_modifier = f.int1()
+                    slot_item_stack = f.int2()
+                    rack_dyes[index] = ItemStack(slot_item_id, slot_item_modifier, slot_item_stack)
+                te_extra = HatRack(rack_items, rack_dyes)
             # Food Plate
             elif te_type == 6:
                 plate_item = ItemStack(ItemType(f.int2()), f.int1(), f.int2())
