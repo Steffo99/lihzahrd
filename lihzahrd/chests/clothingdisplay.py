@@ -5,7 +5,7 @@ from .itemstack import ItemStack
 class ClothingDisplay:
     """Data pertaining to an item to display clothing."""
 
-    __slots__ = "wearing_items", "wearing_dyes", "display_type"
+    __slots__ = "wearing_items", "wearing_dyes"
 
     def __init__(self,
                  wearing_items: typing.List[ItemStack],
