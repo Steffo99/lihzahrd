@@ -218,7 +218,7 @@ class World:
         self.bestiary: Bestiary = bestiary
         """Information about the bestiary, including sightings, kills and takling to NPCs."""
 
-        self.journey_powers: JourneyPowers= journey_powers
+        self.journey_powers: JourneyPowers = journey_powers
         """Status of powers available in Journey mode."""
 
     def __repr__(self):
@@ -556,38 +556,42 @@ class World:
         # Oasis and Graveyard probably got new backgrounds.
         new_bg_1 = f.int1()
         new_bg_2 = f.int1()
-        new_bg_3 = f.int1() # Maybe oasis.
+        new_bg_3 = f.int1()  # Maybe oasis.
         new_bg_4 = f.int1()
         new_bg_5 = f.int1()
 
-        backgrounds = Backgrounds(bg_underground_snow=bg_underground_snow,
-                            bg_underground_jungle=bg_underground_jungle,
-                            bg_hell=bg_hell,
-                            bg_forest=bg_forest,
-                            bg_corruption=bg_corruption,
-                            bg_jungle=bg_jungle,
-                            bg_snow=bg_snow,
-                            bg_hallow=bg_hallow,
-                            bg_crimson=bg_crimson,
-                            bg_desert=bg_desert,
-                            bg_ocean=bg_ocean,
-                            new_bg_1=new_bg_1,
-                            new_bg_2=new_bg_2,
-                            new_bg_3=new_bg_3,
-                            new_bg_4=new_bg_4,
-                            new_bg_5=new_bg_5,)
+        backgrounds = Backgrounds(
+            bg_underground_snow=bg_underground_snow,
+            bg_underground_jungle=bg_underground_jungle,
+            bg_hell=bg_hell,
+            bg_forest=bg_forest,
+            bg_corruption=bg_corruption,
+            bg_jungle=bg_jungle,
+            bg_snow=bg_snow,
+            bg_hallow=bg_hallow,
+            bg_crimson=bg_crimson,
+            bg_desert=bg_desert,
+            bg_ocean=bg_ocean,
+            new_bg_1=new_bg_1,
+            new_bg_2=new_bg_2,
+            new_bg_3=new_bg_3,
+            new_bg_4=new_bg_4,
+            new_bg_5=new_bg_5,
+        )
 
         combat_book_used = f.bool()
 
-        saved_npcs = SavedNPCs(goblin_tinkerer=saved_goblin_tinkerer,
-                        wizard=saved_wizard,
-                        mechanic=saved_mechanic,
-                        angler=saved_angler,
-                        stylist=saved_stylist,
-                        tax_collector=saved_tax_collector,
-                        bartender=saved_bartender,
-                        golfer=saved_golfer,
-                        advanced_combat=combat_book_used)
+        saved_npcs = SavedNPCs(
+            goblin_tinkerer=saved_goblin_tinkerer,
+            wizard=saved_wizard,
+            mechanic=saved_mechanic,
+            angler=saved_angler,
+            stylist=saved_stylist,
+            tax_collector=saved_tax_collector,
+            bartender=saved_bartender,
+            golfer=saved_golfer,
+            advanced_combat=combat_book_used
+        )
 
         lantern_night = LanternEvent(f.int4(), f.bool(), f.bool(), f.bool())
 
