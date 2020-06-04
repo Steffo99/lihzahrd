@@ -215,6 +215,8 @@ class World:
         self.unknown_tile_entities_data: bytes = unknown_tile_entities_data
         self.unknown_pressure_plates_data: bytes = unknown_pressure_plates_data
         self.unknown_town_manager_data: bytes = unknown_town_manager_data
+        self.unknown_bestiary_data: bytes = unknown_bestiary_data
+        self.unknown_journey_powers_data: bytes = unknown_journey_powers_data
 
         self.bestiary: Bestiary = bestiary
         """Information about the bestiary, including sightings, kills and takling to NPCs."""
@@ -840,6 +842,7 @@ class World:
                             bestiary_kill_data,
                             bestiary_sighting_count,
                             bestiary_sighting_data)
+
         unknown_bestiary_data = f.read_until(pointers.journey_powers)
 
         while f.bool():
