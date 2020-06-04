@@ -51,6 +51,7 @@ class Version:
         226: "1.4.0.2",
         227: "1.4.0.3",
         228: "1.4.0.4",
+        230: "1.4.0.5",
     }
 
     def __init__(self, data: typing.Union[int, str]):
