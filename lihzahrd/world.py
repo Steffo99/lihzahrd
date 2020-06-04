@@ -116,7 +116,7 @@ class World:
          seed."""
 
         self.is_for_the_worthy: bool = is_for_the_worthy
-        """Was this world created with the 
+        """Was this world created with the
         `for the worthy <https://terraria.gamepedia.com/Secret_world_seeds#For_the_worthy>` seed."""
 
         self.created_on = created_on
@@ -371,7 +371,8 @@ class World:
         version = Version(f.int4())
         relogic = f.string(7)
         savefile_type = f.uint1()
-        if version != Version("1.4.0.4") or relogic != "relogic" or savefile_type != 2:
+        supported_versions = (Version("1.4.0.4"), Version("1.4.0.5"))
+        if version not in supported_versions or relogic != "relogic" or savefile_type != 2:
             raise NotImplementedError("This parser can only read Terraria 1.4.0.4 save files.")
 
         revision = f.uint4()
