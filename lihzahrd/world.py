@@ -64,7 +64,7 @@ class World:
                  halloween_today: bool,
                  xmas_today: bool,
                  treetop_variants: TreetopVariants,
-                 saved_ore_tiers: SavedNPCs,
+                 saved_ore_tiers: SavedOreTiers,
                  unknown_file_format_data: bytes = b"",
                  unknown_world_header_data: bytes = b"",
                  unknown_world_tiles_data: bytes = b"",
