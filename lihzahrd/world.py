@@ -1,7 +1,8 @@
 import uuid
 import math
-import typing
+from typing import *
 from .fileutils import *
+from .items import *
 from .header import *
 from .tiles import *
 from .bestiary import *
@@ -30,8 +31,8 @@ class World:
                  bounds: Rect,
                  size: Coordinates,
                  difficulty: Difficulty,
-                 drunk_world: bool,
-                 get_good_world: bool,
+                 is_drunk_world: bool,
+                 is_for_the_worthy: bool,
                  created_on,
                  styles: Styles,
                  backgrounds: Backgrounds,
@@ -53,13 +54,13 @@ class World:
                  tiles: TileMatrix,
                  bestiary: Bestiary,
                  journey_powers: JourneyPowers,
-                 chests: typing.List[Chest],
-                 signs: typing.List[Sign],
-                 npcs: typing.List[NPC],
-                 mobs: typing.List[Mob],
-                 tile_entities: typing.List[TileEntity],
-                 weighed_pressure_plates: typing.List[WeighedPressurePlate],
-                 rooms: typing.List[Room],
+                 chests: List[Chest],
+                 signs: List[Sign],
+                 npcs: List[NPC],
+                 mobs: List[Mob],
+                 tile_entities: List[TileEntity],
+                 weighed_pressure_plates: List[WeighedPressurePlate],
+                 rooms: List[Room],
                  pets: Pets,
                  halloween_today: bool,
                  xmas_today: bool,
@@ -110,11 +111,13 @@ class World:
         self.difficulty: Difficulty = difficulty
         """The `difficulty <https://terraria.gamepedia.com/Difficulty>`_ the game is in."""
 
-        self.drunk_world: bool = drunk_world
-        """Was this world created with the drunk worldgen seed."""
+        self.is_drunk_world: bool = is_drunk_world
+        """If the world was created with the `5162020 <https://terraria.gamepedia.com/Secret_world_seeds#Drunk_World>`
+         seed."""
 
-        self.get_good_world: bool = get_good_world
-        """Was this world created with the get good worldgen seed."""
+        self.is_for_the_worthy: bool = is_for_the_worthy
+        """Was this world created with the 
+        `for the worthy <https://terraria.gamepedia.com/Secret_world_seeds#For_the_worthy>` seed."""
 
         self.created_on = created_on
         """The date and time this world was created in."""
@@ -167,22 +170,22 @@ class World:
         self.tiles: TileMatrix = tiles
         """A matrix of all the tiles present in the world."""
 
-        self.chests: typing.List[Chest] = chests
+        self.chests: List[Chest] = chests
         """A list of all the containers (chests, barrels) in the world."""
 
-        self.signs: typing.List[Sign] = signs
+        self.signs: List[Sign] = signs
         """A list of all non-empty signs in the world."""
 
-        self.npcs: typing.List[NPC] = npcs
+        self.npcs: List[NPC] = npcs
         """A list of all the NPCs currently living in the world, including the Old Man."""
 
-        self.mobs: typing.List[Mob] = mobs
+        self.mobs: List[Mob] = mobs
         """A list of mobs in the world...?"""
 
-        self.tile_entities: typing.List[TileEntity] = tile_entities
+        self.tile_entities: List[TileEntity] = tile_entities
         """A list of tile entities in the world, such as Training Dummies, Item Frames and Logic Sensors."""
 
-        self.weighed_pressure_plates: typing.List[WeighedPressurePlate] = weighed_pressure_plates
+        self.weighed_pressure_plates: List[WeighedPressurePlate] = weighed_pressure_plates
         """A list of all Weighed Pressure Plates in the world."""
 
         self.pets: Pets = pets
@@ -200,7 +203,7 @@ class World:
         self.saved_ore_tiers: SavedOreTiers = saved_ore_tiers
         """Probably related to drunk wordgen having both types of ores."""
 
-        self.rooms: typing.List[Room] = rooms
+        self.rooms: List[Room] = rooms
         self.clouds: Clouds = clouds
         self.cultist_delay: int = cultist_delay
         self.unknown_file_format_data: bytes = unknown_file_format_data
@@ -234,7 +237,7 @@ class World:
         self.shadow_orbs = value
 
     @staticmethod
-    def _read_tile_block(fr: FileReader, tileframeimportant) -> typing.List:
+    def _read_tile_block(fr: FileReader, tileframeimportant) -> List:
         # Once again, this code is a mess
         flags1 = fr.bits()
         has_block = flags1[1]
@@ -317,14 +320,29 @@ class World:
         return [tile] * multiply_by
 
     @property
+    def is_classic(self):
+        """If the world is in classic difficulty or not."""
+        return self.difficulty == 0
+
+    @property
     def is_expert(self):
-        """If the world is in expert mode or not.
+        """If the world is in expert difficulty or not.
 
         Provided for compatibility purposes."""
         return self.difficulty == 1
 
+    @property
+    def is_master(self):
+        """If the world is in master difficulty or not."""
+        return self.difficulty == 2
+
+    @property
+    def is_journey(self):
+        """If the world is in journey difficulty or not."""
+        return self.difficulty == 3
+
     @classmethod
-    def _create_tilematrix(cls, f, world_size: Coordinates, tileframeimportant: typing.List[bool]):
+    def _create_tilematrix(cls, f, world_size: Coordinates, tileframeimportant: List[bool]):
         """Create a TileMatrix object from a file."""
         tm = TileMatrix()
         while tm.size.x < world_size.x:
@@ -377,8 +395,8 @@ class World:
         bounds = f.rect()
         world_size = Coordinates(y=f.int4(), x=f.int4())
         difficulty = Difficulty(f.int4())
-        drunk_world = f.bool()
-        get_good_world = f.bool()
+        is_drunk_world = f.bool()
+        is_for_the_worthy = f.bool()
         created_on = f.datetime()
 
         world_styles = Styles(moon=MoonStyle(f.uint1()),
@@ -753,8 +771,8 @@ class World:
             elif te_type == 3:
                 item_flags = f.bits()
                 dye_flags = f.bits()
-                mannequin_items: typing.List[typing.Optional[ItemStack]] = [None for _ in range(len(item_flags))]
-                mannequin_dyes: typing.List[typing.Optional[ItemStack]] = [None for _ in range(len(dye_flags))]
+                mannequin_items: List[Optional[ItemStack]] = [None for _ in range(len(item_flags))]
+                mannequin_dyes: List[Optional[ItemStack]] = [None for _ in range(len(dye_flags))]
                 for index, flag in enumerate(item_flags):
                     if not flag:
                         continue
@@ -773,14 +791,14 @@ class World:
             # Weapon Rack
             elif te_type == 4:
                 rack_item = ItemStack(ItemType(f.int2()), f.int1(), f.int2())
-                te_extra = SingleItemDisplay(rack_item, "weapon_rack")
+                te_extra = WeaponRack(rack_item)
             # Hat Rack
             elif te_type == 5:
                 # This isn't 100% tested, but the first two flags should be items, and the second two should be dyes.
                 item_flags = f.bits()
                 # Maximum of two items slots and two dye slots.
-                rack_items: typing.List[typing.Optional[ItemStack]] = [None for _ in range(2)]
-                rack_dyes: typing.List[typing.Optional[ItemStack]] = [None for _ in range(2)]
+                rack_items: List[Optional[ItemStack]] = [None for _ in range(2)]
+                rack_dyes: List[Optional[ItemStack]] = [None for _ in range(2)]
                 for index, flag in enumerate(item_flags[0:2]):
                     if not flag:
                         continue
@@ -799,7 +817,7 @@ class World:
             # Food Plate
             elif te_type == 6:
                 plate_item = ItemStack(ItemType(f.int2()), f.int1(), f.int2())
-                te_extra = SingleItemDisplay(plate_item, "food_plate")
+                te_extra = Plate(plate_item)
             # Teleport Pylon
             elif te_type == 7:
                 te_extra = Pylon()
@@ -880,7 +898,7 @@ class World:
         # Object creation
         world = cls(version=version, savefile_type=savefile_type, revision=revision, is_favorite=is_favorite,
                     name=name, generator=generator, uuid_=uuid_, id_=id_, bounds=bounds, size=world_size,
-                    difficulty=difficulty, drunk_world=drunk_world, get_good_world=get_good_world,
+                    difficulty=difficulty, is_drunk_world=is_drunk_world, is_for_the_worthy=is_for_the_worthy,
                     created_on=created_on, styles=world_styles, backgrounds=backgrounds,
                     spawn_point=spawn_point, underground_level=underground_level, cavern_level=cavern_level,
                     time=time, events=events, dungeon_point=dungeon_point, world_evil=world_evil,

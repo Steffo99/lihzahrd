@@ -1,5 +1,5 @@
 import typing
-from .itemstack import ItemStack
+from ..items.itemstack import ItemStack
 from ..fileutils import Coordinates
 
 
