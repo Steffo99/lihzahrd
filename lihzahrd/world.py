@@ -29,7 +29,7 @@ class World:
                  id_: int,
                  bounds: Rect,
                  size: Coordinates,
-                 game_mode: int,
+                 difficulty: Difficulty,
                  drunk_world: bool,
                  get_good_world: bool,
                  created_on,
@@ -107,11 +107,8 @@ class World:
         self.size: Coordinates = size
         """The world size in tiles."""
 
-        self.game_mode: int = game_mode
-        """Which mode the game is in. 0=classic, 1=expert, 2=master, 3=journey"""
-
-        self.is_expert: bool = True if self.game_mode==1 else False
-        """If the world is in expert mode or not, no longer stored in worldfile."""
+        self.difficulty: Difficulty = difficulty
+        """The `difficulty <https://terraria.gamepedia.com/Difficulty>`_ the game is in."""
 
         self.drunk_world: bool = drunk_world
         """Was this world created with the drunk worldgen seed."""
@@ -319,6 +316,13 @@ class World:
         tile = Tile(block=block, wall=wall, liquid=liquid, wiring=wiring)
         return [tile] * multiply_by
 
+    @property
+    def is_expert(self):
+        """If the world is in expert mode or not.
+
+        Provided for compatibility purposes."""
+        return self.difficulty == 1
+
     @classmethod
     def _create_tilematrix(cls, f, world_size: Coordinates, tileframeimportant: typing.List[bool]):
         """Create a TileMatrix object from a file."""
@@ -372,7 +376,7 @@ class World:
         id_ = f.int4()
         bounds = f.rect()
         world_size = Coordinates(y=f.int4(), x=f.int4())
-        game_mode = f.int4()
+        difficulty = Difficulty(f.int4())
         drunk_world = f.bool()
         get_good_world = f.bool()
         created_on = f.datetime()
@@ -849,32 +853,21 @@ class World:
             journey_powers = JourneyPowers()
             power_id = f.int2()
             if power_id == 0:
-                freeze_time = f.bool()
-                journey_powers.freeze_time = freeze_time
+                journey_powers.freeze_time = f.bool()
             elif power_id == 5:
-                god_mode = f.bool()
-                journey_powers.god_mode = god_mode
+                journey_powers.god_mode = f.bool()
             elif power_id == 8:
-                time_rate = f.single()
-                journey_powers.time_rate = time_rate
+                journey_powers.time_rate = f.single()
             elif power_id == 9:
-                freeze_rain = f.bool()
-                journey_powers.freeze_rain = freeze_rain
+                journey_powers.freeze_rain = f.bool()
             elif power_id == 10:
-                freeze_wind = f.bool()
-                journey_powers.freeze_wind = freeze_wind
+                journey_powers.freeze_wind = f.bool()
             elif power_id == 11:
-                far_placement_range = f.bool()
-                journey_powers.far_placement_range = far_placement_range
+                journey_powers.far_placement_range = f.bool()
             elif power_id == 12:
-                difficulty = f.single()
-                journey_powers.difficulty = difficulty
+                journey_powers.difficulty = f.single()
             elif power_id == 13:
-                freeze_biome_spread = f.bool()
-                journey_powers.freeze_biome_spread = freeze_biome_spread
-            elif power_id == -1:
-                spawn_rate: f.single()
-                journey_powers.spawn_rate = spawn_rate
+                journey_powers.freeze_biome_spread = f.bool()
             else:
                 print(f"Unknown id: {power_id}")
 
@@ -883,7 +876,7 @@ class World:
         # Object creation
         world = cls(version=version, savefile_type=savefile_type, revision=revision, is_favorite=is_favorite,
                     name=name, generator=generator, uuid_=uuid_, id_=id_, bounds=bounds, size=world_size,
-                    game_mode=game_mode, drunk_world=drunk_world, get_good_world=get_good_world,
+                    difficulty=difficulty, drunk_world=drunk_world, get_good_world=get_good_world,
                     created_on=created_on, styles=world_styles, backgrounds=backgrounds,
                     spawn_point=spawn_point, underground_level=underground_level, cavern_level=cavern_level,
                     time=time, events=events, dungeon_point=dungeon_point, world_evil=world_evil,
