@@ -44,7 +44,7 @@ class World:
                  dungeon_point: Coordinates,
                  world_evil: WorldEvilType,
                  saved_npcs: SavedNPCs,
-                 altars_smashed: AltarsSmashed,
+                 altars_smashed: int,
                  is_hardmode: bool,
                  shadow_orbs: ShadowOrbs,
                  bosses_defeated: BossesDefeated,
@@ -152,8 +152,8 @@ class World:
         self.saved_npcs: SavedNPCs = saved_npcs
         """The NPCs that were rescued by the player."""
 
-        self.altars_smashed: AltarsSmashed = altars_smashed
-        """Information related to the destruction of Demon Altars with a Pwnhammer."""
+        self.altars_smashed: int = altars_smashed
+        """The number of Demon Altars smashed with a Pwnhammer (or better)."""
 
         self.is_hardmode: bool = is_hardmode
         """Whether or not the world is in hardmode."""
@@ -180,7 +180,7 @@ class World:
         """A list of all the NPCs currently living in the world, including the Old Man."""
 
         self.mobs: List[Mob] = mobs
-        """A list of mobs in the world...?"""
+        """(Unknown, possibly a list of mobs in the world?)"""
 
         self.tile_entities: List[TileEntity] = tile_entities
         """A list of tile entities in the world, such as Training Dummies, Item Frames and Logic Sensors."""
@@ -192,16 +192,18 @@ class World:
         """Which pets have bene purchased."""
 
         self.halloween_today: bool = halloween_today
-        """Is today an halloween reward day?"""
+        """Is today an Halloween reward day?
+        Triggered by reaching Wave 15 of the Pumpkin Moon."""
 
         self.xmas_today: bool = xmas_today
-        """Is today an xmas reward day?"""
+        """Is today a Xmas reward day?
+        Triggered by reaching Wave 20 of the Frost Moon."""
 
         self.treetop_variants: TreetopVariants = treetop_variants
         """Treetops variants that can exist in the world."""
 
         self.saved_ore_tiers: SavedOreTiers = saved_ore_tiers
-        """Probably related to drunk wordgen having both types of ores."""
+        """The metals that generated in the world."""
 
         self.rooms: List[Room] = rooms
         self.clouds: Clouds = clouds
@@ -455,7 +457,7 @@ class World:
                                  spawn_meteorite=f.bool(),
                                  evil_boss_counter=f.int4())
 
-        smashed_altars_count = f.int4()
+        altars_smashed = f.int4()
 
         is_hardmode = f.bool()
 
@@ -471,21 +473,17 @@ class World:
         rain = Rain(is_active=f.bool(), time_left=f.int4(), max_rain=f.single())
 
         try:
-            hardmode_ore_1 = HardmodeTier1Ore(f.int4())
+            hardmode_ore_1 = BlockType(f.int4())
         except ValueError:
-            hardmode_ore_1 = HardmodeTier1Ore.NOT_DETERMINED
+            hardmode_ore_1 = None
         try:
-            hardmode_ore_2 = HardmodeTier2Ore(f.int4())
+            hardmode_ore_2 = BlockType(f.int4())
         except ValueError:
-            hardmode_ore_2 = HardmodeTier2Ore.NOT_DETERMINED
+            hardmode_ore_2 = None
         try:
-            hardmode_ore_3 = HardmodeTier3Ore(f.int4())
+            hardmode_ore_3 = BlockType(f.int4())
         except ValueError:
-            hardmode_ore_3 = HardmodeTier3Ore.NOT_DETERMINED
-        altars_smashed = AltarsSmashed(count=smashed_altars_count,
-                                       ore_tier1=hardmode_ore_1,
-                                       ore_tier2=hardmode_ore_2,
-                                       ore_tier3=hardmode_ore_3)
+            hardmode_ore_3 = None
 
         bg_forest = f.int1()
         bg_corruption = f.int1()
@@ -630,7 +628,11 @@ class World:
         halloween_today = f.bool()
         xmas_today = f.bool()
 
-        saved_ore_tiers = SavedOreTiers(f.int4(), f.int4(), f.int4(), f.int4())
+        ore_1 = BlockType(f.int4())
+        ore_2 = BlockType(f.int4())
+        ore_3 = BlockType(f.int4())
+        ore_4 = BlockType(f.int4())
+        saved_ore_tiers = SavedOreTiers(ore_1, ore_2, ore_3, ore_4, hardmode_ore_1, hardmode_ore_2, hardmode_ore_3)
 
         pets = Pets(f.bool(), f.bool(), f.bool())
 
@@ -891,8 +893,6 @@ class World:
                 journey_powers.difficulty = f.single()
             elif power_id == 13:
                 journey_powers.freeze_biome_spread = f.bool()
-            else:
-                print(f"Unknown id: {power_id}")
 
         unknown_journey_powers_data = f.read_until(pointers.footer)
 

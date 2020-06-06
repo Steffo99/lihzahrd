@@ -1,4 +1,3 @@
-from .altarssmashed import AltarsSmashed
 from .anglerquest import AnglerQuest
 from .anglerquestfish import AnglerQuestFish
 from .backgrounds import Backgrounds
@@ -8,7 +7,6 @@ from .difficulty import Difficulty
 from .events import Events
 from .fourpartsplit import FourPartSplit
 from .generatorinfo import GeneratorInfo
-from .hardmodeore import HardmodeTier1Ore, HardmodeTier2Ore, HardmodeTier3Ore
 from .invasion import Invasion
 from .invasiontype import InvasionType
 from .lanternevent import LanternEvent
@@ -31,7 +29,6 @@ from .version import Version
 from .worldeviltype import WorldEvilType
 
 __all__ = [
-    "AltarsSmashed",
     "AnglerQuest",
     "AnglerQuestFish",
     "Backgrounds",
@@ -41,9 +38,6 @@ __all__ = [
     "Events",
     "FourPartSplit",
     "GeneratorInfo",
-    "HardmodeTier1Ore",
-    "HardmodeTier2Ore",
-    "HardmodeTier3Ore",
     "Invasion",
     "InvasionType",
     "LanternEvent",
