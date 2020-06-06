@@ -5,7 +5,7 @@ with open("README.md", "r") as f:
 
 setuptools.setup(
     name="lihzahrd",
-    version="1.0b6",
+    version="2.0a1",
     author="Stefano Pigozzi",
     author_email="ste.pigozzi@gmail.com",
     description="A Terraria world parser in Python",
