@@ -112,8 +112,8 @@ class World:
         """The `difficulty <https://terraria.gamepedia.com/Difficulty>`_ the game is in."""
 
         self.is_drunk_world: bool = is_drunk_world
-        """If the world was created with the `5162020 <https://terraria.gamepedia.com/Secret_world_seeds#Drunk_World>`
-         seed."""
+        """If the world was created with the `5162020 <https://terraria.gamepedia.com/Secret_world_seeds#Drunk_World>_`
+        seed."""
 
         self.is_for_the_worthy: bool = is_for_the_worthy
         """Was this world created with the
