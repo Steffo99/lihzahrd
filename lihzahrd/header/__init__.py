@@ -9,7 +9,7 @@ from .fourpartsplit import FourPartSplit
 from .generatorinfo import GeneratorInfo
 from .invasion import Invasion
 from .invasiontype import InvasionType
-from .lanternevent import LanternEvent
+from .lanternnight import LanternNight
 from .lunarevents import LunarEvents
 from .moonphase import MoonPhase
 from .moonstyle import MoonStyle
@@ -40,7 +40,7 @@ __all__ = [
     "GeneratorInfo",
     "Invasion",
     "InvasionType",
-    "LanternEvent",
+    "LanternNight",
     "LunarEvents",
     "MoonPhase",
     "MoonStyle",

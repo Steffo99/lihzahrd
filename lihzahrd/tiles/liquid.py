@@ -1,4 +1,4 @@
-from .liquidtype import LiquidType
+from ..enums import LiquidType
 
 
 class Liquid:

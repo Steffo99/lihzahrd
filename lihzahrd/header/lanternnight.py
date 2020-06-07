@@ -1,7 +1,7 @@
 import typing
 
 
-class LanternEvent:
+class LanternNight:
     """Lantern Night event related information."""
     def __init__(self,
                  nights_on_cooldown: int,
@@ -17,8 +17,8 @@ class LanternEvent:
         self.manual: bool = manual
         """Was this night started by the player?"""
 
-        self.next_night_is_lantern_night:bool = next_night_is_lantern_night
-        """Is the next night a lantern night?"""
+        self.next_night_is_lantern_night: bool = next_night_is_lantern_night
+        """Was a boss just defeated, making the next night a Lantern Night?"""
 
     def __repr__(self):
         return f"WorldLanternNight(nights_on_cooldown={self.nights_on_cooldown}," \

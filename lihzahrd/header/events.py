@@ -3,7 +3,7 @@ from .rain import Rain
 from .party import Party
 from .sandstorm import Sandstorm
 from .lunarevents import LunarEvents
-from .lanternevent import LanternEvent
+from .lanternnight import LanternNight
 
 class Events:
     """Information about the ongoing world events."""
@@ -16,7 +16,7 @@ class Events:
                  party: Party,
                  sandstorm: Sandstorm,
                  lunar_events: LunarEvents,
-                 lantern_night: LanternEvent):
+                 lantern_night: LanternNight):
         self.blood_moon: bool = blood_moon
         """If the current moon is a Blood Moon."""
 
@@ -41,7 +41,7 @@ class Events:
         self.lunar_events: LunarEvents = lunar_events
         """Information about the currently ongoing Lunar Events."""
 
-        self.lantern_night: LanternEvent = lantern_night
+        self.lantern_night: LanternNight = lantern_night
         """Information about the currently ongoing lantern night."""
 
     def __repr__(self):

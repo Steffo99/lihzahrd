@@ -1,6 +1,6 @@
 import typing
 from .tile import Tile
-from ..fileutils import FileReader, Coordinates
+from ..fileutils import Coordinates
 
 
 class TileMatrix:

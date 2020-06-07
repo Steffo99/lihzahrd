@@ -1,5 +1,5 @@
 import typing
-from .npctype import EntityType
+from ..enums import EntityType
 from ..fileutils import Coordinates
 
 
@@ -9,10 +9,10 @@ class Mob:
     __slots__ = "type", "position"
 
     def __init__(self,
-                 type_: int,
+                 type_: EntityType,
                  position: Coordinates, ):
-        self.type: int = type_
-        """The type of mob this object represents."""
+        self.type: EntityType = type_
+        """The type of entity this object represents."""
 
         self.position: Coordinates = position
         """The position of the mob in the game world."""
