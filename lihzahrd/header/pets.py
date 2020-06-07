@@ -1,19 +1,21 @@
 import typing
 
+
 class Pets:
     """Pet related information"""
     def __init__(self,
-                cat: bool,
-                dog: bool,
-                bunny: bool):
+                 cat: bool,
+                 dog: bool,
+                 bunny: bool):
+
         self.cat: bool = cat
-        """Has the cat been bought."""
+        """Was the `Cat License <https://terraria.gamepedia.com/Cat_License>`_ ever activated?"""
 
         self.dog: int = dog
-        """Has the cat been bought."""
+        """Was the `Dog License <https://terraria.gamepedia.com/Dog_License>`_ ever activated?"""
 
         self.bunny: float = bunny
-        """Has the bunny been bought."""
+        """Was the `Bunny License <https://terraria.gamepedia.com/Bunny_License>`_ ever activated?"""
 
     def __repr__(self):
-        return f"WorldPets(cat={self.cat}, dog={self.dog}, bunny={self.bunny})"
+        return f"{self.__class__.__qualname__}(cat={self.cat}, dog={self.dog}, bunny={self.bunny})"

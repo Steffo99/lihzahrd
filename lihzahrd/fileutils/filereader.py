@@ -2,12 +2,13 @@ import typing
 import struct
 import uuid
 import datetime
+import functools
 from .rect import Rect
 
 
 class FileReader:
-    def __init__(self, file):
-        self.file = file
+    def __init__(self, file: typing.IO):
+        self.file: typing.IO = file
 
     def bool(self) -> bool:
         return struct.unpack("?", self.file.read(1))[0]
@@ -42,8 +43,9 @@ class FileReader:
     def double(self) -> float:
         return struct.unpack("d", self.file.read(8))[0]
 
-    def bits(self) -> typing.Tuple[bool, bool, bool, bool, bool, bool, bool, bool]:
-        data = struct.unpack("B", self.file.read(1))[0]
+    @staticmethod
+    @functools.lru_cache(256)
+    def _bitify(data) -> typing.Tuple[bool, bool, bool, bool, bool, bool, bool, bool]:
         return (bool(data & 0b0000_0001),
                 bool(data & 0b0000_0010),
                 bool(data & 0b0000_0100),
@@ -52,6 +54,10 @@ class FileReader:
                 bool(data & 0b0010_0000),
                 bool(data & 0b0100_0000),
                 bool(data & 0b1000_0000))
+
+    def bits(self) -> typing.Tuple[bool, bool, bool, bool, bool, bool, bool, bool]:
+        data = struct.unpack("B", self.file.read(1))[0]
+        return self._bitify(data)
 
     def rect(self) -> Rect:
         left, right, top, bottom = struct.unpack("iiii", self.file.read(16))

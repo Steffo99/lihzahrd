@@ -1,4 +1,4 @@
-from .itemtype import ItemType
+from ..enums import ItemType
 
 
 class ItemStack:

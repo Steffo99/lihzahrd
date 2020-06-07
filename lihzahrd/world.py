@@ -2,6 +2,7 @@ import uuid
 import math
 from typing import *
 from .fileutils import *
+from .enums import *
 from .items import *
 from .header import *
 from .tiles import *
@@ -610,7 +611,7 @@ class World:
             advanced_combat=combat_book_used
         )
 
-        lantern_night = LanternEvent(f.int4(), f.bool(), f.bool(), f.bool())
+        lantern_night = LanternNight(f.int4(), f.bool(), f.bool(), f.bool())
 
         events = Events(blood_moon=blood_moon,
                         solar_eclipse=eclipse,

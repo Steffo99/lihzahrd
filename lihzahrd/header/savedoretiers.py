@@ -1,5 +1,5 @@
 from typing import *
-from ..tiles import BlockType
+from ..enums import BlockType
 
 
 class SavedOreTiers:
