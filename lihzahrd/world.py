@@ -691,10 +691,10 @@ class World:
                 item_quantity = f.int2()
                 if item_quantity > 0:
                     item_type = ItemType(f.int4())
-                    item_modifier = f.uint1()
+                    item_modifier = PrefixType.get(f.uint1())
                     item = ItemStack(quantity=item_quantity,
                                      type_=item_type,
-                                     modifier=item_modifier)
+                                     prefix=item_modifier)
                 else:
                     item = None
                 chest_contents.append(item)
@@ -766,7 +766,7 @@ class World:
             # Item Frame
             elif te_type == 1:
                 te_extra = ItemFrame(item=ItemStack(type_=ItemType(f.int2()),
-                                                    modifier=f.uint1(),
+                                                    prefix=PrefixType.get(f.uint1()),
                                                     quantity=f.int2()))
             # Logic Sensor
             elif te_type == 2:
@@ -780,21 +780,21 @@ class World:
                 for index, flag in enumerate(item_flags):
                     if not flag:
                         continue
-                    slot_item_id = ItemType(f.int2())
-                    slot_item_modifier = f.int1()
-                    slot_item_stack = f.int2()
-                    mannequin_items[index] = ItemStack(slot_item_id, slot_item_modifier, slot_item_stack)
+                    mannequin_items[index] = ItemStack(type_=ItemType(f.int2()),
+                                                       prefix=PrefixType.get(f.int1()),
+                                                       quantity=f.int2())
                 for index, flag in enumerate(dye_flags):
                     if not flag:
                         continue
-                    slot_item_id = ItemType(f.int2())
-                    slot_item_modifier = f.int1()
-                    slot_item_stack = f.int2()
-                    mannequin_dyes[index] = ItemStack(slot_item_id, slot_item_modifier, slot_item_stack)
+                    mannequin_dyes[index] = ItemStack(type_=ItemType(f.int2()),
+                                                      prefix=PrefixType.get(f.int1()),
+                                                      quantity=f.int2())
                 te_extra = Mannequin(mannequin_items, mannequin_dyes)
             # Weapon Rack
             elif te_type == 4:
-                rack_item = ItemStack(ItemType(f.int2()), f.int1(), f.int2())
+                rack_item = ItemStack(type_=ItemType(f.int2()),
+                                      prefix=PrefixType.get(f.int1()),
+                                      quantity=f.int2())
                 te_extra = WeaponRack(rack_item)
             # Hat Rack
             elif te_type == 5:
@@ -806,21 +806,21 @@ class World:
                 for index, flag in enumerate(item_flags[0:2]):
                     if not flag:
                         continue
-                    slot_item_id = ItemType(f.int2())
-                    slot_item_modifier = f.int1()
-                    slot_item_stack = f.int2()
-                    rack_items[index] = ItemStack(slot_item_id, slot_item_modifier, slot_item_stack)
+                    rack_items[index] = ItemStack(type_=ItemType(f.int2()),
+                                                  prefix=PrefixType.get(f.int1()),
+                                                  quantity=f.int2())
                 for index, flag in enumerate(item_flags[2:4]):
                     if not flag:
                         continue
-                    slot_item_id = ItemType(f.int2())
-                    slot_item_modifier = f.int1()
-                    slot_item_stack = f.int2()
-                    rack_dyes[index] = ItemStack(slot_item_id, slot_item_modifier, slot_item_stack)
+                    rack_dyes[index] = ItemStack(type_=ItemType(f.int2()),
+                                                 prefix=PrefixType.get(f.int1()),
+                                                 quantity=f.int2())
                 te_extra = HatRack(rack_items, rack_dyes)
             # Food Plate
             elif te_type == 6:
-                plate_item = ItemStack(ItemType(f.int2()), f.int1(), f.int2())
+                plate_item = ItemStack(type_=ItemType(f.int2()),
+                                       prefix=PrefixType.get(f.int1()),
+                                       quantity=f.int2())
                 te_extra = Plate(plate_item)
             # Teleport Pylon
             elif te_type == 7:
