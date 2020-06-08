@@ -5098,7 +5098,5 @@ class ItemType(enum.IntEnum):
     CARTON_OF_MILK = 5041
     COFFEE = 5042
 
-    COUNT = 5043
-
     def __repr__(self):
         return f"{self.__class__.__name__}.{self.name}"
