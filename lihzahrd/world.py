@@ -376,7 +376,7 @@ class World:
         savefile_type = f.uint1()
         supported_versions = (Version("1.4.0.4"), Version("1.4.0.5"))
         if version not in supported_versions or relogic != "relogic" or savefile_type != 2:
-            raise NotImplementedError("This parser can only read Terraria 1.4.0.4 save files.")
+            raise NotImplementedError("This parser can only read Terraria 1.4.0.4 or 1.4.0.5 save files.")
 
         revision = f.uint4()
         is_favorite = f.uint8() != 0
