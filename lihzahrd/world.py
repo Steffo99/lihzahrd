@@ -240,7 +240,7 @@ class World:
         self.shadow_orbs = value
 
     @staticmethod
-    def _read_tile_block(fr: FileReader, tileframeimportant) -> List:
+    def _read_tile_block(fr: FileReader, tileframeimportant) -> Tuple[Tile, int]:
         # Once again, this code is a mess
         flags1 = fr.bits()
         has_block = flags1[1]
@@ -320,7 +320,7 @@ class World:
             multiply_by = 1
         # Create tile
         tile = Tile(block=block, wall=wall, liquid=liquid, wiring=wiring)
-        return [tile] * multiply_by
+        return tile, multiply_by
 
     @property
     def is_classic(self):
@@ -351,8 +351,10 @@ class World:
         while tm.size.x < world_size.x:
             column = []
             while len(column) < world_size.y:
-                readtiles = cls._read_tile_block(f, tileframeimportant)
-                column = [*column, *readtiles]
+                tile, multiply_by = cls._read_tile_block(f, tileframeimportant)
+                for _ in range(multiply_by):
+                    # This works by reference, and stops working if write support is added
+                    column.append(tile)
             tm.add_column(column)
         return tm
 
