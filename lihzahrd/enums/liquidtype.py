@@ -1,4 +1,5 @@
 import enum
+import functools
 
 
 class LiquidType(enum.IntEnum):
@@ -10,11 +11,16 @@ class LiquidType(enum.IntEnum):
 
     @classmethod
     def from_flags(cls, flags1):
-        if flags1[3] and flags1[4]:
+        return cls._from_flags(flags1[3], flags1[4])
+
+    @classmethod
+    @functools.lru_cache(4)
+    def _from_flags(cls, flags13, flags14):
+        if flags13 and flags14:
             return cls.HONEY
-        if flags1[4]:
+        if flags14:
             return cls.LAVA
-        if flags1[3]:
+        if flags13:
             return cls.WATER
         return cls.NO_LIQUID
 

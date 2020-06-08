@@ -4,6 +4,7 @@ from .itemtype import ItemType
 from .liquidtype import LiquidType
 from .walltype import WallType
 from .prefixtype import PrefixType
+from .rleencoding import RLEEncoding
 
 __all__ = [
     "BlockType",
@@ -12,4 +13,5 @@ __all__ = [
     "LiquidType",
     "WallType",
     "PrefixType",
+    "RLEEncoding",
 ]

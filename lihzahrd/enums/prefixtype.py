@@ -1,5 +1,6 @@
 from typing import *
 import enum
+import functools
 
 
 class PrefixType(enum.IntEnum):
@@ -89,6 +90,7 @@ class PrefixType(enum.IntEnum):
     Legendary2 = 84
 
     @classmethod
+    @functools.lru_cache(85)
     def get(cls, i: int) -> Optional["PrefixType"]:
         if i == 0:
             return None
