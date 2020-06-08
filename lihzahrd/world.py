@@ -856,22 +856,16 @@ class World:
 
         unknown_town_manager_data = f.read_until(pointers.bestiary)
 
-        bestiary_kill_count = f.int4()
-        bestiary_kill_data = {}
-        for _ in range(bestiary_kill_count):
-            beast = f.string()
-            beast_count = f.int4()
-            bestiary_kill_data[beast] = beast_count
-        bestiary_sighting_count = f.int4()
-        bestiary_sighting_data = [f.string() for _ in range(bestiary_sighting_count)]
-        bestiary_chat_count = f.int4()
-        bestiary_chat_data = [f.string() for _ in range(bestiary_chat_count)]
-        bestiary = Bestiary(bestiary_chat_count,
-                            bestiary_chat_data,
-                            bestiary_kill_count,
-                            bestiary_kill_data,
-                            bestiary_sighting_count,
-                            bestiary_sighting_data)
+        bestiary_kills = {}
+        for _ in range(f.int4()):
+            entity = EntityType[f.string()]
+            kills = f.int4()
+            bestiary_kills[entity] = kills
+
+        bestiary_sightings = [EntityType[f.string()] for _ in range(f.int4())]
+        bestiary_chats = [EntityType[f.string()] for _ in range(f.int4())]
+
+        bestiary = Bestiary(chats=bestiary_chats, kills=bestiary_kills, sightings=bestiary_sightings)
 
         unknown_bestiary_data = f.read_until(pointers.journey_powers)
 
