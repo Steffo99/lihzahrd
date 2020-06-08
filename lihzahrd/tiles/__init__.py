@@ -1,4 +1,3 @@
-from .rleencoding import RLEEncoding
 from .shape import Shape
 from .wiring import Wiring
 from .frameimportantdata import FrameImportantData
@@ -8,5 +7,5 @@ from .liquid import Liquid
 from .tile import Tile
 from .tilematrix import TileMatrix
 
-__all__ = ["RLEEncoding", "Shape", "Wiring", "FrameImportantData", "Block",
+__all__ = ["Shape", "Wiring", "FrameImportantData", "Block",
            "Wall", "Liquid", "Tile", "TileMatrix"]

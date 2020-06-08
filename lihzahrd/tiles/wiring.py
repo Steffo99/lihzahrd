@@ -1,3 +1,6 @@
+import functools
+
+
 class Wiring:
     """Wiring data for a certain tile."""
 
@@ -35,6 +38,11 @@ class Wiring:
     def from_flags(cls, flags2=None, flags3=None):
         if flags2 is not None:
             if flags3 is not None:
-                return cls(red=flags2[1], green=flags2[2], blue=flags2[3], yellow=flags3[5], actuator=flags3[1])
-            return cls(red=flags2[1], green=flags2[2], blue=flags2[3])
-        return cls()
+                return cls._from_flags(flags2[1], flags2[2], flags2[3], flags3[1], flags3[5])
+            return cls._from_flags(flags2[1], flags2[2], flags2[3], False, False)
+        return cls._from_flags(False, False, False, False, False)
+
+    @classmethod
+    @functools.lru_cache(32)
+    def _from_flags(cls, flags21, flags22, flags23, flags31, flags35):
+        return cls(red=flags21, green=flags22, blue=flags23, yellow=flags35, actuator=flags31)

@@ -1,4 +1,5 @@
 import enum
+import functools
 
 
 class RLEEncoding(enum.IntEnum):
@@ -15,4 +16,9 @@ class RLEEncoding(enum.IntEnum):
 
     @classmethod
     def from_flags(cls, flags1):
-        return cls(flags1[7] * 2 + flags1[6])
+        return cls._from_flags(flags1[6], flags1[7])
+
+    @classmethod
+    @functools.lru_cache(3)
+    def _from_flags(cls, flags16, flags17):
+        return cls(flags17 * 2 + flags16)
