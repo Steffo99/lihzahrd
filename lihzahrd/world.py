@@ -110,15 +110,15 @@ class World:
         """The world size in tiles."""
 
         self.difficulty: Difficulty = difficulty
-        """The `difficulty <https://terraria.gamepedia.com/Difficulty>`_ the game is in."""
+        """The difficulty (https://terraria.gamepedia.com/Difficulty) the game is in."""
 
         self.is_drunk_world: bool = is_drunk_world
-        """If the world was created with the `5162020 <https://terraria.gamepedia.com/Secret_world_seeds#Drunk_World>_`
+        """If the world was created with the 5162020 (https://terraria.gamepedia.com/Secret_world_seeds#Drunk_World)
         seed."""
 
         self.is_for_the_worthy: bool = is_for_the_worthy
-        """Was this world created with the
-        `for the worthy <https://terraria.gamepedia.com/Secret_world_seeds#For_the_worthy>` seed."""
+        """If the world was created with the
+        for the worthy (https://terraria.gamepedia.com/Secret_world_seeds#For_the_worthy) seed."""
 
         self.created_on = created_on
         """The date and time this world was created in."""
