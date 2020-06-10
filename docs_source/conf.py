@@ -18,7 +18,7 @@
 # -- Project information -----------------------------------------------------
 
 project = 'lihzahrd'
-copyright = '2019, Stefano Pigozzi'
+copyright = '2020, Stefano Pigozzi'
 author = 'Stefano Pigozzi'
 
 # -- General configuration ---------------------------------------------------
@@ -28,7 +28,7 @@ author = 'Stefano Pigozzi'
 # ones.
 extensions = ["sphinx.ext.napoleon", "sphinx.ext.intersphinx"]
 
-intersphinx_mapping = {"python": ("https://docs.python.org/3.7", None)}
+intersphinx_mapping = {"python": ("https://docs.python.org/3.6", None)}
 napoleon_use_param = True
 
 

@@ -25,7 +25,7 @@ class NPC(Mob):
         """The coordinates of the home of this NPC, or ``None`` if the NPC is homeless."""
 
         self.variation_index: int = variation_index
-        """(Unknown) Possibly the current `Zoologist <https://terraria.gamepedia.com/Zoologist>`_ form?"""
+        """(Unknown) Possibly the current Zoologist (https://terraria.gamepedia.com/Zoologist) form?"""
 
     def __repr__(self):
         return f"<NPC {repr(self.type)} at {self.position}>"

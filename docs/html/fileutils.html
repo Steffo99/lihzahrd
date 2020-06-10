@@ -85,8 +85,12 @@
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage guide</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="reference.html">API Reference</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="world.html">lihzahrd.World</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bestiary.html">lihzahrd.bestiary</a></li>
 <li class="toctree-l2"><a class="reference internal" href="chests.html">lihzahrd.chests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="enums.html">lihzahrd.enums</a></li>
 <li class="toctree-l2"><a class="reference internal" href="header.html">lihzahrd.header</a></li>
+<li class="toctree-l2"><a class="reference internal" href="items.html">lihzahrd.items</a></li>
+<li class="toctree-l2"><a class="reference internal" href="journeypowers.html">lihzahrd.journeypowers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="npcs.html">lihzahrd.npcs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pressureplates.html">lihzahrd.pressureplates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="signs.html">lihzahrd.signs</a></li>
@@ -170,120 +174,224 @@
 <h1>lihzahrd.fileutils<a class="headerlink" href="#lihzahrd-fileutils" title="Permalink to this headline">¶</a></h1>
 <div class="toctree-wrapper compound">
 </div>
-<span class="target" id="module-lihzahrd.fileutils"></span><dl class="py class">
+<span class="target" id="module-lihzahrd.fileutils"></span><dl class="class">
 <dt id="lihzahrd.fileutils.FileReader">
-<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.fileutils.</code><code class="sig-name descname">FileReader</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">file</span></em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.fileutils.FileReader" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="py method">
+<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.fileutils.</code><code class="sig-name descname">FileReader</code><span class="sig-paren">(</span><em class="sig-param">file: IO</em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.fileutils.FileReader" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="lihzahrd.fileutils.FileReader._bitify">
+<code class="sig-name descname">_bitify</code><a class="headerlink" href="#lihzahrd.fileutils.FileReader._bitify" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
 <dt id="lihzahrd.fileutils.FileReader.bits">
-<code class="sig-name descname">bits</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>lihzahrd.fileutils.filereader.FileReader.bool<span class="p">, </span>lihzahrd.fileutils.filereader.FileReader.bool<span class="p">, </span>lihzahrd.fileutils.filereader.FileReader.bool<span class="p">, </span>lihzahrd.fileutils.filereader.FileReader.bool<span class="p">, </span>lihzahrd.fileutils.filereader.FileReader.bool<span class="p">, </span>lihzahrd.fileutils.filereader.FileReader.bool<span class="p">, </span>lihzahrd.fileutils.filereader.FileReader.bool<span class="p">, </span>lihzahrd.fileutils.filereader.FileReader.bool<span class="p">]</span><a class="headerlink" href="#lihzahrd.fileutils.FileReader.bits" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">bits</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Tuple[lihzahrd.fileutils.filereader.FileReader.bool, lihzahrd.fileutils.filereader.FileReader.bool, lihzahrd.fileutils.filereader.FileReader.bool, lihzahrd.fileutils.filereader.FileReader.bool, lihzahrd.fileutils.filereader.FileReader.bool, lihzahrd.fileutils.filereader.FileReader.bool, lihzahrd.fileutils.filereader.FileReader.bool, lihzahrd.fileutils.filereader.FileReader.bool]<a class="headerlink" href="#lihzahrd.fileutils.FileReader.bits" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="py method">
+<dl class="method">
 <dt id="lihzahrd.fileutils.FileReader.bool">
-<code class="sig-name descname">bool</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3.7/library/functions.html#bool" title="(in Python v3.7)">bool</a><a class="headerlink" href="#lihzahrd.fileutils.FileReader.bool" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">bool</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#lihzahrd.fileutils.FileReader.bool" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="py method">
+<dl class="method">
 <dt id="lihzahrd.fileutils.FileReader.datetime">
-<code class="sig-name descname">datetime</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3.7/library/datetime.html#datetime.datetime" title="(in Python v3.7)">datetime.datetime</a><a class="headerlink" href="#lihzahrd.fileutils.FileReader.datetime" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">datetime</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; datetime.datetime<a class="headerlink" href="#lihzahrd.fileutils.FileReader.datetime" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="py method">
+<dl class="method">
 <dt id="lihzahrd.fileutils.FileReader.double">
-<code class="sig-name descname">double</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3.7/library/functions.html#float" title="(in Python v3.7)">float</a><a class="headerlink" href="#lihzahrd.fileutils.FileReader.double" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">double</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#lihzahrd.fileutils.FileReader.double" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="py method">
+<dl class="attribute">
+<dt id="lihzahrd.fileutils.FileReader.file">
+<code class="sig-name descname">file</code><a class="headerlink" href="#lihzahrd.fileutils.FileReader.file" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
 <dt id="lihzahrd.fileutils.FileReader.int1">
-<code class="sig-name descname">int1</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)">int</a><a class="headerlink" href="#lihzahrd.fileutils.FileReader.int1" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">int1</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#lihzahrd.fileutils.FileReader.int1" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="py method">
+<dl class="method">
 <dt id="lihzahrd.fileutils.FileReader.int2">
-<code class="sig-name descname">int2</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)">int</a><a class="headerlink" href="#lihzahrd.fileutils.FileReader.int2" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">int2</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#lihzahrd.fileutils.FileReader.int2" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="py method">
+<dl class="method">
 <dt id="lihzahrd.fileutils.FileReader.int4">
-<code class="sig-name descname">int4</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)">int</a><a class="headerlink" href="#lihzahrd.fileutils.FileReader.int4" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">int4</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#lihzahrd.fileutils.FileReader.int4" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="py method">
+<dl class="method">
 <dt id="lihzahrd.fileutils.FileReader.int8">
-<code class="sig-name descname">int8</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)">int</a><a class="headerlink" href="#lihzahrd.fileutils.FileReader.int8" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">int8</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#lihzahrd.fileutils.FileReader.int8" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="py method">
+<dl class="method">
 <dt id="lihzahrd.fileutils.FileReader.read_until">
-<code class="sig-name descname">read_until</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">address</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)">int</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#bytearray" title="(in Python v3.7)">bytearray</a><a class="headerlink" href="#lihzahrd.fileutils.FileReader.read_until" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">read_until</code><span class="sig-paren">(</span><em class="sig-param">address: int</em><span class="sig-paren">)</span> &#x2192; bytearray<a class="headerlink" href="#lihzahrd.fileutils.FileReader.read_until" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="py method">
+<dl class="method">
 <dt id="lihzahrd.fileutils.FileReader.rect">
 <code class="sig-name descname">rect</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; lihzahrd.fileutils.rect.Rect<a class="headerlink" href="#lihzahrd.fileutils.FileReader.rect" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="py method">
+<dl class="method">
 <dt id="lihzahrd.fileutils.FileReader.single">
-<code class="sig-name descname">single</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3.7/library/functions.html#float" title="(in Python v3.7)">float</a><a class="headerlink" href="#lihzahrd.fileutils.FileReader.single" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">single</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#lihzahrd.fileutils.FileReader.single" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="py method">
+<dl class="method">
 <dt id="lihzahrd.fileutils.FileReader.skip_until">
-<code class="sig-name descname">skip_until</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">address</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)">int</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3.7/library/constants.html#None" title="(in Python v3.7)">None</a><a class="headerlink" href="#lihzahrd.fileutils.FileReader.skip_until" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">skip_until</code><span class="sig-paren">(</span><em class="sig-param">address: int</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#lihzahrd.fileutils.FileReader.skip_until" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="py method">
+<dl class="method">
 <dt id="lihzahrd.fileutils.FileReader.string">
-<code class="sig-name descname">string</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">size</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#str" title="(in Python v3.7)">str</a><a class="headerlink" href="#lihzahrd.fileutils.FileReader.string" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">string</code><span class="sig-paren">(</span><em class="sig-param">size=None</em><span class="sig-paren">)</span> &#x2192; str<a class="headerlink" href="#lihzahrd.fileutils.FileReader.string" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="py method">
+<dl class="method">
 <dt id="lihzahrd.fileutils.FileReader.uint1">
-<code class="sig-name descname">uint1</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)">int</a><a class="headerlink" href="#lihzahrd.fileutils.FileReader.uint1" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">uint1</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#lihzahrd.fileutils.FileReader.uint1" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="py method">
+<dl class="method">
 <dt id="lihzahrd.fileutils.FileReader.uint2">
-<code class="sig-name descname">uint2</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)">int</a><a class="headerlink" href="#lihzahrd.fileutils.FileReader.uint2" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">uint2</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#lihzahrd.fileutils.FileReader.uint2" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="py method">
+<dl class="method">
 <dt id="lihzahrd.fileutils.FileReader.uint4">
-<code class="sig-name descname">uint4</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)">int</a><a class="headerlink" href="#lihzahrd.fileutils.FileReader.uint4" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">uint4</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#lihzahrd.fileutils.FileReader.uint4" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="py method">
+<dl class="method">
 <dt id="lihzahrd.fileutils.FileReader.uint8">
-<code class="sig-name descname">uint8</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)">int</a><a class="headerlink" href="#lihzahrd.fileutils.FileReader.uint8" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">uint8</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#lihzahrd.fileutils.FileReader.uint8" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="py method">
+<dl class="method">
 <dt id="lihzahrd.fileutils.FileReader.uleb128">
-<code class="sig-name descname">uleb128</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)">int</a><a class="headerlink" href="#lihzahrd.fileutils.FileReader.uleb128" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">uleb128</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#lihzahrd.fileutils.FileReader.uleb128" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="py method">
+<dl class="method">
 <dt id="lihzahrd.fileutils.FileReader.uuid">
-<code class="sig-name descname">uuid</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3.7/library/uuid.html#uuid.UUID" title="(in Python v3.7)">uuid.UUID</a><a class="headerlink" href="#lihzahrd.fileutils.FileReader.uuid" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">uuid</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; uuid.UUID<a class="headerlink" href="#lihzahrd.fileutils.FileReader.uuid" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-<dl class="py class">
+<dl class="class">
 <dt id="lihzahrd.fileutils.Rect">
-<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.fileutils.</code><code class="sig-name descname">Rect</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">left</span></em>, <em class="sig-param"><span class="n">right</span></em>, <em class="sig-param"><span class="n">top</span></em>, <em class="sig-param"><span class="n">bottom</span></em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.fileutils.Rect" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.fileutils.</code><code class="sig-name descname">Rect</code><span class="sig-paren">(</span><em class="sig-param">left</em>, <em class="sig-param">right</em>, <em class="sig-param">top</em>, <em class="sig-param">bottom</em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.fileutils.Rect" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="lihzahrd.fileutils.Rect.bottom">
+<code class="sig-name descname">bottom</code><a class="headerlink" href="#lihzahrd.fileutils.Rect.bottom" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="py class">
+<dl class="attribute">
+<dt id="lihzahrd.fileutils.Rect.left">
+<code class="sig-name descname">left</code><a class="headerlink" href="#lihzahrd.fileutils.Rect.left" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="lihzahrd.fileutils.Rect.right">
+<code class="sig-name descname">right</code><a class="headerlink" href="#lihzahrd.fileutils.Rect.right" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="lihzahrd.fileutils.Rect.top">
+<code class="sig-name descname">top</code><a class="headerlink" href="#lihzahrd.fileutils.Rect.top" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
 <dt id="lihzahrd.fileutils.Pointers">
-<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.fileutils.</code><code class="sig-name descname">Pointers</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">world_header</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)">int</a></span></em>, <em class="sig-param"><span class="n">world_tiles</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)">int</a></span></em>, <em class="sig-param"><span class="n">chests</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)">int</a></span></em>, <em class="sig-param"><span class="n">signs</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)">int</a></span></em>, <em class="sig-param"><span class="n">npcs</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)">int</a></span></em>, <em class="sig-param"><span class="n">tile_entities</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)">int</a></span></em>, <em class="sig-param"><span class="n">pressure_plates</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)">int</a></span></em>, <em class="sig-param"><span class="n">town_manager</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)">int</a></span></em>, <em class="sig-param"><span class="n">bestiary</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)">int</a></span></em>, <em class="sig-param"><span class="n">journey_powers</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)">int</a></span></em>, <em class="sig-param"><span class="n">footer</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)">int</a></span></em>, <em class="sig-param"><span class="o">*</span><span class="n">unknown</span></em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.fileutils.Pointers" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.fileutils.</code><code class="sig-name descname">Pointers</code><span class="sig-paren">(</span><em class="sig-param">world_header: int</em>, <em class="sig-param">world_tiles: int</em>, <em class="sig-param">chests: int</em>, <em class="sig-param">signs: int</em>, <em class="sig-param">npcs: int</em>, <em class="sig-param">tile_entities: int</em>, <em class="sig-param">pressure_plates: int</em>, <em class="sig-param">town_manager: int</em>, <em class="sig-param">bestiary: int</em>, <em class="sig-param">journey_powers: int</em>, <em class="sig-param">footer: int</em>, <em class="sig-param">*unknown</em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.fileutils.Pointers" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="lihzahrd.fileutils.Pointers.bestiary">
+<code class="sig-name descname">bestiary</code><a class="headerlink" href="#lihzahrd.fileutils.Pointers.bestiary" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="py class">
+<dl class="attribute">
+<dt id="lihzahrd.fileutils.Pointers.chests">
+<code class="sig-name descname">chests</code><a class="headerlink" href="#lihzahrd.fileutils.Pointers.chests" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="lihzahrd.fileutils.Pointers.file_format">
+<code class="sig-name descname">file_format</code><a class="headerlink" href="#lihzahrd.fileutils.Pointers.file_format" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="lihzahrd.fileutils.Pointers.footer">
+<code class="sig-name descname">footer</code><a class="headerlink" href="#lihzahrd.fileutils.Pointers.footer" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="lihzahrd.fileutils.Pointers.journey_powers">
+<code class="sig-name descname">journey_powers</code><a class="headerlink" href="#lihzahrd.fileutils.Pointers.journey_powers" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="lihzahrd.fileutils.Pointers.npcs">
+<code class="sig-name descname">npcs</code><a class="headerlink" href="#lihzahrd.fileutils.Pointers.npcs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="lihzahrd.fileutils.Pointers.pressure_plates">
+<code class="sig-name descname">pressure_plates</code><a class="headerlink" href="#lihzahrd.fileutils.Pointers.pressure_plates" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="lihzahrd.fileutils.Pointers.signs">
+<code class="sig-name descname">signs</code><a class="headerlink" href="#lihzahrd.fileutils.Pointers.signs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="lihzahrd.fileutils.Pointers.tile_entities">
+<code class="sig-name descname">tile_entities</code><a class="headerlink" href="#lihzahrd.fileutils.Pointers.tile_entities" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="lihzahrd.fileutils.Pointers.town_manager">
+<code class="sig-name descname">town_manager</code><a class="headerlink" href="#lihzahrd.fileutils.Pointers.town_manager" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="lihzahrd.fileutils.Pointers.unknown">
+<code class="sig-name descname">unknown</code><a class="headerlink" href="#lihzahrd.fileutils.Pointers.unknown" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="lihzahrd.fileutils.Pointers.world_header">
+<code class="sig-name descname">world_header</code><a class="headerlink" href="#lihzahrd.fileutils.Pointers.world_header" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="lihzahrd.fileutils.Pointers.world_tiles">
+<code class="sig-name descname">world_tiles</code><a class="headerlink" href="#lihzahrd.fileutils.Pointers.world_tiles" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
 <dt id="lihzahrd.fileutils.Coordinates">
-<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.fileutils.</code><code class="sig-name descname">Coordinates</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em>, <em class="sig-param"><span class="n">y</span></em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.fileutils.Coordinates" title="Permalink to this definition">¶</a></dt>
-<dd><p>A pair of coordinates.</p>
+<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.fileutils.</code><code class="sig-name descname">Coordinates</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">y</em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.fileutils.Coordinates" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="lihzahrd.fileutils.Coordinates.x">
+<code class="sig-name descname">x</code><a class="headerlink" href="#lihzahrd.fileutils.Coordinates.x" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="lihzahrd.fileutils.Coordinates.y">
+<code class="sig-name descname">y</code><a class="headerlink" href="#lihzahrd.fileutils.Coordinates.y" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </dd></dl>
 
 </div>
@@ -308,7 +416,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2019, Stefano Pigozzi
+        &copy; Copyright 2020, Stefano Pigozzi
 
     </p>
   </div>

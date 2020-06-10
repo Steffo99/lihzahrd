@@ -36,8 +36,8 @@
   <link rel="stylesheet" href="_static/lihzahrd.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="lihzahrd.header" href="header.html" />
-    <link rel="prev" title="lihzahrd.World" href="world.html" /> 
+    <link rel="next" title="lihzahrd.enums" href="enums.html" />
+    <link rel="prev" title="lihzahrd.bestiary" href="bestiary.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -85,10 +85,14 @@
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage guide</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="reference.html">API Reference</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="world.html">lihzahrd.World</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bestiary.html">lihzahrd.bestiary</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">lihzahrd.chests</a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="enums.html">lihzahrd.enums</a></li>
 <li class="toctree-l2"><a class="reference internal" href="header.html">lihzahrd.header</a></li>
+<li class="toctree-l2"><a class="reference internal" href="items.html">lihzahrd.items</a></li>
+<li class="toctree-l2"><a class="reference internal" href="journeypowers.html">lihzahrd.journeypowers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="npcs.html">lihzahrd.npcs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pressureplates.html">lihzahrd.pressureplates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="signs.html">lihzahrd.signs</a></li>
@@ -170,10 +174,25 @@
 <h1>lihzahrd.chests<a class="headerlink" href="#lihzahrd-chests" title="Permalink to this headline">¶</a></h1>
 <div class="toctree-wrapper compound">
 </div>
-<span class="target" id="module-lihzahrd.chests"></span><dl class="py class">
+<span class="target" id="module-lihzahrd.chests"></span><dl class="class">
 <dt id="lihzahrd.chests.Chest">
-<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.chests.</code><code class="sig-name descname">Chest</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">position</span><span class="p">:</span> <span class="n">lihzahrd.fileutils.coordinates.Coordinates</span></em>, <em class="sig-param"><span class="n">name</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#str" title="(in Python v3.7)">str</a></span></em>, <em class="sig-param"><span class="n">contents</span><span class="p">:</span> <span class="n">List<span class="p">[</span>lihzahrd.items.itemstack.ItemStack<span class="p">]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.chests.Chest" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.chests.</code><code class="sig-name descname">Chest</code><span class="sig-paren">(</span><em class="sig-param">position: lihzahrd.fileutils.coordinates.Coordinates, name: str, contents: List[lihzahrd.items.itemstack.ItemStack]</em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.chests.Chest" title="Permalink to this definition">¶</a></dt>
 <dd><p>A chest with its contents.</p>
+<dl class="attribute">
+<dt id="lihzahrd.chests.Chest.contents">
+<code class="sig-name descname">contents</code><a class="headerlink" href="#lihzahrd.chests.Chest.contents" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="lihzahrd.chests.Chest.name">
+<code class="sig-name descname">name</code><a class="headerlink" href="#lihzahrd.chests.Chest.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="lihzahrd.chests.Chest.position">
+<code class="sig-name descname">position</code><a class="headerlink" href="#lihzahrd.chests.Chest.position" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </dd></dl>
 
 </div>
@@ -186,10 +205,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="header.html" class="btn btn-neutral float-right" title="lihzahrd.header" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="enums.html" class="btn btn-neutral float-right" title="lihzahrd.enums" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="world.html" class="btn btn-neutral float-left" title="lihzahrd.World" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="bestiary.html" class="btn btn-neutral float-left" title="lihzahrd.bestiary" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -198,7 +217,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2019, Stefano Pigozzi
+        &copy; Copyright 2020, Stefano Pigozzi
 
     </p>
   </div>
