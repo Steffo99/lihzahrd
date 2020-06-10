@@ -6,6 +6,8 @@ from ..fileutils import Coordinates
 class Chest:
     """A chest with its contents."""
 
+    __slots__ = "position", "name", "contents"
+
     def __init__(self, position: Coordinates, name: str, contents: typing.List[ItemStack]):
         self.position: Coordinates = position
         self.name: str = name

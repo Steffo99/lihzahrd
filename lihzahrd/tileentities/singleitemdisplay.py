@@ -5,7 +5,7 @@ class SingleItemDisplay:
     """A display case for a single item, such as a `Weapon Rack <https://terraria.gamepedia.com/Weapon_Rack>`_,
      a `Item Frame <https://terraria.gamepedia.com/Item_Frame>` or a `Plate <https://terraria.gamepedia.com/Plate>`_."""
 
-    __slots__ = "item",
+    __slots__ = ("item",)
 
     def __init__(self, item: ItemStack):
         self.item: ItemStack = item

@@ -2,6 +2,22 @@ import typing
 
 
 class Pointers:
+    __slots__ = (
+        "file_format",
+        "world_header",
+        "world_tiles",
+        "chests",
+        "signs",
+        "npcs",
+        "tile_entities",
+        "pressure_plates",
+        "town_manager",
+        "bestiary",
+        "journey_powers",
+        "footer",
+        "unknown",
+    )
+
     def __init__(self,
                  world_header: int,
                  world_tiles: int,

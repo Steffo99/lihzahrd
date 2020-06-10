@@ -6,6 +6,8 @@ from ..fileutils import Coordinates
 class TileMatrix:
     """A huge matrix containing the tiles of a whole world."""
 
+    __slots__ = "_tiles"
+
     def __init__(self):
         self._tiles: typing.List[typing.List[Tile]] = []
 

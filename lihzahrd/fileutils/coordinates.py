@@ -1,4 +1,6 @@
 class Coordinates:
+    __slots__ = "x", "y"
+
     """A pair of coordinates."""
     def __init__(self, x, y):
         self.x = x
