@@ -12,7 +12,7 @@ class JourneyPowers:
         "freeze_wind",
         "far_placement_range",
         "difficulty",
-        "freeze_biome_spread"
+        "freeze_biome_spread",
     )
 
     def __init__(self,

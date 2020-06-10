@@ -4,6 +4,8 @@ from ..enums import ItemType, PrefixType
 
 class ItemStack:
     """A stack of a certain item."""
+    __slots__ = "type", "quantity", "prefix"
+
     def __init__(self,
                  type_: ItemType,
                  quantity: int = 1,

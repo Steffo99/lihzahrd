@@ -7,6 +7,8 @@ from .rect import Rect
 
 
 class FileReader:
+    __slots__ = "file",
+
     def __init__(self, file: typing.IO):
         self.file: typing.IO = file
 
