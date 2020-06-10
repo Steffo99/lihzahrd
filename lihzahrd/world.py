@@ -637,7 +637,7 @@ class World:
         ore_4 = BlockType(f.int4())
         saved_ore_tiers = SavedOreTiers(ore_1, ore_2, ore_3, ore_4, hardmode_ore_1, hardmode_ore_2, hardmode_ore_3)
 
-        pets = Pets(f.bool(), f.bool(), f.bool())
+        pets = Pets(cat=f.bool(), dog=f.bool(), bunny=f.bool())
 
         defeated_empress_of_light = f.bool()
         defeated_queen_slime = f.bool()
@@ -871,21 +871,17 @@ class World:
 
         unknown_bestiary_data = f.read_until(pointers.journey_powers)
 
+        journey_powers = JourneyPowers()
         while f.bool():
-            journey_powers = JourneyPowers()
             power_id = f.int2()
             if power_id == 0:
                 journey_powers.freeze_time = f.bool()
-            elif power_id == 5:
-                journey_powers.god_mode = f.bool()
             elif power_id == 8:
                 journey_powers.time_rate = f.single()
             elif power_id == 9:
                 journey_powers.freeze_rain = f.bool()
             elif power_id == 10:
                 journey_powers.freeze_wind = f.bool()
-            elif power_id == 11:
-                journey_powers.far_placement_range = f.bool()
             elif power_id == 12:
                 journey_powers.difficulty = f.single()
             elif power_id == 13:
