@@ -36,7 +36,7 @@
   <link rel="stylesheet" href="_static/lihzahrd.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="lihzahrd.chests" href="chests.html" />
+    <link rel="next" title="lihzahrd.bestiary" href="bestiary.html" />
     <link rel="prev" title="API Reference" href="reference.html" /> 
 </head>
 
@@ -87,8 +87,12 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">lihzahrd.World</a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="bestiary.html">lihzahrd.bestiary</a></li>
 <li class="toctree-l2"><a class="reference internal" href="chests.html">lihzahrd.chests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="enums.html">lihzahrd.enums</a></li>
 <li class="toctree-l2"><a class="reference internal" href="header.html">lihzahrd.header</a></li>
+<li class="toctree-l2"><a class="reference internal" href="items.html">lihzahrd.items</a></li>
+<li class="toctree-l2"><a class="reference internal" href="journeypowers.html">lihzahrd.journeypowers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="npcs.html">lihzahrd.npcs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pressureplates.html">lihzahrd.pressureplates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="signs.html">lihzahrd.signs</a></li>
@@ -170,55 +174,61 @@
 <h1>lihzahrd.World<a class="headerlink" href="#lihzahrd-world" title="Permalink to this headline">¶</a></h1>
 <div class="toctree-wrapper compound">
 </div>
-<dl class="py class">
+<dl class="class">
 <dt id="lihzahrd.World">
-<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.</code><code class="sig-name descname">World</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">version</span><span class="p">:</span> <span class="n">lihzahrd.header.version.Version</span></em>, <em class="sig-param"><span class="n">savefile_type</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)">int</a></span></em>, <em class="sig-param"><span class="n">revision</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)">int</a></span></em>, <em class="sig-param"><span class="n">is_favorite</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#bool" title="(in Python v3.7)">bool</a></span></em>, <em class="sig-param"><span class="n">name</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#str" title="(in Python v3.7)">str</a></span></em>, <em class="sig-param"><span class="n">generator</span><span class="p">:</span> <span class="n">lihzahrd.header.generatorinfo.GeneratorInfo</span></em>, <em class="sig-param"><span class="n">uuid_</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/uuid.html#uuid.UUID" title="(in Python v3.7)">uuid.UUID</a></span></em>, <em class="sig-param"><span class="n">id_</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)">int</a></span></em>, <em class="sig-param"><span class="n">bounds</span><span class="p">:</span> <span class="n">lihzahrd.fileutils.rect.Rect</span></em>, <em class="sig-param"><span class="n">size</span><span class="p">:</span> <span class="n">lihzahrd.fileutils.coordinates.Coordinates</span></em>, <em class="sig-param"><span class="n">is_expert</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#bool" title="(in Python v3.7)">bool</a></span></em>, <em class="sig-param"><span class="n">created_on</span></em>, <em class="sig-param"><span class="n">styles</span><span class="p">:</span> <span class="n">lihzahrd.header.styles.Styles</span></em>, <em class="sig-param"><span class="n">backgrounds</span><span class="p">:</span> <span class="n">lihzahrd.header.backgrounds.Backgrounds</span></em>, <em class="sig-param"><span class="n">spawn_point</span><span class="p">:</span> <span class="n">lihzahrd.fileutils.coordinates.Coordinates</span></em>, <em class="sig-param"><span class="n">underground_level</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#float" title="(in Python v3.7)">float</a></span></em>, <em class="sig-param"><span class="n">cavern_level</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#float" title="(in Python v3.7)">float</a></span></em>, <em class="sig-param"><span class="n">time</span><span class="p">:</span> <span class="n">lihzahrd.header.time.Time</span></em>, <em class="sig-param"><span class="n">events</span><span class="p">:</span> <span class="n">lihzahrd.header.events.Events</span></em>, <em class="sig-param"><span class="n">dungeon_point</span><span class="p">:</span> <span class="n">lihzahrd.fileutils.coordinates.Coordinates</span></em>, <em class="sig-param"><span class="n">world_evil</span><span class="p">:</span> <span class="n">lihzahrd.header.worldeviltype.WorldEvilType</span></em>, <em class="sig-param"><span class="n">saved_npcs</span><span class="p">:</span> <span class="n">lihzahrd.header.savednpcs.SavedNPCs</span></em>, <em class="sig-param"><span class="n">altars_smashed</span><span class="p">:</span> <span class="n">lihzahrd.header.altarssmashed.AltarsSmashed</span></em>, <em class="sig-param"><span class="n">is_hardmode</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#bool" title="(in Python v3.7)">bool</a></span></em>, <em class="sig-param"><span class="n">shadow_orbs</span><span class="p">:</span> <span class="n">lihzahrd.header.shadoworbs.ShadowOrbs</span></em>, <em class="sig-param"><span class="n">bosses_defeated</span><span class="p">:</span> <span class="n">lihzahrd.header.bossesdefeated.BossesDefeated</span></em>, <em class="sig-param"><span class="n">anglers_quest</span><span class="p">:</span> <span class="n">lihzahrd.header.anglerquest.AnglerQuest</span></em>, <em class="sig-param"><span class="n">clouds</span><span class="p">:</span> <span class="n">lihzahrd.header.clouds.Clouds</span></em>, <em class="sig-param"><span class="n">cultist_delay</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)">int</a></span></em>, <em class="sig-param"><span class="n">tiles</span><span class="p">:</span> <span class="n">lihzahrd.tiles.tilematrix.TileMatrix</span></em>, <em class="sig-param"><span class="n">chests</span><span class="p">:</span> <span class="n">List<span class="p">[</span>lihzahrd.chests.chest.Chest<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">signs</span><span class="p">:</span> <span class="n">List<span class="p">[</span>lihzahrd.signs.sign.Sign<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">npcs</span><span class="p">:</span> <span class="n">List<span class="p">[</span>lihzahrd.npcs.npc.NPC<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">mobs</span><span class="p">:</span> <span class="n">List<span class="p">[</span>lihzahrd.npcs.mob.Mob<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">tile_entities</span><span class="p">:</span> <span class="n">List<span class="p">[</span>lihzahrd.tileentities.tileentity.TileEntity<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">weighed_pressure_plates</span><span class="p">:</span> <span class="n">List<span class="p">[</span>lihzahrd.pressureplates.weighedpressureplate.WeighedPressurePlate<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">rooms</span><span class="p">:</span> <span class="n">List<span class="p">[</span>lihzahrd.townmanager.room.Room<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">unknown_file_format_data</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#bytes" title="(in Python v3.7)">bytes</a></span> <span class="o">=</span> <span class="default_value">b''</span></em>, <em class="sig-param"><span class="n">unknown_world_header_data</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#bytes" title="(in Python v3.7)">bytes</a></span> <span class="o">=</span> <span class="default_value">b''</span></em>, <em class="sig-param"><span class="n">unknown_world_tiles_data</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#bytes" title="(in Python v3.7)">bytes</a></span> <span class="o">=</span> <span class="default_value">b''</span></em>, <em class="sig-param"><span class="n">unknown_chests_data</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#bytes" title="(in Python v3.7)">bytes</a></span> <span class="o">=</span> <span class="default_value">b''</span></em>, <em class="sig-param"><span class="n">unknown_signs_data</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#bytes" title="(in Python v3.7)">bytes</a></span> <span class="o">=</span> <span class="default_value">b''</span></em>, <em class="sig-param"><span class="n">unknown_npcs_data</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#bytes" title="(in Python v3.7)">bytes</a></span> <span class="o">=</span> <span class="default_value">b''</span></em>, <em class="sig-param"><span class="n">unknown_tile_entities_data</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#bytes" title="(in Python v3.7)">bytes</a></span> <span class="o">=</span> <span class="default_value">b''</span></em>, <em class="sig-param"><span class="n">unknown_pressure_plates_data</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#bytes" title="(in Python v3.7)">bytes</a></span> <span class="o">=</span> <span class="default_value">b''</span></em>, <em class="sig-param"><span class="n">unknown_town_manager_data</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#bytes" title="(in Python v3.7)">bytes</a></span> <span class="o">=</span> <span class="default_value">b''</span></em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.World" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.</code><code class="sig-name descname">World</code><span class="sig-paren">(</span><em class="sig-param">version: lihzahrd.header.version.Version, savefile_type: int, revision: int, is_favorite: bool, name: str, generator: lihzahrd.header.generatorinfo.GeneratorInfo, uuid_: uuid.UUID, id_: int, bounds: lihzahrd.fileutils.rect.Rect, size: lihzahrd.fileutils.coordinates.Coordinates, difficulty: lihzahrd.header.difficulty.Difficulty, is_drunk_world: bool, is_for_the_worthy: bool, created_on, styles: lihzahrd.header.styles.Styles, backgrounds: lihzahrd.header.backgrounds.Backgrounds, spawn_point: lihzahrd.fileutils.coordinates.Coordinates, underground_level: float, cavern_level: float, time: lihzahrd.header.time.Time, events: lihzahrd.header.events.Events, dungeon_point: lihzahrd.fileutils.coordinates.Coordinates, world_evil: lihzahrd.header.worldeviltype.WorldEvilType, saved_npcs: lihzahrd.header.savednpcs.SavedNPCs, altars_smashed: int, is_hardmode: bool, shadow_orbs: lihzahrd.header.shadoworbs.ShadowOrbs, bosses_defeated: lihzahrd.header.bossesdefeated.BossesDefeated, anglers_quest: lihzahrd.header.anglerquest.AnglerQuest, clouds: lihzahrd.header.clouds.Clouds, cultist_delay: int, tiles: lihzahrd.tiles.tilematrix.TileMatrix, bestiary: lihzahrd.bestiary.bestiary.Bestiary, journey_powers: lihzahrd.journeypowers.journeypowers.JourneyPowers, chests: List[lihzahrd.chests.chest.Chest], signs: List[lihzahrd.signs.sign.Sign], npcs: List[lihzahrd.npcs.npc.NPC], mobs: List[lihzahrd.npcs.mob.Mob], tile_entities: List[lihzahrd.tileentities.tileentity.TileEntity], weighed_pressure_plates: List[lihzahrd.pressureplates.weighedpressureplate.WeighedPressurePlate], rooms: List[lihzahrd.townmanager.room.Room], pets: lihzahrd.header.pets.Pets, halloween_today: bool, xmas_today: bool, treetop_variants: lihzahrd.header.treetopvariants.TreetopVariants, saved_ore_tiers: lihzahrd.header.savedoretiers.SavedOreTiers, unknown_file_format_data: bytes = b'', unknown_world_header_data: bytes = b'', unknown_world_tiles_data: bytes = b'', unknown_chests_data: bytes = b'', unknown_signs_data: bytes = b'', unknown_npcs_data: bytes = b'', unknown_tile_entities_data: bytes = b'', unknown_pressure_plates_data: bytes = b'', unknown_town_manager_data: bytes = b'', unknown_bestiary_data: bytes = b'', unknown_journey_powers_data: bytes = b''</em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.World" title="Permalink to this definition">¶</a></dt>
 <dd><p>The Python representation of a Terraria world.</p>
-<dl class="py attribute">
+<dl class="attribute">
 <dt id="lihzahrd.World.altars_smashed">
-<code class="sig-name descname">altars_smashed</code><em class="property">: AltarsSmashed</em><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.World.altars_smashed" title="Permalink to this definition">¶</a></dt>
-<dd><p>Information related to the destruction of Demon Altars with a Pwnhammer.</p>
+<code class="sig-name descname">altars_smashed</code><em class="property">: int</em><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.World.altars_smashed" title="Permalink to this definition">¶</a></dt>
+<dd><p>The number of Demon Altars smashed with a Pwnhammer (or better).</p>
 </dd></dl>
 
-<dl class="py attribute">
+<dl class="attribute">
 <dt id="lihzahrd.World.anglers_quest">
 <code class="sig-name descname">anglers_quest</code><em class="property">: AnglerQuest</em><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.World.anglers_quest" title="Permalink to this definition">¶</a></dt>
 <dd><p>Information about today’s Angler’s Quest.</p>
 </dd></dl>
 
-<dl class="py attribute">
+<dl class="attribute">
 <dt id="lihzahrd.World.backgrounds">
 <code class="sig-name descname">backgrounds</code><em class="property">: Backgrounds</em><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.World.backgrounds" title="Permalink to this definition">¶</a></dt>
 <dd><p>The backgrounds of the various biomes.</p>
 </dd></dl>
 
-<dl class="py attribute">
+<dl class="attribute">
+<dt id="lihzahrd.World.bestiary">
+<code class="sig-name descname">bestiary</code><em class="property">: Bestiary</em><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.World.bestiary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Information about the bestiary, including sightings, kills and takling to NPCs.</p>
+</dd></dl>
+
+<dl class="attribute">
 <dt id="lihzahrd.World.bosses_defeated">
 <code class="sig-name descname">bosses_defeated</code><em class="property">: BossesDefeated</em><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.World.bosses_defeated" title="Permalink to this definition">¶</a></dt>
 <dd><p>Which bosses have been defeated in the world.</p>
 </dd></dl>
 
-<dl class="py attribute">
+<dl class="attribute">
 <dt id="lihzahrd.World.bounds">
 <code class="sig-name descname">bounds</code><em class="property">: Rect</em><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.World.bounds" title="Permalink to this definition">¶</a></dt>
 <dd><p>The world size in pixels.</p>
 </dd></dl>
 
-<dl class="py attribute">
+<dl class="attribute">
 <dt id="lihzahrd.World.cavern_level">
 <code class="sig-name descname">cavern_level</code><em class="property">: float</em><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.World.cavern_level" title="Permalink to this definition">¶</a></dt>
 <dd><p>The depth at which the cavern biome starts.</p>
 </dd></dl>
 
-<dl class="py attribute">
+<dl class="attribute">
 <dt id="lihzahrd.World.chests">
-<code class="sig-name descname">chests</code><em class="property">: typing.List[Chest]</em><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.World.chests" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">chests</code><em class="property">: List[Chest]</em><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.World.chests" title="Permalink to this definition">¶</a></dt>
 <dd><p>A list of all the containers (chests, barrels) in the world.</p>
 </dd></dl>
 
-<dl class="py method">
+<dl class="method">
 <dt id="lihzahrd.World.create_from_file">
-<em class="property">classmethod </em><code class="sig-name descname">create_from_file</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#str" title="(in Python v3.7)">str</a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.World.create_from_file" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><code class="sig-name descname">create_from_file</code><span class="sig-paren">(</span><em class="sig-param">filename: str</em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.World.create_from_file" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a World object from a .wld file.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
@@ -231,172 +241,259 @@
 </dl>
 </dd></dl>
 
-<dl class="py attribute">
+<dl class="attribute">
 <dt id="lihzahrd.World.created_on">
 <code class="sig-name descname">created_on</code><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.World.created_on" title="Permalink to this definition">¶</a></dt>
 <dd><p>The date and time this world was created in.</p>
 </dd></dl>
 
-<dl class="py method">
+<dl class="method">
 <dt id="lihzahrd.World.crimson_hearts">
 <em class="property">property </em><code class="sig-name descname">crimson_hearts</code><a class="headerlink" href="#lihzahrd.World.crimson_hearts" title="Permalink to this definition">¶</a></dt>
 <dd><p>Information related to the Shadow Orbs or Crimson Hearts in the world.</p>
 </dd></dl>
 
-<dl class="py attribute">
+<dl class="attribute">
+<dt id="lihzahrd.World.difficulty">
+<code class="sig-name descname">difficulty</code><em class="property">: Difficulty</em><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.World.difficulty" title="Permalink to this definition">¶</a></dt>
+<dd><p>//terraria.gamepedia.com/Difficulty) the game is in.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>The difficulty (https</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
 <dt id="lihzahrd.World.dungeon_point">
 <code class="sig-name descname">dungeon_point</code><em class="property">: Coordinates</em><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.World.dungeon_point" title="Permalink to this definition">¶</a></dt>
 <dd><p>The Old Man spawn point.</p>
 </dd></dl>
 
-<dl class="py attribute">
+<dl class="attribute">
 <dt id="lihzahrd.World.events">
 <code class="sig-name descname">events</code><em class="property">: Events</em><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.World.events" title="Permalink to this definition">¶</a></dt>
 <dd><p>Currently ongoing world events.</p>
 </dd></dl>
 
-<dl class="py attribute">
+<dl class="attribute">
 <dt id="lihzahrd.World.generator">
 <code class="sig-name descname">generator</code><em class="property">: GeneratorInfo</em><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.World.generator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Information about the generation of this world.</p>
 </dd></dl>
 
-<dl class="py attribute">
+<dl class="attribute">
+<dt id="lihzahrd.World.halloween_today">
+<code class="sig-name descname">halloween_today</code><em class="property">: bool</em><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.World.halloween_today" title="Permalink to this definition">¶</a></dt>
+<dd><p>Is today an Halloween reward day?
+Triggered by reaching Wave 15 of the Pumpkin Moon.</p>
+</dd></dl>
+
+<dl class="attribute">
 <dt id="lihzahrd.World.id">
 <code class="sig-name descname">id</code><em class="property">: int</em><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.World.id" title="Permalink to this definition">¶</a></dt>
 <dd><p>The world id. Used to name the minimap file.</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt id="lihzahrd.World.is_expert">
-<code class="sig-name descname">is_expert</code><em class="property">: bool</em><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.World.is_expert" title="Permalink to this definition">¶</a></dt>
-<dd><p>If the world is in expert mode or not.</p>
+<dl class="method">
+<dt id="lihzahrd.World.is_classic">
+<em class="property">property </em><code class="sig-name descname">is_classic</code><a class="headerlink" href="#lihzahrd.World.is_classic" title="Permalink to this definition">¶</a></dt>
+<dd><p>If the world is in classic difficulty or not.</p>
 </dd></dl>
 
-<dl class="py attribute">
+<dl class="attribute">
+<dt id="lihzahrd.World.is_drunk_world">
+<code class="sig-name descname">is_drunk_world</code><em class="property">: bool</em><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.World.is_drunk_world" title="Permalink to this definition">¶</a></dt>
+<dd><p>//terraria.gamepedia.com/Secret_world_seeds#Drunk_World)
+seed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>If the world was created with the 5162020 (https</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="lihzahrd.World.is_expert">
+<em class="property">property </em><code class="sig-name descname">is_expert</code><a class="headerlink" href="#lihzahrd.World.is_expert" title="Permalink to this definition">¶</a></dt>
+<dd><p>If the world is in expert difficulty or not.</p>
+<p>Provided for compatibility purposes.</p>
+</dd></dl>
+
+<dl class="attribute">
 <dt id="lihzahrd.World.is_favorite">
 <code class="sig-name descname">is_favorite</code><em class="property">: bool</em><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.World.is_favorite" title="Permalink to this definition">¶</a></dt>
 <dd><p>If the world is marked as favorite or not.</p>
 </dd></dl>
 
-<dl class="py attribute">
+<dl class="attribute">
+<dt id="lihzahrd.World.is_for_the_worthy">
+<code class="sig-name descname">is_for_the_worthy</code><em class="property">: bool</em><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.World.is_for_the_worthy" title="Permalink to this definition">¶</a></dt>
+<dd><p>If the world was created with the
+for the worthy (<a class="reference external" href="https://terraria.gamepedia.com/Secret_world_seeds#For_the_worthy">https://terraria.gamepedia.com/Secret_world_seeds#For_the_worthy</a>) seed.</p>
+</dd></dl>
+
+<dl class="attribute">
 <dt id="lihzahrd.World.is_hardmode">
 <code class="sig-name descname">is_hardmode</code><em class="property">: bool</em><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.World.is_hardmode" title="Permalink to this definition">¶</a></dt>
 <dd><p>Whether or not the world is in hardmode.</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt id="lihzahrd.World.mobs">
-<code class="sig-name descname">mobs</code><em class="property">: typing.List[Mob]</em><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.World.mobs" title="Permalink to this definition">¶</a></dt>
-<dd><p>A list of mobs in the world…?</p>
+<dl class="method">
+<dt id="lihzahrd.World.is_journey">
+<em class="property">property </em><code class="sig-name descname">is_journey</code><a class="headerlink" href="#lihzahrd.World.is_journey" title="Permalink to this definition">¶</a></dt>
+<dd><p>If the world is in journey difficulty or not.</p>
 </dd></dl>
 
-<dl class="py attribute">
+<dl class="method">
+<dt id="lihzahrd.World.is_master">
+<em class="property">property </em><code class="sig-name descname">is_master</code><a class="headerlink" href="#lihzahrd.World.is_master" title="Permalink to this definition">¶</a></dt>
+<dd><p>If the world is in master difficulty or not.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="lihzahrd.World.journey_powers">
+<code class="sig-name descname">journey_powers</code><em class="property">: JourneyPowers</em><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.World.journey_powers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Status of powers available in Journey mode.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="lihzahrd.World.mobs">
+<code class="sig-name descname">mobs</code><em class="property">: List[Mob]</em><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.World.mobs" title="Permalink to this definition">¶</a></dt>
+<dd><p>(Unknown, possibly a list of mobs in the world?)</p>
+</dd></dl>
+
+<dl class="attribute">
 <dt id="lihzahrd.World.name">
 <code class="sig-name descname">name</code><em class="property">: str</em><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.World.name" title="Permalink to this definition">¶</a></dt>
 <dd><p>The name the world was given at creation. Doesn’t always match the filename.</p>
 </dd></dl>
 
-<dl class="py attribute">
+<dl class="attribute">
 <dt id="lihzahrd.World.npcs">
-<code class="sig-name descname">npcs</code><em class="property">: typing.List[NPC]</em><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.World.npcs" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">npcs</code><em class="property">: List[NPC]</em><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.World.npcs" title="Permalink to this definition">¶</a></dt>
 <dd><p>A list of all the NPCs currently living in the world, including the Old Man.</p>
 </dd></dl>
 
-<dl class="py attribute">
+<dl class="attribute">
+<dt id="lihzahrd.World.pets">
+<code class="sig-name descname">pets</code><em class="property">: Pets</em><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.World.pets" title="Permalink to this definition">¶</a></dt>
+<dd><p>Which pets have bene purchased.</p>
+</dd></dl>
+
+<dl class="attribute">
 <dt id="lihzahrd.World.revision">
 <code class="sig-name descname">revision</code><em class="property">: int</em><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.World.revision" title="Permalink to this definition">¶</a></dt>
 <dd><p>The number of times this world was saved.</p>
 </dd></dl>
 
-<dl class="py attribute">
+<dl class="attribute">
 <dt id="lihzahrd.World.saved_npcs">
 <code class="sig-name descname">saved_npcs</code><em class="property">: SavedNPCs</em><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.World.saved_npcs" title="Permalink to this definition">¶</a></dt>
 <dd><p>The NPCs that were rescued by the player.</p>
 </dd></dl>
 
-<dl class="py attribute">
+<dl class="attribute">
+<dt id="lihzahrd.World.saved_ore_tiers">
+<code class="sig-name descname">saved_ore_tiers</code><em class="property">: SavedOreTiers</em><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.World.saved_ore_tiers" title="Permalink to this definition">¶</a></dt>
+<dd><p>The metals that generated in the world.</p>
+</dd></dl>
+
+<dl class="attribute">
 <dt id="lihzahrd.World.savefile_type">
 <code class="sig-name descname">savefile_type</code><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.World.savefile_type" title="Permalink to this definition">¶</a></dt>
 <dd><p>The format of the save file. Should be 2 for all versions following 1.2.</p>
 </dd></dl>
 
-<dl class="py attribute">
+<dl class="attribute">
 <dt id="lihzahrd.World.shadow_orbs">
 <code class="sig-name descname">shadow_orbs</code><em class="property">: ShadowOrbs</em><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.World.shadow_orbs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Information related to the Shadow Orbs or Crimson Hearts in the world.</p>
 </dd></dl>
 
-<dl class="py attribute">
+<dl class="attribute">
 <dt id="lihzahrd.World.signs">
-<code class="sig-name descname">signs</code><em class="property">: typing.List[Sign]</em><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.World.signs" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">signs</code><em class="property">: List[Sign]</em><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.World.signs" title="Permalink to this definition">¶</a></dt>
 <dd><p>A list of all non-empty signs in the world.</p>
 </dd></dl>
 
-<dl class="py attribute">
+<dl class="attribute">
 <dt id="lihzahrd.World.size">
 <code class="sig-name descname">size</code><em class="property">: Coordinates</em><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.World.size" title="Permalink to this definition">¶</a></dt>
 <dd><p>The world size in tiles.</p>
 </dd></dl>
 
-<dl class="py attribute">
+<dl class="attribute">
 <dt id="lihzahrd.World.spawn_point">
 <code class="sig-name descname">spawn_point</code><em class="property">: Coordinates</em><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.World.spawn_point" title="Permalink to this definition">¶</a></dt>
 <dd><p>The coordinates of the spawn point.</p>
 </dd></dl>
 
-<dl class="py attribute">
+<dl class="attribute">
 <dt id="lihzahrd.World.styles">
 <code class="sig-name descname">styles</code><em class="property">: Styles</em><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.World.styles" title="Permalink to this definition">¶</a></dt>
 <dd><p>The styles of various world elements.</p>
 </dd></dl>
 
-<dl class="py attribute">
+<dl class="attribute">
 <dt id="lihzahrd.World.tile_entities">
-<code class="sig-name descname">tile_entities</code><em class="property">: typing.List[TileEntity]</em><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.World.tile_entities" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">tile_entities</code><em class="property">: List[TileEntity]</em><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.World.tile_entities" title="Permalink to this definition">¶</a></dt>
 <dd><p>A list of tile entities in the world, such as Training Dummies, Item Frames and Logic Sensors.</p>
 </dd></dl>
 
-<dl class="py attribute">
+<dl class="attribute">
 <dt id="lihzahrd.World.tiles">
 <code class="sig-name descname">tiles</code><em class="property">: TileMatrix</em><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.World.tiles" title="Permalink to this definition">¶</a></dt>
 <dd><p>A matrix of all the tiles present in the world.</p>
 </dd></dl>
 
-<dl class="py attribute">
+<dl class="attribute">
 <dt id="lihzahrd.World.time">
 <code class="sig-name descname">time</code><em class="property">: Time</em><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.World.time" title="Permalink to this definition">¶</a></dt>
 <dd><p>Game time related information.</p>
 </dd></dl>
 
-<dl class="py attribute">
+<dl class="attribute">
+<dt id="lihzahrd.World.treetop_variants">
+<code class="sig-name descname">treetop_variants</code><em class="property">: TreetopVariants</em><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.World.treetop_variants" title="Permalink to this definition">¶</a></dt>
+<dd><p>Treetops variants that can exist in the world.</p>
+</dd></dl>
+
+<dl class="attribute">
 <dt id="lihzahrd.World.underground_level">
 <code class="sig-name descname">underground_level</code><em class="property">: float</em><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.World.underground_level" title="Permalink to this definition">¶</a></dt>
 <dd><p>The depth at which the underground biome starts.</p>
 </dd></dl>
 
-<dl class="py attribute">
+<dl class="attribute">
 <dt id="lihzahrd.World.uuid">
 <code class="sig-name descname">uuid</code><em class="property">: uuid.UUID</em><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.World.uuid" title="Permalink to this definition">¶</a></dt>
 <dd><p>The Universally Unique ID of this world.</p>
 </dd></dl>
 
-<dl class="py attribute">
+<dl class="attribute">
 <dt id="lihzahrd.World.version">
 <code class="sig-name descname">version</code><em class="property">: Version</em><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.World.version" title="Permalink to this definition">¶</a></dt>
 <dd><p>The game version when this savefile was last saved.</p>
 </dd></dl>
 
-<dl class="py attribute">
+<dl class="attribute">
 <dt id="lihzahrd.World.weighed_pressure_plates">
-<code class="sig-name descname">weighed_pressure_plates</code><em class="property">: typing.List[WeighedPressurePlate]</em><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.World.weighed_pressure_plates" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">weighed_pressure_plates</code><em class="property">: List[WeighedPressurePlate]</em><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.World.weighed_pressure_plates" title="Permalink to this definition">¶</a></dt>
 <dd><p>A list of all Weighed Pressure Plates in the world.</p>
 </dd></dl>
 
-<dl class="py attribute">
+<dl class="attribute">
 <dt id="lihzahrd.World.world_evil">
 <code class="sig-name descname">world_evil</code><em class="property">: WorldEvilType</em><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.World.world_evil" title="Permalink to this definition">¶</a></dt>
 <dd><p>Whether the world has Corruption or Crimson.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="lihzahrd.World.xmas_today">
+<code class="sig-name descname">xmas_today</code><em class="property">: bool</em><em class="property"> = None</em><a class="headerlink" href="#lihzahrd.World.xmas_today" title="Permalink to this definition">¶</a></dt>
+<dd><p>Is today a Xmas reward day?
+Triggered by reaching Wave 20 of the Frost Moon.</p>
 </dd></dl>
 
 </dd></dl>
@@ -411,7 +508,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="chests.html" class="btn btn-neutral float-right" title="lihzahrd.chests" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="bestiary.html" class="btn btn-neutral float-right" title="lihzahrd.bestiary" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="reference.html" class="btn btn-neutral float-left" title="API Reference" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -423,7 +520,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2019, Stefano Pigozzi
+        &copy; Copyright 2020, Stefano Pigozzi
 
     </p>
   </div>

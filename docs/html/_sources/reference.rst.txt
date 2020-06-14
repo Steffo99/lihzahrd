@@ -9,8 +9,12 @@ Type annotations are missing for some reason, maybe ``autodoc`` doesn't support 
     :maxdepth: 2
 
     world
+    bestiary
     chests
+    enums
     header
+    items
+    journeypowers
     npcs
     pressureplates
     signs

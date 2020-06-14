@@ -6,8 +6,10 @@ from .rect import Rect
 
 
 class FileReader:
-    def __init__(self, file):
-        self.file = file
+    __slots__ = "file",
+
+    def __init__(self, file: typing.IO):
+        self.file: typing.IO = file
         self._bits_cache = {
             int(i).to_bytes(1, 'little'): (
                 bool(i & 0b0000_0001),

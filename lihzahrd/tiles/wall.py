@@ -1,5 +1,5 @@
 import typing
-from .walltype import WallType
+from ..enums import WallType
 
 
 class Wall:

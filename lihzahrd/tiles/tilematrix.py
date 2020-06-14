@@ -1,10 +1,12 @@
 import typing
 from .tile import Tile
-from ..fileutils import FileReader, Coordinates
+from ..fileutils import Coordinates
 
 
 class TileMatrix:
     """A huge matrix containing the tiles of a whole world."""
+
+    __slots__ = "_tiles", "_width", "_height", "_stride"
 
     def __init__(self, width: int, height: int):
         self._stride = [

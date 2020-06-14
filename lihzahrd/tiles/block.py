@@ -1,5 +1,5 @@
 import typing
-from .blocktype import BlockType
+from ..enums import BlockType
 from .frameimportantdata import FrameImportantData
 from .shape import Shape
 

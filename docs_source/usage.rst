@@ -6,7 +6,7 @@ Usage guide
 Prerequisites
 ------------------------------------
 
-To use ``lihzahrd``, you need Python 3.7 or higher.
+To use ``lihzahrd``, you need Python 3.6 or higher.
 
 That's it! No other packages are required!
 
@@ -15,7 +15,7 @@ Installing
 
 You can download (or update) the package with ``pip`` by entering in your terminal: ::
 
-    python3.7 -m pip install --upgrade lihzahrd
+    python3.8 -m pip install --upgrade lihzahrd
 
 Opening a world
 ------------------------------------

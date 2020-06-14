@@ -1,4 +1,4 @@
-from .liquidtype import LiquidType
+from ..enums import LiquidType
 
 
 class Liquid:
@@ -16,3 +16,4 @@ class Liquid:
         0 means the tile has no liquid, while 255 means the tile is full of liquid.
         
         Values over 255 aren't supported."""
+        assert 0 <= volume <= 255

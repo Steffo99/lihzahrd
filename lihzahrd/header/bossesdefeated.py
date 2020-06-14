@@ -29,7 +29,9 @@ class BossesDefeated:
                  martian_madness: bool,
                  lunatic_cultist: bool,
                  lunar_pillars: PillarsInfo,
-                 old_ones_army: OldOnesArmyTiers):
+                 old_ones_army: OldOnesArmyTiers,
+                 empress_of_light: bool,
+                 queen_slime: bool):
         self.eye_of_cthulhu: bool = eye_of_cthulhu
         self.eater_of_worlds: bool = eater_of_worlds
         self.skeletron: bool = skeletron
@@ -59,6 +61,8 @@ class BossesDefeated:
         self.lunatic_cultist: bool = lunatic_cultist
         self.lunar_pillars: PillarsInfo = lunar_pillars
         self.old_ones_army: OldOnesArmyTiers = old_ones_army
+        self.empress_of_light: bool = empress_of_light
+        self.queen_slime: bool = queen_slime
 
     def __repr__(self):
         return f"<BossesDefeated>"

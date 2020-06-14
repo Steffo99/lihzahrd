@@ -1,4 +1,6 @@
 class Rect:
+    __slots__ = "left", "right", "top", "bottom"
+
     def __init__(self, left, right, top, bottom):
         self.left = left
         self.right = right

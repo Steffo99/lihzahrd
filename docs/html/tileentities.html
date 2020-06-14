@@ -85,8 +85,12 @@
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage guide</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="reference.html">API Reference</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="world.html">lihzahrd.World</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bestiary.html">lihzahrd.bestiary</a></li>
 <li class="toctree-l2"><a class="reference internal" href="chests.html">lihzahrd.chests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="enums.html">lihzahrd.enums</a></li>
 <li class="toctree-l2"><a class="reference internal" href="header.html">lihzahrd.header</a></li>
+<li class="toctree-l2"><a class="reference internal" href="items.html">lihzahrd.items</a></li>
+<li class="toctree-l2"><a class="reference internal" href="journeypowers.html">lihzahrd.journeypowers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="npcs.html">lihzahrd.npcs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pressureplates.html">lihzahrd.pressureplates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="signs.html">lihzahrd.signs</a></li>
@@ -170,58 +174,166 @@
 <h1>lihzahrd.tileentities<a class="headerlink" href="#lihzahrd-tileentities" title="Permalink to this headline">¶</a></h1>
 <div class="toctree-wrapper compound">
 </div>
-<span class="target" id="module-lihzahrd.tileentities"></span><dl class="py class">
+<span class="target" id="module-lihzahrd.tileentities"></span><dl class="class">
 <dt id="lihzahrd.tileentities.TileEntity">
-<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.tileentities.</code><code class="sig-name descname">TileEntity</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">id_</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)">int</a></span></em>, <em class="sig-param"><span class="n">position</span><span class="p">:</span> <span class="n">lihzahrd.fileutils.coordinates.Coordinates</span></em>, <em class="sig-param"><span class="n">extra</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>lihzahrd.tileentities.targetdummy.TargetDummy<span class="p">, </span>lihzahrd.tileentities.itemframe.ItemFrame<span class="p">, </span>lihzahrd.tileentities.logicsensor.LogicSensor<span class="p">]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.tileentities.TileEntity" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.tileentities.</code><code class="sig-name descname">TileEntity</code><span class="sig-paren">(</span><em class="sig-param">id_: int, position: lihzahrd.fileutils.coordinates.Coordinates, extra: Union[lihzahrd.tileentities.targetdummy.TargetDummy, lihzahrd.tileentities.itemframe.ItemFrame, lihzahrd.tileentities.logicsensor.LogicSensor]</em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.tileentities.TileEntity" title="Permalink to this definition">¶</a></dt>
 <dd><p>A TileEntity, such as a Training Dummy, an Item Frame or a Logic Sensor.</p>
-<dl class="py attribute">
+<dl class="attribute">
 <dt id="lihzahrd.tileentities.TileEntity.data">
 <code class="sig-name descname">data</code><a class="headerlink" href="#lihzahrd.tileentities.TileEntity.data" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="py attribute">
+<dl class="attribute">
 <dt id="lihzahrd.tileentities.TileEntity.id">
 <code class="sig-name descname">id</code><a class="headerlink" href="#lihzahrd.tileentities.TileEntity.id" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="py attribute">
+<dl class="attribute">
 <dt id="lihzahrd.tileentities.TileEntity.position">
 <code class="sig-name descname">position</code><a class="headerlink" href="#lihzahrd.tileentities.TileEntity.position" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-<dl class="py class">
+<dl class="class">
 <dt id="lihzahrd.tileentities.ItemFrame">
-<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.tileentities.</code><code class="sig-name descname">ItemFrame</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">item</span><span class="p">:</span> <span class="n">lihzahrd.chests.itemstack.ItemStack</span></em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.tileentities.ItemFrame" title="Permalink to this definition">¶</a></dt>
-<dd><p>Data pertaining to an <a class="reference external" href="https://terraria.gamepedia.com/Item_Frame">https://terraria.gamepedia.com/Item_Frame</a> .</p>
-<dl class="py attribute">
+<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.tileentities.</code><code class="sig-name descname">ItemFrame</code><span class="sig-paren">(</span><em class="sig-param">item: lihzahrd.items.itemstack.ItemStack</em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.tileentities.ItemFrame" title="Permalink to this definition">¶</a></dt>
+<dd><p>An Item Frame (<a class="reference external" href="https://terraria.gamepedia.com/Item_Frame">https://terraria.gamepedia.com/Item_Frame</a>).</p>
+<dl class="attribute">
 <dt id="lihzahrd.tileentities.ItemFrame.item">
 <code class="sig-name descname">item</code><a class="headerlink" href="#lihzahrd.tileentities.ItemFrame.item" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-<dl class="py class">
+<dl class="class">
 <dt id="lihzahrd.tileentities.LogicSensor">
-<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.tileentities.</code><code class="sig-name descname">LogicSensor</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">logic_check</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)">int</a></span></em>, <em class="sig-param"><span class="n">enabled</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#bool" title="(in Python v3.7)">bool</a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.tileentities.LogicSensor" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.tileentities.</code><code class="sig-name descname">LogicSensor</code><span class="sig-paren">(</span><em class="sig-param">logic_check: int</em>, <em class="sig-param">enabled: bool</em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.tileentities.LogicSensor" title="Permalink to this definition">¶</a></dt>
 <dd><p>Data pertaining to a Logic Sensor (<a class="reference external" href="https://terraria.gamepedia.com/Sensors">https://terraria.gamepedia.com/Sensors</a>).</p>
-<dl class="py attribute">
+<dl class="attribute">
 <dt id="lihzahrd.tileentities.LogicSensor.enabled">
 <code class="sig-name descname">enabled</code><a class="headerlink" href="#lihzahrd.tileentities.LogicSensor.enabled" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="py attribute">
+<dl class="attribute">
 <dt id="lihzahrd.tileentities.LogicSensor.logic_check">
 <code class="sig-name descname">logic_check</code><a class="headerlink" href="#lihzahrd.tileentities.LogicSensor.logic_check" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-<dl class="py class">
+<dl class="class">
 <dt id="lihzahrd.tileentities.TargetDummy">
-<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.tileentities.</code><code class="sig-name descname">TargetDummy</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">npc</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)">int</a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.tileentities.TargetDummy" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.tileentities.</code><code class="sig-name descname">TargetDummy</code><span class="sig-paren">(</span><em class="sig-param">npc: int</em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.tileentities.TargetDummy" title="Permalink to this definition">¶</a></dt>
 <dd><p>Data pertaining to a Target Dummy (<a class="reference external" href="https://terraria.gamepedia.com/Target_Dummy">https://terraria.gamepedia.com/Target_Dummy</a>)</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="lihzahrd.tileentities.ClothingDisplay">
+<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.tileentities.</code><code class="sig-name descname">ClothingDisplay</code><span class="sig-paren">(</span><em class="sig-param">items: List[lihzahrd.items.itemstack.ItemStack], dyes: List[lihzahrd.items.itemstack.ItemStack]</em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.tileentities.ClothingDisplay" title="Permalink to this definition">¶</a></dt>
+<dd><p>Data pertaining to an item to display clothing.</p>
+<dl class="attribute">
+<dt id="lihzahrd.tileentities.ClothingDisplay.dyes">
+<code class="sig-name descname">dyes</code><a class="headerlink" href="#lihzahrd.tileentities.ClothingDisplay.dyes" title="Permalink to this definition">¶</a></dt>
+<dd><p>What dyes is the display wearing.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="lihzahrd.tileentities.ClothingDisplay.dyes_count">
+<em class="property">property </em><code class="sig-name descname">dyes_count</code><a class="headerlink" href="#lihzahrd.tileentities.ClothingDisplay.dyes_count" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="lihzahrd.tileentities.ClothingDisplay.items">
+<code class="sig-name descname">items</code><a class="headerlink" href="#lihzahrd.tileentities.ClothingDisplay.items" title="Permalink to this definition">¶</a></dt>
+<dd><p>What items is the display wearing.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="lihzahrd.tileentities.ClothingDisplay.items_count">
+<em class="property">property </em><code class="sig-name descname">items_count</code><a class="headerlink" href="#lihzahrd.tileentities.ClothingDisplay.items_count" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="lihzahrd.tileentities.ClothingDisplay.total_count">
+<em class="property">property </em><code class="sig-name descname">total_count</code><a class="headerlink" href="#lihzahrd.tileentities.ClothingDisplay.total_count" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="lihzahrd.tileentities.Mannequin">
+<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.tileentities.</code><code class="sig-name descname">Mannequin</code><span class="sig-paren">(</span><em class="sig-param">items: List[lihzahrd.items.itemstack.ItemStack], dyes: List[lihzahrd.items.itemstack.ItemStack]</em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.tileentities.Mannequin" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <a class="reference external" href="https://terraria.gamepedia.com/Mannequin">Mannequin</a>
+/ <a class="reference external" href="https://terraria.gamepedia.com/Womannequin">Womannequin</a> containing up to 3 dyed armor pieces and up
+to 5 dyed accessories.</p>
+<dl class="attribute">
+<dt id="lihzahrd.tileentities.Mannequin.dyes">
+<code class="sig-name descname">dyes</code><a class="headerlink" href="#lihzahrd.tileentities.Mannequin.dyes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="lihzahrd.tileentities.Mannequin.items">
+<code class="sig-name descname">items</code><a class="headerlink" href="#lihzahrd.tileentities.Mannequin.items" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="lihzahrd.tileentities.HatRack">
+<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.tileentities.</code><code class="sig-name descname">HatRack</code><span class="sig-paren">(</span><em class="sig-param">items: List[lihzahrd.items.itemstack.ItemStack], dyes: List[lihzahrd.items.itemstack.ItemStack]</em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.tileentities.HatRack" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <a class="reference external" href="https://terraria.gamepedia.com/Hat_Rack">Hat Rack</a> containing up to 2 dyed helmets.</p>
+<dl class="attribute">
+<dt id="lihzahrd.tileentities.HatRack.dyes">
+<code class="sig-name descname">dyes</code><a class="headerlink" href="#lihzahrd.tileentities.HatRack.dyes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="lihzahrd.tileentities.HatRack.items">
+<code class="sig-name descname">items</code><a class="headerlink" href="#lihzahrd.tileentities.HatRack.items" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="lihzahrd.tileentities.SingleItemDisplay">
+<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.tileentities.</code><code class="sig-name descname">SingleItemDisplay</code><span class="sig-paren">(</span><em class="sig-param">item: lihzahrd.items.itemstack.ItemStack</em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.tileentities.SingleItemDisplay" title="Permalink to this definition">¶</a></dt>
+<dd><p>A display case for a single item, such as a <a class="reference external" href="https://terraria.gamepedia.com/Weapon_Rack">Weapon Rack</a>,
+a <a class="reference external" href="https://terraria.gamepedia.com/Item_Frame">Item Frame</a> or a <a class="reference external" href="https://terraria.gamepedia.com/Plate">Plate</a>.</p>
+<dl class="attribute">
+<dt id="lihzahrd.tileentities.SingleItemDisplay.item">
+<code class="sig-name descname">item</code><a class="headerlink" href="#lihzahrd.tileentities.SingleItemDisplay.item" title="Permalink to this definition">¶</a></dt>
+<dd><p>The item which is on display.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="lihzahrd.tileentities.Pylon">
+<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.tileentities.</code><code class="sig-name descname">Pylon</code><a class="headerlink" href="#lihzahrd.tileentities.Pylon" title="Permalink to this definition">¶</a></dt>
+<dd><p>Data pertaining to a Pylon (<a class="reference external" href="https://terraria.gamepedia.com/Pylons">https://terraria.gamepedia.com/Pylons</a>)</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="lihzahrd.tileentities.Plate">
+<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.tileentities.</code><code class="sig-name descname">Plate</code><span class="sig-paren">(</span><em class="sig-param">item: lihzahrd.items.itemstack.ItemStack</em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.tileentities.Plate" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <a class="reference external" href="https://terraria.gamepedia.com/Plate">Plate</a>.</p>
+<dl class="attribute">
+<dt id="lihzahrd.tileentities.Plate.item">
+<code class="sig-name descname">item</code><a class="headerlink" href="#lihzahrd.tileentities.Plate.item" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="lihzahrd.tileentities.WeaponRack">
+<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.tileentities.</code><code class="sig-name descname">WeaponRack</code><span class="sig-paren">(</span><em class="sig-param">item: lihzahrd.items.itemstack.ItemStack</em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.tileentities.WeaponRack" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <a class="reference external" href="https://terraria.gamepedia.com/Weapon_Rack">Weapon Rack</a>.</p>
+<dl class="attribute">
+<dt id="lihzahrd.tileentities.WeaponRack.item">
+<code class="sig-name descname">item</code><a class="headerlink" href="#lihzahrd.tileentities.WeaponRack.item" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </dd></dl>
 
 </div>
@@ -246,7 +358,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2019, Stefano Pigozzi
+        &copy; Copyright 2020, Stefano Pigozzi
 
     </p>
   </div>
