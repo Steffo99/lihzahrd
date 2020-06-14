@@ -240,90 +240,90 @@ class World:
         self.shadow_orbs = value
 
     @staticmethod
-    def _read_tile_block(fr: FileReader, tileframeimportant, max_count) -> typing.Iterator[Tile]:
+    def _read_tile_block(fr: FileReader, tileframeimportant, max_count) -> Iterator[Tile]:
         # Once again, this code is a mess
         while max_count:
-        flags1 = fr.bits()
-        has_block = flags1[1]
-        has_wall = flags1[2]
-        liquid_type = LiquidType.from_flags(flags1)
-        has_extended_block_id = flags1[5]
-        rle_compression = RLEEncoding.from_flags(flags1)
-        # Parse flags
-        if flags1[0]:
-            flags2 = fr.bits()
-            block_shape = Shape.from_flags(flags2)
-            if flags2[0]:
-                flags3 = fr.bits()
-                is_block_active = not flags3[2]
-                wiring = Wiring.from_flags(flags2, flags3)
-                is_block_painted = flags3[3]
-                is_wall_painted = flags3[4]
-                has_extended_wall_id = flags3[6]
+            flags1 = fr.bits()
+            has_block = flags1[1]
+            has_wall = flags1[2]
+            liquid_type = LiquidType.from_flags(flags1)
+            has_extended_block_id = flags1[5]
+            rle_compression = RLEEncoding.from_flags(flags1)
+            # Parse flags
+            if flags1[0]:
+                flags2 = fr.bits()
+                block_shape = Shape.from_flags(flags2)
+                if flags2[0]:
+                    flags3 = fr.bits()
+                    is_block_active = not flags3[2]
+                    wiring = Wiring.from_flags(flags2, flags3)
+                    is_block_painted = flags3[3]
+                    is_wall_painted = flags3[4]
+                    has_extended_wall_id = flags3[6]
+                else:
+                    is_block_active = True
+                    wiring = Wiring.from_flags(flags2)
+                    is_block_painted = False
+                    is_wall_painted = False
+                    has_extended_wall_id = False
             else:
+                block_shape = Shape.NORMAL
                 is_block_active = True
-                wiring = Wiring.from_flags(flags2)
+                wiring = None
                 is_block_painted = False
                 is_wall_painted = False
                 has_extended_wall_id = False
-        else:
-            block_shape = Shape.NORMAL
-            is_block_active = True
-            wiring = None
-            is_block_painted = False
-            is_wall_painted = False
-            has_extended_wall_id = False
-        # Parse block
-        if has_block:
-            if has_extended_block_id:
-                block_type = BlockType(fr.uint2())
+            # Parse block
+            if has_block:
+                if has_extended_block_id:
+                    block_type = BlockType(fr.uint2())
+                else:
+                    block_type = BlockType(fr.uint1())
+                if tileframeimportant[block_type]:
+                    frame = FrameImportantData(fr.uint2(), fr.uint2())
+                else:
+                    frame = None
+                if is_block_painted:
+                    block_paint = fr.uint1()
+                else:
+                    block_paint = None
+                block = Block(type_=block_type,
+                              frame=frame,
+                              paint=block_paint,
+                              is_active=is_block_active,
+                              shape=block_shape)
             else:
-                block_type = BlockType(fr.uint1())
-            if tileframeimportant[block_type]:
-                frame = FrameImportantData(fr.uint2(), fr.uint2())
+                block = None
+            # Parse wall
+            if has_wall:
+                if has_extended_wall_id:
+                    wall_type = WallType(fr.uint2())
+                else:
+                    wall_type = WallType(fr.uint1())
+                if is_wall_painted:
+                    wall_paint = fr.uint1()
+                else:
+                    wall_paint = None
+                wall = Wall(type_=wall_type, paint=wall_paint)
             else:
-                frame = None
-            if is_block_painted:
-                block_paint = fr.uint1()
+                wall = None
+            # Parse liquid
+            if liquid_type != LiquidType.NO_LIQUID:
+                liquid = Liquid(type_=liquid_type, volume=fr.uint1())
             else:
-                block_paint = None
-            block = Block(type_=block_type,
-                          frame=frame,
-                          paint=block_paint,
-                          is_active=is_block_active,
-                          shape=block_shape)
-        else:
-            block = None
-        # Parse wall
-        if has_wall:
-            if has_extended_wall_id:
-                wall_type = WallType(fr.uint2())
+                liquid = None
+            # Find RLE Compression multiplier
+            if rle_compression == RLEEncoding.DOUBLE_BYTE:
+                multiply_by = fr.uint2() + 1
+            elif rle_compression == RLEEncoding.SINGLE_BYTE:
+                multiply_by = fr.uint1() + 1
             else:
-                wall_type = WallType(fr.uint1())
-            if is_wall_painted:
-                wall_paint = fr.uint1()
-            else:
-                wall_paint = None
-            wall = Wall(type_=wall_type, paint=wall_paint)
-        else:
-            wall = None
-        # Parse liquid
-        if liquid_type != LiquidType.NO_LIQUID:
-            liquid = Liquid(type_=liquid_type, volume=fr.uint1())
-        else:
-            liquid = None
-        # Find RLE Compression multiplier
-        if rle_compression == RLEEncoding.DOUBLE_BYTE:
-            multiply_by = fr.uint2() + 1
-        elif rle_compression == RLEEncoding.SINGLE_BYTE:
-            multiply_by = fr.uint1() + 1
-        else:
-            multiply_by = 1
-        # Create tile
-        tile = Tile(block=block, wall=wall, liquid=liquid, wiring=wiring)
-        max_count -= multiply_by
-        for _ in range(multiply_by):
-            yield tile
+                multiply_by = 1
+            # Create tile
+            tile = Tile(block=block, wall=wall, liquid=liquid, wiring=wiring)
+            max_count -= multiply_by
+            for _ in range(multiply_by):
+                yield tile
 
     @property
     def is_classic(self):

@@ -6,7 +6,7 @@ from .rect import Rect
 
 
 class FileReader:
-    __slots__ = "file",
+    __slots__ = "file", "_bits_cache"
 
     def __init__(self, file: typing.IO):
         self.file: typing.IO = file
@@ -20,7 +20,7 @@ class FileReader:
                 bool(i & 0b0010_0000),
                 bool(i & 0b0100_0000),
                 bool(i & 0b1000_0000))
-                for i in range(0, 256)
+            for i in range(0, 256)
         }
 
     def bool(self) -> bool:
@@ -59,7 +59,17 @@ class FileReader:
         i = self.file.read(8)
         if i[7] & 0b10000000:
             return -(
-                ((i[7] & 0b01111111) << 56) +
+                    ((i[7] & 0b01111111) << 56) +
+                    (i[6] << 48) +
+                    (i[5] << 40) +
+                    (i[4] << 32) +
+                    (i[3] << 24) +
+                    (i[2] << 16) +
+                    (i[1] << 8) +
+                    i[0]
+            )
+        return (
+                (i[7] << 56) +
                 (i[6] << 48) +
                 (i[5] << 40) +
                 (i[4] << 32) +
@@ -67,29 +77,19 @@ class FileReader:
                 (i[2] << 16) +
                 (i[1] << 8) +
                 i[0]
-            )
-        return (
-            (i[7] << 56) +
-            (i[6] << 48) +
-            (i[5] << 40) +
-            (i[4] << 32) +
-            (i[3] << 24) +
-            (i[2] << 16) +
-            (i[1] << 8) +
-            i[0]
         )
 
     def uint8(self) -> int:
         i = self.file.read(8)
         return (
-            (i[7] << 56) +
-            (i[6] << 48) +
-            (i[5] << 40) +
-            (i[4] << 32) +
-            (i[3] << 24) +
-            (i[2] << 16) +
-            (i[1] << 8) +
-            i[0]
+                (i[7] << 56) +
+                (i[6] << 48) +
+                (i[5] << 40) +
+                (i[4] << 32) +
+                (i[3] << 24) +
+                (i[2] << 16) +
+                (i[1] << 8) +
+                i[0]
         )
 
     def single(self) -> float:
