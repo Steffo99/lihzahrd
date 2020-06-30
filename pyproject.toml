@@ -1,6 +1,6 @@
 [tool.poetry]
     name = "lihzahrd"
-    version = "2.0.0a1"
+    version = "2.0.0"
     description = "A Terraria world parser in Python"
     authors = ["Stefano Pigozzi <ste.pigozzi@gmail.com>"]
     license = "AGPL-3.0+"
