@@ -42,5 +42,8 @@ class AnglerQuestFish(enum.IntEnum):
     SLIMEFISH = 37
     TROPICAL_BARRACUDA = 38
 
+    # none of the other tools know what fish this is ... *shrug*
+    UNKNOWN1 = 39
+
     def __repr__(self):
         return f"{self.__class__.__name__}.{self.name}"

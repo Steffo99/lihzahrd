@@ -729,6 +729,11 @@ class EntityType(enum.IntEnum):
     QueenSlimeMinionPurple = 660
     EmpressButterfly = 661
     PirateGhost = 662
+    Princess = 663
+    TorchGod = 664
+    ChaosBallTim = 665
+    VileSpitEaterOfWorlds = 666
+    GoldenSlime = 667
 
     def __repr__(self):
         return f"{self.__class__.__name__}.{self.name}"

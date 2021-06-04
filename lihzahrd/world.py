@@ -34,6 +34,7 @@ class World:
                  difficulty: Difficulty,
                  is_drunk_world: bool,
                  is_for_the_worthy: bool,
+                 is_tenth_anniversary: bool,
                  created_on,
                  styles: Styles,
                  backgrounds: Backgrounds,
@@ -119,6 +120,10 @@ class World:
         self.is_for_the_worthy: bool = is_for_the_worthy
         """If the world was created with the
         for the worthy (https://terraria.gamepedia.com/Secret_world_seeds#For_the_worthy) seed."""
+
+        self.is_tenth_anniversary: bool = is_tenth_anniversary
+        """If the world was created with the
+        celebrationmk10 (https://terraria.fandom.com/wiki/Secret_world_seeds#Celebrationmk10) seed."""
 
         self.created_on = created_on
         """The date and time this world was created in."""
@@ -376,9 +381,9 @@ class World:
         version = Version(f.int4())
         relogic = f.string(7)
         savefile_type = f.uint1()
-        supported_versions = (Version("1.4.0.4"), Version("1.4.0.5"))
+        supported_versions = (Version("1.4.2.3"), Version("1.4.2.3"))
         if version not in supported_versions or relogic != "relogic" or savefile_type != 2:
-            raise NotImplementedError("This parser can only read Terraria 1.4.0.4 or 1.4.0.5 save files.")
+            raise NotImplementedError("This parser can only read Terraria 1.4.2.3 save files.")
 
         revision = f.uint4()
         is_favorite = f.uint8() != 0
@@ -403,6 +408,7 @@ class World:
         difficulty = Difficulty(f.int4())
         is_drunk_world = f.bool()
         is_for_the_worthy = f.bool()
+        is_tenth_anniversary = f.bool()
         created_on = f.datetime()
 
         world_styles = Styles(moon=MoonStyle(f.uint1()),
@@ -458,7 +464,7 @@ class World:
 
         shadow_orbs = ShadowOrbs(smashed_at_least_once=f.bool(),
                                  spawn_meteorite=f.bool(),
-                                 evil_boss_counter=f.int4())
+                                 evil_boss_counter=f.uint1())   # was int4()
 
         altars_smashed = f.int4()
 
@@ -499,7 +505,7 @@ class World:
 
         clouds = Clouds(bg_cloud=f.int4(), cloud_number=f.int2(), wind_speed=f.single())
 
-        angler_today_quest_completed_by_count = f.uint1()
+        angler_today_quest_completed_by_count = f.int4() # was uint1()
         angler_today_quest_completed_by = []
         for _ in range(angler_today_quest_completed_by_count):
             angler_today_quest_completed_by.append(f.string())
@@ -893,7 +899,7 @@ class World:
         world = cls(version=version, savefile_type=savefile_type, revision=revision, is_favorite=is_favorite,
                     name=name, generator=generator, uuid_=uuid_, id_=id_, bounds=bounds, size=world_size,
                     difficulty=difficulty, is_drunk_world=is_drunk_world, is_for_the_worthy=is_for_the_worthy,
-                    created_on=created_on, styles=world_styles, backgrounds=backgrounds,
+                    is_tenth_anniversary=is_tenth_anniversary, created_on=created_on, styles=world_styles, backgrounds=backgrounds,
                     spawn_point=spawn_point, underground_level=underground_level, cavern_level=cavern_level,
                     time=time, events=events, dungeon_point=dungeon_point, world_evil=world_evil,
                     saved_npcs=saved_npcs, altars_smashed=altars_smashed, is_hardmode=is_hardmode,
