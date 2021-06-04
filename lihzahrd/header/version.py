@@ -52,6 +52,7 @@ class Version:
         227: "1.4.0.3",
         228: "1.4.0.4",
         230: "1.4.0.5",
+        238: "1.4.2.3"
     }
 
     def __init__(self, data: typing.Union[int, str]):
@@ -71,7 +72,7 @@ class Version:
         try:
             return self._version_ids[self.id]
         except KeyError:
-            return "Unknown"
+            return "Unknown (%i)" % self.id
 
     def __repr__(self):
         return f"Version({self.id})"
