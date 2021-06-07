@@ -6,7 +6,7 @@ lihzahrd
     :height: 48px
     :alt: A Lihzahrd from the Jungle Temple
 
-``lihzahrd`` is a Terraria 1.3.5.3 world parser in Python.
+``lihzahrd`` is a Terraria 1.4.2.3 world parser in Python.
 
 You can use this package to get programmer-friendly data from a Terraria world!
 
