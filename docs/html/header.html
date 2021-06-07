@@ -176,7 +176,7 @@
 </div>
 <span class="target" id="module-lihzahrd.header"></span><dl class="class">
 <dt id="lihzahrd.header.AnglerQuest">
-<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.header.</code><code class="sig-name descname">AnglerQuest</code><span class="sig-paren">(</span><em class="sig-param">current_goal: lihzahrd.header.anglerquestfish.AnglerQuestFish, completed_by: List[str]</em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.header.AnglerQuest" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.header.</code><code class="sig-name descname">AnglerQuest</code><a class="headerlink" href="#lihzahrd.header.AnglerQuest" title="Permalink to this definition">¶</a></dt>
 <dd><p>Information about today’s Angler’s quest.</p>
 <dl class="attribute">
 <dt id="lihzahrd.header.AnglerQuest.completed_by">
@@ -382,6 +382,11 @@
 <dd></dd></dl>
 
 <dl class="attribute">
+<dt id="lihzahrd.header.AnglerQuestFish.UNKNOWN1">
+<code class="sig-name descname">UNKNOWN1</code><em class="property"> = 39</em><a class="headerlink" href="#lihzahrd.header.AnglerQuestFish.UNKNOWN1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
 <dt id="lihzahrd.header.AnglerQuestFish.WYVERNTAIL">
 <code class="sig-name descname">WYVERNTAIL</code><em class="property"> = 23</em><a class="headerlink" href="#lihzahrd.header.AnglerQuestFish.WYVERNTAIL" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -504,7 +509,7 @@
 
 <dl class="class">
 <dt id="lihzahrd.header.FourPartSplit">
-<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.header.</code><code class="sig-name descname">FourPartSplit</code><span class="sig-paren">(</span><em class="sig-param">separators: List[int], properties: List</em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.header.FourPartSplit" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.header.</code><code class="sig-name descname">FourPartSplit</code><a class="headerlink" href="#lihzahrd.header.FourPartSplit" title="Permalink to this definition">¶</a></dt>
 <dd><p>A world property split in four parts, separated by three vertical lines at a certain x coordinate.</p>
 <dl class="method">
 <dt id="lihzahrd.header.FourPartSplit.far_left">
@@ -770,7 +775,7 @@
 
 <dl class="class">
 <dt id="lihzahrd.header.Party">
-<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.header.</code><code class="sig-name descname">Party</code><span class="sig-paren">(</span><em class="sig-param">thrown_by_party_center: bool, thrown_by_npcs: bool, cooldown: int, partying_npcs: List[int]</em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.header.Party" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.header.</code><code class="sig-name descname">Party</code><a class="headerlink" href="#lihzahrd.header.Party" title="Permalink to this definition">¶</a></dt>
 <dd><p>NPC Party related information.</p>
 <dl class="attribute">
 <dt id="lihzahrd.header.Party.cooldown">
@@ -1007,7 +1012,7 @@
 
 <dl class="class">
 <dt id="lihzahrd.header.TreetopVariants">
-<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.header.</code><code class="sig-name descname">TreetopVariants</code><span class="sig-paren">(</span><em class="sig-param">treetop_variants: List[int]</em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.header.TreetopVariants" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.header.</code><code class="sig-name descname">TreetopVariants</code><a class="headerlink" href="#lihzahrd.header.TreetopVariants" title="Permalink to this definition">¶</a></dt>
 <dd><p>(Unknown) Information about the treetop variants in the world.</p>
 </dd></dl>
 
@@ -1017,7 +1022,7 @@
 <dd><p>A Terraria version.</p>
 <dl class="attribute">
 <dt id="lihzahrd.header.Version._version_ids">
-<code class="sig-name descname">_version_ids</code><em class="property"> = {12: '1.0.5', 20: '1.0.6', 22: '1.0.6.1', 37: '1.1.1', 39: '1.1.2', 67: '1.2', 71: '1.2.0.3.1', 72: '1.2.1.1', 73: '1.2.1.2', 77: '1.2.2', 94: '1.2.3.1', 101: '1.2.4', 102: '1.2.4.1', 140: '1.3.0.1', 146: '1.3.0.1', 147: '1.3.0.2', 149: '1.3.0.3', 151: '1.3.0.4', 153: '1.3.0.5', 154: '1.3.0.6', 155: '1.3.0.7', 156: '1.3.0.8', 168: '1.3.1', 169: '1.3.1.1', 170: '1.3.2', 173: '1.3.2.1', 174: '1.3.3', 175: '1.3.3.1', 176: '1.3.3.2', 177: '1.3.3.3', 178: '1.3.4', 185: '1.3.4.1', 186: '1.3.4.2', 187: '1.3.4.3', 188: '1.3.4.4', 191: '1.3.5', 192: '1.3.5.1', 193: '1.3.5.2', 194: '1.3.5.3', 225: '1.4.0.1', 226: '1.4.0.2', 227: '1.4.0.3', 228: '1.4.0.4', 230: '1.4.0.5'}</em><a class="headerlink" href="#lihzahrd.header.Version._version_ids" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">_version_ids</code><em class="property"> = {12: '1.0.5', 20: '1.0.6', 22: '1.0.6.1', 37: '1.1.1', 39: '1.1.2', 67: '1.2', 71: '1.2.0.3.1', 72: '1.2.1.1', 73: '1.2.1.2', 77: '1.2.2', 94: '1.2.3.1', 101: '1.2.4', 102: '1.2.4.1', 140: '1.3.0.1', 146: '1.3.0.1', 147: '1.3.0.2', 149: '1.3.0.3', 151: '1.3.0.4', 153: '1.3.0.5', 154: '1.3.0.6', 155: '1.3.0.7', 156: '1.3.0.8', 168: '1.3.1', 169: '1.3.1.1', 170: '1.3.2', 173: '1.3.2.1', 174: '1.3.3', 175: '1.3.3.1', 176: '1.3.3.2', 177: '1.3.3.3', 178: '1.3.4', 185: '1.3.4.1', 186: '1.3.4.2', 187: '1.3.4.3', 188: '1.3.4.4', 191: '1.3.5', 192: '1.3.5.1', 193: '1.3.5.2', 194: '1.3.5.3', 225: '1.4.0.1', 226: '1.4.0.2', 227: '1.4.0.3', 228: '1.4.0.4', 230: '1.4.0.5', 238: '1.4.2.3'}</em><a class="headerlink" href="#lihzahrd.header.Version._version_ids" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
