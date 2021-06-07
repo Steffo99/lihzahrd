@@ -126,3 +126,5 @@ dmypy.json
 # Terraria worlds
 *.wld
 .idea/
+
+/__main__.py
