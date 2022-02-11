@@ -7,6 +7,8 @@ from .rect import Rect
 
 
 class FileReader:
+    """Helper class for deserializing a Terraria world file."""
+
     __slots__ = ("file",)
 
     def __init__(self, file: typing.IO):

@@ -1,4 +1,6 @@
 class Rect:
+    """Class delimining the bounds of a rectangle."""
+
     __slots__ = "left", "right", "top", "bottom"
 
     def __init__(self, left, right, top, bottom):

@@ -2,6 +2,10 @@ import typing
 
 
 class Pointers:
+    """Pointers to the various sections of the Terraria save file.
+    
+    All values are in number of bytes from the start."""
+
     __slots__ = (
         "file_format",
         "world_header",
