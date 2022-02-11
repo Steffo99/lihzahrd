@@ -9,12 +9,14 @@ class NPC(Mob):
 
     __slots__ = "type", "name", "position", "home", "variation_index"
 
-    def __init__(self,
-                 type_: EntityType,
-                 position: Coordinates,
-                 name: str,
-                 variation_index: int,
-                 home: Optional[Coordinates] = None):
+    def __init__(
+        self,
+        type_: EntityType,
+        position: Coordinates,
+        name: str,
+        variation_index: int,
+        home: Optional[Coordinates] = None,
+    ):
 
         super().__init__(type_, position)
 

@@ -1,5 +1,6 @@
 class PillarsInfo:
     """A container for information associated with the Lunar Pillars."""
+
     def __init__(self, solar, vortex, nebula, stardust):
         self.solar = solar
         self.vortex = vortex

@@ -9,12 +9,14 @@ class Block:
 
     __slots__ = "type", "frame", "shape", "paint", "is_active"
 
-    def __init__(self,
-                 type_: BlockType,
-                 shape: Shape = Shape.NORMAL,
-                 frame: typing.Optional[FrameImportantData] = None,
-                 paint: typing.Optional[int] = None,
-                 is_active: bool = True):
+    def __init__(
+        self,
+        type_: BlockType,
+        shape: Shape = Shape.NORMAL,
+        frame: typing.Optional[FrameImportantData] = None,
+        paint: typing.Optional[int] = None,
+        is_active: bool = True,
+    ):
         self.type: BlockType = type_
         """The type of the block (dirt, stone, ...)."""
 

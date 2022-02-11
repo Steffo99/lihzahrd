@@ -1,5 +1,6 @@
 class Rain:
     """Rain related information."""
+
     def __init__(self, is_active: bool, time_left: int, max_rain: float):
         self.is_active: bool = is_active
         """If it is currently raining in the world."""

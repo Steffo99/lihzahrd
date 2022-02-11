@@ -10,10 +10,7 @@ class TileEntity:
 
     __slots__ = "id", "position", "data"
 
-    def __init__(self,
-                 id_: int,
-                 position: Coordinates,
-                 extra: typing.Union[TargetDummy, ItemFrame, LogicSensor]):
+    def __init__(self, id_: int, position: Coordinates, extra: typing.Union[TargetDummy, ItemFrame, LogicSensor]):
         self.id: int = id_
         self.position: Coordinates = position
         self.data: typing.Union[TargetDummy, ItemFrame, LogicSensor] = extra

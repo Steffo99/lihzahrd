@@ -5,6 +5,7 @@ class BlockType(enum.IntEnum):
     """All possible block types.
 
     Data from https://github.com/tModLoader/tModLoader/wiki/Vanilla-Tile-IDs."""
+
     DIRT = 0
     STONE = 1
     GRASS = 2

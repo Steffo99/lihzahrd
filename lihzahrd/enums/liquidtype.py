@@ -4,6 +4,7 @@ import functools
 
 class LiquidType(enum.IntEnum):
     """All possible types of liquids."""
+
     NO_LIQUID = 0
     WATER = 1
     LAVA = 2

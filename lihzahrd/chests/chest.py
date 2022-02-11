@@ -14,5 +14,7 @@ class Chest:
         self.contents: typing.List[ItemStack] = contents
 
     def __repr__(self):
-        return f'<Chest "{self.name}" at {self.position} ' \
-               f'with {len(list(filter(lambda x: x is not None, self.contents)))} items>'
+        return (
+            f'<Chest "{self.name}" at {self.position} '
+            f"with {len(list(filter(lambda x: x is not None, self.contents)))} items>"
+        )

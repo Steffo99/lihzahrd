@@ -18,19 +18,21 @@ class Pointers:
         "unknown",
     )
 
-    def __init__(self,
-                 world_header: int,
-                 world_tiles: int,
-                 chests: int,
-                 signs: int,
-                 npcs: int,
-                 tile_entities: int,
-                 pressure_plates: int,
-                 town_manager: int,
-                 bestiary: int,
-                 journey_powers: int,
-                 footer: int,
-                 *unknown):
+    def __init__(
+        self,
+        world_header: int,
+        world_tiles: int,
+        chests: int,
+        signs: int,
+        npcs: int,
+        tile_entities: int,
+        pressure_plates: int,
+        town_manager: int,
+        bestiary: int,
+        journey_powers: int,
+        footer: int,
+        *unknown,
+    ):
         self.file_format: int = 0
         self.world_header: int = world_header
         self.world_tiles: int = world_tiles

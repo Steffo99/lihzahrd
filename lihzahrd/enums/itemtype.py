@@ -5,6 +5,7 @@ class ItemType(enum.IntEnum):
     """List of all available Terraria item types.
 
     From https://github.com/tModLoader/tModLoader/wiki/Vanilla-Item-IDs ."""
+
     YELLOW_PHASESABER_OLD = -24
     WHITE_PHASESABER_OLD = -23
     PURPLE_PHASESABER_OLD = -22

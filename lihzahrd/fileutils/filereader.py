@@ -7,7 +7,7 @@ from .rect import Rect
 
 
 class FileReader:
-    __slots__ = "file",
+    __slots__ = ("file",)
 
     def __init__(self, file: typing.IO):
         self.file: typing.IO = file
@@ -48,14 +48,16 @@ class FileReader:
     @staticmethod
     @functools.lru_cache(256)
     def _bitify(data) -> typing.Tuple[bool, bool, bool, bool, bool, bool, bool, bool]:
-        return (bool(data & 0b0000_0001),
-                bool(data & 0b0000_0010),
-                bool(data & 0b0000_0100),
-                bool(data & 0b0000_1000),
-                bool(data & 0b0001_0000),
-                bool(data & 0b0010_0000),
-                bool(data & 0b0100_0000),
-                bool(data & 0b1000_0000))
+        return (
+            bool(data & 0b0000_0001),
+            bool(data & 0b0000_0010),
+            bool(data & 0b0000_0100),
+            bool(data & 0b0000_1000),
+            bool(data & 0b0001_0000),
+            bool(data & 0b0010_0000),
+            bool(data & 0b0100_0000),
+            bool(data & 0b1000_0000),
+        )
 
     def bits(self) -> typing.Tuple[bool, bool, bool, bool, bool, bool, bool, bool]:
         data = struct.unpack("B", self.file.read(1))[0]

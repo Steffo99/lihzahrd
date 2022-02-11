@@ -4,10 +4,7 @@ import typing
 class Pets:
     """Information about the Pet Licenses that were activated in the world."""
 
-    def __init__(self,
-                 cat: bool,
-                 dog: bool,
-                 bunny: bool):
+    def __init__(self, cat: bool, dog: bool, bunny: bool):
 
         self.cat: bool = cat
         """Was the Cat License (https://terraria.gamepedia.com/Cat_License) ever activated?"""

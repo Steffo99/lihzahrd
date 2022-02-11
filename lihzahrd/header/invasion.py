@@ -4,11 +4,7 @@ from .invasiontype import InvasionType
 class Invasion:
     """Invasions (goblin army, pirates, martian madness...) related information."""
 
-    def __init__(self, delay: int,
-                 size: int,
-                 type_: InvasionType,
-                 position: float,
-                 size_start: int):
+    def __init__(self, delay: int, size: int, type_: InvasionType, position: float, size_start: int):
         self.delay: int = delay
         self.size: int = size
 
@@ -21,5 +17,7 @@ class Invasion:
         self.size_start: int = size_start
 
     def __repr__(self):
-        return f"WorldInvasion(delay={self.delay}, size={self.size}, type_={self.type}, position={self.position}," \
-               f" size_start={self.size_start})"
+        return (
+            f"WorldInvasion(delay={self.delay}, size={self.size}, type_={self.type}, position={self.position},"
+            f" size_start={self.size_start})"
+        )

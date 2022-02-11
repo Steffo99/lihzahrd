@@ -1,10 +1,9 @@
 class Time:
     """Game time related information."""
-    def __init__(self, current: float,
-                 is_daytime: bool,
-                 moon_phase: int,
-                 sundial_cooldown: int,
-                 fast_forward_time: bool):
+
+    def __init__(
+        self, current: float, is_daytime: bool, moon_phase: int, sundial_cooldown: int, fast_forward_time: bool
+    ):
         self.current: float = current
         """The current game time."""
 
@@ -20,5 +19,7 @@ class Time:
         self.fast_forward_time: bool = fast_forward_time
 
     def __repr__(self):
-        return f"WorldTime(current={self.current}, is_daytime={self.is_daytime}, moon_phase={self.moon_phase}," \
-               f" sundial_cooldown={self.sundial_cooldown}, fast_forward_time={self.fast_forward_time})"
+        return (
+            f"WorldTime(current={self.current}, is_daytime={self.is_daytime}, moon_phase={self.moon_phase},"
+            f" sundial_cooldown={self.sundial_cooldown}, fast_forward_time={self.fast_forward_time})"
+        )

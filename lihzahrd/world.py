@@ -20,65 +20,67 @@ from .errors import InvalidFooterError
 class World:
     """The Python representation of a Terraria world."""
 
-    def __init__(self,
-                 version: Version,
-                 savefile_type: int,
-                 revision: int,
-                 is_favorite: bool,
-                 name: str,
-                 generator: GeneratorInfo,
-                 uuid_: uuid.UUID,
-                 id_: int,
-                 bounds: Rect,
-                 size: Coordinates,
-                 difficulty: Difficulty,
-                 is_drunk_world: bool,
-                 is_for_the_worthy: bool,
-                 is_tenth_anniversary: bool,
-                 created_on,
-                 styles: Styles,
-                 backgrounds: Backgrounds,
-                 spawn_point: Coordinates,
-                 underground_level: float,
-                 cavern_level: float,
-                 time: Time,
-                 events: Events,
-                 dungeon_point: Coordinates,
-                 world_evil: WorldEvilType,
-                 saved_npcs: SavedNPCs,
-                 altars_smashed: int,
-                 is_hardmode: bool,
-                 shadow_orbs: ShadowOrbs,
-                 bosses_defeated: BossesDefeated,
-                 anglers_quest: AnglerQuest,
-                 clouds: Clouds,
-                 cultist_delay: int,
-                 tiles: TileMatrix,
-                 bestiary: Bestiary,
-                 journey_powers: JourneyPowers,
-                 chests: List[Chest],
-                 signs: List[Sign],
-                 npcs: List[NPC],
-                 mobs: List[Mob],
-                 tile_entities: List[TileEntity],
-                 weighed_pressure_plates: List[WeighedPressurePlate],
-                 rooms: List[Room],
-                 pets: Pets,
-                 halloween_today: bool,
-                 xmas_today: bool,
-                 treetop_variants: TreetopVariants,
-                 saved_ore_tiers: SavedOreTiers,
-                 unknown_file_format_data: bytes = b"",
-                 unknown_world_header_data: bytes = b"",
-                 unknown_world_tiles_data: bytes = b"",
-                 unknown_chests_data: bytes = b"",
-                 unknown_signs_data: bytes = b"",
-                 unknown_npcs_data: bytes = b"",
-                 unknown_tile_entities_data: bytes = b"",
-                 unknown_pressure_plates_data: bytes = b"",
-                 unknown_town_manager_data: bytes = b"",
-                 unknown_bestiary_data: bytes = b"",
-                 unknown_journey_powers_data: bytes = b""):
+    def __init__(
+        self,
+        version: Version,
+        savefile_type: int,
+        revision: int,
+        is_favorite: bool,
+        name: str,
+        generator: GeneratorInfo,
+        uuid_: uuid.UUID,
+        id_: int,
+        bounds: Rect,
+        size: Coordinates,
+        difficulty: Difficulty,
+        is_drunk_world: bool,
+        is_for_the_worthy: bool,
+        is_tenth_anniversary: bool,
+        created_on,
+        styles: Styles,
+        backgrounds: Backgrounds,
+        spawn_point: Coordinates,
+        underground_level: float,
+        cavern_level: float,
+        time: Time,
+        events: Events,
+        dungeon_point: Coordinates,
+        world_evil: WorldEvilType,
+        saved_npcs: SavedNPCs,
+        altars_smashed: int,
+        is_hardmode: bool,
+        shadow_orbs: ShadowOrbs,
+        bosses_defeated: BossesDefeated,
+        anglers_quest: AnglerQuest,
+        clouds: Clouds,
+        cultist_delay: int,
+        tiles: TileMatrix,
+        bestiary: Bestiary,
+        journey_powers: JourneyPowers,
+        chests: List[Chest],
+        signs: List[Sign],
+        npcs: List[NPC],
+        mobs: List[Mob],
+        tile_entities: List[TileEntity],
+        weighed_pressure_plates: List[WeighedPressurePlate],
+        rooms: List[Room],
+        pets: Pets,
+        halloween_today: bool,
+        xmas_today: bool,
+        treetop_variants: TreetopVariants,
+        saved_ore_tiers: SavedOreTiers,
+        unknown_file_format_data: bytes = b"",
+        unknown_world_header_data: bytes = b"",
+        unknown_world_tiles_data: bytes = b"",
+        unknown_chests_data: bytes = b"",
+        unknown_signs_data: bytes = b"",
+        unknown_npcs_data: bytes = b"",
+        unknown_tile_entities_data: bytes = b"",
+        unknown_pressure_plates_data: bytes = b"",
+        unknown_town_manager_data: bytes = b"",
+        unknown_bestiary_data: bytes = b"",
+        unknown_journey_powers_data: bytes = b"",
+    ):
 
         self.version: Version = version
         """The game version when this savefile was last saved."""
@@ -291,11 +293,9 @@ class World:
                 block_paint = fr.uint1()
             else:
                 block_paint = None
-            block = Block(type_=block_type,
-                          frame=frame,
-                          paint=block_paint,
-                          is_active=is_block_active,
-                          shape=block_shape)
+            block = Block(
+                type_=block_type, frame=frame, paint=block_paint, is_active=is_block_active, shape=block_shape
+            )
         else:
             block = None
         # Parse wall
@@ -411,17 +411,15 @@ class World:
         is_tenth_anniversary = f.bool()
         created_on = f.datetime()
 
-        world_styles = Styles(moon=MoonStyle(f.uint1()),
-                              trees=FourPartSplit(separators=[f.int4(), f.int4(), f.int4()],
-                                                  properties=[f.int4(),
-                                                              f.int4(),
-                                                              f.int4(),
-                                                              f.int4()]),
-                              moss=FourPartSplit(separators=[f.int4(), f.int4(), f.int4()],
-                                                 properties=[f.int4(),
-                                                             f.int4(),
-                                                             f.int4(),
-                                                             f.int4()]))
+        world_styles = Styles(
+            moon=MoonStyle(f.uint1()),
+            trees=FourPartSplit(
+                separators=[f.int4(), f.int4(), f.int4()], properties=[f.int4(), f.int4(), f.int4(), f.int4()]
+            ),
+            moss=FourPartSplit(
+                separators=[f.int4(), f.int4(), f.int4()], properties=[f.int4(), f.int4(), f.int4(), f.int4()]
+            ),
+        )
 
         bg_underground_snow = f.int4()
         bg_underground_jungle = f.int4()
@@ -462,9 +460,9 @@ class World:
         defeated_frost_moon = f.bool()
         defeated_pirates = f.bool()
 
-        shadow_orbs = ShadowOrbs(smashed_at_least_once=f.bool(),
-                                 spawn_meteorite=f.bool(),
-                                 evil_boss_counter=f.uint1())   # was int4()
+        shadow_orbs = ShadowOrbs(
+            smashed_at_least_once=f.bool(), spawn_meteorite=f.bool(), evil_boss_counter=f.uint1()
+        )  # was int4()
 
         altars_smashed = f.int4()
 
@@ -505,7 +503,7 @@ class World:
 
         clouds = Clouds(bg_cloud=f.int4(), cloud_number=f.int2(), wind_speed=f.single())
 
-        angler_today_quest_completed_by_count = f.int4() # was uint1()
+        angler_today_quest_completed_by_count = f.int4()  # was uint1()
         angler_today_quest_completed_by = []
         for _ in range(angler_today_quest_completed_by_count):
             angler_today_quest_completed_by.append(f.string())
@@ -513,19 +511,22 @@ class World:
         saved_angler = f.bool()
 
         angler_today_quest_target = AnglerQuestFish(f.int4())
-        anglers_quest = AnglerQuest(current_goal=angler_today_quest_target,
-                                    completed_by=angler_today_quest_completed_by)
+        anglers_quest = AnglerQuest(
+            current_goal=angler_today_quest_target, completed_by=angler_today_quest_completed_by
+        )
 
         saved_stylist = f.bool()
         saved_tax_collector = f.bool()
         saved_golfer = f.bool()
 
         invasion_size_start = f.int4()  # ???
-        invasion = Invasion(delay=invasion_delay,
-                            size=invasion_size,
-                            type_=invasion_type,
-                            position=invasion_position,
-                            size_start=invasion_size_start)
+        invasion = Invasion(
+            delay=invasion_delay,
+            size=invasion_size,
+            type_=invasion_type,
+            position=invasion_position,
+            size_start=invasion_size_start,
+        )
 
         cultist_delay = f.int4()  # ???
         mob_types_count = f.int2()
@@ -534,11 +535,13 @@ class World:
             mob_kills[mob_id] = f.int4()
 
         fast_forward_time = f.bool()
-        time = Time(current=current_time,
-                    is_daytime=is_daytime,
-                    moon_phase=moon_phase,
-                    sundial_cooldown=sundial_cooldown,
-                    fast_forward_time=fast_forward_time)
+        time = Time(
+            current=current_time,
+            is_daytime=is_daytime,
+            moon_phase=moon_phase,
+            sundial_cooldown=sundial_cooldown,
+            fast_forward_time=fast_forward_time,
+        )
 
         defeated_duke_fishron = f.bool()
         defeated_martian_madness = f.bool()
@@ -551,11 +554,10 @@ class World:
         defeated_everscream = f.bool()
         defeated_pillars = PillarsInfo(solar=f.bool(), vortex=f.bool(), nebula=f.bool(), stardust=f.bool())
 
-        lunar_events = LunarEvents(pillars_present=PillarsInfo(solar=f.bool(),
-                                                               vortex=f.bool(),
-                                                               nebula=f.bool(),
-                                                               stardust=f.bool()),
-                                   are_active=f.bool())
+        lunar_events = LunarEvents(
+            pillars_present=PillarsInfo(solar=f.bool(), vortex=f.bool(), nebula=f.bool(), stardust=f.bool()),
+            are_active=f.bool(),
+        )
 
         party_center_active = f.bool()
         party_natural_active = f.bool()
@@ -564,15 +566,14 @@ class World:
         partying_npcs = []
         for _ in range(partying_npcs_count):
             partying_npcs.append(f.int4())
-        party = Party(thrown_by_party_center=party_center_active,
-                      thrown_by_npcs=party_natural_active,
-                      cooldown=party_cooldown,
-                      partying_npcs=partying_npcs)
+        party = Party(
+            thrown_by_party_center=party_center_active,
+            thrown_by_npcs=party_natural_active,
+            cooldown=party_cooldown,
+            partying_npcs=partying_npcs,
+        )
 
-        sandstorm = Sandstorm(is_active=f.bool(),
-                              time_left=f.int4(),
-                              severity=f.single(),
-                              intended_severity=f.single())
+        sandstorm = Sandstorm(is_active=f.bool(), time_left=f.int4(), severity=f.single(), intended_severity=f.single())
 
         saved_bartender = f.bool()
 
@@ -616,20 +617,22 @@ class World:
             tax_collector=saved_tax_collector,
             bartender=saved_bartender,
             golfer=saved_golfer,
-            advanced_combat=combat_book_used
+            advanced_combat=combat_book_used,
         )
 
         lantern_night = LanternNight(f.int4(), f.bool(), f.bool(), f.bool())
 
-        events = Events(blood_moon=blood_moon,
-                        solar_eclipse=eclipse,
-                        invasion=invasion,
-                        slime_rain=time_left_slime_rain,
-                        rain=rain,
-                        party=party,
-                        sandstorm=sandstorm,
-                        lunar_events=lunar_events,
-                        lantern_night=lantern_night)
+        events = Events(
+            blood_moon=blood_moon,
+            solar_eclipse=eclipse,
+            invasion=invasion,
+            slime_rain=time_left_slime_rain,
+            rain=rain,
+            party=party,
+            sandstorm=sandstorm,
+            lunar_events=lunar_events,
+            lantern_night=lantern_night,
+        )
 
         treetop_variant_count = f.int4()
         treetop_variants = TreetopVariants([f.int4() for _ in range(treetop_variant_count)])
@@ -648,34 +651,36 @@ class World:
         defeated_empress_of_light = f.bool()
         defeated_queen_slime = f.bool()
 
-        bosses_defeated = BossesDefeated(eye_of_cthulhu=defeated_eye_of_cthulhu,
-                                         eater_of_worlds=defeated_eater_of_worlds,
-                                         skeletron=defeated_skeletron,
-                                         queen_bee=defeated_queen_bee,
-                                         the_twins=defeated_the_twins,
-                                         the_destroyer=defeated_the_destroyer,
-                                         skeletron_prime=defeated_skeletron_prime,
-                                         any_mechnical_boss=defeated_any_mechnical_boss,
-                                         plantera=defeated_plantera,
-                                         golem=defeated_golem,
-                                         king_slime=defeated_king_slime,
-                                         goblin_army=defeated_goblin_army,
-                                         clown=defeated_clown,
-                                         frost_moon=defeated_frost_moon,
-                                         pirates=defeated_pirates,
-                                         duke_fishron=defeated_duke_fishron,
-                                         moon_lord=defeated_moon_lord,
-                                         pumpking=defeated_pumpking,
-                                         mourning_wood=defeated_mourning_wood,
-                                         ice_queen=defeated_ice_queen,
-                                         santa_nk1=defeated_santa_nk1,
-                                         everscream=defeated_everscream,
-                                         lunar_pillars=defeated_pillars,
-                                         old_ones_army=old_ones_army,
-                                         martian_madness=defeated_martian_madness,
-                                         lunatic_cultist=defeated_lunatic_cultist,
-                                         empress_of_light=defeated_empress_of_light,
-                                         queen_slime=defeated_queen_slime)
+        bosses_defeated = BossesDefeated(
+            eye_of_cthulhu=defeated_eye_of_cthulhu,
+            eater_of_worlds=defeated_eater_of_worlds,
+            skeletron=defeated_skeletron,
+            queen_bee=defeated_queen_bee,
+            the_twins=defeated_the_twins,
+            the_destroyer=defeated_the_destroyer,
+            skeletron_prime=defeated_skeletron_prime,
+            any_mechnical_boss=defeated_any_mechnical_boss,
+            plantera=defeated_plantera,
+            golem=defeated_golem,
+            king_slime=defeated_king_slime,
+            goblin_army=defeated_goblin_army,
+            clown=defeated_clown,
+            frost_moon=defeated_frost_moon,
+            pirates=defeated_pirates,
+            duke_fishron=defeated_duke_fishron,
+            moon_lord=defeated_moon_lord,
+            pumpking=defeated_pumpking,
+            mourning_wood=defeated_mourning_wood,
+            ice_queen=defeated_ice_queen,
+            santa_nk1=defeated_santa_nk1,
+            everscream=defeated_everscream,
+            lunar_pillars=defeated_pillars,
+            old_ones_army=old_ones_army,
+            martian_madness=defeated_martian_madness,
+            lunatic_cultist=defeated_lunatic_cultist,
+            empress_of_light=defeated_empress_of_light,
+            queen_slime=defeated_queen_slime,
+        )
 
         unknown_world_header_data = f.read_until(pointers.world_tiles)
 
@@ -700,15 +705,11 @@ class World:
                 if item_quantity > 0:
                     item_type = ItemType(f.int4())
                     item_modifier = PrefixType.get(f.uint1())
-                    item = ItemStack(quantity=item_quantity,
-                                     type_=item_type,
-                                     prefix=item_modifier)
+                    item = ItemStack(quantity=item_quantity, type_=item_type, prefix=item_modifier)
                 else:
                     item = None
                 chest_contents.append(item)
-            chest = Chest(position=chest_position,
-                          name=chest_name,
-                          contents=chest_contents)
+            chest = Chest(position=chest_position, name=chest_name, contents=chest_contents)
             chests.append(chest)
             tm[chest.position].extra = chest
 
@@ -720,8 +721,7 @@ class World:
         signs_count = f.int2()
 
         for _ in range(signs_count):
-            sign = Sign(text=f.string(),
-                        position=Coordinates(f.int4(), f.int4()))
+            sign = Sign(text=f.string(), position=Coordinates(f.int4(), f.int4()))
             signs.append(sign)
             tm[sign.position].extra = sign
 
@@ -743,19 +743,16 @@ class World:
             npc_flags = f.bits()
             npc_variation_index = f.int4() if npc_flags[0] else 0
 
-            npc = NPC(type_=npc_type,
-                      name=npc_name,
-                      position=npc_position,
-                      home=npc_home,
-                      variation_index=npc_variation_index)
+            npc = NPC(
+                type_=npc_type, name=npc_name, position=npc_position, home=npc_home, variation_index=npc_variation_index
+            )
             npcs.append(npc)
 
         while f.bool():
             mob_type = EntityType(f.int4())
             mob_position = Coordinates(f.single(), f.single())
 
-            mob = Mob(type_=mob_type,
-                      position=mob_position)
+            mob = Mob(type_=mob_type, position=mob_position)
             mobs.append(mob)
 
         unknown_npcs_data = f.read_until(pointers.tile_entities)
@@ -773,9 +770,9 @@ class World:
                 te_extra = TargetDummy(npc=f.int2())
             # Item Frame
             elif te_type == 1:
-                te_extra = ItemFrame(item=ItemStack(type_=ItemType(f.int2()),
-                                                    prefix=PrefixType.get(f.uint1()),
-                                                    quantity=f.int2()))
+                te_extra = ItemFrame(
+                    item=ItemStack(type_=ItemType(f.int2()), prefix=PrefixType.get(f.uint1()), quantity=f.int2())
+                )
             # Logic Sensor
             elif te_type == 2:
                 te_extra = LogicSensor(logic_check=f.uint1(), enabled=f.bool())
@@ -788,21 +785,19 @@ class World:
                 for index, flag in enumerate(item_flags):
                     if not flag:
                         continue
-                    mannequin_items[index] = ItemStack(type_=ItemType(f.int2()),
-                                                       prefix=PrefixType.get(f.int1()),
-                                                       quantity=f.int2())
+                    mannequin_items[index] = ItemStack(
+                        type_=ItemType(f.int2()), prefix=PrefixType.get(f.int1()), quantity=f.int2()
+                    )
                 for index, flag in enumerate(dye_flags):
                     if not flag:
                         continue
-                    mannequin_dyes[index] = ItemStack(type_=ItemType(f.int2()),
-                                                      prefix=PrefixType.get(f.int1()),
-                                                      quantity=f.int2())
+                    mannequin_dyes[index] = ItemStack(
+                        type_=ItemType(f.int2()), prefix=PrefixType.get(f.int1()), quantity=f.int2()
+                    )
                 te_extra = Mannequin(mannequin_items, mannequin_dyes)
             # Weapon Rack
             elif te_type == 4:
-                rack_item = ItemStack(type_=ItemType(f.int2()),
-                                      prefix=PrefixType.get(f.int1()),
-                                      quantity=f.int2())
+                rack_item = ItemStack(type_=ItemType(f.int2()), prefix=PrefixType.get(f.int1()), quantity=f.int2())
                 te_extra = WeaponRack(rack_item)
             # Hat Rack
             elif te_type == 5:
@@ -814,21 +809,19 @@ class World:
                 for index, flag in enumerate(item_flags[0:2]):
                     if not flag:
                         continue
-                    rack_items[index] = ItemStack(type_=ItemType(f.int2()),
-                                                  prefix=PrefixType.get(f.int1()),
-                                                  quantity=f.int2())
+                    rack_items[index] = ItemStack(
+                        type_=ItemType(f.int2()), prefix=PrefixType.get(f.int1()), quantity=f.int2()
+                    )
                 for index, flag in enumerate(item_flags[2:4]):
                     if not flag:
                         continue
-                    rack_dyes[index] = ItemStack(type_=ItemType(f.int2()),
-                                                 prefix=PrefixType.get(f.int1()),
-                                                 quantity=f.int2())
+                    rack_dyes[index] = ItemStack(
+                        type_=ItemType(f.int2()), prefix=PrefixType.get(f.int1()), quantity=f.int2()
+                    )
                 te_extra = HatRack(rack_items, rack_dyes)
             # Food Plate
             elif te_type == 6:
-                plate_item = ItemStack(type_=ItemType(f.int2()),
-                                       prefix=PrefixType.get(f.int1()),
-                                       quantity=f.int2())
+                plate_item = ItemStack(type_=ItemType(f.int2()), prefix=PrefixType.get(f.int1()), quantity=f.int2())
                 te_extra = Plate(plate_item)
             # Teleport Pylon
             elif te_type == 7:
@@ -896,31 +889,66 @@ class World:
         unknown_journey_powers_data = f.read_until(pointers.footer)
 
         # Object creation
-        world = cls(version=version, savefile_type=savefile_type, revision=revision, is_favorite=is_favorite,
-                    name=name, generator=generator, uuid_=uuid_, id_=id_, bounds=bounds, size=world_size,
-                    difficulty=difficulty, is_drunk_world=is_drunk_world, is_for_the_worthy=is_for_the_worthy,
-                    is_tenth_anniversary=is_tenth_anniversary, created_on=created_on, styles=world_styles, backgrounds=backgrounds,
-                    spawn_point=spawn_point, underground_level=underground_level, cavern_level=cavern_level,
-                    time=time, events=events, dungeon_point=dungeon_point, world_evil=world_evil,
-                    saved_npcs=saved_npcs, altars_smashed=altars_smashed, is_hardmode=is_hardmode,
-                    shadow_orbs=shadow_orbs, bosses_defeated=bosses_defeated, anglers_quest=anglers_quest,
-                    clouds=clouds, cultist_delay=cultist_delay, tiles=tm, chests=chests, signs=signs,
-                    npcs=npcs, mobs=mobs, tile_entities=tile_entities,
-                    weighed_pressure_plates=weighed_pressure_plates, rooms=rooms,
-                    halloween_today=halloween_today, xmas_today=xmas_today,
-                    treetop_variants=treetop_variants, saved_ore_tiers=saved_ore_tiers, pets=pets,
-                    bestiary=bestiary, journey_powers=journey_powers,
-                    unknown_file_format_data=unknown_file_format_data,
-                    unknown_world_header_data=unknown_world_header_data,
-                    unknown_world_tiles_data=unknown_world_tiles_data,
-                    unknown_chests_data=unknown_chests_data,
-                    unknown_signs_data=unknown_signs_data,
-                    unknown_npcs_data=unknown_npcs_data,
-                    unknown_tile_entities_data=unknown_tile_entities_data,
-                    unknown_pressure_plates_data=unknown_pressure_plates_data,
-                    unknown_town_manager_data=unknown_town_manager_data,
-                    unknown_bestiary_data=unknown_bestiary_data,
-                    unknown_journey_powers_data=unknown_journey_powers_data)
+        world = cls(
+            version=version,
+            savefile_type=savefile_type,
+            revision=revision,
+            is_favorite=is_favorite,
+            name=name,
+            generator=generator,
+            uuid_=uuid_,
+            id_=id_,
+            bounds=bounds,
+            size=world_size,
+            difficulty=difficulty,
+            is_drunk_world=is_drunk_world,
+            is_for_the_worthy=is_for_the_worthy,
+            is_tenth_anniversary=is_tenth_anniversary,
+            created_on=created_on,
+            styles=world_styles,
+            backgrounds=backgrounds,
+            spawn_point=spawn_point,
+            underground_level=underground_level,
+            cavern_level=cavern_level,
+            time=time,
+            events=events,
+            dungeon_point=dungeon_point,
+            world_evil=world_evil,
+            saved_npcs=saved_npcs,
+            altars_smashed=altars_smashed,
+            is_hardmode=is_hardmode,
+            shadow_orbs=shadow_orbs,
+            bosses_defeated=bosses_defeated,
+            anglers_quest=anglers_quest,
+            clouds=clouds,
+            cultist_delay=cultist_delay,
+            tiles=tm,
+            chests=chests,
+            signs=signs,
+            npcs=npcs,
+            mobs=mobs,
+            tile_entities=tile_entities,
+            weighed_pressure_plates=weighed_pressure_plates,
+            rooms=rooms,
+            halloween_today=halloween_today,
+            xmas_today=xmas_today,
+            treetop_variants=treetop_variants,
+            saved_ore_tiers=saved_ore_tiers,
+            pets=pets,
+            bestiary=bestiary,
+            journey_powers=journey_powers,
+            unknown_file_format_data=unknown_file_format_data,
+            unknown_world_header_data=unknown_world_header_data,
+            unknown_world_tiles_data=unknown_world_tiles_data,
+            unknown_chests_data=unknown_chests_data,
+            unknown_signs_data=unknown_signs_data,
+            unknown_npcs_data=unknown_npcs_data,
+            unknown_tile_entities_data=unknown_tile_entities_data,
+            unknown_pressure_plates_data=unknown_pressure_plates_data,
+            unknown_town_manager_data=unknown_town_manager_data,
+            unknown_bestiary_data=unknown_bestiary_data,
+            unknown_journey_powers_data=unknown_journey_powers_data,
+        )
 
         # Footer
         if not f.bool():

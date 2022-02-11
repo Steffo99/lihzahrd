@@ -6,12 +6,9 @@ class Wiring:
 
     __slots__ = "red", "green", "blue", "yellow", "actuator"
 
-    def __init__(self,
-                 red: bool = False,
-                 green: bool = False,
-                 blue: bool = False,
-                 yellow: bool = False,
-                 actuator: bool = False):
+    def __init__(
+        self, red: bool = False, green: bool = False, blue: bool = False, yellow: bool = False, actuator: bool = False
+    ):
         self.red: bool = red
         """If there's a red Wire in the tile."""
 
@@ -28,8 +25,10 @@ class Wiring:
         """If there's an Actuator in the tile."""
 
     def __repr__(self):
-        return f"Wires(red={self.red}, green={self.green}, blue={self.blue}, yellow={self.yellow}," \
-               f" actuator={self.actuator})"
+        return (
+            f"Wires(red={self.red}, green={self.green}, blue={self.blue}, yellow={self.yellow},"
+            f" actuator={self.actuator})"
+        )
 
     def __bool__(self):
         return self.red or self.green or self.blue or self.yellow or self.actuator

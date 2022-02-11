@@ -7,10 +7,7 @@ class Bestiary:
 
     __slots__ = "chats", "kills", "sightings"
 
-    def __init__(self,
-                 chats: List[EntityType],
-                 kills: Dict[EntityType, int],
-                 sightings: List[EntityType]):
+    def __init__(self, chats: List[EntityType], kills: Dict[EntityType, int], sightings: List[EntityType]):
         self.chats: List[EntityType] = chats
         self.kills: Dict[EntityType, int] = kills
         self.sightings: List[EntityType] = sightings

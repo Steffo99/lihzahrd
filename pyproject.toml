@@ -15,16 +15,22 @@
 
 # Library dependencies
 [tool.poetry.dependencies]
-    python = "^3.6"
+    python = "^3.6.2"
 
 # Development dependencies
 [tool.poetry.dev-dependencies]
     pytest = "^5.2.1"
     sphinx = "^2.2.1"
     sphinx_rtd_theme = "^0.4.3"
+    black = "^22.1.0"
 
 # Optional dependencies
 [tool.poetry.extras]
+
+# Code style
+[tool.black]
+line-length = 120
+target-version = ['py36']
 
 # Used build system
 [build-system]

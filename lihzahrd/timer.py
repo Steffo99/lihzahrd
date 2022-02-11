@@ -4,6 +4,7 @@ import typing
 
 class Timer:
     """An object to track and print the time required to perform a section of code."""
+
     def __init__(self, name: str, display: bool = True):
         self.name: str = name
         self.display: bool = display

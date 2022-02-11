@@ -4,7 +4,7 @@ import typing
 class Version:
     """A Terraria version."""
 
-    __slots__ = ("id", )
+    __slots__ = ("id",)
 
     _version_ids = {
         12: "1.0.5",
@@ -52,7 +52,7 @@ class Version:
         227: "1.4.0.3",
         228: "1.4.0.4",
         230: "1.4.0.5",
-        238: "1.4.2.3"
+        238: "1.4.2.3",
     }
 
     def __init__(self, data: typing.Union[int, str]):

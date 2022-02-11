@@ -3,6 +3,7 @@ import enum
 
 class EntityType(enum.IntEnum):
     """An enumeration of all Terraria entities."""
+
     # https://terraria.gamepedia.com/NPC_IDs
     # Obtained from this wiki page with the following regex and adding BestiaryGirl = 633 manually
     # ^([0-9-]+)\s+[A-Za-z0-9()\s.,\-']+?\.(?:png|gif)\s+([A-Za-z0-9]+)$

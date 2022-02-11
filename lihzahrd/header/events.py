@@ -5,18 +5,22 @@ from .sandstorm import Sandstorm
 from .lunarevents import LunarEvents
 from .lanternnight import LanternNight
 
+
 class Events:
     """Information about the ongoing world events."""
-    def __init__(self,
-                 blood_moon: bool,
-                 solar_eclipse: bool,
-                 invasion: Invasion,
-                 slime_rain: float,
-                 rain: Rain,
-                 party: Party,
-                 sandstorm: Sandstorm,
-                 lunar_events: LunarEvents,
-                 lantern_night: LanternNight):
+
+    def __init__(
+        self,
+        blood_moon: bool,
+        solar_eclipse: bool,
+        invasion: Invasion,
+        slime_rain: float,
+        rain: Rain,
+        party: Party,
+        sandstorm: Sandstorm,
+        lunar_events: LunarEvents,
+        lantern_night: LanternNight,
+    ):
         self.blood_moon: bool = blood_moon
         """If the current moon is a Blood Moon."""
 

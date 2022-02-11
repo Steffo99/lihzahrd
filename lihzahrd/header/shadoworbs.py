@@ -1,10 +1,7 @@
 class ShadowOrbs:
     """Information related to the Shadow Orbs (or the Crimson Hearts) smashed in the world."""
 
-    def __init__(self,
-                 smashed_at_least_once: bool,
-                 spawn_meteorite: bool,
-                 evil_boss_counter: int):
+    def __init__(self, smashed_at_least_once: bool, spawn_meteorite: bool, evil_boss_counter: int):
         self.smashed_at_least_once: bool = smashed_at_least_once
         """If a Shadow Orb has ever been smashed in this world."""
 
@@ -19,5 +16,7 @@ class ShadowOrbs:
         It is the number of Shadow Orbs broken, modulo 3."""
 
     def __repr__(self):
-        return f"WorldShadowOrbs(smashed_at_least_once={self.smashed_at_least_once}," \
-               f" spawn_meteorite={self.spawn_meteorite}, evil_boss_counter={self.evil_boss_counter})"
+        return (
+            f"WorldShadowOrbs(smashed_at_least_once={self.smashed_at_least_once},"
+            f" spawn_meteorite={self.spawn_meteorite}, evil_boss_counter={self.evil_boss_counter})"
+        )

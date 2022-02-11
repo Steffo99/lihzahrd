@@ -3,9 +3,8 @@ from .pillarsinfo import PillarsInfo
 
 class LunarEvents:
     """Lunar Events (Lunar Pillars) related information."""
-    def __init__(self,
-                 are_active: bool,
-                 pillars_present: PillarsInfo):
+
+    def __init__(self, are_active: bool, pillars_present: PillarsInfo):
         self.are_active: bool = are_active
         """If the Lunar Events are active or not."""
 
