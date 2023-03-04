@@ -735,6 +735,26 @@ class EntityType(enum.IntEnum):
     ChaosBallTim = 665
     VileSpitEaterOfWorlds = 666
     GoldenSlime = 667
+    Deerclops = 668
+    Stinkbug = 669
+    TownSlimeBlue = 670
+    ScarletMacaw = 671
+    BlueMacaw = 672
+    Toucan = 673
+    YellowCockatiel = 674
+    GrayCockatiel = 675
+    ShimmerSlime = 676
+    Shimmerfly = 677
+    TownSlimeGreen = 678
+    TownSlimeOld = 679
+    TownSlimePurple = 680
+    TownSlimeRainbow = 681
+    TownSlimeRed = 682
+    TownSlimeYellow = 683
+    TownSlimeCopper = 684
+    BoundTownSlimeOld = 685
+    BoundTownSlimePurple = 686
+    BoundTownSlimeYellow = 687
 
     def __repr__(self):
         return f"{self.__class__.__name__}.{self.name}"

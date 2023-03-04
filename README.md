@@ -1,13 +1,18 @@
 # ![](https://gamepedia.cursecdn.com/terraria_gamepedia/e/ee/Lihzahrd.png?version=b8e7ea78b2f9f27a46e2e70d5684b344) `lihzahrd` [![](https://img.shields.io/pypi/v/lihzahrd)](https://pypi.org/project/lihzahrd/)
 
-A Terraria 1.4.2.3 world parser in Python.
+A Terraria 1.4.4.9 world parser in Python, forked from [Steffo99](https://github.com/Steffo99/lihzahrd), and the implementation of 1.4.4.x features merged from [StarryNightCat](https://github.com/StarryNightCat/lihzahrd). I have also incorporated optimiszations and the addition of caching done by [rodjjo](https://github.com/Steffo99/lihzahrd/pull/6).
 
-You can use this package to get programmer-friendly data from a Terraria world!
+This works on the current version of Terraria! Documentation on usage can be found [here](https://gh.steffo.eu/lihzahrd/html/index.html)
+From the original README.md
 
 Install with:
 ```
-pip install lihzahrd
+pip install https://github.com/martydingo/lihzahrd/
 ```
+---
+
+You can use this package to get programmer-friendly data from a Terraria world!
+
 
 ## Usage
 
@@ -46,6 +51,10 @@ Time to parse the same large world:
 ## Development
 
 To contribute to `lihzahrd`, you need to have [Poetry](https://poetry.eustace.io/) installed on your PC.
+
+```
+curl -sSL https://install.python-poetry.org | python3 -
+```
 
 After you've installed Poetry, clone the git repo with the command:
 

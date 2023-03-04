@@ -126,5 +126,11 @@ dmypy.json
 # Terraria worlds
 *.wld
 .idea/
+worlds
+
+# Test Script
+test.py
+test2.py
 
 /__main__.py
+.vscode

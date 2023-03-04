@@ -36,6 +36,11 @@ class World:
         is_drunk_world: bool,
         is_for_the_worthy: bool,
         is_tenth_anniversary: bool,
+        is_dont_starve_world: bool,
+        is_not_the_bees_world: bool,
+        is_remix_world: bool,
+        is_no_traps_world: bool,
+        is_zenith_world: bool,
         created_on,
         styles: Styles,
         backgrounds: Backgrounds,
@@ -49,6 +54,7 @@ class World:
         saved_npcs: SavedNPCs,
         altars_smashed: int,
         is_hardmode: bool,
+        after_party_of_doom: bool,
         shadow_orbs: ShadowOrbs,
         bosses_defeated: BossesDefeated,
         anglers_quest: AnglerQuest,
@@ -127,6 +133,21 @@ class World:
         """If the world was created with the
         celebrationmk10 (https://terraria.fandom.com/wiki/Secret_world_seeds#Celebrationmk10) seed."""
 
+        self.is_dont_starve_world: bool = is_dont_starve_world
+        """TODO"""
+
+        self.is_not_the_bees_world: bool = is_not_the_bees_world
+        """TODO"""
+
+        self.is_remix_world: bool = is_remix_world
+        """TODO"""
+
+        self.is_no_traps_world: bool = is_no_traps_world
+        """TODO"""
+
+        self.is_zenith_world: bool = is_zenith_world
+        """TODO"""
+
         self.created_on = created_on
         """The date and time this world was created in."""
 
@@ -165,6 +186,9 @@ class World:
 
         self.is_hardmode: bool = is_hardmode
         """Whether or not the world is in hardmode."""
+
+        self.after_party_of_doom: bool = after_party_of_doom
+        """TODO"""
 
         self.shadow_orbs: ShadowOrbs = shadow_orbs
         """Information related to the Shadow Orbs or Crimson Hearts in the world."""
@@ -247,85 +271,90 @@ class World:
         self.shadow_orbs = value
 
     @staticmethod
-    def _read_tile_block(fr: FileReader, tileframeimportant) -> Tuple[Tile, int]:
+    def _read_tile_block(fr: FileReader, tileframeimportant, max_count) -> Iterator[Tile]:
         # Once again, this code is a mess
-        flags1 = fr.bits()
-        has_block = flags1[1]
-        has_wall = flags1[2]
-        liquid_type = LiquidType.from_flags(flags1)
-        has_extended_block_id = flags1[5]
-        rle_compression = RLEEncoding.from_flags(flags1)
-        # Parse flags
-        if flags1[0]:
-            flags2 = fr.bits()
-            block_shape = Shape.from_flags(flags2)
-            if flags2[0]:
-                flags3 = fr.bits()
-                is_block_active = not flags3[2]
-                wiring = Wiring.from_flags(flags2, flags3)
-                is_block_painted = flags3[3]
-                is_wall_painted = flags3[4]
-                has_extended_wall_id = flags3[6]
+        while max_count:
+            flags1 = fr.bits()
+            has_block = flags1[1]
+            has_wall = flags1[2]
+            liquid_type = LiquidType.from_flags(flags1)
+            has_extended_block_id = flags1[5]
+            rle_compression = RLEEncoding.from_flags(flags1)
+            # Parse flags
+            if flags1[0]:
+                flags2 = fr.bits()
+                block_shape = Shape.from_flags(flags2)
+                if flags2[0]:
+                    flags3 = fr.bits()
+                    is_block_active = not flags3[2]
+                    wiring = Wiring.from_flags(flags2, flags3)
+                    is_block_painted = flags3[3]
+                    is_wall_painted = flags3[4]
+                    has_extended_wall_id = flags3[6]
+                else:
+                    is_block_active = True
+                    wiring = Wiring.from_flags(flags2)
+                    is_block_painted = False
+                    is_wall_painted = False
+                    has_extended_wall_id = False
             else:
+                block_shape = Shape.NORMAL
                 is_block_active = True
-                wiring = Wiring.from_flags(flags2)
+                wiring = None
                 is_block_painted = False
                 is_wall_painted = False
                 has_extended_wall_id = False
-        else:
-            block_shape = Shape.NORMAL
-            is_block_active = True
-            wiring = None
-            is_block_painted = False
-            is_wall_painted = False
-            has_extended_wall_id = False
-        # Parse block
-        if has_block:
-            if has_extended_block_id:
-                block_type = BlockType(fr.uint2())
+            # Parse block
+            if has_block:
+                if has_extended_block_id:
+                    block_type = BlockType(fr.uint2())
+                else:
+                    block_type = BlockType(fr.uint1())
+                if tileframeimportant[block_type]:
+                    frame = FrameImportantData(fr.uint2(), fr.uint2())
+                else:
+                    frame = None
+                if is_block_painted:
+                    block_paint = fr.uint1()
+                else:
+                    block_paint = None
+                block = Block(type_=block_type,
+                              frame=frame,
+                              paint=block_paint,
+                              is_active=is_block_active,
+                              shape=block_shape)
             else:
-                block_type = BlockType(fr.uint1())
-            if tileframeimportant[block_type]:
-                frame = FrameImportantData(fr.uint2(), fr.uint2())
+                block = None
+            # Parse wall
+            if has_wall:
+                if has_extended_wall_id:
+                    wall_type = WallType(fr.uint2())
+                else:
+                    wall_type = WallType(fr.uint1())
+                if is_wall_painted:
+                    wall_paint = fr.uint1()
+                else:
+                    wall_paint = None
+                wall = Wall(type_=wall_type, paint=wall_paint)
             else:
-                frame = None
-            if is_block_painted:
-                block_paint = fr.uint1()
+                wall = None
+            # Parse liquid
+            if liquid_type != LiquidType.NO_LIQUID:
+                liquid = Liquid(type_=liquid_type, volume=fr.uint1())
             else:
-                block_paint = None
-            block = Block(
-                type_=block_type, frame=frame, paint=block_paint, is_active=is_block_active, shape=block_shape
-            )
-        else:
-            block = None
-        # Parse wall
-        if has_wall:
-            if has_extended_wall_id:
-                wall_type = WallType(fr.uint2())
+                liquid = None
+            # Find RLE Compression multiplier
+            if rle_compression == RLEEncoding.DOUBLE_BYTE:
+                multiply_by = fr.uint2() + 1
+            elif rle_compression == RLEEncoding.SINGLE_BYTE:
+                multiply_by = fr.uint1() + 1
             else:
-                wall_type = WallType(fr.uint1())
-            if is_wall_painted:
-                wall_paint = fr.uint1()
-            else:
-                wall_paint = None
-            wall = Wall(type_=wall_type, paint=wall_paint)
-        else:
-            wall = None
-        # Parse liquid
-        if liquid_type != LiquidType.NO_LIQUID:
-            liquid = Liquid(type_=liquid_type, volume=fr.uint1())
-        else:
-            liquid = None
-        # Find RLE Compression multiplier
-        if rle_compression == RLEEncoding.DOUBLE_BYTE:
-            multiply_by = fr.uint2() + 1
-        elif rle_compression == RLEEncoding.SINGLE_BYTE:
-            multiply_by = fr.uint1() + 1
-        else:
-            multiply_by = 1
-        # Create tile
-        tile = Tile(block=block, wall=wall, liquid=liquid, wiring=wiring)
-        return tile, multiply_by
+                multiply_by = 1
+            # Create tile
+            tile = Tile(block=block, wall=wall, liquid=liquid, wiring=wiring)
+            max_count -= multiply_by
+            for _ in range(multiply_by):
+                yield tile
 
     @property
     def is_classic(self):
@@ -352,15 +381,8 @@ class World:
     @classmethod
     def _create_tilematrix(cls, f, world_size: Coordinates, tileframeimportant: List[bool]):
         """Create a TileMatrix object from a file."""
-        tm = TileMatrix()
-        while tm.size.x < world_size.x:
-            column = []
-            while len(column) < world_size.y:
-                tile, multiply_by = cls._read_tile_block(f, tileframeimportant)
-                for _ in range(multiply_by):
-                    # This works by reference, and stops working if write support is added
-                    column.append(tile)
-            tm.add_column(column)
+        tm = TileMatrix(world_size.x, world_size.y)
+        tm.fill(cls._read_tile_block(f, tileframeimportant, len(tm)))
         return tm
 
     @classmethod
@@ -379,11 +401,12 @@ class World:
 
         # File header
         version = Version(f.int4())
+        print(version)
         relogic = f.string(7)
         savefile_type = f.uint1()
-        supported_versions = (Version("1.4.2.3"), Version("1.4.2.3"))
+        supported_versions = (Version("1.4.4.9"), Version("1.4.4.9"))
         if version not in supported_versions or relogic != "relogic" or savefile_type != 2:
-            raise NotImplementedError("This parser can only read Terraria 1.4.2.3 save files.")
+            raise NotImplementedError("This parser can only read Terraria 1.4.4.9 save files.")
 
         revision = f.uint4()
         is_favorite = f.uint8() != 0
@@ -409,6 +432,11 @@ class World:
         is_drunk_world = f.bool()
         is_for_the_worthy = f.bool()
         is_tenth_anniversary = f.bool()
+        is_dont_starve_world = f.bool()
+        is_not_the_bees_world = f.bool()
+        is_remix_world = f.bool()
+        is_no_traps_world = f.bool()
+        is_zenith_world = f.bool()
         created_on = f.datetime()
 
         world_styles = Styles(
@@ -467,6 +495,7 @@ class World:
         altars_smashed = f.int4()
 
         is_hardmode = f.bool()
+        after_party_of_doom = f.bool()
 
         invasion_delay = f.int4()
         invasion_size = f.int4()
@@ -681,6 +710,8 @@ class World:
             empress_of_light=defeated_empress_of_light,
             queen_slime=defeated_queen_slime,
         )
+
+        # TODO: Add Deerclop and town NPCs spawn flags
 
         unknown_world_header_data = f.read_until(pointers.world_tiles)
 
@@ -904,6 +935,11 @@ class World:
             is_drunk_world=is_drunk_world,
             is_for_the_worthy=is_for_the_worthy,
             is_tenth_anniversary=is_tenth_anniversary,
+            is_dont_starve_world=is_dont_starve_world,
+            is_not_the_bees_world=is_not_the_bees_world,
+            is_remix_world=is_remix_world,
+            is_no_traps_world=is_no_traps_world,
+            is_zenith_world=is_zenith_world,
             created_on=created_on,
             styles=world_styles,
             backgrounds=backgrounds,
@@ -917,6 +953,7 @@ class World:
             saved_npcs=saved_npcs,
             altars_smashed=altars_smashed,
             is_hardmode=is_hardmode,
+            after_party_of_doom=after_party_of_doom,
             shadow_orbs=shadow_orbs,
             bosses_defeated=bosses_defeated,
             anglers_quest=anglers_quest,
