@@ -1,16 +1,16 @@
 [tool.poetry]
     name = "lihzahrd"
-    version = "2.0.0"
+    version = "3.0.0"
     description = "A Terraria world parser in Python"
-    authors = ["Stefano Pigozzi <ste.pigozzi@gmail.com>"]
+    authors = ["Martin George <marty@dii.ngo>", "Stefano Pigozzi <ste.pigozzi@gmail.com>"]
     license = "AGPL-3.0+"
     readme = "README.md"
-    homepage = "https://github.com/Steffo99/lihzahrd"
+    homepage = "https://github.com/martydingo/lihzahrd"
     documentation = "https://gh.steffo.eu/lihzahrd/"
     classifiers = [
         "Development Status :: 4 - Beta",
         "Operating System :: OS Independent",
-        "Programming Language :: Python :: 3.6"
+        "Programming Language :: Python :: 3.9"
     ]
 
 # Library dependencies

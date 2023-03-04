@@ -401,7 +401,6 @@ class World:
 
         # File header
         version = Version(f.int4())
-        print(version)
         relogic = f.string(7)
         savefile_type = f.uint1()
         supported_versions = (Version("1.4.4.9"), Version("1.4.4.9"))

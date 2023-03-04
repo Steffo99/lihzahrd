@@ -7,7 +7,7 @@ From the original README.md
 
 Install with:
 ```
-pip3 install https://github.com/martydingo/lihzahrd/
+pip3 install git+https://github.com/martydingo/lihzahrd/
 ```
 ---
 
