@@ -2,7 +2,6 @@ import typing
 import struct
 import uuid
 import datetime
-import functools
 from .rect import Rect
 
 
