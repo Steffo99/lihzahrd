@@ -252,7 +252,6 @@ class World:
         flags1 = fr.bits()
         has_block = flags1[1]
         has_wall = flags1[2]
-        liquid_type = LiquidType.from_flags(flags1)
         has_extended_block_id = flags1[5]
         rle_compression = RLEEncoding.from_flags(flags1)
         # Parse flags
@@ -261,6 +260,7 @@ class World:
             block_shape = Shape.from_flags(flags2)
             if flags2[0]:
                 flags3 = fr.bits()
+                liquid_type = LiquidType.from_flags(flags1)
                 is_block_active = not flags3[2]
                 wiring = Wiring.from_flags(flags2, flags3)
                 is_block_painted = flags3[3]
@@ -268,11 +268,13 @@ class World:
                 has_extended_wall_id = flags3[6]
             else:
                 is_block_active = True
+                liquid_type = LiquidType.from_flags(flags1)
                 wiring = Wiring.from_flags(flags2)
                 is_block_painted = False
                 is_wall_painted = False
                 has_extended_wall_id = False
         else:
+            liquid_type = LiquidType.from_flags(flags1)
             block_shape = Shape.NORMAL
             is_block_active = True
             wiring = None
