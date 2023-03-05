@@ -6,6 +6,21 @@ import functools
 from .rect import Rect
 
 
+INT_TO_BITS_CACHE = {
+    i: (
+        bool(i & 0b0000_0001),
+        bool(i & 0b0000_0010),
+        bool(i & 0b0000_0100),
+        bool(i & 0b0000_1000),
+        bool(i & 0b0001_0000),
+        bool(i & 0b0010_0000),
+        bool(i & 0b0100_0000),
+        bool(i & 0b1000_0000)
+    )
+    for i in range(256)
+}
+
+
 class FileReader:
     """Helper class for deserializing a Terraria world file."""
 
@@ -47,23 +62,9 @@ class FileReader:
     def double(self) -> float:
         return struct.unpack("d", self.file.read(8))[0]
 
-    @staticmethod
-    @functools.lru_cache(256)
-    def _bitify(data) -> typing.Tuple[bool, bool, bool, bool, bool, bool, bool, bool]:
-        return (
-            bool(data & 0b0000_0001),
-            bool(data & 0b0000_0010),
-            bool(data & 0b0000_0100),
-            bool(data & 0b0000_1000),
-            bool(data & 0b0001_0000),
-            bool(data & 0b0010_0000),
-            bool(data & 0b0100_0000),
-            bool(data & 0b1000_0000),
-        )
-
     def bits(self) -> typing.Tuple[bool, bool, bool, bool, bool, bool, bool, bool]:
         data = struct.unpack("B", self.file.read(1))[0]
-        return self._bitify(data)
+        return INT_TO_BITS_CACHE[data]
 
     def rect(self) -> Rect:
         left, right, top, bottom = struct.unpack("iiii", self.file.read(16))
