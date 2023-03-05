@@ -248,39 +248,33 @@ class World:
 
     @staticmethod
     def _read_tile_block(fr: FileReader, tileframeimportant) -> Tuple[Tile, int]:
-        # Once again, this code is a mess
         flags1 = fr.bits()
+        has_flags2 = flags1[0]
+        flags2 = fr.bits() if has_flags2 else INT_TO_BITS_CACHE[0]
+        has_flags3 = flags2[0]
+        flags3 = fr.bits() if has_flags3 else INT_TO_BITS_CACHE[0]
+        has_flags4 = flags3[0]
+        flags4 = fr.bits() if has_flags4 else INT_TO_BITS_CACHE[0]
+            
         has_block = flags1[1]
         has_wall = flags1[2]
+
         has_extended_block_id = flags1[5]
+        has_extended_wall_id = flags3[6]
+
+        is_block_active = not flags3[2]
+        is_block_painted = flags3[3]
+        is_wall_painted = flags3[4]
+        is_block_echo = flags4[1]
+        is_wall_echo = flags4[2]
+        is_block_illuminant = flags4[3]
+        is_wall_illuminant = flags4[4]
+
+        liquid_type = LiquidType.from_flags(flags1, flags3)
         rle_compression = RLEEncoding.from_flags(flags1)
-        # Parse flags
-        if flags1[0]:
-            flags2 = fr.bits()
-            block_shape = Shape.from_flags(flags2)
-            if flags2[0]:
-                flags3 = fr.bits()
-                liquid_type = LiquidType.from_flags(flags1)
-                is_block_active = not flags3[2]
-                wiring = Wiring.from_flags(flags2, flags3)
-                is_block_painted = flags3[3]
-                is_wall_painted = flags3[4]
-                has_extended_wall_id = flags3[6]
-            else:
-                is_block_active = True
-                liquid_type = LiquidType.from_flags(flags1)
-                wiring = Wiring.from_flags(flags2)
-                is_block_painted = False
-                is_wall_painted = False
-                has_extended_wall_id = False
-        else:
-            liquid_type = LiquidType.from_flags(flags1)
-            block_shape = Shape.NORMAL
-            is_block_active = True
-            wiring = None
-            is_block_painted = False
-            is_wall_painted = False
-            has_extended_wall_id = False
+        block_shape = Shape.from_flags(flags2)
+        wiring = Wiring.from_flags(flags2, flags3)
+
         # Parse block
         if has_block:
             if has_extended_block_id:
@@ -296,10 +290,17 @@ class World:
             else:
                 block_paint = None
             block = Block(
-                type_=block_type, frame=frame, paint=block_paint, is_active=is_block_active, shape=block_shape
+                type_=block_type,
+                frame=frame,
+                paint=block_paint,
+                is_active=is_block_active,
+                shape=block_shape,
+                is_illuminant=is_block_illuminant,
+                is_echo=is_block_echo,
             )
         else:
             block = None
+
         # Parse wall
         if has_wall:
             if has_extended_wall_id:
@@ -310,14 +311,21 @@ class World:
                 wall_paint = fr.uint1()
             else:
                 wall_paint = None
-            wall = Wall(type_=wall_type, paint=wall_paint)
+            wall = Wall(
+                type_=wall_type,
+                paint=wall_paint,
+                is_illuminant=is_wall_illuminant,
+                is_echo=is_wall_echo,
+            )
         else:
             wall = None
+
         # Parse liquid
         if liquid_type != LiquidType.NO_LIQUID:
             liquid = Liquid(type_=liquid_type, volume=fr.uint1())
         else:
             liquid = None
+
         # Find RLE Compression multiplier
         if rle_compression == RLEEncoding.DOUBLE_BYTE:
             multiply_by = fr.uint2() + 1
@@ -325,6 +333,7 @@ class World:
             multiply_by = fr.uint1() + 1
         else:
             multiply_by = 1
+
         # Create tile
         tile = Tile(block=block, wall=wall, liquid=liquid, wiring=wiring)
         return tile, multiply_by
