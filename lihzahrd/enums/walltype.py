@@ -4,7 +4,7 @@ import enum
 class WallType(enum.IntEnum):
     """All possible wall types.
 
-    Data from https://github.com/tModLoader/tModLoader/wiki/Vanilla-Wall-IDs."""
+    Data from https://github.com/tModLoader/tModLoader/wiki/Vanilla-Wall-IDs and https://github.com/TerraMap/windows/blob/master/Data/tiles.xml."""
 
     STONE = 1
     DIRT_UNSAFE = 2
@@ -236,11 +236,6 @@ class WallType(enum.IntEnum):
     SILLY_BALLOON_PINK_WALL = 228
     SILLY_BALLOON_PURPLE_WALL = 229
     SILLY_BALLOON_GREEN_WALL = 230
-
-    # 1.4, adapted from: https://github.com/TerraMap/windows/blob/master/Data/tiles.xml
-    # Ecto blocks are craftable versions of the natural walls which can be crafted in graveyards
-    # https://terraria.gamepedia.com/1.4.0.1
-
     IRON_BRICK = 231
     LEAD_BRICK = 232
     LESION_BLOCK = 233
@@ -326,6 +321,38 @@ class WallType(enum.IntEnum):
     LARGE_BAMBOO_BLOCK_WALL = 313
     ECTO_AMBER_STONE_WALL = 314
     BAMBOO_FENCE = 315
+    ASH_WOOD = 316
+    ASH_WOOD_FENCE = 317
+    ECHO_WALL = 318
+    REEF_WALL = 319
+    POOP_WALL = 320
+    SHIMMER_BLOCK_WALL = 321
+    SHIMMER_BRICK_WALL = 322
+    LUNAR_RUST_BRICK_WALL = 323
+    DARK_CELESTIAL_BRICK_WALL = 324
+    ASTRA_BRICK_WALL = 325
+    COSMIC_EMBER_BRICK_WALL = 326
+    CRYOCORE_BRICK_WALL = 327
+    MERCURY_BRICK_WALL = 328
+    STAR_ROYALE_BRICK_WALL = 329
+    HEAVENFORGE_BRICK_WALL = 330
+    ANCIENT_BLUE_BRICK_WALL = 331
+    ANCIENT_GREEN_BRICK_WALL = 332
+    ANCIENT_PINK_BRICK_WALL = 333
+    ANCIENT_GOLD_BRICK_WALL = 334
+    ANCIENT_SILVER_BRICK_WALL = 335
+    ANCIENT_COPPER_BRICK_WALL = 336
+    ANCIENT_OBSIDIAN_BRICK_WALL = 337
+    ANCIENT_HELLSTONE_BRICK_WALL = 338
+    ANCIENT_COBALT_BRICK_WALL = 339
+    ANCIENT_MYTHRIL_BRICK_WALL = 340
+    LAVA_MOSS_BLOCK_WALL = 341
+    ARGON_MOSS_BLOCK_WALL = 342
+    KRYPTON_MOSS_BLOCK_WALL = 343
+    XENON_MOSS_BLOCK_WALL = 344
+    VIOLET_MOSS_BLOCK_WALL = 345
+    RAINBOW_MOSS_BLOCK_WALL = 346
+
 
     def __repr__(self):
         return f"{self.__class__.__name__}.{self.name}"
