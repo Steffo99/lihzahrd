@@ -4,16 +4,30 @@ A Terraria 1.4.4.9 world parser in Python.
 
 You can use this package to get programmer-friendly data from a Terraria world!
 
-Install with:
-```
-pip install lihzahrd
-```
+## Installation
+
+Use your favourite Python package manager to install `lihzahrd`:
+
+- Venv + Pip
+
+  ```console
+  $ source .venv/bin/activate
+  $ pip install lihzahrd
+  ```
+
+- Poetry
+
+  ```console
+  $ poetry add lihzahrd
+  ```
+  
+- And more!
 
 ## Usage
 
 You can open a world file and get a `World` object by calling:
 
-```
+```python
 import lihzahrd
 world = lihzahrd.World.create_from_file("filename.wld")
 ```
@@ -24,7 +38,7 @@ Once you have a `World` object, you can use all data present in the save file by
 
 > **Warning**
 > 
-> Maliciously designed Terraria worlds can drain system resources, crash the interpreter, or possibly do more evil things!
+> Loading maliciously designed Terraria worlds can drain system resources, crash the interpreter, or possibly do more evil things!
 > 
 > **Make sure you trust the worlds you are parsing!**
 
@@ -32,13 +46,11 @@ Once you have a `World` object, you can use all data present in the save file by
 
 The documentation is available [here](https://gh.steffo.eu/lihzahrd/html/).
 
-It's a bit messy and incomplete, as I still have not figured out the meaning of some data, and the code is in need of some refactoring.
-
-If you know something that isn't present in the documentation, please let me know [with an issue](https://github.com/Steffo99/lihzahrd/issues/new)!
+If you know something that is missing in the documentation, please let me know [with an issue](https://github.com/Steffo99/lihzahrd/issues/new)!
 
 ## PyPy
 
-`lihzahrd` is compatible with [PyPy](https://www.pypy.org), a faster implementation of Python!
+`lihzahrd` is compatible with [PyPy](https://www.pypy.org), an alternative implementation on Python!
 
 If you think that parsing a world takes too much time, you can use PyPy to reduce the required time by a factor of ~3!
 
@@ -55,26 +67,26 @@ To contribute to `lihzahrd`, you need to have [Poetry](https://poetry.eustace.io
 
 After you've installed Poetry, clone the git repo with the command:
 
-```
-git clone https://github.com/Steffo99/lihzahrd
+```console
+$ git clone https://github.com/Steffo99/lihzahrd
 ```
 
 Then enter the new directory:
 
-```
-cd lihzahrd
+```console
+$ cd lihzahrd
 ```
 
 And finally install all dependencies and the package:
 
-```
-poetry install
+```console
+$ poetry install
 ```
 
 This will create a new virtualenv for the development of the library; you can activate it by typing:
 
-```
-poetry shell
+```console
+$ poetry shell
 ```
 
 Please note that for compatibility with PyPy, the project needs to target Python 3.6.
@@ -99,4 +111,4 @@ That means you have to publish under the same license the source code of any pro
 
 ## See also
 
-- [flyingsnake](https://github.com/Steffo99/flyingsnake), a map renderer using this package
+- [flyingsnake](https://github.com/Steffo99/flyingsnake), a map renderer using this package (not updated yet)
