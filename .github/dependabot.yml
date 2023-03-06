@@ -1,0 +1,93 @@
+# Dependabot configuration file
+# See: https://docs.github.com/en/code-security/supply-chain-security/keeping-your-dependencies-updated-automatically/configuration-options-for-dependency-updates#allow
+
+version: 2
+
+updates:
+
+  # We're using Poetry
+  - package-ecosystem: pip
+
+    # The root directory of the project
+    directory: "/"
+
+    # Check every day for updates at 08:00 UTC
+    schedule:
+      interval: "daily"
+      time: "08:00"
+      timezone: "UTC"
+
+    # Do not alert for indirect dependencies, as there may be too many
+    allow:
+      - dependency-type: direct
+
+    # Use Gitmoji in the commit message
+    commit-message:
+      prefix: "⬆️ "
+      include: "scope"
+
+    # Set the pull request label
+    labels:
+      - "dependencies"
+
+    # Stay updated to the main branch
+    rebase-strategy: auto
+
+    # Pip does not support any other versioning strategy
+    versioning-strategy: lockfile-only
+
+  # Additionally, keep GitHub Actions updated
+  - package-ecosystem: github-actions
+
+    # The root directory of the actions
+    directory: "/"
+
+    # Check every day for updates at 08:00 UTC
+    schedule:
+      interval: "daily"
+      time: "08:00"
+      timezone: "UTC"
+
+    # GitHub Actions only has direct dependencies
+    allow:
+      - dependency-type: direct
+
+    # Use Gitmoji in the commit message
+    commit-message:
+      prefix: "🔨️ "
+      include: "scope"
+
+    # Set the pull request label
+    labels:
+      - "automation"
+
+    # Stay updated to the main branch
+    rebase-strategy: auto
+
+  # Finally, keep Git submodules updated
+  - package-ecosystem: gitsubmodule
+
+    # The root directory of the repository
+    directory: "/"
+
+    # Check every day for updates at 08:00 UTC
+    schedule:
+      interval: "daily"
+      time: "08:00"
+      timezone: "UTC"
+
+    # GitHub Actions only has direct dependencies
+    allow:
+      - dependency-type: direct
+
+    # Use Gitmoji in the commit message
+    commit-message:
+      prefix: "⬆️ "
+      include: "scope"
+
+    # Set the pull request label
+    labels:
+      - "dependencies"
+
+    # Stay updated to the main branch
+    rebase-strategy: auto
