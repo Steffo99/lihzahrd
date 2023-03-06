@@ -33,6 +33,7 @@ class BossesDefeated:
         old_ones_army: OldOnesArmyTiers,
         empress_of_light: bool,
         queen_slime: bool,
+        deerclops: bool,
     ):
         self.eye_of_cthulhu: bool = eye_of_cthulhu
         self.eater_of_worlds: bool = eater_of_worlds
@@ -65,6 +66,7 @@ class BossesDefeated:
         self.old_ones_army: OldOnesArmyTiers = old_ones_army
         self.empress_of_light: bool = empress_of_light
         self.queen_slime: bool = queen_slime
+        self.deerclops: bool = deerclops
 
     def __repr__(self):
         return f"<BossesDefeated>"
