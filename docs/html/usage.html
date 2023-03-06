@@ -5,7 +5,8 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <title>Usage guide &mdash; lihzahrd  documentation</title>
@@ -157,21 +158,21 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="usage-guide">
+  <section id="usage-guide">
 <h1>Usage guide<a class="headerlink" href="#usage-guide" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="prerequisites">
+<section id="prerequisites">
 <h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
 <p>To use <code class="docutils literal notranslate"><span class="pre">lihzahrd</span></code>, you need Python 3.6 or higher.</p>
 <p>That’s it! No other packages are required!</p>
-</div>
-<div class="section" id="installing">
+</section>
+<section id="installing">
 <h2>Installing<a class="headerlink" href="#installing" title="Permalink to this headline">¶</a></h2>
 <p>You can download (or update) the package with <code class="docutils literal notranslate"><span class="pre">pip</span></code> by entering in your terminal:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span><span class="o">.</span><span class="mi">8</span> <span class="o">-</span><span class="n">m</span> <span class="n">pip</span> <span class="n">install</span> <span class="o">--</span><span class="n">upgrade</span> <span class="n">lihzahrd</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span><span class="mf">.8</span> <span class="o">-</span><span class="n">m</span> <span class="n">pip</span> <span class="n">install</span> <span class="o">--</span><span class="n">upgrade</span> <span class="n">lihzahrd</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="opening-a-world">
+</section>
+<section id="opening-a-world">
 <h2>Opening a world<a class="headerlink" href="#opening-a-world" title="Permalink to this headline">¶</a></h2>
 <p>To open a Terraria world file named <code class="docutils literal notranslate"><span class="pre">terra.wld</span></code> located in the current working directory, you should import the
 <code class="xref py py-mod docutils literal notranslate"><span class="pre">lihzahrd</span></code> package and then call the <a class="reference internal" href="world.html#lihzahrd.World.create_from_file" title="lihzahrd.World.create_from_file"><code class="xref py py-meth docutils literal notranslate"><span class="pre">World.create_from_file()</span></code></a> function:</p>
@@ -181,8 +182,8 @@
 </div>
 <p>It should take <strong>a few minutes</strong>, depending on the size of the world, and then return a
 <a class="reference internal" href="world.html#lihzahrd.World" title="lihzahrd.World"><code class="xref py py-class docutils literal notranslate"><span class="pre">World</span></code></a> object.</p>
-</div>
-<div class="section" id="accessing-the-world-properties">
+</section>
+<section id="accessing-the-world-properties">
 <h2>Accessing the world properties<a class="headerlink" href="#accessing-the-world-properties" title="Permalink to this headline">¶</a></h2>
 <p>Most of the world properties are accessible directly as attributes of the <a class="reference internal" href="world.html#lihzahrd.World" title="lihzahrd.World"><code class="xref py py-class docutils literal notranslate"><span class="pre">World</span></code></a> object:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">world</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
@@ -205,8 +206,8 @@
 </div>
 <p>You can look at the <a class="reference internal" href="world.html#lihzahrd.World" title="lihzahrd.World"><code class="xref py py-class docutils literal notranslate"><span class="pre">World</span></code></a> class documentation or use an IDE that supports type annotations
 (such as <a class="reference external" href="https://www.jetbrains.com/pycharm/">PyCharm</a>) to find all available attributes.</p>
-</div>
-<div class="section" id="accessing-the-tile-data">
+</section>
+<section id="accessing-the-tile-data">
 <h2>Accessing the tile data<a class="headerlink" href="#accessing-the-tile-data" title="Permalink to this headline">¶</a></h2>
 <p>All <a class="reference internal" href="tiles.html#lihzahrd.tiles.Tile" title="lihzahrd.tiles.Tile"><code class="xref py py-class docutils literal notranslate"><span class="pre">tiles.Tile</span></code></a> are stored in the <a class="reference internal" href="tiles.html#lihzahrd.tiles.TileMatrix" title="lihzahrd.tiles.TileMatrix"><code class="xref py py-class docutils literal notranslate"><span class="pre">tiles.TileMatrix</span></code></a> accessible at the <a class="reference internal" href="world.html#lihzahrd.World.tiles" title="lihzahrd.World.tiles"><code class="xref py py-attr docutils literal notranslate"><span class="pre">World.tiles</span></code></a>
 attribute.</p>
@@ -242,8 +243,8 @@ attribute.</p>
 </ul>
 <p>All of these attributes may be <code class="xref py py-const docutils literal notranslate"><span class="pre">None</span></code> if the property isn’t applicable for the tile:
 for example, <a class="reference internal" href="tiles.html#lihzahrd.tiles.Tile.block" title="lihzahrd.tiles.Tile.block"><code class="xref py py-attr docutils literal notranslate"><span class="pre">tiles.Tile.block</span></code></a> is <code class="xref py py-const docutils literal notranslate"><span class="pre">None</span></code> if there is no block (“air”) placed there.</p>
-</div>
-<div class="section" id="accessing-extra-data">
+</section>
+<section id="accessing-extra-data">
 <h2>Accessing extra data<a class="headerlink" href="#accessing-extra-data" title="Permalink to this headline">¶</a></h2>
 <p>Extra data, such as the content of chests or the text of signs, may be accessed in two different ways:</p>
 <ul>
@@ -265,15 +266,15 @@ for example, <a class="reference internal" href="tiles.html#lihzahrd.tiles.Tile.
 <span class="c1"># True</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="something-else">
+</section>
+<section id="something-else">
 <h2>Something else<a class="headerlink" href="#something-else" title="Permalink to this headline">¶</a></h2>
 <p>All information included in a Terraria savefile is parsed in this package and made available in the <a class="reference internal" href="world.html#lihzahrd.World" title="lihzahrd.World"><code class="xref py py-class docutils literal notranslate"><span class="pre">World</span></code></a>
 object.</p>
 <p>If you couldn’t find what you needed in this short usage guide, check the API Reference or have a look at the
 <a class="reference external" href="https://github.com/Steffo99/lihzahrd/tree/master/lihzahrd">source code</a> !</p>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

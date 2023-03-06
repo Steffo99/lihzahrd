@@ -5,7 +5,8 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <title>lihzahrd.fileutils &mdash; lihzahrd  documentation</title>
@@ -170,17 +171,112 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="lihzahrd-fileutils">
+  <section id="lihzahrd-fileutils">
 <h1>lihzahrd.fileutils<a class="headerlink" href="#lihzahrd-fileutils" title="Permalink to this headline">¶</a></h1>
 <div class="toctree-wrapper compound">
 </div>
 <span class="target" id="module-lihzahrd.fileutils"></span><dl class="class">
 <dt id="lihzahrd.fileutils.FileReader">
 <em class="property">class </em><code class="sig-prename descclassname">lihzahrd.fileutils.</code><code class="sig-name descname">FileReader</code><span class="sig-paren">(</span><em class="sig-param">file: IO</em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.fileutils.FileReader" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="attribute">
-<dt id="lihzahrd.fileutils.FileReader._bitify">
-<code class="sig-name descname">_bitify</code><a class="headerlink" href="#lihzahrd.fileutils.FileReader._bitify" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Helper class for deserializing a Terraria world file.</p>
+<dl class="method">
+<dt id="lihzahrd.fileutils.FileReader._bool">
+<code class="sig-name descname">_bool</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.fileutils.FileReader._bool" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a tuple containing unpacked values.</p>
+<p>Unpack according to the format string Struct.format. The buffer’s size
+in bytes must be Struct.size.</p>
+<p>See help(struct) for more on format strings.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="lihzahrd.fileutils.FileReader._double">
+<code class="sig-name descname">_double</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.fileutils.FileReader._double" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a tuple containing unpacked values.</p>
+<p>Unpack according to the format string Struct.format. The buffer’s size
+in bytes must be Struct.size.</p>
+<p>See help(struct) for more on format strings.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="lihzahrd.fileutils.FileReader._int1">
+<code class="sig-name descname">_int1</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.fileutils.FileReader._int1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a tuple containing unpacked values.</p>
+<p>Unpack according to the format string Struct.format. The buffer’s size
+in bytes must be Struct.size.</p>
+<p>See help(struct) for more on format strings.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="lihzahrd.fileutils.FileReader._int2">
+<code class="sig-name descname">_int2</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.fileutils.FileReader._int2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a tuple containing unpacked values.</p>
+<p>Unpack according to the format string Struct.format. The buffer’s size
+in bytes must be Struct.size.</p>
+<p>See help(struct) for more on format strings.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="lihzahrd.fileutils.FileReader._int4">
+<code class="sig-name descname">_int4</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.fileutils.FileReader._int4" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a tuple containing unpacked values.</p>
+<p>Unpack according to the format string Struct.format. The buffer’s size
+in bytes must be Struct.size.</p>
+<p>See help(struct) for more on format strings.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="lihzahrd.fileutils.FileReader._int8">
+<code class="sig-name descname">_int8</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.fileutils.FileReader._int8" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a tuple containing unpacked values.</p>
+<p>Unpack according to the format string Struct.format. The buffer’s size
+in bytes must be Struct.size.</p>
+<p>See help(struct) for more on format strings.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="lihzahrd.fileutils.FileReader._rect">
+<code class="sig-name descname">_rect</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.fileutils.FileReader._rect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a tuple containing unpacked values.</p>
+<p>Unpack according to the format string Struct.format. The buffer’s size
+in bytes must be Struct.size.</p>
+<p>See help(struct) for more on format strings.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="lihzahrd.fileutils.FileReader._single">
+<code class="sig-name descname">_single</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.fileutils.FileReader._single" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a tuple containing unpacked values.</p>
+<p>Unpack according to the format string Struct.format. The buffer’s size
+in bytes must be Struct.size.</p>
+<p>See help(struct) for more on format strings.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="lihzahrd.fileutils.FileReader._uint2">
+<code class="sig-name descname">_uint2</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.fileutils.FileReader._uint2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a tuple containing unpacked values.</p>
+<p>Unpack according to the format string Struct.format. The buffer’s size
+in bytes must be Struct.size.</p>
+<p>See help(struct) for more on format strings.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="lihzahrd.fileutils.FileReader._uint4">
+<code class="sig-name descname">_uint4</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.fileutils.FileReader._uint4" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a tuple containing unpacked values.</p>
+<p>Unpack according to the format string Struct.format. The buffer’s size
+in bytes must be Struct.size.</p>
+<p>See help(struct) for more on format strings.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="lihzahrd.fileutils.FileReader._uint8">
+<code class="sig-name descname">_uint8</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.fileutils.FileReader._uint8" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a tuple containing unpacked values.</p>
+<p>Unpack according to the format string Struct.format. The buffer’s size
+in bytes must be Struct.size.</p>
+<p>See help(struct) for more on format strings.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="lihzahrd.fileutils.FileReader.bits">
@@ -287,7 +383,8 @@
 <dl class="class">
 <dt id="lihzahrd.fileutils.Rect">
 <em class="property">class </em><code class="sig-prename descclassname">lihzahrd.fileutils.</code><code class="sig-name descname">Rect</code><span class="sig-paren">(</span><em class="sig-param">left</em>, <em class="sig-param">right</em>, <em class="sig-param">top</em>, <em class="sig-param">bottom</em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.fileutils.Rect" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="attribute">
+<dd><p>Class delimining the bounds of a rectangle.</p>
+<dl class="attribute">
 <dt id="lihzahrd.fileutils.Rect.bottom">
 <code class="sig-name descname">bottom</code><a class="headerlink" href="#lihzahrd.fileutils.Rect.bottom" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -312,7 +409,9 @@
 <dl class="class">
 <dt id="lihzahrd.fileutils.Pointers">
 <em class="property">class </em><code class="sig-prename descclassname">lihzahrd.fileutils.</code><code class="sig-name descname">Pointers</code><span class="sig-paren">(</span><em class="sig-param">world_header: int</em>, <em class="sig-param">world_tiles: int</em>, <em class="sig-param">chests: int</em>, <em class="sig-param">signs: int</em>, <em class="sig-param">npcs: int</em>, <em class="sig-param">tile_entities: int</em>, <em class="sig-param">pressure_plates: int</em>, <em class="sig-param">town_manager: int</em>, <em class="sig-param">bestiary: int</em>, <em class="sig-param">journey_powers: int</em>, <em class="sig-param">footer: int</em>, <em class="sig-param">*unknown</em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.fileutils.Pointers" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="attribute">
+<dd><p>Pointers to the various sections of the Terraria save file.</p>
+<p>All values are in number of bytes from the start.</p>
+<dl class="attribute">
 <dt id="lihzahrd.fileutils.Pointers.bestiary">
 <code class="sig-name descname">bestiary</code><a class="headerlink" href="#lihzahrd.fileutils.Pointers.bestiary" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -382,7 +481,8 @@
 <dl class="class">
 <dt id="lihzahrd.fileutils.Coordinates">
 <em class="property">class </em><code class="sig-prename descclassname">lihzahrd.fileutils.</code><code class="sig-name descname">Coordinates</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">y</em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.fileutils.Coordinates" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="attribute">
+<dd><p>A pair of coordinates.</p>
+<dl class="attribute">
 <dt id="lihzahrd.fileutils.Coordinates.x">
 <code class="sig-name descname">x</code><a class="headerlink" href="#lihzahrd.fileutils.Coordinates.x" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -394,7 +494,7 @@
 
 </dd></dl>
 
-</div>
+</section>
 
 
            </div>

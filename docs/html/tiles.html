@@ -5,7 +5,8 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <title>lihzahrd.tiles &mdash; lihzahrd  documentation</title>
@@ -170,7 +171,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="lihzahrd-tiles">
+  <section id="lihzahrd-tiles">
 <h1>lihzahrd.tiles<a class="headerlink" href="#lihzahrd-tiles" title="Permalink to this headline">¶</a></h1>
 <div class="toctree-wrapper compound">
 </div>
@@ -282,7 +283,7 @@ the save file.</p>
 
 <dl class="class">
 <dt id="lihzahrd.tiles.Block">
-<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.tiles.</code><code class="sig-name descname">Block</code><span class="sig-paren">(</span><em class="sig-param">type_: lihzahrd.enums.blocktype.BlockType</em>, <em class="sig-param">shape: lihzahrd.tiles.shape.Shape = &lt;Shape.NORMAL: 0&gt;</em>, <em class="sig-param">frame: Optional[lihzahrd.tiles.frameimportantdata.FrameImportantData] = None</em>, <em class="sig-param">paint: Optional[int] = None</em>, <em class="sig-param">is_active: bool = True</em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.tiles.Block" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.tiles.</code><code class="sig-name descname">Block</code><a class="headerlink" href="#lihzahrd.tiles.Block" title="Permalink to this definition">¶</a></dt>
 <dd><p>A block that has been placed in the world.</p>
 <dl class="attribute">
 <dt id="lihzahrd.tiles.Block.frame">
@@ -294,6 +295,18 @@ the save file.</p>
 <dt id="lihzahrd.tiles.Block.is_active">
 <code class="sig-name descname">is_active</code><a class="headerlink" href="#lihzahrd.tiles.Block.is_active" title="Permalink to this definition">¶</a></dt>
 <dd><p>If the block is solid or can be passed through because of an Actuator.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="lihzahrd.tiles.Block.is_echo">
+<code class="sig-name descname">is_echo</code><a class="headerlink" href="#lihzahrd.tiles.Block.is_echo" title="Permalink to this definition">¶</a></dt>
+<dd><p>If the block had Echo Coating applied, and is invisible.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="lihzahrd.tiles.Block.is_illuminant">
+<code class="sig-name descname">is_illuminant</code><a class="headerlink" href="#lihzahrd.tiles.Block.is_illuminant" title="Permalink to this definition">¶</a></dt>
+<dd><p>If the block had Illuminant Coating applied, and is unaffected by lighting.</p>
 </dd></dl>
 
 <dl class="attribute">
@@ -318,8 +331,20 @@ the save file.</p>
 
 <dl class="class">
 <dt id="lihzahrd.tiles.Wall">
-<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.tiles.</code><code class="sig-name descname">Wall</code><span class="sig-paren">(</span><em class="sig-param">type_: lihzahrd.enums.walltype.WallType</em>, <em class="sig-param">paint: Optional[int] = None</em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.tiles.Wall" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.tiles.</code><code class="sig-name descname">Wall</code><a class="headerlink" href="#lihzahrd.tiles.Wall" title="Permalink to this definition">¶</a></dt>
 <dd><p>A wall that has been placed in the world.</p>
+<dl class="attribute">
+<dt id="lihzahrd.tiles.Wall.is_echo">
+<code class="sig-name descname">is_echo</code><a class="headerlink" href="#lihzahrd.tiles.Wall.is_echo" title="Permalink to this definition">¶</a></dt>
+<dd><p>If the wall had Echo Coating applied, and is invisible.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="lihzahrd.tiles.Wall.is_illuminant">
+<code class="sig-name descname">is_illuminant</code><a class="headerlink" href="#lihzahrd.tiles.Wall.is_illuminant" title="Permalink to this definition">¶</a></dt>
+<dd><p>If the wall had Illuminant Coating applied, and is unaffected by lighting.</p>
+</dd></dl>
+
 <dl class="attribute">
 <dt id="lihzahrd.tiles.Wall.paint">
 <code class="sig-name descname">paint</code><a class="headerlink" href="#lihzahrd.tiles.Wall.paint" title="Permalink to this definition">¶</a></dt>
@@ -354,7 +379,7 @@ the save file.</p>
 
 <dl class="class">
 <dt id="lihzahrd.tiles.Tile">
-<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.tiles.</code><code class="sig-name descname">Tile</code><span class="sig-paren">(</span><em class="sig-param">block: Optional[lihzahrd.tiles.block.Block] = None</em>, <em class="sig-param">wall: Optional[lihzahrd.tiles.wall.Wall] = None</em>, <em class="sig-param">liquid: Optional[lihzahrd.tiles.liquid.Liquid] = None</em>, <em class="sig-param">wiring: Optional[lihzahrd.tiles.wiring.Wiring] = None</em>, <em class="sig-param">extra: Union[lihzahrd.chests.chest.Chest</em>, <em class="sig-param">lihzahrd.signs.sign.Sign</em>, <em class="sig-param">lihzahrd.pressureplates.weighedpressureplate.WeighedPressurePlate</em>, <em class="sig-param">lihzahrd.tileentities.tileentity.TileEntity</em>, <em class="sig-param">None] = None</em><span class="sig-paren">)</span><a class="headerlink" href="#lihzahrd.tiles.Tile" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">lihzahrd.tiles.</code><code class="sig-name descname">Tile</code><a class="headerlink" href="#lihzahrd.tiles.Tile" title="Permalink to this definition">¶</a></dt>
 <dd><p>A tile, composed by a block, a wall, a liquid and wires.</p>
 <dl class="attribute">
 <dt id="lihzahrd.tiles.Tile.block">
@@ -437,7 +462,7 @@ the save file.</p>
 
 </dd></dl>
 
-</div>
+</section>
 
 
            </div>
