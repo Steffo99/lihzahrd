@@ -28,45 +28,67 @@ class FileReader:
     def __init__(self, file: typing.IO):
         self.file: typing.IO = file
 
+    _bool = struct.Struct("?").unpack
+
     def bool(self) -> bool:
-        return struct.unpack("?", self.file.read(1))[0]
+        return self._bool(self.file.read(1))[0]
+
+    _int1 = struct.Struct("B").unpack
 
     def int1(self) -> int:
-        return struct.unpack("B", self.file.read(1))[0]
+        return self._int1(self.file.read(1))[0]
 
     def uint1(self) -> int:
-        return struct.unpack("B", self.file.read(1))[0]
+        return self._int1(self.file.read(1))[0]
+
+    _int2 = struct.Struct("h").unpack
 
     def int2(self) -> int:
-        return struct.unpack("h", self.file.read(2))[0]
+        return self._int2(self.file.read(2))[0]
+
+    _uint2 = struct.Struct("H").unpack
 
     def uint2(self) -> int:
-        return struct.unpack("H", self.file.read(2))[0]
+        return self._uint2(self.file.read(2))[0]
+
+    _int4 = struct.Struct("i").unpack
 
     def int4(self) -> int:
-        return struct.unpack("i", self.file.read(4))[0]
+        return self._int4(self.file.read(4))[0]
+
+    _uint4 = struct.Struct("i").unpack
 
     def uint4(self) -> int:
-        return struct.unpack("I", self.file.read(4))[0]
+        return self._uint4(self.file.read(4))[0]
+
+    _int8 = struct.Struct("q").unpack
 
     def int8(self) -> int:
-        return struct.unpack("q", self.file.read(8))[0]
+        return self._int8(self.file.read(8))[0]
+
+    _uint8 = struct.Struct("Q").unpack
 
     def uint8(self) -> int:
-        return struct.unpack("Q", self.file.read(8))[0]
+        return self._uint8(self.file.read(8))[0]
+
+    _single = struct.Struct("f").unpack
 
     def single(self) -> float:
-        return struct.unpack("f", self.file.read(4))[0]
+        return self._single(self.file.read(4))[0]
+
+    _double = struct.Struct("d").unpack
 
     def double(self) -> float:
-        return struct.unpack("d", self.file.read(8))[0]
+        return self._double(self.file.read(8))[0]
 
     def bits(self) -> typing.Tuple[bool, bool, bool, bool, bool, bool, bool, bool]:
-        data = struct.unpack("B", self.file.read(1))[0]
+        data = self._int1(self.file.read(1))[0]
         return INT_TO_BITS_CACHE[data]
 
+    _rect = struct.Struct("iiii").unpack
+
     def rect(self) -> Rect:
-        left, right, top, bottom = struct.unpack("iiii", self.file.read(16))
+        left, right, top, bottom = self._rect(self.file.read(16))
         return Rect(left, right, top, bottom)
 
     def uleb128(self) -> int:
