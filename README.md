@@ -22,6 +22,12 @@ It _will_ take a while to process: a small Terraria world contains more than 5 m
 
 Once you have a `World` object, you can use all data present in the save file by accessing [its attributes](http://gh.steffo.eu/lihzahrd/html/world.html).
 
+> **Warning**
+> 
+> Maliciously designed Terraria worlds can drain system resources, crash the interpreter, or possibly do more evil things!
+> 
+> **Make sure you trust the worlds you are parsing!**
+
 ## Documentation
 
 The documentation is available [here](https://gh.steffo.eu/lihzahrd/html/).
