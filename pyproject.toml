@@ -1,38 +1,171 @@
-[tool.poetry]
-    name = "lihzahrd"
-    version = "2.0.0"
-    description = "A Terraria world parser in Python"
-    authors = ["Stefano Pigozzi <ste.pigozzi@gmail.com>"]
-    license = "AGPL-3.0+"
-    readme = "README.md"
-    homepage = "https://github.com/Steffo99/lihzahrd"
-    documentation = "https://gh.steffo.eu/lihzahrd/"
-    classifiers = [
-        "Development Status :: 4 - Beta",
-        "Operating System :: OS Independent",
-        "Programming Language :: Python :: 3.6"
-    ]
-
-# Library dependencies
-[tool.poetry.dependencies]
-    python = "^3.6.2"
-
-# Development dependencies
-[tool.poetry.dev-dependencies]
-    pytest = "^5.2.1"
-    sphinx = "^2.2.1"
-    sphinx_rtd_theme = "^0.4.3"
-    black = "^22.1.0"
-
-# Optional dependencies
-[tool.poetry.extras]
-
-# Code style
-[tool.black]
-line-length = 120
-target-version = ['py36']
-
-# Used build system
 [build-system]
-    requires = ["poetry>=0.12"]
-    build-backend = "poetry.masonry.api"
+#######################
+# Python build system #
+#######################
+# The build system to use when installing this package.
+# Used when installing the package with `pip install .`.
+# See also: https://www.python.org/dev/peps/pep-0517/
+
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+
+
+[tool.poetry]
+###################
+# Poetry settings #
+###################
+# See https://python-poetry.org/docs/pyproject/ for more details!
+
+# The name of your project.
+# Ensure that it is available on PyPI: https://pypi.org/
+name = "lihzahrd"
+
+# The version of the package.
+version = "3.0.0"
+
+# A brief, one-sentence description about your project.
+description = "A Terraria world parser in Python"
+
+# A list of the authors of the project.
+authors = [
+    "Stefano Pigozzi <me@steffo.eu>",
+]
+
+# A list of maintainers of the project.
+# Often, it is the same as the authors list.
+maintainers = [
+    "Stefano Pigozzi <me@steffo.eu>",
+]
+
+# The license of the package.
+# Uses SPDX format: https://spdx.org/licenses/
+license = "AGPL-3.0-or-later"
+
+# The README file.
+readme = "README.md"
+
+# The URL of the project website.
+# Not the GitHub repository!
+# homepage = ""
+
+# The URL of the project repository.
+repository = "https://github.com/Steffo99/lihzahrd/"
+
+# The URL of the project documentation location.
+documentation = "https://gh.steffo.eu/lihzahrd/"
+
+# Up to five keywords related to your project.
+# See also: https://packaging.python.org/en/latest/guides/distributing-packages-using-setuptools/#keywords
+keywords = [
+    "terraria",
+    "parser",
+    "game",
+]
+
+# Any number of trove classifiers that apply to your project.
+# See the list at: https://pypi.org/classifiers/
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3.6"
+]
+
+# ADVANCED: specify the packages exported by your project
+# See also: https://python-poetry.org/docs/pyproject/#packages
+# packages = [
+#     # Regular packages
+#     { include = "OTHER_PACKAGE_NAME" },
+#     # Namespace packages
+#     { include = "EXTEND/OTHER/NAMESPACE/**/*.py" }
+# ]
+
+# ADVANCED: include additional files in the build
+# include = [
+#     "FILENAME.txt"
+# ]
+
+# ADVANCED: exclude files from the build
+# exclude = [
+#     "PACKAGE_NAME/test.py"
+# ]
+
+
+
+[tool.poetry.urls]
+##################
+# URLs           #
+##################
+# Additional project URLs in a name → link mapping.
+
+
+
+[tool.poetry.scripts]
+#####################
+# Scripts           #
+#####################
+# Poetry can create "binaries" to add to the PATH when the project is installed.
+# They are specified in the form of a mapping with the command name as key and the function to execute as value.
+
+# If you are building a library, comment this.
+# If you are building an application, replace PACKAGE-NAME and PACKAGE_NAME with your package name in kebab-case and snake_case respectively.
+
+# PACKAGE-NAME = "PACKAGE_NAME.__main__:main"
+
+
+
+[tool.poetry.dependencies]
+##########################
+# Dependencies           #
+##########################
+# A mapping of dependencies of the project
+# It should be maintained by `poetry add` / `poetry remove`, but it currently adds things after all comments...
+# You can manually specify allowed version numbers:
+# * means "any release"
+#         *        →  any
+# ^X.X.X means "newer releases with this major version"
+#         ^3.10.1  →  == 3      && >= 3.10.1
+# ~X.X.X means "newer releases with this minor version"
+#         ~3.10.1  →  == 3.10   && >= 3.10.1
+# nothing means "this specific release"
+#          3.10.1  →  == 3.10.1
+
+python = "^3.6.2"
+
+
+
+[tool.poetry.dev-dependencies]
+##############################
+# Development dependencies   #
+##############################
+# Same as above, but these dependencies are installed only if the project is being installed in development mode.
+# They are excluded from the final build.
+
+pytest = "^5.2.1"
+sphinx = "^2.2.1"
+sphinx_rtd_theme = "^0.4.3"
+
+
+
+[tool.poetry.extras]
+####################
+# Package extras   #
+####################
+# ADVANCED: specify optional dependency groups.
+# See: https://python-poetry.org/docs/pyproject/#extras
+
+
+
+[tool.poetry.plugins]
+#####################
+# Poetry plugins    #
+#####################
+# ADVANCED: extend Poetry's functionality.
+# See: https://python-poetry.org/docs/pyproject/#plugins
+
+
+
+[tool.pytest.ini_options]
+#########################
+# Pytest configuration  #
+#########################
