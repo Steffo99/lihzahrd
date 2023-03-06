@@ -36,6 +36,11 @@ class World:
         is_drunk_world: bool,
         is_for_the_worthy: bool,
         is_tenth_anniversary: bool,
+        is_the_constant: bool,
+        is_bee_world: bool,
+        is_upside_down: bool,
+        is_trap_world: bool,
+        is_zenith_world: bool,
         created_on,
         styles: Styles,
         backgrounds: Backgrounds,
@@ -116,16 +121,28 @@ class World:
         """The difficulty (https://terraria.gamepedia.com/Difficulty) the game is in."""
 
         self.is_drunk_world: bool = is_drunk_world
-        """If the world was created with the 5162020 (https://terraria.gamepedia.com/Secret_world_seeds#Drunk_World)
-        seed."""
+        """If the world was created with the `Drunk world <https://terraria.wiki.gg/wiki/Secret_world_seeds#Drunk_world>`_ seed."""
 
         self.is_for_the_worthy: bool = is_for_the_worthy
-        """If the world was created with the
-        for the worthy (https://terraria.gamepedia.com/Secret_world_seeds#For_the_worthy) seed."""
+        """If the world was created with the `For the worthy <https://terraria.wiki.gg/wiki/Secret_world_seeds#For_the_worthy>`_ seed."""
 
         self.is_tenth_anniversary: bool = is_tenth_anniversary
-        """If the world was created with the
-        celebrationmk10 (https://terraria.fandom.com/wiki/Secret_world_seeds#Celebrationmk10) seed."""
+        """If the world was created with the `Celebrationmk10 <https://terraria.wiki.gg/wiki/Secret_world_seeds#Celebrationmk10>` seed."""
+
+        self.is_the_constant: bool = is_the_constant
+        """If the world was created with `The Constant <https://terraria.wiki.gg/wiki/Secret_world_seeds#The_Constant>`_ seed."""
+
+        self.is_bee_world: bool = is_bee_world
+        """If the world was created with the `Not the bees <https://terraria.wiki.gg/wiki/Secret_world_seeds#Not_the_bees>`_ seed."""
+
+        self.is_upside_down: bool = is_upside_down
+        """If the world was created with the `Don't dig up <https://terraria.wiki.gg/wiki/Secret_world_seeds#Don't_dig_up>`_ seed."""
+
+        self.is_trap_world: bool = is_trap_world
+        """If the world was created with the `No traps <https://terraria.wiki.gg/wiki/Secret_world_seeds#No_traps>`_ seed."""
+
+        self.is_zenith_world: bool = is_zenith_world
+        """If the world was created with the `Get fixed boi <https://terraria.wiki.gg/wiki/Secret_world_seeds#Get_fixed_boi>`_ seed."""
 
         self.created_on = created_on
         """The date and time this world was created in."""
@@ -345,15 +362,18 @@ class World:
 
     @property
     def is_expert(self):
-        """If the world is in expert difficulty or not.
-
-        Provided for compatibility purposes."""
-        return self.difficulty == 1
+        """If the world is in expert difficulty or not."""
+        return self.difficulty == 1 or self.difficulty == 0 and (self.is_for_the_worthy or self.is_zenith_world)
 
     @property
     def is_master(self):
         """If the world is in master difficulty or not."""
-        return self.difficulty == 2
+        return self.difficulty == 2 or self.difficulty == 1 and (self.is_for_the_worthy or self.is_zenith_world)
+
+    @property
+    def is_legendary(self):
+        """If the world is in legendary difficulty or not."""
+        return self.difficulty == 2 and (self.is_for_the_worthy or self.is_zenith_world)
 
     @property
     def is_journey(self):
@@ -390,7 +410,7 @@ class World:
 
         # File header
         version = Version(f.int4())
-        relogic = f.string(7)
+        relogic = f.string(7)  # TODO: this can appearently be "xindong"?
         savefile_type = f.uint1()
         supported_versions = (Version("1.4.4.9"), Version("1.4.4.9"))
         if version not in supported_versions or relogic != "relogic" or savefile_type != 2:
@@ -420,6 +440,12 @@ class World:
         is_drunk_world = f.bool()
         is_for_the_worthy = f.bool()
         is_tenth_anniversary = f.bool()
+        is_the_constant = f.bool()
+        is_bee_world = f.bool()
+        is_upside_down = f.bool()
+        is_trap_world = f.bool()
+        is_zenith_world = f.bool()
+
         created_on = f.datetime()
 
         world_styles = Styles(
@@ -478,6 +504,8 @@ class World:
         altars_smashed = f.int4()
 
         is_hardmode = f.bool()
+
+        party_is_doomed = not f.bool()
 
         invasion_delay = f.int4()
         invasion_size = f.int4()
@@ -578,6 +606,7 @@ class World:
         for _ in range(partying_npcs_count):
             partying_npcs.append(f.int4())
         party = Party(
+            is_doomed=party_is_doomed,
             thrown_by_party_center=party_center_active,
             thrown_by_npcs=party_natural_active,
             cooldown=party_cooldown,
@@ -592,46 +621,36 @@ class World:
 
         # ToDo: Figure out which biomes got new BGs.
         # Oasis and Graveyard probably got new backgrounds.
-        new_bg_1 = f.int1()
-        new_bg_2 = f.int1()
-        new_bg_3 = f.int1()  # Maybe oasis.
-        new_bg_4 = f.int1()
-        new_bg_5 = f.int1()
+        bg_mushroom = f.int1()
+        bg_underworld = f.int1()
+        bg_forest_2 = f.int1()  # Maybe oasis.
+        bg_forest_3 = f.int1()
+        bg_forest_4 = f.int1()
 
         backgrounds = Backgrounds(
-            bg_underground_snow=bg_underground_snow,
-            bg_underground_jungle=bg_underground_jungle,
-            bg_hell=bg_hell,
-            bg_forest=bg_forest,
-            bg_corruption=bg_corruption,
-            bg_jungle=bg_jungle,
-            bg_snow=bg_snow,
-            bg_hallow=bg_hallow,
-            bg_crimson=bg_crimson,
-            bg_desert=bg_desert,
-            bg_ocean=bg_ocean,
-            new_bg_1=new_bg_1,
-            new_bg_2=new_bg_2,
-            new_bg_3=new_bg_3,
-            new_bg_4=new_bg_4,
-            new_bg_5=new_bg_5,
+            underground_snow=bg_underground_snow,
+            underground_jungle=bg_underground_jungle,
+            hell=bg_hell,
+            forest=FourPartSplit(world_styles.trees.separators, [bg_forest, bg_forest_2, bg_forest_3, bg_forest_4]),
+            corruption=bg_corruption,
+            jungle=bg_jungle,
+            snow=bg_snow,
+            hallow=bg_hallow,
+            crimson=bg_crimson,
+            desert=bg_desert,
+            ocean=bg_ocean,
+            mushroom=bg_mushroom,
+            underworld=bg_underworld,
         )
 
         combat_book_used = f.bool()
 
-        saved_npcs = SavedNPCs(
-            goblin_tinkerer=saved_goblin_tinkerer,
-            wizard=saved_wizard,
-            mechanic=saved_mechanic,
-            angler=saved_angler,
-            stylist=saved_stylist,
-            tax_collector=saved_tax_collector,
-            bartender=saved_bartender,
-            golfer=saved_golfer,
-            advanced_combat=combat_book_used,
+        lantern_night = LanternNight(
+            nights_on_cooldown=f.int4(),
+            genuine=f.bool(),
+            manual=f.bool(),
+            next_night_is_lantern_night=f.bool()
         )
-
-        lantern_night = LanternNight(f.int4(), f.bool(), f.bool(), f.bool())
 
         events = Events(
             blood_moon=blood_moon,
@@ -661,6 +680,7 @@ class World:
 
         defeated_empress_of_light = f.bool()
         defeated_queen_slime = f.bool()
+        defeated_deerclops = f.bool()
 
         bosses_defeated = BossesDefeated(
             eye_of_cthulhu=defeated_eye_of_cthulhu,
@@ -691,6 +711,58 @@ class World:
             lunatic_cultist=defeated_lunatic_cultist,
             empress_of_light=defeated_empress_of_light,
             queen_slime=defeated_queen_slime,
+            deerclops=defeated_deerclops,
+        )
+
+        defeated_deerclops = f.bool()
+
+        saved_slime_nerdy = f.bool()
+        saved_merchant = f.bool()
+        saved_demolitionist = f.bool()
+        saved_party_girl = f.bool()
+        saved_dye_trader = f.bool()
+        saved_truffle = f.bool()
+        saved_arms_dealer = f.bool()
+        saved_nurse = f.bool()
+        saved_princess = f.bool()
+        combat_book_2_used = f.bool()
+        peddler_satchel_used = f.bool()
+        saved_slime_cool = f.bool()
+        saved_slime_elder = f.bool()
+        saved_slime_clumsy = f.bool()
+        saved_slime_diva = f.bool()
+        saved_slime_surly = f.bool()
+        saved_slime_mystic = f.bool()
+        saved_slime_squire = f.bool()
+
+        saved_npcs = SavedNPCs(
+            goblin_tinkerer=saved_goblin_tinkerer,
+            wizard=saved_wizard,
+            mechanic=saved_mechanic,
+            angler=saved_angler,
+            stylist=saved_stylist,
+            tax_collector=saved_tax_collector,
+            bartender=saved_bartender,
+            golfer=saved_golfer,
+            advanced_combat=combat_book_used,
+            slime_nerdy=saved_slime_nerdy,
+            merchant=saved_merchant,
+            demolitionist=saved_demolitionist,
+            party_girl=saved_party_girl,
+            dye_trader=saved_dye_trader,
+            truffle=saved_truffle,
+            arms_dealer=saved_arms_dealer,
+            nurse=saved_nurse,
+            princess=saved_princess,
+            advanced_combat_2=combat_book_2_used,
+            peddlers_satchel=peddler_satchel_used,
+            slime_cool=saved_slime_cool,
+            slime_elder=saved_slime_elder,
+            slime_clumsy=saved_slime_clumsy,
+            slime_diva=saved_slime_diva,
+            slime_surly=saved_slime_surly,
+            slime_mystic=saved_slime_mystic,
+            slime_squire=saved_slime_squire,
         )
 
         unknown_world_header_data = f.read_until(pointers.world_tiles)
@@ -915,6 +987,11 @@ class World:
             is_drunk_world=is_drunk_world,
             is_for_the_worthy=is_for_the_worthy,
             is_tenth_anniversary=is_tenth_anniversary,
+            is_the_constant=is_the_constant,
+            is_bee_world=is_bee_world,
+            is_upside_down=is_upside_down,
+            is_trap_world=is_trap_world,
+            is_zenith_world=is_zenith_world,
             created_on=created_on,
             styles=world_styles,
             backgrounds=backgrounds,

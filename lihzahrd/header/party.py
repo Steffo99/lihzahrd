@@ -5,8 +5,11 @@ class Party:
     """NPC Party related information."""
 
     def __init__(
-        self, thrown_by_party_center: bool, thrown_by_npcs: bool, cooldown: int, partying_npcs: typing.List[int]
+        self, is_doomed: bool, thrown_by_party_center: bool, thrown_by_npcs: bool, cooldown: int, partying_npcs: typing.List[int]
     ):
+        self.is_doomed: bool = is_doomed
+        """If all NPCs will die after this party ends."""
+
         self.thrown_by_party_center: bool = thrown_by_party_center
         """If the party was started by right-clicking a Party Center."""
 
@@ -21,7 +24,7 @@ class Party:
 
     def __repr__(self):
         return (
-            f"WorldParty(thrown_by_party_center={self.thrown_by_party_center},"
+            f"WorldParty(is_doomed={self.is_doomed}, thrown_by_party_center={self.thrown_by_party_center},"
             f" thrown_by_npcs={self.thrown_by_npcs}, cooldown={self.cooldown}, partying_npcs={self.partying_npcs})"
         )
 
