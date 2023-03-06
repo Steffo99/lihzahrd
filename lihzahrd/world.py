@@ -1,5 +1,6 @@
 import uuid
 import math
+import sys
 from typing import *
 from .fileutils import *
 from .enums import *
@@ -64,6 +65,7 @@ class World:
         journey_powers: JourneyPowers,
         chests: List[Chest],
         signs: List[Sign],
+        shimmered_npcs: List[int],
         npcs: List[NPC],
         mobs: List[Mob],
         tile_entities: List[TileEntity],
@@ -200,6 +202,9 @@ class World:
 
         self.signs: List[Sign] = signs
         """A list of all non-empty signs in the world."""
+
+        self.shimmered_npcs: List[int] = shimmered_npcs
+        """A list of the ids of the NPCs that have been shimmered."""
 
         self.npcs: List[NPC] = npcs
         """A list of all the NPCs currently living in the world, including the Old Man."""
@@ -410,11 +415,18 @@ class World:
 
         # File header
         version = Version(f.int4())
+
         relogic = f.string(7)  # TODO: this can appearently be "xindong"?
+        if relogic != "relogic":
+            raise ValueError("World file is missing the 'relogic' magic string", relogic)
+
         savefile_type = f.uint1()
-        supported_versions = (Version("1.4.4.9"), Version("1.4.4.9"))
-        if version not in supported_versions or relogic != "relogic" or savefile_type != 2:
-            raise NotImplementedError("This parser can only read Terraria 1.4.4.9 save files.")
+        if savefile_type != 2:
+            raise NotImplementedError("World file uses an unknown savefile type", savefile_type)
+
+        supported_versions = (Version("1.4.4.9"),)
+        if version not in supported_versions:
+            raise NotImplementedError("World file has been created with a unsupported version of Terraria", version)
 
         revision = f.uint4()
         is_favorite = f.uint8() != 0
@@ -573,14 +585,7 @@ class World:
         for mob_id in range(mob_types_count):
             mob_kills[mob_id] = f.int4()
 
-        fast_forward_time = f.bool()
-        time = Time(
-            current=current_time,
-            is_daytime=is_daytime,
-            moon_phase=moon_phase,
-            sundial_cooldown=sundial_cooldown,
-            fast_forward_time=fast_forward_time,
-        )
+        sundial_is_running = f.bool()
 
         defeated_duke_fishron = f.bool()
         defeated_martian_madness = f.bool()
@@ -714,8 +719,6 @@ class World:
             deerclops=defeated_deerclops,
         )
 
-        defeated_deerclops = f.bool()
-
         saved_slime_nerdy = f.bool()
         saved_merchant = f.bool()
         saved_demolitionist = f.bool()
@@ -763,6 +766,19 @@ class World:
             slime_surly=saved_slime_surly,
             slime_mystic=saved_slime_mystic,
             slime_squire=saved_slime_squire,
+        )
+
+        moondial_is_running = f.bool()
+        moondial_cooldown = f.uint1()
+
+        time = Time(
+            current=current_time,
+            is_daytime=is_daytime,
+            moon_phase=moon_phase,
+            sundial_cooldown=sundial_cooldown,
+            sundial_is_running=sundial_is_running,
+            moondial_cooldown=moondial_cooldown,
+            moondial_is_running=moondial_is_running,
         )
 
         unknown_world_header_data = f.read_until(pointers.world_tiles)
@@ -813,6 +829,11 @@ class World:
         # Entities
         npcs = []
         mobs = []
+
+        shimmered_npcs_count = f.int4()
+        shimmered_npcs = []
+        for _ in range(shimmered_npcs_count):
+            shimmered_npcs.append(f.int4())
 
         while f.bool():
             npc_type = EntityType(f.int4())
@@ -1013,6 +1034,7 @@ class World:
             tiles=tm,
             chests=chests,
             signs=signs,
+            shimmered_npcs=shimmered_npcs,
             npcs=npcs,
             mobs=mobs,
             tile_entities=tile_entities,
@@ -1049,3 +1071,8 @@ class World:
         f.file.close()
 
         return world
+
+
+if __name__ == "__main__":
+    world = World.create_from_file(sys.argv[1])
+    breakpoint()
