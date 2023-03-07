@@ -111,4 +111,4 @@ That means you have to publish under the same license the source code of any pro
 
 ## See also
 
-- [flyingsnake](https://github.com/Steffo99/flyingsnake), a map renderer using this package (not updated yet)
+- [flyingsnake](https://github.com/Steffo99/flyingsnake), a map renderer using this package
