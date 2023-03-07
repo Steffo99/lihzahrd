@@ -279,17 +279,16 @@ class World:
         flags4 = fr.bits() if has_flags4 else INT_TO_BITS_CACHE[0]
             
         has_block = flags1[1]
-        has_wall = flags1[2]
-
         has_extended_block_id = flags1[5]
-        has_extended_wall_id = flags3[6]
-
-        is_block_active = not flags3[2]
         is_block_painted = flags3[3]
-        is_wall_painted = flags3[4]
+        is_block_active = not flags3[2]
         is_block_echo = flags4[1]
-        is_wall_echo = flags4[2]
         is_block_illuminant = flags4[3]
+
+        has_wall = flags1[2]
+        has_extended_wall_id = flags3[6]
+        is_wall_painted = flags3[4]
+        is_wall_echo = flags4[2]
         is_wall_illuminant = flags4[4]
 
         liquid_type = LiquidType.from_flags(flags1, flags3)
@@ -325,14 +324,29 @@ class World:
 
         # Parse wall
         if has_wall:
-            if has_extended_wall_id:
-                wall_type = WallType(fr.uint2())
-            else:
-                wall_type = WallType(fr.uint1())
+            wall_type_l = fr.uint1()
             if is_wall_painted:
                 wall_paint = fr.uint1()
             else:
                 wall_paint = None
+        else:
+            wall_type_l = 0
+            wall_paint = None
+
+        # Parse liquid
+        if liquid_type != LiquidType.NO_LIQUID:
+            liquid = Liquid(type_=liquid_type, volume=fr.uint1())
+        else:
+            liquid = None
+
+        # Parse wall, again
+        if has_extended_wall_id:
+            wall_type_g = fr.uint1()
+        else:
+            wall_type_g = 0
+
+        if has_wall:
+            wall_type = WallType(wall_type_g * 256 + wall_type_l)
             wall = Wall(
                 type_=wall_type,
                 paint=wall_paint,
@@ -341,12 +355,6 @@ class World:
             )
         else:
             wall = None
-
-        # Parse liquid
-        if liquid_type != LiquidType.NO_LIQUID:
-            liquid = Liquid(type_=liquid_type, volume=fr.uint1())
-        else:
-            liquid = None
 
         # Find RLE Compression multiplier
         if rle_compression == RLEEncoding.DOUBLE_BYTE:

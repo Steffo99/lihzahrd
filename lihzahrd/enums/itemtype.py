@@ -5508,6 +5508,9 @@ class ItemType(enum.IntEnum):
     RAINBOW_MOSS_BLOCK_WALL = 5450
     JIMS_DRONE = 5451
     JIMS_DRONE_VISOR = 5452
+    DONT_HURT_CRITTERS_BOOK_INACTIVE = 5453
+    DONT_HURT_NATURE_BOOK_INACTIVE = 5454
+    DONT_HURT_COMBO_BOOK_INACTIVE = 5455
 
     def __repr__(self):
         return f"{self.__class__.__name__}.{self.name}"
