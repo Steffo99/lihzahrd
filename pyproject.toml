@@ -22,7 +22,7 @@ build-backend = "poetry.core.masonry.api"
 name = "lihzahrd"
 
 # The version of the package.
-version = "3.0.1"
+version = "3.1.0"
 
 # A brief, one-sentence description about your project.
 description = "A Terraria world parser in Python"
