@@ -41,13 +41,11 @@ class AnglerQuestFish(enum.IntEnum):
     MUDFISH = 36
     SLIMEFISH = 37
     TROPICAL_BARRACUDA = 38
-
-    # none of the other tools know what fish this is ... *shrug*
-    # we now know it's a SCARAB_FISH; UNKNOWN1 remains for back-compatibility.
-    UNKNOWN1 = 39
     SCARAB_FISH = 39
-
     SCORPIO_FISH = 40
+
+    # Backward compatibility
+    UNKNOWN1 = 39  # SCARAB_FISH
 
     def __repr__(self):
         return f"{self.__class__.__name__}.{self.name}"
