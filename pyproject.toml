@@ -1,0 +1,89 @@
+[build-system]
+#######################
+# Python build system #
+#######################
+# The build system to use when installing this package.
+# Used when installing the package with `pip install .`.
+# See also: https://www.python.org/dev/peps/pep-0517/
+
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+
+
+[project]
+###################
+# Project settings #
+###################
+
+# The name of your project.
+# Ensure that it is available on PyPI: https://pypi.org/
+name = "lihzahrd"
+
+# The version of the package.
+version = "3.1.1"
+
+# A brief, one-sentence description about your project.
+description = "Terraria world parser in Python"
+
+# A list of the authors of the project.
+authors = [
+    {name = "Stefano Pigozzi", email = "me@steffo.eu"},
+]
+
+# A list of maintainers of the project.
+# Often, it is the same as the authors list.
+maintainers = [
+    {name = "Stefano Pigozzi", email = "me@steffo.eu"},
+]
+
+# The license of the package.
+# Uses SPDX format: https://spdx.org/licenses/
+license = "EUPL-1.2"
+
+# The README file.
+readme = "README.md"
+
+# Up to five keywords related to your project.
+# See also: https://packaging.python.org/en/latest/guides/distributing-packages-using-setuptools/#keywords
+keywords = [
+    "terraria",
+    "parser",
+    "game",
+]
+
+# Any number of trove classifiers that apply to your project.
+# See the list at: https://pypi.org/classifiers/
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3.6"
+]
+
+# The minimum version of Python required to run the project.
+requires-python = ">=3.6.2"
+
+# A list of dependencies of the project, in pip format.
+dependencies = []
+
+
+[project.urls]
+##################
+# URLs           #
+##################
+# Project URLs in a name → link mapping.
+
+"Repository" = "https://forge.steffo.eu/steffo/lihzahrd/"
+"Documentation" = "https://gh.steffo.eu/lihzahrd/"
+
+
+[project.optional-dependencies]
+##############################
+# Optional dependencies   #
+##############################
+# Same as dependencies, but with a key denoting the relevant extra.
+
+docs = [
+    "sphinx>=2.2.1", 
+    "sphinx_rtd_theme>=0.4.3"
+]
