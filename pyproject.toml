@@ -22,7 +22,7 @@ build-backend = "poetry.core.masonry.api"
 name = "lihzahrd"
 
 # The version of the package.
-version = "3.1.0"
+version = "3.1.1"
 
 # A brief, one-sentence description about your project.
 description = "A Terraria world parser in Python"
@@ -40,7 +40,7 @@ maintainers = [
 
 # The license of the package.
 # Uses SPDX format: https://spdx.org/licenses/
-license = "AGPL-3.0-or-later"
+license = "EUPL-1.2"
 
 # The README file.
 readme = "README.md"

@@ -1,27 +1,28 @@
-# ![](https://gamepedia.cursecdn.com/terraria_gamepedia/e/ee/Lihzahrd.png?version=b8e7ea78b2f9f27a46e2e70d5684b344) `lihzahrd` [![Available on PyPI](https://img.shields.io/pypi/v/lihzahrd)](https://pypi.org/project/lihzahrd/)
+<div align="center">
 
-A Terraria 1.4.4.9 world parser in Python.
+![](.media/icon-128x128_round.png)
 
-You can use this package to get programmer-friendly data from a Terraria world!
+# Lihzahrd
+
+Terraria game world parser for Python.
+
+</div>
+
+## Links
+
+[![Available on PyPI](https://img.shields.io/pypi/v/lihzahrd)](https://pypi.org/project/lihzahrd/)
+
+[![Full documentation](https://img.shields.io/website?url=https%3A%2F%2Fgh.steffo.eu%2Flihzahrd%2Fhtml%2F&up_message=passing&down_message=failing&label=docs)](https://gh.steffo.eu/lihzahrd/html/)
 
 ## Installation
 
-Use your favourite Python package manager to install `lihzahrd`:
+Lihzahrd can be installed from PyPI like any other public Python package.
 
-- Venv + Pip
+Using [uv](https://docs.astral.sh/uv/), that means:
 
-  ```console
-  $ source .venv/bin/activate
-  $ pip install lihzahrd
-  ```
-
-- Poetry
-
-  ```console
-  $ poetry add lihzahrd
-  ```
-  
-- And more!
+```shell
+uv add lihzahrd
+```
 
 ## Usage
 
@@ -36,11 +37,11 @@ It _will_ take a while to process: a small Terraria world contains more than 5 m
 
 Once you have a `World` object, you can use all data present in the save file by accessing [its attributes](http://gh.steffo.eu/lihzahrd/html/world.html).
 
-> **Warning**
+> [!Warning]
 > 
-> Loading maliciously designed Terraria worlds can drain system resources, crash the interpreter, or possibly do more evil things!
+> Maliciously designed Terraria worlds can drain system resources, crash the interpreter, or possibly do other evil things!
 > 
-> **Make sure you trust the worlds you are parsing!**
+> **Make sure you trust worlds before parsing them!**
 
 ## Documentation
 
@@ -61,36 +62,6 @@ Time to parse the same large world:
 - CPython took 11.45 s.
 - Pypy took 3.57 s!
 
-## Development
-
-To contribute to `lihzahrd`, you need to have [Poetry](https://poetry.eustace.io/) installed on your PC.
-
-After you've installed Poetry, clone the git repo with the command:
-
-```console
-$ git clone https://github.com/Steffo99/lihzahrd
-```
-
-Then enter the new directory:
-
-```console
-$ cd lihzahrd
-```
-
-And finally install all dependencies and the package:
-
-```console
-$ poetry install
-```
-
-This will create a new virtualenv for the development of the library; you can activate it by typing:
-
-```console
-$ poetry shell
-```
-
-Please note that for compatibility with PyPy, the project needs to target Python 3.6.
-
 ### Building docs
 
 You can build the docs by entering the `docs_source` folder and running `make html`, then committing the whole `docs` folder.
@@ -103,11 +74,6 @@ You can build the docs by entering the `docs_source` folder and running `make ht
 - The [1.3.x.x world documentation](http://ludwig.schafer.free.fr/), a bit incomplete, but an useful source nevertheless.
 - A [JS World Parser](https://github.com/cokolele/terraria-world-parser/) on GitHub.
 - A [Background Guide](https://steamcommunity.com/sharedfiles/filedetails/?id=841032800) on Steam that displays all possible world backgrounds.
-
-## License
-
-`lihzahrd` is licensed under the [AGPL 3.0](/LICENSE.txt).
-That means you have to publish under the same license the source code of any program you create that uses `lihzahrd`.
 
 ## See also
 
