@@ -1,0 +1,7 @@
+version = 1
+requires-python = ">=3.6"
+
+[[package]]
+name = "lihzahrd"
+version = "3.1.1"
+source = { editable = "." }
