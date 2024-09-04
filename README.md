@@ -4,7 +4,7 @@
 
 # Lihzahrd
 
-Terraria game world parser for Python.
+Terraria game world parser for Python
 
 </div>
 
