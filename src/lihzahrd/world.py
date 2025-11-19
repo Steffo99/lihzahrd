@@ -1081,6 +1081,11 @@ class World:
         return world
 
 
+__all__ = (
+    "World",
+)
+
+
 if __name__ == "__main__":
     world = World.create_from_file(sys.argv[1])
     breakpoint()
