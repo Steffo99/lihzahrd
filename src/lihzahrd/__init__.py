@@ -1,5 +1,5 @@
 from .world import World
 
-__all__ = [
+__all__ = (
     "World",
-]
+)
