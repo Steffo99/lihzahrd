@@ -10,10 +10,6 @@ class Timer:
         self._start_time: float|None = None
         self._stop_time: float|None = None
 
-    @property
-    def _result(self) -> float:
-        return self._stop_time - self._start_time
-
     def start(self):
         self._start_time = time.time()
         if self.display:
@@ -22,7 +18,9 @@ class Timer:
     def stop(self):
         self._stop_time = time.time()
         if self.display:
-            print(f"Timer {self.name} stopped: {self._result} seconds elapsed.")
+            assert self._start_time is not None
+            difference_s = self._stop_time - self._start_time
+            print(f"Timer {self.name} stopped: {difference_s} seconds elapsed.")
 
     def __enter__(self):
         self.start()
