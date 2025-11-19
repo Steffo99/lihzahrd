@@ -1,6 +1,3 @@
-import typing
-
-
 class Pointers:
     """Pointers to the various sections of the Terraria save file.
     
@@ -49,4 +46,4 @@ class Pointers:
         self.bestiary: int = bestiary
         self.journey_powers: int = journey_powers
         self.footer: int = footer
-        self.unknown: typing.List[int] = list(unknown)
+        self.unknown: list[int] = list(unknown)

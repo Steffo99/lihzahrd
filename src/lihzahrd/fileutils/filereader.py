@@ -1,4 +1,4 @@
-import typing
+from typing import IO
 import struct
 import uuid
 import datetime
@@ -25,12 +25,12 @@ class FileReader:
 
     __slots__ = ("file",)
 
-    def __init__(self, file: typing.IO):
-        self.file: typing.IO = file
+    def __init__(self, file: IO):
+        self.file: IO = file
 
     _bool = struct.Struct("?").unpack
 
-    def bool(self) -> bool:
+    def boolean(self) -> bool:
         return self._bool(self.file.read(1))[0]
 
     _int1 = struct.Struct("B").unpack
@@ -81,7 +81,7 @@ class FileReader:
     def double(self) -> float:
         return self._double(self.file.read(8))[0]
 
-    def bits(self) -> typing.Tuple[bool, bool, bool, bool, bool, bool, bool, bool]:
+    def bits(self) -> tuple[bool, bool, bool, bool, bool, bool, bool, bool]:
         data = self._int1(self.file.read(1))[0]
         return INT_TO_BITS_CACHE[data]
 
