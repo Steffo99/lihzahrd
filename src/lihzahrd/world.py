@@ -1000,7 +1000,7 @@ class World:
         unknown_journey_powers_data = f.read_until(pointers.footer)
 
         # Object creation
-        world = cls(
+        result = cls(
             version=version,
             savefile_type=savefile_type,
             revision=revision,
@@ -1070,14 +1070,14 @@ class World:
         # Footer
         if not f.bool():
             raise InvalidFooterError("Invalid footer")
-        if not f.string() == world.name:
+        if not f.string() == result.name:
             raise InvalidFooterError("Invalid footer")
-        if not f.int4() == world.id:
+        if not f.int4() == result.id:
             raise InvalidFooterError("Invalid footer")
 
         f.file.close()
 
-        return world
+        return result
 
 
 __all__ = (
