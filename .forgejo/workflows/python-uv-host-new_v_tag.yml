@@ -1,0 +1,139 @@
+name: "Release using uv a new version of the Python package and deploy docs on a host directory"
+
+on: 
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  package:
+    name: "Build package"
+    runs-on: rookframe
+
+    steps:
+      -
+        name: "Checkout repository"
+        uses: https://code.forgejo.org/actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8
+      -
+        name: "Build package"
+        run: |-
+          uv build --verbose
+      -
+        name: "Upload package as artifact"
+        uses: https://code.forgejo.org/forgejo/upload-artifact@16871d9e8cfcf27ff31822cac382bbb5450f1e1e
+        with:
+          name: &package_artifact_name "Package.zip"
+          path: dist/
+          if-no-files-found: error
+
+  docs:
+    name: "Build documentation"
+    runs-on: rookframe
+
+    steps:
+      -
+        name: "Checkout repository"
+        uses: https://code.forgejo.org/actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8
+      -
+        name: "Build docs"
+        run: |-
+          uv run --group='docs' sphinx-build 'docs/' 'dist/'
+      -
+        name: "Upload docs as artifact"
+        uses: https://code.forgejo.org/forgejo/upload-artifact@16871d9e8cfcf27ff31822cac382bbb5450f1e1e
+        with:
+          name: &documentation_artifact_name "Documentation.zip"
+          path: dist/
+          if-no-files-found: error
+    
+  publish_forgejo:
+    name: "Publish package on Forgejo Packages"
+    runs-on: rookframe
+
+    needs:
+      - package
+
+    steps:
+      -
+        name: "Download package artifact"
+        uses: https://code.forgejo.org/forgejo/download-artifact@d8d0a99033603453ad2255e58720b460a0555e1e
+        with:
+          name: *package_artifact_name
+          path: dist/
+      -
+        name: "Upload package"
+        run: twine upload dist/** --verbose --disable-progress-bar
+        env:
+          TWINE_NON_INTERACTIVE: "1"
+          TWINE_REPOSITORY_URL: "${{ github.server_url }}/api/packages/${{ github.repository_owner }}/pypi"
+          TWINE_USERNAME: "${{ github.repository_owner }}"
+          TWINE_PASSWORD: "${{ secrets.FORGEJO_PACKAGES_TOKEN }}"
+    
+  publish_testpypi:
+    name: "Publish package on Test PyPI"
+    runs-on: rookframe
+
+    needs:
+      - package
+
+    steps:
+      -
+        name: "Download package artifact"
+        uses: https://code.forgejo.org/forgejo/download-artifact@d8d0a99033603453ad2255e58720b460a0555e1e
+        with:
+          name: *package_artifact_name
+          path: dist/
+      -
+        name: "Upload package"
+        run: twine upload dist/** --verbose --disable-progress-bar
+        env:
+          TWINE_NON_INTERACTIVE: "1"
+          TWINE_REPOSITORY_URL: "https://test.pypi.org/legacy/"
+          TWINE_USERNAME: "__token__"
+          TWINE_PASSWORD: "${{ secrets.TEST_PYPI_TOKEN }}"
+    
+  publish_pypi:
+    name: "Publish package on PyPI"
+    runs-on: rookframe
+
+    needs:
+      - package
+
+    steps:
+      -
+        name: "Download package artifact"
+        uses: https://code.forgejo.org/forgejo/download-artifact@d8d0a99033603453ad2255e58720b460a0555e1e
+        with:
+          name: *package_artifact_name
+          path: dist/
+      -
+        name: "Upload package"
+        run: twine upload dist/** --verbose --disable-progress-bar
+        env:
+          TWINE_NON_INTERACTIVE: "1"
+          TWINE_REPOSITORY_URL: "https://upload.pypi.org/legacy/"
+          TWINE_USERNAME: "__token__"
+          TWINE_PASSWORD: "${{ secrets.PYPI_TOKEN }}"
+
+  explain:
+    name: "Publish documentation via host runner"
+    runs-on: temeria-host
+
+    needs:
+      - docs
+
+    steps:
+      -
+        name: "Download docs artifact"
+        uses: https://code.forgejo.org/forgejo/download-artifact@d8d0a99033603453ad2255e58720b460a0555e1e
+        with:
+          name: *documentation_artifact_name
+          path: deploy/docs/
+      -
+        name: "Deploy documentation"
+        uses: https://forge.steffo.eu/steffo/actions-deploy-link@4787279abac0d8dd48beec5d0831cbe9e710c589
+        with:
+          source: "deploy"
+          destination: "/mnt/beta/artifacts/${{ github.repository }}"
+          dir-name: "${{ github.ref_name }}"
+          link-name: "latest"
