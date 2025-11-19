@@ -2,7 +2,7 @@
 <img alt="" src="https://forge.steffo.eu/steffo/lihzahrd/raw/branch/main/.media/icon-512.png" height="128" style="border-radius: 100%;">
 <hgroup>
 <h1>Lihzahrd</h1>
-<p>[Terraria] world parser in Python</p>
+<p>Terraria world parser in Python</p>
 </hgroup>
 </div>
 
@@ -11,6 +11,12 @@
 ## What is this?
 
 ## Links
+
+### Context
+
+<a href="https://www.terraria.org/">
+	<img alt="For Terraria" title="For Terraria" src="https://img.shields.io/badge/game-terraria-1cd85e" height="30px">
+</a>
 
 ### Tools
 
@@ -55,6 +61,3 @@
 <a href="https://forge.steffo.eu/steffo/lihzahrd/pulls">
 	<img alt="Pull requests" title="Pull requests" src="https://img.shields.io/gitea/pull-requests/open/steffo/lihzahrd?gitea_url=https%3A%2F%2Fforge.steffo.eu&color=374351" height="30px">
 </a>
-
-
-[Terraria]: https://www.terraria.org/
