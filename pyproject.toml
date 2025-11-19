@@ -48,3 +48,6 @@ Documentation = "https://artifacts.steffo.eu/steffo/lihzahrd/"
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
+
+[tool.uv]
+default-groups = ["docs"]
