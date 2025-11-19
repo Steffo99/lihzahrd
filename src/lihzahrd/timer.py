@@ -1,5 +1,4 @@
 import time
-import typing
 
 
 class Timer:
@@ -8,8 +7,8 @@ class Timer:
     def __init__(self, name: str, display: bool = True):
         self.name: str = name
         self.display: bool = display
-        self._start_time: typing.Optional[float] = None
-        self._stop_time: typing.Optional[float] = None
+        self._start_time: float|None = None
+        self._stop_time: float|None = None
 
     @property
     def _result(self) -> float:
