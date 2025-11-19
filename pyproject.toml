@@ -8,7 +8,7 @@ authors = [
 maintainers = [
     {name = "Stefano Pigozzi", email = "me@steffo.eu"},
 ]
-license = "EUPL-1.2"
+license = "AGPL-3.0-or-later"
 license-files = ["LICENSE.txt"]
 readme = "README.md"
 keywords = [
@@ -23,7 +23,7 @@ classifiers = [
     "Programming Language :: Python :: 3.13",
     "Development Status :: 4 - Beta",
 	"Intended Audience :: Developers",
-    "License :: OSI Approved :: European Union Public Licence 1.2 (EUPL 1.2)",
+    "License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)",
     "Natural Language :: English",
     "Topic :: Games/Entertainment",
     "Topic :: Games/Entertainment :: Side-Scrolling/Arcade Games",
