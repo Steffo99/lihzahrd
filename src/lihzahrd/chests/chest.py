@@ -1,4 +1,3 @@
-import typing
 from ..items import ItemStack
 from ..fileutils import Coordinates
 
@@ -8,10 +7,10 @@ class Chest:
 
     __slots__ = "position", "name", "contents"
 
-    def __init__(self, position: Coordinates, name: str, contents: typing.List[ItemStack]):
+    def __init__(self, position: Coordinates, name: str, contents: list[ItemStack]):
         self.position: Coordinates = position
         self.name: str = name
-        self.contents: typing.List[ItemStack] = contents
+        self.contents: list[ItemStack] = contents
 
     def __repr__(self):
         return (
