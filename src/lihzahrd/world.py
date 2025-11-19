@@ -1,7 +1,6 @@
 import uuid
 import math
 import sys
-from typing import *
 from .fileutils import *
 from .enums import *
 from .items import *
@@ -63,14 +62,14 @@ class World:
         tiles: TileMatrix,
         bestiary: Bestiary,
         journey_powers: JourneyPowers,
-        chests: List[Chest],
-        signs: List[Sign],
-        shimmered_npcs: List[int],
-        npcs: List[NPC],
-        mobs: List[Mob],
-        tile_entities: List[TileEntity],
-        weighed_pressure_plates: List[WeighedPressurePlate],
-        rooms: List[Room],
+        chests: list[Chest],
+        signs: list[Sign],
+        shimmered_npcs: list[int],
+        npcs: list[NPC],
+        mobs: list[Mob],
+        tile_entities: list[TileEntity],
+        weighed_pressure_plates: list[WeighedPressurePlate],
+        rooms: list[Room],
         pets: Pets,
         halloween_today: bool,
         xmas_today: bool,
@@ -197,25 +196,25 @@ class World:
         self.tiles: TileMatrix = tiles
         """A matrix of all the tiles present in the world."""
 
-        self.chests: List[Chest] = chests
+        self.chests: list[Chest] = chests
         """A list of all the containers (chests, barrels) in the world."""
 
-        self.signs: List[Sign] = signs
+        self.signs: list[Sign] = signs
         """A list of all non-empty signs in the world."""
 
-        self.shimmered_npcs: List[int] = shimmered_npcs
+        self.shimmered_npcs: list[int] = shimmered_npcs
         """A list of the ids of the NPCs that have been shimmered."""
 
-        self.npcs: List[NPC] = npcs
+        self.npcs: list[NPC] = npcs
         """A list of all the NPCs currently living in the world, including the Old Man."""
 
-        self.mobs: List[Mob] = mobs
+        self.mobs: list[Mob] = mobs
         """(Unknown, possibly a list of mobs in the world?)"""
 
-        self.tile_entities: List[TileEntity] = tile_entities
+        self.tile_entities: list[TileEntity] = tile_entities
         """A list of tile entities in the world, such as Training Dummies, Item Frames and Logic Sensors."""
 
-        self.weighed_pressure_plates: List[WeighedPressurePlate] = weighed_pressure_plates
+        self.weighed_pressure_plates: list[WeighedPressurePlate] = weighed_pressure_plates
         """A list of all Weighed Pressure Plates in the world."""
 
         self.pets: Pets = pets
@@ -235,7 +234,7 @@ class World:
         self.saved_ore_tiers: SavedOreTiers = saved_ore_tiers
         """The metals that generated in the world."""
 
-        self.rooms: List[Room] = rooms
+        self.rooms: list[Room] = rooms
         self.clouds: Clouds = clouds
         self.cultist_delay: int = cultist_delay
         self.unknown_file_format_data: bytes = unknown_file_format_data
@@ -269,7 +268,7 @@ class World:
         self.shadow_orbs = value
 
     @staticmethod
-    def _read_tile_block(fr: FileReader, tileframeimportant) -> Tuple[Tile, int]:
+    def _read_tile_block(fr: FileReader, tileframeimportant) -> tuple[Tile, int]:
         flags1 = fr.bits()
         has_flags2 = flags1[0]
         flags2 = fr.bits() if has_flags2 else INT_TO_BITS_CACHE[0]
@@ -394,7 +393,7 @@ class World:
         return self.difficulty == 3
 
     @classmethod
-    def _create_tilematrix(cls, f, world_size: Coordinates, tileframeimportant: List[bool]):
+    def _create_tilematrix(cls, f, world_size: Coordinates, tileframeimportant: list[bool]):
         """Create a TileMatrix object from a file."""
         tm = TileMatrix()
         while tm.size.x < world_size.x:
@@ -892,8 +891,8 @@ class World:
             elif te_type == 3:
                 item_flags = f.bits()
                 dye_flags = f.bits()
-                mannequin_items: List[Optional[ItemStack]] = [None for _ in range(len(item_flags))]
-                mannequin_dyes: List[Optional[ItemStack]] = [None for _ in range(len(dye_flags))]
+                mannequin_items: list[ItemStack|None] = [None for _ in range(len(item_flags))]
+                mannequin_dyes: list[ItemStack|None] = [None for _ in range(len(dye_flags))]
                 for index, flag in enumerate(item_flags):
                     if not flag:
                         continue
@@ -916,8 +915,8 @@ class World:
                 # This isn't 100% tested, but the first two flags should be items, and the second two should be dyes.
                 item_flags = f.bits()
                 # Maximum of two items slots and two dye slots.
-                rack_items: List[Optional[ItemStack]] = [None for _ in range(2)]
-                rack_dyes: List[Optional[ItemStack]] = [None for _ in range(2)]
+                rack_items: list[ItemStack|None] = [None for _ in range(2)]
+                rack_dyes: list[ItemStack|None] = [None for _ in range(2)]
                 for index, flag in enumerate(item_flags[0:2]):
                     if not flag:
                         continue
