@@ -1,4 +1,3 @@
-from typing import *
 from ..items.itemstack import ItemStack
 
 
@@ -7,12 +6,12 @@ class ClothingDisplay:
 
     __slots__ = "items", "dyes"
 
-    def __init__(self, items: List[ItemStack], dyes: List[ItemStack]):
+    def __init__(self, items: list[ItemStack], dyes: list[ItemStack]):
 
-        self.items: List[ItemStack] = items
+        self.items: list[ItemStack] = items
         """What items is the display wearing."""
 
-        self.dyes: List[ItemStack] = dyes
+        self.dyes: list[ItemStack] = dyes
         """What dyes is the display wearing."""
 
     def __repr__(self):
