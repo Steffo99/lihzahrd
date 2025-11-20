@@ -1,6 +1,3 @@
-import typing
-
-
 class Pets:
     """Information about the Pet Licenses that were activated in the world."""
 

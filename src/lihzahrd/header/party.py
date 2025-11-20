@@ -1,11 +1,8 @@
-import typing
-
-
 class Party:
     """NPC Party related information."""
 
     def __init__(
-        self, is_doomed: bool, thrown_by_party_center: bool, thrown_by_npcs: bool, cooldown: int, partying_npcs: typing.List[int]
+        self, is_doomed: bool, thrown_by_party_center: bool, thrown_by_npcs: bool, cooldown: int, partying_npcs: list[int]
     ):
         self.is_doomed: bool = is_doomed
         """If all NPCs will die after this party ends."""
@@ -19,7 +16,7 @@ class Party:
         self.cooldown: int = cooldown
         """How long a party cannot be started for."""
 
-        self.partying_npcs: typing.List[int] = partying_npcs
+        self.partying_npcs: list[int] = partying_npcs
         """The list of NPC IDs that threw the party."""
 
     def __repr__(self):

@@ -1,6 +1,3 @@
-import typing
-
-
 class Version:
     """A Terraria version."""
 
@@ -58,7 +55,7 @@ class Version:
         279: "1.4.4.9",
     }
 
-    def __init__(self, data: typing.Union[int, str]):
+    def __init__(self, data: int|str):
         if isinstance(data, int):
             self.id = data
         else:

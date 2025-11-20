@@ -1,14 +1,11 @@
-import typing
-
-
 class FourPartSplit:
     """A world property split in four parts, separated by three vertical lines at a certain x coordinate."""
 
-    def __init__(self, separators: typing.List[int], properties: typing.List):
-        self.separators: typing.List[int] = separators
+    def __init__(self, separators: list[int], properties: list):
+        self.separators: list[int] = separators
         """The three x coordinates of the vertical separators, in increasing order."""
 
-        self.properties: typing.List = properties
+        self.properties: list = properties
         """The four properties, in order:
 
         - The far left property, the one between the left world edge and the first separator.

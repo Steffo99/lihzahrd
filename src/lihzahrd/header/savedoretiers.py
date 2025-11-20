@@ -1,4 +1,3 @@
-from typing import *
 from ..enums import BlockType
 
 
@@ -11,9 +10,9 @@ class SavedOreTiers:
         tier_2: BlockType,
         tier_3: BlockType,
         tier_4: BlockType,
-        hardmode_tier_1: Optional[BlockType],
-        hardmode_tier_2: Optional[BlockType],
-        hardmode_tier_3: Optional[BlockType],
+        hardmode_tier_1: BlockType|None,
+        hardmode_tier_2: BlockType|None,
+        hardmode_tier_3: BlockType|None,
     ):
 
         self.tier_1: BlockType = tier_1
@@ -32,7 +31,7 @@ class SavedOreTiers:
         """Gold or Platinum?"""
         assert self.tier_4 == BlockType.GOLD or self.tier_4 == BlockType.PLATINUM
 
-        self.hardmode_tier_1: Optional[BlockType] = hardmode_tier_1
+        self.hardmode_tier_1: BlockType|None = hardmode_tier_1
         """Cobalt or Palladium? None if it hasn't been determined yet."""
         assert (
             self.hardmode_tier_1 is None
@@ -40,7 +39,7 @@ class SavedOreTiers:
             or self.hardmode_tier_1 == BlockType.PALLADIUM
         )
 
-        self.hardmode_tier_2: Optional[BlockType] = hardmode_tier_2
+        self.hardmode_tier_2: BlockType|None = hardmode_tier_2
         """Mythril or Orichalcum? None if it hasn't been determined yet."""
         assert (
             self.hardmode_tier_2 is None
@@ -48,7 +47,7 @@ class SavedOreTiers:
             or self.hardmode_tier_2 == BlockType.ORICHALCUM
         )
 
-        self.hardmode_tier_3: Optional[BlockType] = hardmode_tier_3
+        self.hardmode_tier_3: BlockType|None = hardmode_tier_3
         """Adamantite or Titanium? None if it hasn't been determined yet."""
         assert (
             self.hardmode_tier_3 is None

@@ -1,6 +1,3 @@
-import typing
-
-
 class LanternNight:
     """Lantern Night event related information."""
 
