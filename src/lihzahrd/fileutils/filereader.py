@@ -1,4 +1,4 @@
-from typing import IO
+from typing import BinaryIO
 import struct
 import uuid
 import datetime
@@ -25,8 +25,8 @@ class FileReader:
 
     __slots__ = ("file",)
 
-    def __init__(self, file: IO):
-        self.file: IO = file
+    def __init__(self, file: BinaryIO):
+        self.file: BinaryIO = file
 
     _bool = struct.Struct("?").unpack
 
