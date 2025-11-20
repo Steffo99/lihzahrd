@@ -1,4 +1,3 @@
-import typing
 from ..enums import WallType
 
 
@@ -10,12 +9,12 @@ class Wall:
     def __init__(
         self,
         type_: WallType,
-        paint: typing.Optional[int] = None,
+        paint: int|None = None,
         is_illuminant: bool = False,
         is_echo: bool = False,
     ):
         self.type: WallType = type_
-        self.paint: typing.Optional[int] = paint
+        self.paint: int|None = paint
 
         self.is_illuminant: bool = is_illuminant
         """If the wall had Illuminant Coating applied, and is unaffected by lighting."""

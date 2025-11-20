@@ -1,4 +1,3 @@
-import typing
 from .block import Block
 from .wall import Wall
 from .liquid import Liquid
@@ -16,21 +15,21 @@ class Tile:
 
     def __init__(
         self,
-        block: typing.Optional[Block] = None,
-        wall: typing.Optional[Wall] = None,
-        liquid: typing.Optional[Liquid] = None,
-        wiring: typing.Optional[Wiring] = None,
-        extra: typing.Optional[typing.Union[Chest, Sign, WeighedPressurePlate, TileEntity]] = None,
+        block: Block|None = None,
+        wall: Wall|None = None,
+        liquid: Liquid|None = None,
+        wiring: Wiring|None = None,
+        extra: Chest|Sign|WeighedPressurePlate|TileEntity|None = None,
     ):
         if wiring is None:
             wiring = Wiring()
 
-        self.block: typing.Optional[Block] = block
-        self.wall: typing.Optional[Wall] = wall
-        self.liquid: typing.Optional[Liquid] = liquid
-        self.wiring: typing.Optional[Wiring] = wiring
+        self.block: Block|None = block
+        self.wall: Wall|None = wall
+        self.liquid: Liquid|None = liquid
+        self.wiring: Wiring|None = wiring
 
-        self.extra: typing.Optional[typing.Union[Chest, Sign, WeighedPressurePlate, TileEntity]] = extra
+        self.extra: Chest|Sign|WeighedPressurePlate|TileEntity|None = extra
         """A reference to the extra data of this tile, such as Chest or Sign data."""
 
     def __repr__(self):

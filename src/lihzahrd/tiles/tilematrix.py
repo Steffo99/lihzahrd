@@ -1,4 +1,3 @@
-import typing
 from .tile import Tile
 from ..fileutils import Coordinates
 
@@ -9,14 +8,14 @@ class TileMatrix:
     __slots__ = "_tiles"
 
     def __init__(self):
-        self._tiles: typing.List[typing.List[Tile]] = []
+        self._tiles: list[list[Tile]] = []
 
     def __repr__(self):
         if len(self._tiles) > 0:
             return f"<TileMatrix {len(self._tiles)}x{len(self._tiles[0])}>"
         return f"<TileMatrix 0x0>"
 
-    def __getitem__(self, item: typing.Union[typing.Tuple, Coordinates]):
+    def __getitem__(self, item: tuple|Coordinates):
         """Get a tile at specific coordinates.
 
         (x=0, y=0) returns the top-left tile in the map.
@@ -30,7 +29,7 @@ class TileMatrix:
         else:
             raise TypeError(f"Unsupported type: {item.__class__.__name__}")
 
-    def __setitem__(self, key: typing.Union[typing.Tuple, Coordinates], value: Tile):
+    def __setitem__(self, key: tuple|Coordinates, value: Tile):
         """Change a tile at specific coordinates.
 
         The same properties that apply to __getitem__ are valid for __setitem__."""
@@ -49,7 +48,7 @@ class TileMatrix:
             return len(self._tiles) * len(self._tiles[0])
         return 0
 
-    def add_column(self, column: typing.List[Tile]):
+    def add_column(self, column: list[Tile]):
         """Add a new column to the matrix."""
         if len(self._tiles) > 0 and len(column) != len(self._tiles[0]):
             raise ValueError("column has a different length than the others in the matrix")
