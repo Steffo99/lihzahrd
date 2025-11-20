@@ -430,10 +430,6 @@ class World:
         signature = Signature.read(f, v)
         savefile_type = SaveFileType.read(f, v)
 
-        supported_versions = (Version("1.4.4.9"),)
-        if v not in supported_versions:
-            raise NotImplementedError("World file has been created with a unsupported version of Terraria", v)
-
         revision = f.read_uint4()
         is_favorite = f.read_uint8() != 0
 
