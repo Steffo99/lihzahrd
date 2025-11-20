@@ -2,6 +2,7 @@ from abc import ABCMeta, abstractmethod
 from typing import Self
 
 from lihzahrd.fileutils import FilePacker
+from lihzahrd.header import Version
 
 
 class Packable(metaclass=ABCMeta):
@@ -10,10 +11,10 @@ class Packable(metaclass=ABCMeta):
     """
 
     @abstractmethod
-    def write(self, f: FilePacker):
+    def write(self, f: FilePacker, v: Version | None):
         raise NotImplementedError()
 
     @classmethod
     @abstractmethod
-    def read(cls, f: FilePacker) -> Self:
+    def read(cls, f: FilePacker, v: Version | None) -> Self:
         raise NotImplementedError()

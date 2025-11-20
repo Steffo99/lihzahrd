@@ -72,11 +72,11 @@ class Version(Packable):
             else:
                 raise ValueError("No such version")
 
-    def write(self, f: FilePacker):
+    def write(self, f: FilePacker, v: None = None):
         f.write_int4(self.id)
 
     @classmethod
-    def read(cls, f: FilePacker) -> Self:
+    def read(cls, f: FilePacker, v: None = None) -> Self:
         return cls(f.read_int4())
 
     def __repr__(self):
