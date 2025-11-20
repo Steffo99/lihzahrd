@@ -19,10 +19,10 @@ class Time:
         self.sundial_is_running: bool = sundial_is_running
         """Whether the Enchanted Sundial is currently fast-forwarding time."""
 
-        self.moondial_cooldown: int = sundial_cooldown
+        self.moondial_cooldown: int = moondial_cooldown
         """The number of days the Enchanted Moondial can't be used for."""
 
-        self.moondial_is_running: bool = sundial_is_running
+        self.moondial_is_running: bool = moondial_is_running
         """Whether the Enchanted Moondial is currently fast-forwarding time."""
 
     def __repr__(self):
