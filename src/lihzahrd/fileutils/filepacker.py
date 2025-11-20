@@ -1,135 +1,257 @@
-from typing import BinaryIO
+from typing import Any
 import struct
 import uuid
 import datetime
+import logging
 from .rect import Rect
+from .bits import BITS
 
 
-INT_TO_BITS_CACHE = {
-    i: (
-        bool(i & 0b0000_0001),
-        bool(i & 0b0000_0010),
-        bool(i & 0b0000_0100),
-        bool(i & 0b0000_1000),
-        bool(i & 0b0001_0000),
-        bool(i & 0b0010_0000),
-        bool(i & 0b0100_0000),
-        bool(i & 0b1000_0000)
-    )
-    for i in range(256)
-}
+log = logging.getLogger(__name__)
 
 
 class FilePacker:
-    """Helper class for deserializing a Terraria world file."""
+    """Helper class for serializing and deserializing a Terraria world file."""
 
-    __slots__ = ("file",)
+    __slots__ = ("data", "cursor")
 
-    def __init__(self, file: BinaryIO):
-        self.file: BinaryIO = file
+    def __init__(self, data: bytearray):
+        self.data: bytearray = data
+        """The world data."""
 
-    _bool = struct.Struct("?").unpack
+        self.cursor = 0
+        """The byte currently being edited."""
 
-    def boolean(self) -> bool:
-        return self._bool(self.file.read(1))[0]
+    def __repr__(self):
+        length = len(self.data)
+        return f"<FilePacker, size {length:08x}, cursor {self.cursor:08x}>"
 
-    _int1 = struct.Struct("B").unpack
+    def __len__(self):
+        return len(self.data)
 
-    def int1(self) -> int:
-        return self._int1(self.file.read(1))[0]
+    def read(self, structure: struct.Struct) -> Any:
+        value = structure.unpack_from(self.data, self.cursor)
+        self.cursor += structure.size
+        return value
 
-    def uint1(self) -> int:
-        return self._int1(self.file.read(1))[0]
+    def write(self, structure: struct.Struct, value: Any) -> None:
+        structure.pack_into(self.data, self.cursor, value)
+        self.cursor += self._boolean.size
 
-    _int2 = struct.Struct("h").unpack
+    _boolean = struct.Struct("?")
 
-    def int2(self) -> int:
-        return self._int2(self.file.read(2))[0]
+    def read_boolean(self) -> bool:
+        value = self.read(self._boolean)[0]
+        log.info("%r: Read boolean %r", self, value)
+        return value
 
-    _uint2 = struct.Struct("H").unpack
+    def write_boolean(self, value: bool) -> None:
+        log.info("%r: Writing boolean %r", self, value)
+        self.write(self._boolean, value)
 
-    def uint2(self) -> int:
-        return self._uint2(self.file.read(2))[0]
+    _uint1 = struct.Struct("B")
 
-    _int4 = struct.Struct("i").unpack
+    def read_uint1(self) -> int:
+        value = self.read(self._uint1)[0]
+        log.info("%r: Read uint1 %r", self, value)
+        return value
 
-    def int4(self) -> int:
-        return self._int4(self.file.read(4))[0]
+    def write_uint1(self, value: int) -> None:
+        log.info("%r: Writing uint1 %r", self, value)
+        self.write(self._uint1, value)
 
-    _uint4 = struct.Struct("i").unpack
+    def read_bits(self) -> tuple[bool, bool, bool, bool, bool, bool, bool, bool]:
+        byte = self.read(self._uint1)[0]
+        value = BITS[byte]
+        log.info("%r: Read bits %r", self, value)
+        return value
 
-    def uint4(self) -> int:
-        return self._uint4(self.file.read(4))[0]
+    def write_bits(self, value: tuple[bool, bool, bool, bool, bool, bool, bool, bool]) -> None:
+        log.info("%r: Writing bits %r", self, value)
+        byte = \
+            value[0] * (1 << 0) + \
+            value[1] * (1 << 1) + \
+            value[2] * (1 << 2) + \
+            value[3] * (1 << 3) + \
+            value[4] * (1 << 4) + \
+            value[5] * (1 << 5) + \
+            value[6] * (1 << 6) + \
+            value[7] * (1 << 7)
+        self.write(self._uint1, byte)
 
-    _int8 = struct.Struct("q").unpack
+    _int2 = struct.Struct("h")
 
-    def int8(self) -> int:
-        return self._int8(self.file.read(8))[0]
+    def read_int2(self) -> int:
+        value = self.read(self._int2)[0]
+        log.info("%r: Read int2 %r", self, value)
+        return value
 
-    _uint8 = struct.Struct("Q").unpack
+    def write_int2(self, value: int) -> None:
+        log.info("%r: Writing int2 %r", self, value)
+        self.write(self._int2, value)
 
-    def uint8(self) -> int:
-        return self._uint8(self.file.read(8))[0]
+    _uint2 = struct.Struct("H")
 
-    _single = struct.Struct("f").unpack
+    def read_uint2(self) -> int:
+        value = self.read(self._uint2)[0]
+        log.info("%r: Read uint2 %r", self, value)
+        return value
 
-    def single(self) -> float:
-        return self._single(self.file.read(4))[0]
+    def write_uint2(self, value: int) -> None:
+        log.info("%r: Writing uint2 %r", self, value)
+        self.write(self._uint2, value)
 
-    _double = struct.Struct("d").unpack
+    _int4 = struct.Struct("i")
 
-    def double(self) -> float:
-        return self._double(self.file.read(8))[0]
+    def read_int4(self) -> int:
+        value = self.read(self._int4)[0]
+        log.info("%r: Read int4 %r", self, value)
+        return value
 
-    def bits(self) -> tuple[bool, bool, bool, bool, bool, bool, bool, bool]:
-        data = self._int1(self.file.read(1))[0]
-        return INT_TO_BITS_CACHE[data]
+    def write_int4(self, value: int) -> None:
+        log.info("%r: Writing int4 %r", self, value)
+        self.write(self._int4, value)
 
-    _rect = struct.Struct("iiii").unpack
+    _uint4 = struct.Struct("i")
 
-    def rect(self) -> Rect:
-        left, right, top, bottom = self._rect(self.file.read(16))
-        return Rect(left, right, top, bottom)
+    def read_uint4(self) -> int:
+        value = self.read(self._uint4)[0]
+        log.info("%r: Read uint4 %r", self, value)
+        return value
 
-    def uleb128(self) -> int:
+    def write_uint4(self, value: int) -> None:
+        log.info("%r: Writing uint4 %r", self, value)
+        self.write(self._uint4, value)
+
+    _int8 = struct.Struct("q")
+
+    def read_int8(self) -> int:
+        value = self.read(self._int8)[0]
+        log.info("%r: Read int8 %r", self, value)
+        return value
+
+    def write_int8(self, value: int) -> None:
+        log.info("%r: Writing int8 %r", self, value)
+        self.write(self._int8, value)
+
+    _uint8 = struct.Struct("Q")
+
+    def read_uint8(self) -> int:
+        value = self.read(self._uint8)[0]
+        log.info("%r: Read uint8 %r", self, value)
+        return value
+
+    def write_uint8(self, value: int) -> None:
+        log.info("%r: Writing uint8 %r", self, value)
+        self.write(self._uint8, value)
+
+    _fsingle = struct.Struct("f")
+
+    def read_fsingle(self) -> float:
+        value = self.read(self._fsingle)[0]
+        log.info("%r: Read fsingle %r", self, value)
+        return value
+
+    def write_fsingle(self, value: float) -> None:
+        log.info("%r: Writing fsingle %r", self, value)
+        self.write(self._fsingle, value)
+
+    _fdouble = struct.Struct("d")
+
+    def read_fdouble(self) -> float:
+        value = self.read(self._fdouble)[0]
+        log.info("%r: Read fdouble %r", self, value)
+        return value
+
+    def write_fdouble(self, value: float) -> None:
+        log.info("%r: Writing fdouble %r", self, value)
+        self.write(self._fdouble, value)
+
+    _rect = struct.Struct("iiii")
+
+    def read_rect(self) -> Rect:
+        value = Rect(*self.read(self._rect))
+        log.info("%r: Read rect %r", self, value)
+        return value
+
+    def write_rect(self, value: Rect) -> None:
+        log.info("%r: Writing rect %r", self, value)
+        self.write(self._rect, value.to_tuple())
+
+    def read_uleb128(self) -> int:
         times = 0
         value = 0
         more = True
         while more:
-            byte = self.uint1()
+            byte = self.read_uint1()
             shifted_byte = (byte & 0b0111_1111) << (7 * times)
             times += 1
             value += shifted_byte
             more = bool(byte & 0b1000_0000)
+        log.info("%r: Read uleb128 %r", self, value)
         return value
 
-    def string(self, size=None) -> str:
-        if size is None:
-            size = self.uleb128()
-        return str(self.file.read(size), encoding="latin1")
+    def write_uleb128(self, value: int) -> None:
+        log.info("%r: Writing uleb128 %r", self, value)
+        more = True
+        while more:
+            byte = value & 0b0111_1111
+            value -= 0b0111_1111
+            more = value > 0
+            if more:
+                byte |= 0b1000_0000
+            self.write_uint1(value)
 
-    def uuid(self) -> uuid.UUID:
-        # TODO: convert to uuid
-        # https://docs.microsoft.com/en-us/dotnet/api/system.guid.tobytearray?view=netframework-4.8
-        uuid_bytes = self.file.read(16)
-        return uuid_bytes
+    def _read_string_base(self, size: int) -> str:
+        value = str(self.data[self.cursor:self.cursor+size], encoding="latin1")
+        self.cursor += size
+        return value
 
-    def datetime(self) -> datetime.datetime:
+    def read_string_fixed(self, size: int):
+        value = self._read_string_base(size)
+        log.info("%r: Read string_fixed %r", self, value)
+        return value
+
+    def write_string_fixed(self, value: str, expected_size: int) -> None:
+        # TODO
+        raise NotImplementedError()
+
+    def read_string_variable(self) -> str:
+        size = self.read_uleb128()
+        value = self._read_string_base(size)
+        log.info("%r: Read string_variable %r", self, value)
+        return value
+
+    def write_string_variable(self, value: str) -> None:
+        # TODO
+        raise NotImplementedError()
+
+    def read_uuid(self) -> uuid.UUID:
+        data = self.data[self.cursor:self.cursor+16]
+        value = uuid.UUID(bytes=bytes(data))
+        self.cursor += 16
+        log.info("%r: Read uuid %r", self, value)
+        return value
+
+    def write_uuid(self, value: uuid.UUID) -> None:
+        # TODO
+        raise NotImplementedError()
+
+    def read_datetime(self) -> bytearray:
         # TODO: convert to datetime
         # https://docs.microsoft.com/it-it/dotnet/api/system.datetime.kind?view=netframework-4.8#System_DateTime_Kind
-        datetime_bytes = self.file.read(8)
-        return datetime_bytes
+        value = self.data[self.cursor:self.cursor+8]
+        self.cursor += 8
+        log.info("%r: Read datetime %r", self, value)
+        return value
 
-    def read_until(self, address: int) -> bytearray:
-        data = bytearray()
-        if self.file.tell() > address:
-            raise ValueError("Can't read backwards")
-        while self.file.tell() < address:
-            data += self.file.read(1)
-        return data
+    def write_datetime(self, value: datetime.datetime) -> None:
+        # TODO
+        raise NotImplementedError()
 
-    def skip_until(self, address: int) -> None:
-        self.file.seek(address)
-
-    def __repr__(self):
-        return f"<FileReader at {hex(self.file.tell())}>"
+    def read_bytearray_to_address(self, address: int) -> bytearray:
+        # TODO: remove this
+        value = self.data[self.cursor:address]
+        self.cursor += len(value)
+        log.info("%r: Read bytearray to address %r", self, value)
+        return value
