@@ -72,13 +72,6 @@ class Version(Packable):
             else:
                 raise ValueError("No such version")
 
-    @property
-    def name(self):
-        try:
-            return self.VERSION_IDS[self.id]
-        except KeyError:
-            return "Unknown (%i)" % self.id
-
     def write(self, f: FilePacker):
         f.write_int4(self.id)
 
@@ -87,16 +80,41 @@ class Version(Packable):
         return cls(f.read_int4())
 
     def __repr__(self):
+        """
+        :return: The expression to create the same :class:`.Version` object.
+        """
         return f"Version({self.id})"
 
+    def name(self) -> str:
+        """
+        :return: The name of the version, for example, `"1.4.4.9"`.
+        :raises KeyError: If the name of the version is not known.
+        """
+        return self.VERSION_IDS[self.id]
+
     def __str__(self):
-        return self.name
+        """
+        :return: The name of the version, for example, `"1.4.4.9"`, or `"Unknown ({id})"` if it isn't known.
+        """
+        try:
+            return self.name()
+        except KeyError:
+            return f"Unknown ({self.id})"
 
     def __eq__(self, other):
+        """
+        :return: If two versions match.
+        """
         return self.id == other
 
     def __gt__(self, other):
+        """
+        :return: If the version on the left is more recent than the one on the right.
+        """
         return self.id > other
 
     def __lt__(self, other):
+        """
+        :return: If the version on the left is less recent than the one on the right.
+        """
         return self.id < other
