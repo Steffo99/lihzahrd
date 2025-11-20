@@ -456,14 +456,14 @@ class World:
         bounds = f.rect()
         world_size = Coordinates(y=f.int4(), x=f.int4())
         difficulty = Difficulty(f.int4())
-        is_drunk_world = f.bool()
-        is_for_the_worthy = f.bool()
-        is_tenth_anniversary = f.bool()
-        is_the_constant = f.bool()
-        is_bee_world = f.bool()
-        is_upside_down = f.bool()
-        is_trap_world = f.bool()
-        is_zenith_world = f.bool()
+        is_drunk_world = f.boolean()
+        is_for_the_worthy = f.boolean()
+        is_tenth_anniversary = f.boolean()
+        is_the_constant = f.boolean()
+        is_bee_world = f.boolean()
+        is_upside_down = f.boolean()
+        is_trap_world = f.boolean()
+        is_zenith_world = f.boolean()
 
         created_on = f.datetime()
 
@@ -486,45 +486,45 @@ class World:
         cavern_level = f.double()
 
         current_time = f.double()
-        is_daytime = f.bool()
+        is_daytime = f.boolean()
         moon_phase = MoonPhase(f.uint4())
 
-        blood_moon = f.bool()
-        eclipse = f.bool()
+        blood_moon = f.boolean()
+        eclipse = f.boolean()
 
         dungeon_point = Coordinates(f.int4(), f.int4())
-        world_evil = WorldEvilType(f.bool())
+        world_evil = WorldEvilType(f.boolean())
 
-        defeated_eye_of_cthulhu = f.bool()  # Possibly. I'm not sure.
-        defeated_eater_of_worlds = f.bool()  # Possibly. I'm not sure.
-        defeated_skeletron = f.bool()  # Possibly. I'm not sure.
-        defeated_queen_bee = f.bool()
-        defeated_the_twins = f.bool()
-        defeated_the_destroyer = f.bool()
-        defeated_skeletron_prime = f.bool()
-        defeated_any_mechnical_boss = f.bool()
-        defeated_plantera = f.bool()
-        defeated_golem = f.bool()
-        defeated_king_slime = f.bool()
+        defeated_eye_of_cthulhu = f.boolean()  # Possibly. I'm not sure.
+        defeated_eater_of_worlds = f.boolean()  # Possibly. I'm not sure.
+        defeated_skeletron = f.boolean()  # Possibly. I'm not sure.
+        defeated_queen_bee = f.boolean()
+        defeated_the_twins = f.boolean()
+        defeated_the_destroyer = f.boolean()
+        defeated_skeletron_prime = f.boolean()
+        defeated_any_mechnical_boss = f.boolean()
+        defeated_plantera = f.boolean()
+        defeated_golem = f.boolean()
+        defeated_king_slime = f.boolean()
 
-        saved_goblin_tinkerer = f.bool()
-        saved_wizard = f.bool()
-        saved_mechanic = f.bool()
+        saved_goblin_tinkerer = f.boolean()
+        saved_wizard = f.boolean()
+        saved_mechanic = f.boolean()
 
-        defeated_goblin_army = f.bool()
-        defeated_clown = f.bool()
-        defeated_frost_moon = f.bool()
-        defeated_pirates = f.bool()
+        defeated_goblin_army = f.boolean()
+        defeated_clown = f.boolean()
+        defeated_frost_moon = f.boolean()
+        defeated_pirates = f.boolean()
 
         shadow_orbs = ShadowOrbs(
-            smashed_at_least_once=f.bool(), spawn_meteorite=f.bool(), evil_boss_counter=f.uint1()
+            smashed_at_least_once=f.boolean(), spawn_meteorite=f.boolean(), evil_boss_counter=f.uint1()
         )  # was int4()
 
         altars_smashed = f.int4()
 
-        is_hardmode = f.bool()
+        is_hardmode = f.boolean()
 
-        party_is_doomed = not f.bool()
+        party_is_doomed = not f.boolean()
 
         invasion_delay = f.int4()
         invasion_size = f.int4()
@@ -535,7 +535,7 @@ class World:
 
         sundial_cooldown = f.uint1()
 
-        rain = Rain(is_active=f.bool(), time_left=f.int4(), max_rain=f.single())
+        rain = Rain(is_active=f.boolean(), time_left=f.int4(), max_rain=f.single())
 
         try:
             hardmode_ore_1 = BlockType(f.int4())
@@ -566,16 +566,16 @@ class World:
         for _ in range(angler_today_quest_completed_by_count):
             angler_today_quest_completed_by.append(f.string())
 
-        saved_angler = f.bool()
+        saved_angler = f.boolean()
 
         angler_today_quest_target = AnglerQuestFish(f.int4())
         anglers_quest = AnglerQuest(
             current_goal=angler_today_quest_target, completed_by=angler_today_quest_completed_by
         )
 
-        saved_stylist = f.bool()
-        saved_tax_collector = f.bool()
-        saved_golfer = f.bool()
+        saved_stylist = f.boolean()
+        saved_tax_collector = f.boolean()
+        saved_golfer = f.boolean()
 
         invasion_size_start = f.int4()  # ???
         invasion = Invasion(
@@ -592,26 +592,26 @@ class World:
         for mob_id in range(mob_types_count):
             mob_kills[mob_id] = f.int4()
 
-        sundial_is_running = f.bool()
+        sundial_is_running = f.boolean()
 
-        defeated_duke_fishron = f.bool()
-        defeated_martian_madness = f.bool()
-        defeated_lunatic_cultist = f.bool()
-        defeated_moon_lord = f.bool()
-        defeated_pumpking = f.bool()
-        defeated_mourning_wood = f.bool()
-        defeated_ice_queen = f.bool()
-        defeated_santa_nk1 = f.bool()
-        defeated_everscream = f.bool()
-        defeated_pillars = PillarsInfo(solar=f.bool(), vortex=f.bool(), nebula=f.bool(), stardust=f.bool())
+        defeated_duke_fishron = f.boolean()
+        defeated_martian_madness = f.boolean()
+        defeated_lunatic_cultist = f.boolean()
+        defeated_moon_lord = f.boolean()
+        defeated_pumpking = f.boolean()
+        defeated_mourning_wood = f.boolean()
+        defeated_ice_queen = f.boolean()
+        defeated_santa_nk1 = f.boolean()
+        defeated_everscream = f.boolean()
+        defeated_pillars = PillarsInfo(solar=f.boolean(), vortex=f.boolean(), nebula=f.boolean(), stardust=f.boolean())
 
         lunar_events = LunarEvents(
-            pillars_present=PillarsInfo(solar=f.bool(), vortex=f.bool(), nebula=f.bool(), stardust=f.bool()),
-            are_active=f.bool(),
+            pillars_present=PillarsInfo(solar=f.boolean(), vortex=f.boolean(), nebula=f.boolean(), stardust=f.boolean()),
+            are_active=f.boolean(),
         )
 
-        party_center_active = f.bool()
-        party_natural_active = f.bool()
+        party_center_active = f.boolean()
+        party_natural_active = f.boolean()
         party_cooldown = f.int4()
         partying_npcs_count = f.int4()
         partying_npcs = []
@@ -625,11 +625,11 @@ class World:
             partying_npcs=partying_npcs,
         )
 
-        sandstorm = Sandstorm(is_active=f.bool(), time_left=f.int4(), severity=f.single(), intended_severity=f.single())
+        sandstorm = Sandstorm(is_active=f.boolean(), time_left=f.int4(), severity=f.single(), intended_severity=f.single())
 
-        saved_bartender = f.bool()
+        saved_bartender = f.boolean()
 
-        old_ones_army = OldOnesArmyTiers(f.bool(), f.bool(), f.bool())
+        old_ones_army = OldOnesArmyTiers(f.boolean(), f.boolean(), f.boolean())
 
         # ToDo: Figure out which biomes got new BGs.
         # Oasis and Graveyard probably got new backgrounds.
@@ -655,13 +655,13 @@ class World:
             underworld=bg_underworld,
         )
 
-        combat_book_used = f.bool()
+        combat_book_used = f.boolean()
 
         lantern_night = LanternNight(
             nights_on_cooldown=f.int4(),
-            genuine=f.bool(),
-            manual=f.bool(),
-            next_night_is_lantern_night=f.bool()
+            genuine=f.boolean(),
+            manual=f.boolean(),
+            next_night_is_lantern_night=f.boolean()
         )
 
         events = Events(
@@ -679,8 +679,8 @@ class World:
         treetop_variant_count = f.int4()
         treetop_variants = TreetopVariants([f.int4() for _ in range(treetop_variant_count)])
 
-        halloween_today = f.bool()
-        xmas_today = f.bool()
+        halloween_today = f.boolean()
+        xmas_today = f.boolean()
 
         ore_1 = BlockType(f.int4())
         ore_2 = BlockType(f.int4())
@@ -688,11 +688,11 @@ class World:
         ore_4 = BlockType(f.int4())
         saved_ore_tiers = SavedOreTiers(ore_1, ore_2, ore_3, ore_4, hardmode_ore_1, hardmode_ore_2, hardmode_ore_3)
 
-        pets = Pets(cat=f.bool(), dog=f.bool(), bunny=f.bool())
+        pets = Pets(cat=f.boolean(), dog=f.boolean(), bunny=f.boolean())
 
-        defeated_empress_of_light = f.bool()
-        defeated_queen_slime = f.bool()
-        defeated_deerclops = f.bool()
+        defeated_empress_of_light = f.boolean()
+        defeated_queen_slime = f.boolean()
+        defeated_deerclops = f.boolean()
 
         bosses_defeated = BossesDefeated(
             eye_of_cthulhu=defeated_eye_of_cthulhu,
@@ -726,24 +726,24 @@ class World:
             deerclops=defeated_deerclops,
         )
 
-        saved_slime_nerdy = f.bool()
-        saved_merchant = f.bool()
-        saved_demolitionist = f.bool()
-        saved_party_girl = f.bool()
-        saved_dye_trader = f.bool()
-        saved_truffle = f.bool()
-        saved_arms_dealer = f.bool()
-        saved_nurse = f.bool()
-        saved_princess = f.bool()
-        combat_book_2_used = f.bool()
-        peddler_satchel_used = f.bool()
-        saved_slime_cool = f.bool()
-        saved_slime_elder = f.bool()
-        saved_slime_clumsy = f.bool()
-        saved_slime_diva = f.bool()
-        saved_slime_surly = f.bool()
-        saved_slime_mystic = f.bool()
-        saved_slime_squire = f.bool()
+        saved_slime_nerdy = f.boolean()
+        saved_merchant = f.boolean()
+        saved_demolitionist = f.boolean()
+        saved_party_girl = f.boolean()
+        saved_dye_trader = f.boolean()
+        saved_truffle = f.boolean()
+        saved_arms_dealer = f.boolean()
+        saved_nurse = f.boolean()
+        saved_princess = f.boolean()
+        combat_book_2_used = f.boolean()
+        peddler_satchel_used = f.boolean()
+        saved_slime_cool = f.boolean()
+        saved_slime_elder = f.boolean()
+        saved_slime_clumsy = f.boolean()
+        saved_slime_diva = f.boolean()
+        saved_slime_surly = f.boolean()
+        saved_slime_mystic = f.boolean()
+        saved_slime_squire = f.boolean()
 
         saved_npcs = SavedNPCs(
             goblin_tinkerer=saved_goblin_tinkerer,
@@ -775,7 +775,7 @@ class World:
             slime_squire=saved_slime_squire,
         )
 
-        moondial_is_running = f.bool()
+        moondial_is_running = f.boolean()
         moondial_cooldown = f.uint1()
 
         time = Time(
@@ -842,11 +842,11 @@ class World:
         for _ in range(shimmered_npcs_count):
             shimmered_npcs.append(f.int4())
 
-        while f.bool():
+        while f.boolean():
             npc_type = EntityType(f.int4())
             npc_name = f.string()
             npc_position = Coordinates(f.single(), f.single())
-            is_homeless = f.bool()
+            is_homeless = f.boolean()
             npc_home = Coordinates(f.int4(), f.int4())
             if is_homeless:
                 npc_home = None
@@ -859,7 +859,7 @@ class World:
             )
             npcs.append(npc)
 
-        while f.bool():
+        while f.boolean():
             mob_type = EntityType(f.int4())
             mob_position = Coordinates(f.single(), f.single())
 
@@ -886,7 +886,7 @@ class World:
                 )
             # Logic Sensor
             elif te_type == 2:
-                te_extra = LogicSensor(logic_check=f.uint1(), enabled=f.bool())
+                te_extra = LogicSensor(logic_check=f.uint1(), enabled=f.boolean())
             # Mannequin
             elif te_type == 3:
                 item_flags = f.bits()
@@ -982,20 +982,20 @@ class World:
         unknown_bestiary_data = f.read_until(pointers.journey_powers)
 
         journey_powers = JourneyPowers()
-        while f.bool():
+        while f.boolean():
             power_id = f.int2()
             if power_id == 0:
-                journey_powers.freeze_time = f.bool()
+                journey_powers.freeze_time = f.boolean()
             elif power_id == 8:
                 journey_powers.time_rate = f.single()
             elif power_id == 9:
-                journey_powers.freeze_rain = f.bool()
+                journey_powers.freeze_rain = f.boolean()
             elif power_id == 10:
-                journey_powers.freeze_wind = f.bool()
+                journey_powers.freeze_wind = f.boolean()
             elif power_id == 12:
                 journey_powers.difficulty = f.single()
             elif power_id == 13:
-                journey_powers.freeze_biome_spread = f.bool()
+                journey_powers.freeze_biome_spread = f.boolean()
 
         unknown_journey_powers_data = f.read_until(pointers.footer)
 
@@ -1068,7 +1068,7 @@ class World:
         )
 
         # Footer
-        if not f.bool():
+        if not f.boolean():
             raise InvalidFooterError("Invalid footer")
         if not f.string() == result.name:
             raise InvalidFooterError("Invalid footer")
