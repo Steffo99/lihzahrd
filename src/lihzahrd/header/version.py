@@ -6,16 +6,8 @@ from ..fileutils import Packable, FilePacker
 class Version(Packable):
     """A Terraria version."""
 
-    __slots__ = ("id",)
-
-    def write(self, f: FilePacker):
-        f.write_int4(self.id)
-
-    @classmethod
-    def read(cls, f: FilePacker) -> Self:
-        return cls(f.read_int4())
-
-    _version_ids = {
+    # TODO: Add all versions
+    VERSION_IDS = {
         12: "1.0.5",
         20: "1.0.6",
         22: "1.0.6.1",
@@ -67,12 +59,14 @@ class Version(Packable):
         279: "1.4.4.9",
     }
 
+    __slots__ = ("id",)
+
     def __init__(self, data: int | str):
         if isinstance(data, int):
             self.id = data
         else:
-            for version in self._version_ids:
-                if self._version_ids[version] == data:
+            for version in self.VERSION_IDS:
+                if self.VERSION_IDS[version] == data:
                     self.id = version
                     break
             else:
@@ -80,11 +74,17 @@ class Version(Packable):
 
     @property
     def name(self):
-        # TODO: Add all versions
         try:
-            return self._version_ids[self.id]
+            return self.VERSION_IDS[self.id]
         except KeyError:
             return "Unknown (%i)" % self.id
+
+    def write(self, f: FilePacker):
+        f.write_int4(self.id)
+
+    @classmethod
+    def read(cls, f: FilePacker) -> Self:
+        return cls(f.read_int4())
 
     def __repr__(self):
         return f"Version({self.id})"
