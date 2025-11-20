@@ -15,11 +15,11 @@ class SaveFileType(Packable, IntEnum):
     TWO = 2
     """Currently, Terraria worlds use this value."""
 
-    def write(self, f: FilePacker, v: Version | None):
+    def write(self, f: FilePacker, v: Version):
         f.write_uint1(self.value)
 
     @classmethod
-    def read(cls, f: FilePacker, v: Version | None) -> Self:
+    def read(cls, f: FilePacker, v: Version) -> Self:
         return cls(f.read_uint1())
 
     def __repr__(self):

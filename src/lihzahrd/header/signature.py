@@ -20,13 +20,13 @@ class Signature(Packable, Enum):
     XINDONG = "xindong"
     """Chinese Terraria."""
 
-    def write(self, f: FilePacker, v: Version | None):
+    def write(self, f: FilePacker, v: Version):
         # noinspection PyTypeChecker
         # i'm pretty sure self.value is a str
         f.write_string_fixed(self.value, 7)
 
     @classmethod
-    def read(cls, f: FilePacker, v: Version | None) -> Self:
+    def read(cls, f: FilePacker, v: Version) -> Self:
         return cls(f.read_string_fixed(7))
 
     def __repr__(self):

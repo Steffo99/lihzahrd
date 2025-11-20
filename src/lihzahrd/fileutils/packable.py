@@ -13,9 +13,9 @@ class Packable:
     An object which can be serialized and deserialized via a :class:`lihzahrd.fileutils.FilePacker`.
     """
 
-    def write(self, f: FilePacker, v: Version | None):
+    def write(self, f: FilePacker, v: Version):
         raise NotImplementedError()
 
     @classmethod
-    def read(cls, f: FilePacker, v: Version | None) -> Self:
+    def read(cls, f: FilePacker, v: Version) -> Self:
         raise NotImplementedError()
