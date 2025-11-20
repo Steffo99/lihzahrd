@@ -1,4 +1,3 @@
-import typing
 from ..enums import EntityType
 from ..fileutils import Coordinates
 

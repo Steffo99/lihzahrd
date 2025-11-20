@@ -1,4 +1,3 @@
-from typing import Optional
 from ..enums import EntityType
 from ..fileutils import Coordinates
 from .mob import Mob
@@ -15,7 +14,7 @@ class NPC(Mob):
         position: Coordinates,
         name: str,
         variation_index: int,
-        home: Optional[Coordinates] = None,
+        home: Coordinates|None = None,
     ):
 
         super().__init__(type_, position)
@@ -23,7 +22,7 @@ class NPC(Mob):
         self.name: str = name
         """The name of this NPC."""
 
-        self.home: Optional[Coordinates] = home
+        self.home: Coordinates|None = home
         """The coordinates of the home of this NPC, or ``None`` if the NPC is homeless."""
 
         self.variation_index: int = variation_index
