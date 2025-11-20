@@ -207,14 +207,22 @@ class FilePacker:
         self.cursor += size
         return value
 
+    def _write_string_base(self, value: bytes) -> None:
+        self.data[self.cursor:self.cursor+len(value)] = value
+        self.cursor += len(value)
+
     def read_string_fixed(self, size: int):
         value = self._read_string_base(size)
         log.info("%r: Read string_fixed %r", self, value)
         return value
 
     def write_string_fixed(self, value: str, expected_size: int) -> None:
-        # TODO
-        raise NotImplementedError()
+        log.info("%r: Writing string_fixed %r", self, value)
+        data = bytes(value, encoding="latin1")
+        size = len(data)
+        if size != expected_size:
+            raise ValueError(f"expected value to be of size {expected_size}, was of size {size} instead")
+        self._write_string_base(data)
 
     def read_string_variable(self) -> str:
         size = self.read_uleb128()
@@ -223,8 +231,11 @@ class FilePacker:
         return value
 
     def write_string_variable(self, value: str) -> None:
-        # TODO
-        raise NotImplementedError()
+        log.info("%r: Writing string_variable %r", self, value)
+        data = bytes(value, encoding="latin1")
+        size = len(data)
+        self.write_uleb128(size)
+        self._write_string_base(data)
 
     def read_uuid(self) -> uuid.UUID:
         data = self.data[self.cursor:self.cursor+16]
