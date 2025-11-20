@@ -8,4 +8,4 @@ class Difficulty(enum.IntEnum):
     MASTER = 2
 
     def __repr__(self):
-        return f"{self.__class__.__qualname__}.{self.NAME}"
+        return f"{self.__class__.__qualname__}.{self.name}"
