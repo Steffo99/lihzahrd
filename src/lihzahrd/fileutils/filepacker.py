@@ -234,8 +234,10 @@ class FilePacker:
         return value
 
     def write_uuid(self, value: uuid.UUID) -> None:
-        # TODO
-        raise NotImplementedError()
+        log.info("%r: Writing uuid %r", self, value)
+        data = value.bytes
+        self.data = b"".join((self.data[0:self.cursor], data, self.data[self.cursor:-1]))
+        self.cursor += len(data)
 
     def read_datetime(self) -> bytearray:
         # TODO: convert to datetime
@@ -245,9 +247,11 @@ class FilePacker:
         log.info("%r: Read datetime %r", self, value)
         return value
 
-    def write_datetime(self, value: datetime.datetime) -> None:
-        # TODO
-        raise NotImplementedError()
+    def write_datetime(self, value: bytearray) -> None:
+        log.info("%r: Writing datetime %r", self, value)
+        # TODO: convert from datetime
+        self.data = b"".join((self.data[0:self.cursor], value, self.data[self.cursor:-1]))
+        self.cursor += len(value)
 
     def read_bytearray_to_address(self, address: int) -> bytearray:
         # TODO: remove this
