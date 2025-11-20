@@ -1,11 +1,10 @@
-from typing import Any
+import logging
 import struct
 import uuid
-import datetime
-import logging
-from .rect import Rect
-from .bits import BITS
+from typing import Any
 
+from .bits import BITS
+from .rect import Rect
 
 log = logging.getLogger(__name__)
 
@@ -203,12 +202,12 @@ class FilePacker:
             self.write_uint1(value)
 
     def _read_string_base(self, size: int) -> str:
-        value = str(self.data[self.cursor:self.cursor+size], encoding="latin1")
+        value = str(self.data[self.cursor:self.cursor + size], encoding="latin1")
         self.cursor += size
         return value
 
     def _write_string_base(self, value: bytes) -> None:
-        self.data[self.cursor:self.cursor+len(value)] = value
+        self.data[self.cursor:self.cursor + len(value)] = value
         self.cursor += len(value)
 
     def read_string_fixed(self, size: int):
@@ -238,7 +237,7 @@ class FilePacker:
         self._write_string_base(data)
 
     def read_uuid(self) -> uuid.UUID:
-        data = self.data[self.cursor:self.cursor+16]
+        data = self.data[self.cursor:self.cursor + 16]
         value = uuid.UUID(bytes=bytes(data))
         self.cursor += 16
         log.info("%r: Read uuid %r", self, value)
@@ -247,13 +246,13 @@ class FilePacker:
     def write_uuid(self, value: uuid.UUID) -> None:
         log.info("%r: Writing uuid %r", self, value)
         data = value.bytes
-        self.data[self.cursor:self.cursor+16] = data
+        self.data[self.cursor:self.cursor + 16] = data
         self.cursor += 16
 
     def read_datetime(self) -> bytearray:
         # TODO: convert to datetime
         # https://docs.microsoft.com/it-it/dotnet/api/system.datetime.kind?view=netframework-4.8#System_DateTime_Kind
-        value = self.data[self.cursor:self.cursor+8]
+        value = self.data[self.cursor:self.cursor + 8]
         self.cursor += 8
         log.info("%r: Read datetime %r", self, value)
         return value
@@ -261,7 +260,7 @@ class FilePacker:
     def write_datetime(self, value: bytearray) -> None:
         log.info("%r: Writing datetime %r", self, value)
         # TODO: convert from datetime
-        self.data[self.cursor:self.cursor+8] = value
+        self.data[self.cursor:self.cursor + 8] = value
         self.cursor += 8
 
     def read_bytearray_to_address(self, address: int) -> bytearray:

@@ -2,7 +2,7 @@ class Party:
     """NPC Party related information."""
 
     def __init__(
-        self, is_doomed: bool, thrown_by_party_center: bool, thrown_by_npcs: bool, cooldown: int, partying_npcs: list[int]
+            self, is_doomed: bool, thrown_by_party_center: bool, thrown_by_npcs: bool, cooldown: int, partying_npcs: list[int]
     ):
         self.is_doomed: bool = is_doomed
         """If all NPCs will die after this party ends."""

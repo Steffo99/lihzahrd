@@ -1,5 +1,5 @@
-from ..fileutils import Coordinates
 from ..enums import EntityType
+from ..fileutils import Coordinates
 
 
 class Room:

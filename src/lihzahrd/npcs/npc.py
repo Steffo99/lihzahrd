@@ -1,6 +1,6 @@
+from .mob import Mob
 from ..enums import EntityType
 from ..fileutils import Coordinates
-from .mob import Mob
 
 
 class NPC(Mob):
@@ -9,20 +9,19 @@ class NPC(Mob):
     __slots__ = "type", "name", "position", "home", "variation_index"
 
     def __init__(
-        self,
-        type_: EntityType,
-        position: Coordinates,
-        name: str,
-        variation_index: int,
-        home: Coordinates|None = None,
+            self,
+            type_: EntityType,
+            position: Coordinates,
+            name: str,
+            variation_index: int,
+            home: Coordinates | None = None,
     ):
-
         super().__init__(type_, position)
 
         self.name: str = name
         """The name of this NPC."""
 
-        self.home: Coordinates|None = home
+        self.home: Coordinates | None = home
         """The coordinates of the home of this NPC, or ``None`` if the NPC is homeless."""
 
         self.variation_index: int = variation_index

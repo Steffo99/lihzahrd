@@ -1,14 +1,14 @@
-from .tileentity import TileEntity
+from .clothingdisplay import ClothingDisplay
+from .hatrack import HatRack
 from .itemframe import ItemFrame
 from .logicsensor import LogicSensor
-from .targetdummy import TargetDummy
-from .clothingdisplay import ClothingDisplay
 from .mannequin import Mannequin
-from .hatrack import HatRack
-from .singleitemdisplay import SingleItemDisplay
 from .plate import Plate
-from .weaponrack import WeaponRack
 from .pylon import Pylon
+from .singleitemdisplay import SingleItemDisplay
+from .targetdummy import TargetDummy
+from .tileentity import TileEntity
+from .weaponrack import WeaponRack
 
 __all__ = [
     "TileEntity",

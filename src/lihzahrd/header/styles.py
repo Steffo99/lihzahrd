@@ -1,15 +1,15 @@
-from .moonstyle import MoonStyle
 from .fourpartsplit import FourPartSplit
+from .moonstyle import MoonStyle
 
 
 class Styles:
     """The styles of various world elements."""
 
     def __init__(
-        self,
-        moon: MoonStyle,
-        trees: FourPartSplit,
-        moss: FourPartSplit,
+            self,
+            moon: MoonStyle,
+            trees: FourPartSplit,
+            moss: FourPartSplit,
     ):
         self.moon: MoonStyle = moon
         self.trees: FourPartSplit = trees

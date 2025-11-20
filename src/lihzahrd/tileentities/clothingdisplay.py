@@ -7,7 +7,6 @@ class ClothingDisplay:
     __slots__ = "items", "dyes"
 
     def __init__(self, items: list[ItemStack], dyes: list[ItemStack]):
-
         self.items: list[ItemStack] = items
         """What items is the display wearing."""
 

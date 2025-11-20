@@ -15,7 +15,7 @@ class TileMatrix:
             return f"<TileMatrix {len(self._tiles)}x{len(self._tiles[0])}>"
         return f"<TileMatrix 0x0>"
 
-    def __getitem__(self, item: tuple|Coordinates):
+    def __getitem__(self, item: tuple | Coordinates):
         """Get a tile at specific coordinates.
 
         (x=0, y=0) returns the top-left tile in the map.
@@ -29,7 +29,7 @@ class TileMatrix:
         else:
             raise TypeError(f"Unsupported type: {item.__class__.__name__}")
 
-    def __setitem__(self, key: tuple|Coordinates, value: Tile):
+    def __setitem__(self, key: tuple | Coordinates, value: Tile):
         """Change a tile at specific coordinates.
 
         The same properties that apply to __getitem__ are valid for __setitem__."""

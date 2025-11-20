@@ -1,4 +1,5 @@
 from __future__ import annotations
+
 import enum
 import functools
 
@@ -91,7 +92,7 @@ class PrefixType(enum.IntEnum):
 
     @classmethod
     @functools.lru_cache(85)
-    def get(cls, i: int) -> PrefixType|None:
+    def get(cls, i: int) -> PrefixType | None:
         if i == 0:
             return None
         else:

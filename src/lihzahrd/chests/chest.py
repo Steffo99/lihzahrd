@@ -1,5 +1,5 @@
-from ..items import ItemStack
 from ..fileutils import Coordinates
+from ..items import ItemStack
 
 
 class Chest:

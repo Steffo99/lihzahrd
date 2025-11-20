@@ -7,14 +7,14 @@ class Wall:
     __slots__ = "type", "paint", "is_illuminant", "is_echo"
 
     def __init__(
-        self,
-        type_: WallType,
-        paint: int|None = None,
-        is_illuminant: bool = False,
-        is_echo: bool = False,
+            self,
+            type_: WallType,
+            paint: int | None = None,
+            is_illuminant: bool = False,
+            is_echo: bool = False,
     ):
         self.type: WallType = type_
-        self.paint: int|None = paint
+        self.paint: int | None = paint
 
         self.is_illuminant: bool = is_illuminant
         """If the wall had Illuminant Coating applied, and is unaffected by lighting."""

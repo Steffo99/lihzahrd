@@ -1,6 +1,6 @@
-from ..enums import BlockType
 from .frameimportantdata import FrameImportantData
 from .shape import Shape
+from ..enums import BlockType
 
 
 class Block:
@@ -9,25 +9,25 @@ class Block:
     __slots__ = "type", "frame", "shape", "paint", "is_active", "is_illuminant", "is_echo"
 
     def __init__(
-        self,
-        type_: BlockType,
-        shape: Shape = Shape.NORMAL,
-        frame: FrameImportantData|None = None,
-        paint: int|None = None,
-        is_active: bool = True,
-        is_illuminant: bool = False,
-        is_echo: bool = False,
+            self,
+            type_: BlockType,
+            shape: Shape = Shape.NORMAL,
+            frame: FrameImportantData | None = None,
+            paint: int | None = None,
+            is_active: bool = True,
+            is_illuminant: bool = False,
+            is_echo: bool = False,
     ):
         self.type: BlockType = type_
         """The type of the block (dirt, stone, ...)."""
 
-        self.frame: FrameImportantData|None = frame
+        self.frame: FrameImportantData | None = frame
         """The framedata of the block, if present."""
 
         self.shape: Shape = shape
         """The shape of the block, is changed with an hammer."""
 
-        self.paint: int|None = paint
+        self.paint: int | None = paint
         """The paint color of a block."""
 
         self.is_active: bool = is_active

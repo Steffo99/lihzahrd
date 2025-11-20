@@ -1,10 +1,10 @@
 from .block import Block
-from .wall import Wall
 from .liquid import Liquid
+from .wall import Wall
 from .wiring import Wiring
 from ..chests import Chest
-from ..signs import Sign
 from ..pressureplates import WeighedPressurePlate
+from ..signs import Sign
 from ..tileentities import TileEntity
 
 
@@ -14,22 +14,22 @@ class Tile:
     __slots__ = "block", "wall", "liquid", "wiring", "extra"
 
     def __init__(
-        self,
-        block: Block|None = None,
-        wall: Wall|None = None,
-        liquid: Liquid|None = None,
-        wiring: Wiring|None = None,
-        extra: Chest|Sign|WeighedPressurePlate|TileEntity|None = None,
+            self,
+            block: Block | None = None,
+            wall: Wall | None = None,
+            liquid: Liquid | None = None,
+            wiring: Wiring | None = None,
+            extra: Chest | Sign | WeighedPressurePlate | TileEntity | None = None,
     ):
         if wiring is None:
             wiring = Wiring()
 
-        self.block: Block|None = block
-        self.wall: Wall|None = wall
-        self.liquid: Liquid|None = liquid
-        self.wiring: Wiring|None = wiring
+        self.block: Block | None = block
+        self.wall: Wall | None = wall
+        self.liquid: Liquid | None = liquid
+        self.wiring: Wiring | None = wiring
 
-        self.extra: Chest|Sign|WeighedPressurePlate|TileEntity|None = extra
+        self.extra: Chest | Sign | WeighedPressurePlate | TileEntity | None = extra
         """A reference to the extra data of this tile, such as Chest or Sign data."""
 
     def __repr__(self):

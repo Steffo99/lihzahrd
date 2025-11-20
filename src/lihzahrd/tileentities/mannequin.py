@@ -1,5 +1,5 @@
-from ..items.itemstack import ItemStack
 from .clothingdisplay import ClothingDisplay
+from ..items.itemstack import ItemStack
 
 
 class Mannequin(ClothingDisplay):

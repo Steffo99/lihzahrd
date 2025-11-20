@@ -1,93 +1,93 @@
-import uuid
+import logging
 import math
 import sys
-import logging
+import uuid
 
-from .fileutils import *
-from .enums import *
-from .items import *
-from .header import *
-from .tiles import *
 from .bestiary import *
-from .journeypowers import *
 from .chests import *
-from .signs import *
-from .npcs import *
-from .tileentities import *
-from .pressureplates import *
-from .townmanager import *
+from .enums import *
 from .errors import InvalidFooterError
+from .fileutils import *
+from .header import *
+from .items import *
+from .journeypowers import *
+from .npcs import *
+from .pressureplates import *
+from .signs import *
+from .tileentities import *
+from .tiles import *
+from .townmanager import *
 
 
 class World:
     """The Python representation of a Terraria world."""
 
     def __init__(
-        self,
-        version: Version,
-        savefile_type: int,
-        revision: int,
-        is_favorite: bool,
-        name: str,
-        generator: GeneratorInfo,
-        uuid_: uuid.UUID,
-        id_: int,
-        bounds: Rect,
-        size: Coordinates,
-        difficulty: Difficulty,
-        is_drunk_world: bool,
-        is_for_the_worthy: bool,
-        is_tenth_anniversary: bool,
-        is_the_constant: bool,
-        is_bee_world: bool,
-        is_upside_down: bool,
-        is_trap_world: bool,
-        is_zenith_world: bool,
-        created_on,
-        styles: Styles,
-        backgrounds: Backgrounds,
-        spawn_point: Coordinates,
-        underground_level: float,
-        cavern_level: float,
-        time: Time,
-        events: Events,
-        dungeon_point: Coordinates,
-        world_evil: WorldEvilType,
-        saved_npcs: SavedNPCs,
-        altars_smashed: int,
-        is_hardmode: bool,
-        shadow_orbs: ShadowOrbs,
-        bosses_defeated: BossesDefeated,
-        anglers_quest: AnglerQuest,
-        clouds: Clouds,
-        cultist_delay: int,
-        tiles: TileMatrix,
-        bestiary: Bestiary,
-        journey_powers: JourneyPowers,
-        chests: list[Chest],
-        signs: list[Sign],
-        shimmered_npcs: list[int],
-        npcs: list[NPC],
-        mobs: list[Mob],
-        tile_entities: list[TileEntity],
-        weighed_pressure_plates: list[WeighedPressurePlate],
-        rooms: list[Room],
-        pets: Pets,
-        halloween_today: bool,
-        xmas_today: bool,
-        treetop_variants: TreetopVariants,
-        saved_ore_tiers: SavedOreTiers,
-        unknown_file_format_data: bytes = b"",
-        unknown_world_header_data: bytes = b"",
-        unknown_world_tiles_data: bytes = b"",
-        unknown_chests_data: bytes = b"",
-        unknown_signs_data: bytes = b"",
-        unknown_npcs_data: bytes = b"",
-        unknown_tile_entities_data: bytes = b"",
-        unknown_pressure_plates_data: bytes = b"",
-        unknown_town_manager_data: bytes = b"",
-        unknown_bestiary_data: bytes = b"",
-        unknown_journey_powers_data: bytes = b"",
+            self,
+            version: Version,
+            savefile_type: int,
+            revision: int,
+            is_favorite: bool,
+            name: str,
+            generator: GeneratorInfo,
+            uuid_: uuid.UUID,
+            id_: int,
+            bounds: Rect,
+            size: Coordinates,
+            difficulty: Difficulty,
+            is_drunk_world: bool,
+            is_for_the_worthy: bool,
+            is_tenth_anniversary: bool,
+            is_the_constant: bool,
+            is_bee_world: bool,
+            is_upside_down: bool,
+            is_trap_world: bool,
+            is_zenith_world: bool,
+            created_on,
+            styles: Styles,
+            backgrounds: Backgrounds,
+            spawn_point: Coordinates,
+            underground_level: float,
+            cavern_level: float,
+            time: Time,
+            events: Events,
+            dungeon_point: Coordinates,
+            world_evil: WorldEvilType,
+            saved_npcs: SavedNPCs,
+            altars_smashed: int,
+            is_hardmode: bool,
+            shadow_orbs: ShadowOrbs,
+            bosses_defeated: BossesDefeated,
+            anglers_quest: AnglerQuest,
+            clouds: Clouds,
+            cultist_delay: int,
+            tiles: TileMatrix,
+            bestiary: Bestiary,
+            journey_powers: JourneyPowers,
+            chests: list[Chest],
+            signs: list[Sign],
+            shimmered_npcs: list[int],
+            npcs: list[NPC],
+            mobs: list[Mob],
+            tile_entities: list[TileEntity],
+            weighed_pressure_plates: list[WeighedPressurePlate],
+            rooms: list[Room],
+            pets: Pets,
+            halloween_today: bool,
+            xmas_today: bool,
+            treetop_variants: TreetopVariants,
+            saved_ore_tiers: SavedOreTiers,
+            unknown_file_format_data: bytes = b"",
+            unknown_world_header_data: bytes = b"",
+            unknown_world_tiles_data: bytes = b"",
+            unknown_chests_data: bytes = b"",
+            unknown_signs_data: bytes = b"",
+            unknown_npcs_data: bytes = b"",
+            unknown_tile_entities_data: bytes = b"",
+            unknown_pressure_plates_data: bytes = b"",
+            unknown_town_manager_data: bytes = b"",
+            unknown_bestiary_data: bytes = b"",
+            unknown_journey_powers_data: bytes = b"",
     ):
 
         self.version: Version = version
@@ -278,7 +278,7 @@ class World:
         flags3 = fr.read_bits() if has_flags3 else BITS[0]
         has_flags4 = flags3[0]
         flags4 = fr.read_bits() if has_flags4 else BITS[0]
-            
+
         has_block = flags1[1]
         has_extended_block_id = flags1[5]
         is_block_painted = flags3[3]
@@ -894,8 +894,8 @@ class World:
             elif te_type == 3:
                 item_flags = f.read_bits()
                 dye_flags = f.read_bits()
-                mannequin_items: list[ItemStack|None] = [None for _ in range(8)]
-                mannequin_dyes: list[ItemStack|None] = [None for _ in range(8)]
+                mannequin_items: list[ItemStack | None] = [None for _ in range(8)]
+                mannequin_dyes: list[ItemStack | None] = [None for _ in range(8)]
                 for index, flag in enumerate(item_flags):
                     if not flag:
                         continue
@@ -918,8 +918,8 @@ class World:
                 # This isn't 100% tested, but the first two flags should be items, and the second two should be dyes.
                 item_flags = f.read_bits()
                 # Maximum of two items slots and two dye slots.
-                rack_items: list[ItemStack|None] = [None for _ in range(2)]
-                rack_dyes: list[ItemStack|None] = [None for _ in range(2)]
+                rack_items: list[ItemStack | None] = [None for _ in range(2)]
+                rack_dyes: list[ItemStack | None] = [None for _ in range(2)]
                 for index, flag in enumerate(item_flags[0:2]):
                     if not flag:
                         continue
@@ -1084,7 +1084,6 @@ class World:
 __all__ = (
     "World",
 )
-
 
 if __name__ == "__main__":
     logging.basicConfig(level="DEBUG")

@@ -5,20 +5,20 @@ class Backgrounds:
     """The backgrounds of various world biomes."""
 
     def __init__(
-        self,
-        underground_snow: int,
-        underground_jungle: int,
-        hell: int,
-        forest: FourPartSplit,
-        corruption: int,
-        jungle: int,
-        snow: int,
-        hallow: int,
-        crimson: int,
-        desert: int,
-        ocean: int,
-        mushroom: int,
-        underworld: int,
+            self,
+            underground_snow: int,
+            underground_jungle: int,
+            hell: int,
+            forest: FourPartSplit,
+            corruption: int,
+            jungle: int,
+            snow: int,
+            hallow: int,
+            crimson: int,
+            desert: int,
+            ocean: int,
+            mushroom: int,
+            underworld: int,
     ):
         self.underground_snow: int = underground_snow
         self.underground_jungle: int = underground_jungle

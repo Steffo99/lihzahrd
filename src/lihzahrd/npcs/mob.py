@@ -8,9 +8,9 @@ class Mob:
     __slots__ = "type", "position"
 
     def __init__(
-        self,
-        type_: EntityType,
-        position: Coordinates,
+            self,
+            type_: EntityType,
+            position: Coordinates,
     ):
         self.type: EntityType = type_
         """The type of entity this object represents."""

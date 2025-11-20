@@ -7,7 +7,7 @@ class Wiring:
     __slots__ = "red", "green", "blue", "yellow", "actuator"
 
     def __init__(
-        self, red: bool = False, green: bool = False, blue: bool = False, yellow: bool = False, actuator: bool = False
+            self, red: bool = False, green: bool = False, blue: bool = False, yellow: bool = False, actuator: bool = False
     ):
         self.red: bool = red
         """If there's a red Wire in the tile."""

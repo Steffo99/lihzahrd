@@ -2,7 +2,8 @@ class Time:
     """Game time related information."""
 
     def __init__(
-        self, current: float, is_daytime: bool, moon_phase: int, sundial_cooldown: int, sundial_is_running: bool, moondial_cooldown: int, moondial_is_running: bool
+            self, current: float, is_daytime: bool, moon_phase: int, sundial_cooldown: int, sundial_is_running: bool, moondial_cooldown: int,
+            moondial_is_running: bool
     ):
         self.current: float = current
         """The current game time."""

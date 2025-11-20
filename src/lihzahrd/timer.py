@@ -7,8 +7,8 @@ class Timer:
     def __init__(self, name: str, display: bool = True):
         self.name: str = name
         self.display: bool = display
-        self._start_time: float|None = None
-        self._stop_time: float|None = None
+        self._start_time: float | None = None
+        self._stop_time: float | None = None
 
     def start(self):
         self._start_time = time.time()
