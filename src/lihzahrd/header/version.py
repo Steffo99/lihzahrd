@@ -1,7 +1,19 @@
-class Version:
+from typing import Self
+
+from ..fileutils import Packable, FilePacker
+
+
+class Version(Packable):
     """A Terraria version."""
 
     __slots__ = ("id",)
+
+    def write(self, f: FilePacker):
+        f.write_int4(self.id)
+
+    @classmethod
+    def read(cls, f: FilePacker) -> Self:
+        return cls(f.read_int4())
 
     _version_ids = {
         12: "1.0.5",

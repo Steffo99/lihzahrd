@@ -424,7 +424,7 @@ class World:
         f = FilePacker(data)
 
         # File header
-        version = Version(f.read_int4())
+        version = Version.read(f)
 
         relogic = f.read_string_fixed(7)  # TODO: this can appearently be "xindong"?
         if relogic != "relogic":
