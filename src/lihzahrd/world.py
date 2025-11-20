@@ -3,6 +3,7 @@ import math
 import sys
 import uuid
 
+from lihzahrd.header.revision import Revision
 from lihzahrd.header.savefiletype import SaveFileType
 from lihzahrd.header.signature import Signature
 from .bestiary import *
@@ -28,7 +29,7 @@ class World:
             self,
             version: Version,
             savefile_type: int,
-            revision: int,
+            revision: Revision,
             is_favorite: bool,
             name: str,
             generator: GeneratorInfo,
@@ -98,7 +99,7 @@ class World:
         self.savefile_type = savefile_type
         """The format of the save file. Should be 2 for all versions following 1.2."""
 
-        self.revision: int = revision
+        self.revision: Revision = revision
         """The number of times this world was saved."""
 
         self.is_favorite: bool = is_favorite
@@ -429,8 +430,8 @@ class World:
         v = Version.read(f)
         signature = Signature.read(f, v)
         savefile_type = SaveFileType.read(f, v)
+        revision = Revision.read(f, v)
 
-        revision = f.read_uint4()
         is_favorite = f.read_uint8() != 0
 
         # Pointers and tileframeimportant
