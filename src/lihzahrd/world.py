@@ -28,6 +28,7 @@ class World:
     def __init__(
             self,
             version: Version,
+            signature: Signature,
             savefile_type: int,
             revision: Revision,
             is_favorite: bool,
@@ -95,6 +96,9 @@ class World:
 
         self.version: Version = version
         """The game version when this savefile was last saved."""
+
+        self.signature: Signature = signature
+        """The signature with which the world was saved."""
 
         self.savefile_type = savefile_type
         """The format of the save file. Should be 2 for all versions following 1.2."""
@@ -998,6 +1002,7 @@ class World:
         # Object creation
         result = cls(
             version=v,
+            signature=signature,
             savefile_type=savefile_type,
             revision=revision,
             is_favorite=is_favorite,
