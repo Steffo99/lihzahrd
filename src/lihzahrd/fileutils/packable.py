@@ -1,8 +1,12 @@
+from __future__ import annotations
+
 from abc import ABCMeta, abstractmethod
-from typing import Self
+from typing import Self, TYPE_CHECKING
 
 from lihzahrd.fileutils import FilePacker
-from lihzahrd.header import Version
+
+if TYPE_CHECKING:
+    from lihzahrd.header import Version
 
 
 class Packable(metaclass=ABCMeta):
