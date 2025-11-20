@@ -3,6 +3,7 @@ import math
 import sys
 import uuid
 
+from lihzahrd.header.savefiletype import SaveFileType
 from lihzahrd.header.signature import Signature
 from .bestiary import *
 from .chests import *
@@ -427,10 +428,7 @@ class World:
         # File header
         v = Version.read(f)
         signature = Signature.read(f, v)
-
-        savefile_type = f.read_uint1()
-        if savefile_type != 2:
-            raise NotImplementedError("World file uses an unknown savefile type", savefile_type)
+        savefile_type = SaveFileType.read(f, v)
 
         supported_versions = (Version("1.4.4.9"),)
         if v not in supported_versions:
