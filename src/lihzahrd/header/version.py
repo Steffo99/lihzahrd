@@ -105,16 +105,28 @@ class Version(Packable):
         """
         :return: If two versions match.
         """
-        return self.id == other
+        return self.id == other.id
 
     def __gt__(self, other):
         """
         :return: If the version on the left is more recent than the one on the right.
         """
-        return self.id > other
+        return self.id > other.id
+
+    def __ge__(self, other):
+        """
+        :return: If the version on the left is greater or equal to the one on the right.
+        """
+        return self.id >= other.id
 
     def __lt__(self, other):
         """
         :return: If the version on the left is less recent than the one on the right.
         """
-        return self.id < other
+        return self.id < other.id
+
+    def __le__(self, other):
+        """
+        :return: If the version on the left is lesser or equal to the one on the right.
+        """
+        return self.id <= other.id
