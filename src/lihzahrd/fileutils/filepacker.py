@@ -20,7 +20,7 @@ INT_TO_BITS_CACHE = {
 }
 
 
-class FileReader:
+class FilePacker:
     """Helper class for deserializing a Terraria world file."""
 
     __slots__ = ("file",)

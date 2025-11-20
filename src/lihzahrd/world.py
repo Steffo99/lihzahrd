@@ -268,7 +268,7 @@ class World:
         self.shadow_orbs = value
 
     @staticmethod
-    def _read_tile_block(fr: FileReader, tileframeimportant) -> tuple[Tile, int]:
+    def _read_tile_block(fr: FilePacker, tileframeimportant) -> tuple[Tile, int]:
         flags1 = fr.bits()
         has_flags2 = flags1[0]
         flags2 = fr.bits() if has_flags2 else INT_TO_BITS_CACHE[0]
@@ -418,7 +418,7 @@ class World:
         # This code is a mess.
 
         file = open(filename, "rb")
-        f = FileReader(file)
+        f = FilePacker(file)
 
         # File header
         version = Version(f.int4())
