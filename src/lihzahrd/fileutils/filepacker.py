@@ -236,8 +236,8 @@ class FilePacker:
     def write_uuid(self, value: uuid.UUID) -> None:
         log.info("%r: Writing uuid %r", self, value)
         data = value.bytes
-        self.data = b"".join((self.data[0:self.cursor], data, self.data[self.cursor:-1]))
-        self.cursor += len(data)
+        self.data[self.cursor:self.cursor+16] = data
+        self.cursor += 16
 
     def read_datetime(self) -> bytearray:
         # TODO: convert to datetime
