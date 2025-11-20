@@ -3,6 +3,7 @@ import math
 import sys
 import uuid
 
+from lihzahrd.header.signature import Signature
 from .bestiary import *
 from .chests import *
 from .enums import *
@@ -424,19 +425,16 @@ class World:
         f = FilePacker(data)
 
         # File header
-        version = Version.read(f)
-
-        relogic = f.read_string_fixed(7)  # TODO: this can appearently be "xindong"?
-        if relogic != "relogic":
-            raise ValueError("World file is missing the 'relogic' magic string", relogic)
+        v = Version.read(f)
+        signature = Signature.read(f, v)
 
         savefile_type = f.read_uint1()
         if savefile_type != 2:
             raise NotImplementedError("World file uses an unknown savefile type", savefile_type)
 
         supported_versions = (Version("1.4.4.9"),)
-        if version not in supported_versions:
-            raise NotImplementedError("World file has been created with a unsupported version of Terraria", version)
+        if v not in supported_versions:
+            raise NotImplementedError("World file has been created with a unsupported version of Terraria", v)
 
         revision = f.read_uint4()
         is_favorite = f.read_uint8() != 0
@@ -1004,7 +1002,7 @@ class World:
 
         # Object creation
         result = cls(
-            version=version,
+            version=v,
             savefile_type=savefile_type,
             revision=revision,
             is_favorite=is_favorite,
