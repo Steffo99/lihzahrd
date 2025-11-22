@@ -978,7 +978,7 @@ class World:
 
         # Object creation
         result = cls(
-            meta=meta_,
+            meta_=meta_,
             name=name,
             generator=generator,
             uuid_=uuid_,
