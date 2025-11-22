@@ -1,12 +1,21 @@
-class Pointers:
-    """Pointers to the various sections of the Terraria save file.
-    
-    All values are in number of bytes from the start."""
+from typing import Self
+
+from .version import Version
+from .worldversionedpackable import WorldVersionedPackable
+from ..utils import FilePacker
+
+
+class Pointers(WorldVersionedPackable):
+    """
+    Pointers to the various sections of a Terraria world save file.
+
+    All values are in number of bytes from the start.
+    """
 
     __slots__ = (
         "file_format",
-        "world_header",
-        "world_tiles",
+        "header",
+        "tiles",
         "chests",
         "signs",
         "npcs",
@@ -16,8 +25,12 @@ class Pointers:
         "bestiary",
         "journey_powers",
         "footer",
-        "unknown",
     )
+
+    meta: int = 0
+    """
+    Meta section is always at byte 0 in all worlds, and cannot be changed.
+    """
 
     def __init__(
             self,
@@ -34,9 +47,8 @@ class Pointers:
             footer: int,
             *unknown,
     ):
-        self.file_format: int = 0
-        self.world_header: int = world_header
-        self.world_tiles: int = world_tiles
+        self.header: int = world_header
+        self.tiles: int = world_tiles
         self.chests: int = chests
         self.signs: int = signs
         self.npcs: int = npcs
@@ -47,6 +59,35 @@ class Pointers:
         self.journey_powers: int = journey_powers
         self.footer: int = footer
         self.unknown: list[int] = list(unknown)
+
+    def serialize(self, f: FilePacker, *, v: Version) -> None:
+        count = 11 + len(self.unknown)
+        f.write_int2(count)
+
+        f.write_int4(self.header)
+        f.write_int4(self.tiles)
+        f.write_int4(self.chests)
+        f.write_int4(self.signs)
+        f.write_int4(self.npcs)
+        f.write_int4(self.tile_entities)
+        f.write_int4(self.pressure_plates)
+        f.write_int4(self.town_manager)
+        f.write_int4(self.bestiary)
+        f.write_int4(self.journey_powers)
+        f.write_int4(self.footer)
+
+        for unknown in self.unknown:
+            f.write_uint4(unknown)
+
+    @classmethod
+    def deserialize(cls, f: FilePacker, *, v: Version) -> Self:
+        pointers = []
+
+        count = f.read_int2()
+        for _ in range(count):
+            pointers.append(f.read_int4())
+
+        return cls(*pointers)
 
 
 __all__ = (
