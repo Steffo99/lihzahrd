@@ -39,6 +39,10 @@ docs = [
     "Sphinx (>=8.2.3,<9.0.0)",
     "sphinx-rtd-theme (>=3.0.2, <4.0.0)",
 ]
+test = [
+	"pytest (>=9.0.0,<10.0.0)",
+	"pytest-cov (>=7.0.0,<8.0.0)",
+]
 
 [project.urls]
 Repository = "https://forge.steffo.eu/steffo/lihzahrd/"

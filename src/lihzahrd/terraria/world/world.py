@@ -1055,8 +1055,3 @@ class World:
 __all__ = (
     "World",
 )
-
-if __name__ == "__main__":
-    logging.basicConfig(level="DEBUG")
-    world = World.create_from_file(sys.argv[1])
-    breakpoint()

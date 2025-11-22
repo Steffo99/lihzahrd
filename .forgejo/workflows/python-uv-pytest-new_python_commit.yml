@@ -1,0 +1,36 @@
+name: "Test with Pytest the Python package using Poetry"
+
+on:
+  push:
+    branches:
+    - "main"
+    paths:
+    - "${{ vars.PYTHON_PACKAGE }}/**"
+    - "pyproject.toml"
+    - "poetry.lock"
+    - ".forgejo/workflows/python-poetry-pytest-new_python_commit.yml"
+  pull_request:
+    types:
+    - opened
+    - synchronize
+
+jobs:
+  test:
+    name: "Run tests"
+    runs-on: rookframe
+    
+    steps:
+    -
+      name: "Checkout repository"
+      uses: https://code.forgejo.org/actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8
+    -
+      name: "Run Pytest with coverage"
+      run: |-
+        uv run --group='test' pytest --cov='${{ vars.PYTHON_PACKAGE }}'
+    -
+      name: "Upload coverage artifact"
+      uses: https://code.forgejo.org/forgejo/upload-artifact@16871d9e8cfcf27ff31822cac382bbb5450f1e1e
+      with:
+        name: "Coverage"
+        path: .coverage
+        if-no-files-found: warn
