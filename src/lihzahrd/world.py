@@ -3,6 +3,7 @@ import math
 import sys
 import uuid
 
+from lihzahrd.header.favorite import Favorite
 from lihzahrd.header.revision import Revision
 from lihzahrd.header.savefiletype import SaveFileType
 from lihzahrd.header.signature import Signature
@@ -31,7 +32,7 @@ class World:
             signature: Signature,
             savefile_type: int,
             revision: Revision,
-            is_favorite: bool,
+            is_favorite: Favorite,
             name: str,
             generator: GeneratorInfo,
             uuid_: uuid.UUID,
@@ -106,7 +107,7 @@ class World:
         self.revision: Revision = revision
         """The number of times this world was saved."""
 
-        self.is_favorite: bool = is_favorite
+        self.is_favorite: Favorite = is_favorite
         """If the world is marked as favorite or not."""
 
         self.name: str = name
@@ -435,8 +436,7 @@ class World:
         signature = Signature.read(f, v)
         savefile_type = SaveFileType.read(f, v)
         revision = Revision.read(f, v)
-
-        is_favorite = f.read_uint8() != 0
+        is_favorite = Favorite.read(f, v)
 
         # Pointers and tileframeimportant
         pointers = Pointers(*[f.read_int4() for _ in range(f.read_int2())])
