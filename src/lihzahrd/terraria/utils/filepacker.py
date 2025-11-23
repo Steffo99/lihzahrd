@@ -278,6 +278,8 @@ class FilePacker:
 
     def read_bytearray(self, address: int = -1) -> bytearray:
         # TODO: remove this
+        if address > self.cursor:
+            raise ValueError("address is behind the current position of the cursor")
         value = self.data[self.cursor:address]
         self.cursor += len(value)
         log.info("%r: Read bytearray to address %r", self, value)
