@@ -15,6 +15,8 @@ class Meta(Packable):
     Metadata about a save file, written even before the world information.
     """
 
+    __slots__ = ("version", "signature", "type", "revision", "favorite", "pointers", "frameimportantarray", "unknown")
+
     def __init__(
             self,
             version_: Version,
