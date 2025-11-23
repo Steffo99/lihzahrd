@@ -8,7 +8,7 @@ on:
     - "src/lihzahrd/**"
     - "pyproject.toml"
     - "poetry.lock"
-    - ".forgejo/workflows/python-poetry-pytest-new_python_commit.yml"
+    - ".forgejo/workflows/python-uv-pytest-new_python_commit.yml"
   pull_request:
     types:
     - opened
