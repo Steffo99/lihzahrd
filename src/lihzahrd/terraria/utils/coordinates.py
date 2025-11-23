@@ -15,7 +15,7 @@ class Coordinates:
     def __repr__(self):
         x = self.x
         y = self.y
-        return f"Coordinates({x=}, {y=})"
+        return f"{self.__class__.__qualname__}({x=}, {y=})"
 
     def __str__(self):
         return f"({self.x}, {self.y})"
