@@ -75,7 +75,7 @@ class Header(WorldVersionedPackable):
         uuid_ = f.read_uuid()
         id_ = f.read_int4()
         bounds_ = f.read_rect()
-        size_ = Coordinates(x=f.read_int4(), y=f.read_int4())
+        size_ = Coordinates(y=f.read_int4(), x=f.read_int4())  # Swapped!
         challenges_ = Challenges.deserialize(f, v=v)
         createdon_ = f.read_datetime()
         return cls(
