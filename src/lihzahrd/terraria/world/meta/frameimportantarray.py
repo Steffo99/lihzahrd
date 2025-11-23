@@ -8,6 +8,8 @@ from ...utils import FilePacker
 
 
 class FrameImportantArray(WorldVersionedPackable):
+    __slots__ = ("data",)
+
     def __init__(self, *data):
         self.data: list[bool] = list(data)
 
