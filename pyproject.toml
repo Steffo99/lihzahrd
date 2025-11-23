@@ -54,4 +54,4 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [tool.uv]
-default-groups = ["docs"]
+default-groups = ["docs", "test"]
