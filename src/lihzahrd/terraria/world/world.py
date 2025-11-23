@@ -5,13 +5,11 @@ from .bestiary import *
 from .chests import *
 from .enums import *
 from .errors import InvalidFooterError
-from .frameimportantarray import *
 from .header import *
 from .items import *
 from .journeypowers import *
 from .meta import *
 from .npcs import *
-from .pointers import *
 from .pressureplates import *
 from .signs import *
 from .tileentities import *
@@ -25,8 +23,6 @@ class World:
     def __init__(
             self,
             meta_: Meta,
-            pointers_: Pointers,
-            frameimportantarray_: FrameImportantArray,
             name: str,
             generator: GeneratorInfo,
             uuid_: uuid.UUID,
@@ -76,7 +72,6 @@ class World:
             xmas_today: bool,
             treetop_variants: TreetopVariants,
             saved_ore_tiers: SavedOreTiers,
-            unknown_file_format_data: bytes = b"",
             unknown_world_header_data: bytes = b"",
             unknown_world_tiles_data: bytes = b"",
             unknown_chests_data: bytes = b"",
@@ -90,13 +85,6 @@ class World:
     ):
         self.meta: Meta = meta_
         """Metadata about the save file itself."""
-
-        # TODO: Automate this away.
-        self.pointers: Pointers = pointers_
-        """Pointers to the various sections of the savefile."""
-
-        self.frameimportantarray_: FrameImportantArray = frameimportantarray_
-        """Data about which tiles are FrameImportant and which ones are not."""
 
         self.name: str = name
         """The name the world was given at creation. Doesn't always match the filename."""
@@ -235,7 +223,7 @@ class World:
         self.rooms: list[Room] = rooms
         self.clouds: Clouds = clouds
         self.cultist_delay: int = cultist_delay
-        self.unknown_file_format_data: bytes = unknown_file_format_data
+
         self.unknown_world_header_data: bytes = unknown_world_header_data
         self.unknown_world_tiles_data: bytes = unknown_world_tiles_data
         self.unknown_chests_data: bytes = unknown_chests_data
@@ -420,13 +408,6 @@ class World:
         f = FilePacker(data)
 
         meta_ = Meta.deserialize(f)
-        v = meta_.version
-
-        pointers_ = Pointers.deserialize(f, v=v)
-        frameimportantarray_ = FrameImportantArray.deserialize(f, v=v)
-
-        unknown_file_format_data = f.read_bytearray_to_address(pointers_.header)
-
         name = f.read_string_variable()
         generator = GeneratorInfo(f.read_string_variable(), f.read_uint8())
 
@@ -767,12 +748,12 @@ class World:
             moondial_is_running=moondial_is_running,
         )
 
-        unknown_world_header_data = f.read_bytearray_to_address(pointers_.tiles)
+        unknown_world_header_data = f.read_bytearray(meta_.pointers.tiles)
 
         # Tiles
-        tm = cls._create_tilematrix(f, world_size, tileframeimportant=frameimportantarray_.data)
+        tm = cls._create_tilematrix(f, world_size, tileframeimportant=meta_.frameimportantarray.data)
 
-        unknown_world_tiles_data = f.read_bytearray_to_address(pointers_.chests)
+        unknown_world_tiles_data = f.read_bytearray(meta_.pointers.chests)
 
         # Chests
         chests = []
@@ -798,7 +779,7 @@ class World:
             chests.append(chest)
             tm[chest.position].extra = chest
 
-        unknown_chests_data = f.read_bytearray_to_address(pointers_.signs)
+        unknown_chests_data = f.read_bytearray(meta_.pointers.signs)
 
         # Signs
         signs = []
@@ -810,7 +791,7 @@ class World:
             signs.append(sign)
             tm[sign.position].extra = sign
 
-        unknown_signs_data = f.read_bytearray_to_address(pointers_.npcs)
+        unknown_signs_data = f.read_bytearray(meta_.pointers.npcs)
 
         # Entities
         npcs = []
@@ -845,7 +826,7 @@ class World:
             mob = Mob(type_=mob_type, position=mob_position)
             mobs.append(mob)
 
-        unknown_npcs_data = f.read_bytearray_to_address(pointers_.tile_entities)
+        unknown_npcs_data = f.read_bytearray(meta_.pointers.tile_entities)
 
         # Tile entities
         tile_entities_count = f.read_int4()
@@ -924,7 +905,7 @@ class World:
             tile_entities.append(tile_entity)
             tm[tile_entity.position].extra = tile_entity
 
-        unknown_tile_entities_data = f.read_bytearray_to_address(pointers_.pressure_plates)
+        unknown_tile_entities_data = f.read_bytearray(meta_.pointers.pressure_plates)
 
         # Weighed Pressure Plates
         weighed_pressure_plates_count = f.read_int4()
@@ -935,7 +916,7 @@ class World:
             weighed_pressure_plates.append(wpp)
             tm[wpp.position].extra = wpp
 
-        unknown_pressure_plates_data = f.read_bytearray_to_address(pointers_.town_manager)
+        unknown_pressure_plates_data = f.read_bytearray(meta_.pointers.town_manager)
 
         # Town Manager
         rooms_count = f.read_int4()
@@ -945,7 +926,7 @@ class World:
             room = Room(npc=EntityType(f.read_int4()), position=Coordinates(f.read_int4(), f.read_int4()))
             rooms.append(room)
 
-        unknown_town_manager_data = f.read_bytearray_to_address(pointers_.bestiary)
+        unknown_town_manager_data = f.read_bytearray(meta_.pointers.bestiary)
 
         bestiary_kills = {}
         for _ in range(f.read_int4()):
@@ -958,7 +939,7 @@ class World:
 
         bestiary = Bestiary(chats=bestiary_chats, kills=bestiary_kills, sightings=bestiary_sightings)
 
-        unknown_bestiary_data = f.read_bytearray_to_address(pointers_.journey_powers)
+        unknown_bestiary_data = f.read_bytearray(meta_.pointers.journey_powers)
 
         journey_powers = JourneyPowers()
         while f.read_boolean():
@@ -976,13 +957,11 @@ class World:
             elif power_id == 13:
                 journey_powers.freeze_biome_spread = f.read_boolean()
 
-        unknown_journey_powers_data = f.read_bytearray_to_address(pointers_.footer)
+        unknown_journey_powers_data = f.read_bytearray(meta_.pointers.footer)
 
         # Object creation
         result = cls(
             meta_=meta_,
-            pointers_=pointers_,
-            frameimportantarray_=frameimportantarray_,
             name=name,
             generator=generator,
             uuid_=uuid_,
@@ -1032,7 +1011,6 @@ class World:
             pets=pets,
             bestiary=bestiary,
             journey_powers=journey_powers,
-            unknown_file_format_data=unknown_file_format_data,
             unknown_world_header_data=unknown_world_header_data,
             unknown_world_tiles_data=unknown_world_tiles_data,
             unknown_chests_data=unknown_chests_data,

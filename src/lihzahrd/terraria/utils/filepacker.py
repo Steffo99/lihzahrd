@@ -276,12 +276,17 @@ class FilePacker:
         self.data[self.cursor:self.cursor + 8] = value
         self.cursor += 8
 
-    def read_bytearray_to_address(self, address: int) -> bytearray:
+    def read_bytearray(self, address: int = -1) -> bytearray:
         # TODO: remove this
         value = self.data[self.cursor:address]
         self.cursor += len(value)
         log.info("%r: Read bytearray to address %r", self, value)
         return value
+
+    def write_bytearray(self, value: bytearray) -> None:
+        log.info("%r: Writing bytearray %r", self, value)
+        length = len(value)
+        self.data[self.cursor:self.cursor + length] = value
 
 
 __all__ = (

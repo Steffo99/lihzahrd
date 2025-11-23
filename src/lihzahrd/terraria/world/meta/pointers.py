@@ -1,8 +1,8 @@
 from typing import Self
 
-from .version import Version
-from .worldversionedpackable import WorldVersionedPackable
-from ..utils import FilePacker
+from ..version import Version
+from ..worldversionedpackable import WorldVersionedPackable
+from ...utils import FilePacker
 
 
 class Pointers(WorldVersionedPackable):

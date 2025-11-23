@@ -1,11 +1,13 @@
 from typing import Self
 
-from ...utils import Packable, FilePacker
-from ..version import Version
-from .signature import Signature
-from .savefiletype import SaveFileType
-from .revision import Revision
 from .favorite import Favorite
+from .frameimportantarray import FrameImportantArray
+from .pointers import Pointers
+from .revision import Revision
+from .savefiletype import SaveFileType
+from .signature import Signature
+from ..version import Version
+from ...utils import Packable, FilePacker
 
 
 class Meta(Packable):
@@ -20,6 +22,9 @@ class Meta(Packable):
             type_: SaveFileType,
             revision_: Revision,
             favorite_: Favorite,
+            pointers_: Pointers,
+            frameimportantarray_: FrameImportantArray,
+            unknown_: bytearray = bytearray(),
     ):
         self.version: Version = version_
         """The game version when this savefile was last saved."""
@@ -40,12 +45,24 @@ class Meta(Packable):
         In-game, Favorite worlds cannot be deleted.
         """
 
+        self.pointers: Pointers = pointers_
+        """Pointers to the positions of the other sections of the save file."""
+
+        self.frameimportantarray: FrameImportantArray = frameimportantarray_
+        """Something related to the FrameImportant-ness of tiles. Not sure what."""
+
+        self.unknown: bytearray = unknown_
+        """Extra, unknown bytes in the meta section of the savefile."""
+
     def serialize(self, f: FilePacker) -> None:
         self.version.serialize(f)
         self.signature.serialize(f, v=self.version)
         self.type.serialize(f, v=self.version)
         self.revision.serialize(f, v=self.version)
         self.favorite.serialize(f, v=self.version)
+        self.pointers.serialize(f, v=self.version)
+        self.frameimportantarray.serialize(f, v=self.version)
+        f.write_bytearray(self.unknown)
 
     @classmethod
     def deserialize(cls, f: FilePacker) -> Self:
@@ -54,6 +71,9 @@ class Meta(Packable):
         type_ = SaveFileType.deserialize(f, v=version_)
         revision_ = Revision.deserialize(f, v=version_)
         favorite_ = Favorite.deserialize(f, v=version_)
+        pointers_ = Pointers.deserialize(f, v=version_)
+        frameimportantarray_ = FrameImportantArray.deserialize(f, v=version_)
+        unknown_ = f.read_bytearray(pointers_.meta)
 
         return cls(
             version_=version_,
@@ -61,6 +81,9 @@ class Meta(Packable):
             type_=type_,
             revision_=revision_,
             favorite_=favorite_,
+            pointers_=pointers_,
+            frameimportantarray_=frameimportantarray_,
+            unknown_=unknown_,
         )
 
 
