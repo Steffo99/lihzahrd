@@ -55,3 +55,7 @@ build-backend = "hatchling.build"
 
 [tool.uv]
 default-groups = ["docs", "test"]
+
+[tool.pytest]
+log_cli = true
+log_cli_level = "DEBUG"
