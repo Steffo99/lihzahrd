@@ -5,7 +5,7 @@ on:
     branches:
     - "main"
     paths:
-    - "${{ vars.PYTHON_PACKAGE }}/**"
+    - "src/${{ vars.PYTHON_PACKAGE }}/**"
     - "pyproject.toml"
     - "poetry.lock"
     - ".forgejo/workflows/python-poetry-pytest-new_python_commit.yml"
