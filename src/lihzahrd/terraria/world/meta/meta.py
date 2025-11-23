@@ -73,7 +73,7 @@ class Meta(Packable):
         favorite_ = Favorite.deserialize(f, v=version_)
         pointers_ = Pointers.deserialize(f, v=version_)
         frameimportantarray_ = FrameImportantArray.deserialize(f, v=version_)
-        unknown_ = f.read_bytearray(pointers_.meta)
+        unknown_ = f.read_bytearray(pointers_.header)
 
         return cls(
             version_=version_,
