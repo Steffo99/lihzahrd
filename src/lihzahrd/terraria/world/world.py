@@ -1,6 +1,3 @@
-import uuid
-
-from lihzahrd.terraria.utils import FilePacker, Rect, Coordinates
 from .bestiary import *
 from .chests import *
 from .enums import *
@@ -15,6 +12,7 @@ from .signs import *
 from .tileentities import *
 from .tiles import *
 from .townmanager import *
+from ..utils import FilePacker, Coordinates
 
 
 class World:
@@ -23,22 +21,7 @@ class World:
     def __init__(
             self,
             meta_: Meta,
-            name: str,
-            generator: GeneratorInfo,
-            uuid_: uuid.UUID,
-            id_: int,
-            bounds: Rect,
-            size: Coordinates,
-            difficulty: Difficulty,
-            is_drunk_world: bool,
-            is_for_the_worthy: bool,
-            is_tenth_anniversary: bool,
-            is_the_constant: bool,
-            is_bee_world: bool,
-            is_upside_down: bool,
-            is_trap_world: bool,
-            is_zenith_world: bool,
-            created_on,
+            header_: Header,
             styles: Styles,
             backgrounds: Backgrounds,
             spawn_point: Coordinates,
@@ -86,53 +69,8 @@ class World:
         self.meta: Meta = meta_
         """Metadata about the save file itself."""
 
-        self.name: str = name
-        """The name the world was given at creation. Doesn't always match the filename."""
-
-        self.generator: GeneratorInfo = generator
-        """Information about the generation of this world."""
-
-        self.uuid: uuid.UUID = uuid_
-        """The Universally Unique ID of this world."""
-
-        self.id: int = id_
-        """The world id. Used to name the minimap file."""
-
-        self.bounds: Rect = bounds
-        """The world size in pixels."""
-
-        self.size: Coordinates = size
-        """The world size in tiles."""
-
-        self.difficulty: Difficulty = difficulty
-        """The difficulty (https://terraria.gamepedia.com/Difficulty) the game is in."""
-
-        self.is_drunk_world: bool = is_drunk_world
-        """If the world was created with the `Drunk world <https://terraria.wiki.gg/wiki/Secret_world_seeds#Drunk_world>`_ seed."""
-
-        self.is_for_the_worthy: bool = is_for_the_worthy
-        """If the world was created with the `For the worthy <https://terraria.wiki.gg/wiki/Secret_world_seeds#For_the_worthy>`_ seed."""
-
-        self.is_tenth_anniversary: bool = is_tenth_anniversary
-        """If the world was created with the `Celebrationmk10 <https://terraria.wiki.gg/wiki/Secret_world_seeds#Celebrationmk10>` seed."""
-
-        self.is_the_constant: bool = is_the_constant
-        """If the world was created with `The Constant <https://terraria.wiki.gg/wiki/Secret_world_seeds#The_Constant>`_ seed."""
-
-        self.is_bee_world: bool = is_bee_world
-        """If the world was created with the `Not the bees <https://terraria.wiki.gg/wiki/Secret_world_seeds#Not_the_bees>`_ seed."""
-
-        self.is_upside_down: bool = is_upside_down
-        """If the world was created with the `Don't dig up <https://terraria.wiki.gg/wiki/Secret_world_seeds#Don't_dig_up>`_ seed."""
-
-        self.is_trap_world: bool = is_trap_world
-        """If the world was created with the `No traps <https://terraria.wiki.gg/wiki/Secret_world_seeds#No_traps>`_ seed."""
-
-        self.is_zenith_world: bool = is_zenith_world
-        """If the world was created with the `Get fixed boi <https://terraria.wiki.gg/wiki/Secret_world_seeds#Get_fixed_boi>`_ seed."""
-
-        self.created_on = created_on
-        """The date and time this world was created in."""
+        self.header: Header = header_
+        """The world header. Contains all data about the game's progression, among various other global things."""
 
         self.styles: Styles = styles
         """The styles of various world elements."""
@@ -242,7 +180,7 @@ class World:
         """Status of powers available in Journey mode."""
 
     def __repr__(self):
-        return f'<World "{self.name}">'
+        return f'<World "{self.header.name}">'
 
     @property
     def crimson_hearts(self) -> ShadowOrbs:
@@ -353,31 +291,6 @@ class World:
         tile = Tile(block=block, wall=wall, liquid=liquid, wiring=wiring)
         return tile, multiply_by
 
-    @property
-    def is_classic(self):
-        """If the world is in classic difficulty or not."""
-        return self.difficulty == 0
-
-    @property
-    def is_expert(self):
-        """If the world is in expert difficulty or not."""
-        return self.difficulty == 1 or self.difficulty == 0 and (self.is_for_the_worthy or self.is_zenith_world)
-
-    @property
-    def is_master(self):
-        """If the world is in master difficulty or not."""
-        return self.difficulty == 2 or self.difficulty == 1 and (self.is_for_the_worthy or self.is_zenith_world)
-
-    @property
-    def is_legendary(self):
-        """If the world is in legendary difficulty or not."""
-        return self.difficulty == 2 and (self.is_for_the_worthy or self.is_zenith_world)
-
-    @property
-    def is_journey(self):
-        """If the world is in journey difficulty or not."""
-        return self.difficulty == 3
-
     @classmethod
     def _create_tilematrix(cls, f, world_size: Coordinates, tileframeimportant: list[bool]):
         """Create a TileMatrix object from a file."""
@@ -408,24 +321,7 @@ class World:
         f = FilePacker(data)
 
         meta_ = Meta.deserialize(f)
-        name = f.read_string_variable()
-        generator = GeneratorInfo(f.read_string_variable(), f.read_uint8())
-
-        uuid_ = f.read_uuid()
-        id_ = f.read_int4()
-        bounds = f.read_rect()
-        world_size = Coordinates(y=f.read_int4(), x=f.read_int4())
-        difficulty = Difficulty(f.read_int4())
-        is_drunk_world = f.read_boolean()
-        is_for_the_worthy = f.read_boolean()
-        is_tenth_anniversary = f.read_boolean()
-        is_the_constant = f.read_boolean()
-        is_bee_world = f.read_boolean()
-        is_upside_down = f.read_boolean()
-        is_trap_world = f.read_boolean()
-        is_zenith_world = f.read_boolean()
-
-        created_on = f.read_datetime()
+        header_ = Header.deserialize(f, v=meta_.version)
 
         world_styles = Styles(
             moon=MoonStyle(f.read_uint1()),
@@ -751,7 +647,7 @@ class World:
         unknown_world_header_data = f.read_bytearray(meta_.pointers.tiles)
 
         # Tiles
-        tm = cls._create_tilematrix(f, world_size, tileframeimportant=meta_.frameimportantarray.data)
+        tm = cls._create_tilematrix(f, header_.size, tileframeimportant=meta_.frameimportantarray.data)
 
         unknown_world_tiles_data = f.read_bytearray(meta_.pointers.chests)
 
@@ -962,22 +858,7 @@ class World:
         # Object creation
         result = cls(
             meta_=meta_,
-            name=name,
-            generator=generator,
-            uuid_=uuid_,
-            id_=id_,
-            bounds=bounds,
-            size=world_size,
-            difficulty=difficulty,
-            is_drunk_world=is_drunk_world,
-            is_for_the_worthy=is_for_the_worthy,
-            is_tenth_anniversary=is_tenth_anniversary,
-            is_the_constant=is_the_constant,
-            is_bee_world=is_bee_world,
-            is_upside_down=is_upside_down,
-            is_trap_world=is_trap_world,
-            is_zenith_world=is_zenith_world,
-            created_on=created_on,
+            header_=header_,
             styles=world_styles,
             backgrounds=backgrounds,
             spawn_point=spawn_point,
@@ -1026,9 +907,9 @@ class World:
         # Footer
         if not f.read_boolean():
             raise InvalidFooterError("Invalid footer")
-        if not f.read_string_variable() == result.name:
+        if not f.read_string_variable() == header_.name:
             raise InvalidFooterError("Invalid footer")
-        if not f.read_int4() == result.id:
+        if not f.read_int4() == header_.id:
             raise InvalidFooterError("Invalid footer")
 
         return result

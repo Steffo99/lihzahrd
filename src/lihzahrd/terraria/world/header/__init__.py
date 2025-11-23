@@ -7,7 +7,8 @@ from .difficulty import Difficulty
 from .events import Events
 from .evil import Evil
 from .fourpartsplit import FourPartSplit
-from .generatorinfo import GeneratorInfo
+from .generator import Generator
+from .header import Header
 from .invasion import Invasion
 from .invasiontype import InvasionType
 from .lanternnight import LanternNight
@@ -36,7 +37,7 @@ __all__ = [
     "Difficulty",
     "Events",
     "FourPartSplit",
-    "GeneratorInfo",
+    "Generator",
     "Invasion",
     "InvasionType",
     "LanternNight",
@@ -56,4 +57,5 @@ __all__ = [
     "Time",
     "TreetopVariants",
     "Evil",
+    "Header",
 ]
