@@ -5,6 +5,7 @@ from .bossesdefeated import BossesDefeated
 from .clouds import Clouds
 from .difficulty import Difficulty
 from .events import Events
+from .evil import Evil
 from .fourpartsplit import FourPartSplit
 from .generatorinfo import GeneratorInfo
 from .invasion import Invasion
@@ -25,7 +26,6 @@ from .shadoworbs import ShadowOrbs
 from .styles import Styles
 from .time import Time
 from .treetopvariants import TreetopVariants
-from .worldeviltype import WorldEvilType
 
 __all__ = [
     "AnglerQuest",
@@ -55,5 +55,5 @@ __all__ = [
     "Styles",
     "Time",
     "TreetopVariants",
-    "WorldEvilType",
+    "Evil",
 ]

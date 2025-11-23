@@ -1,7 +1,7 @@
 import enum
 
 
-class WorldEvilType(enum.Enum):
+class Evil(enum.Enum):
     CORRUPTION = False
     CRIMSON = True
 

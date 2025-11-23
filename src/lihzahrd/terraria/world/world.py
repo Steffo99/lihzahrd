@@ -47,7 +47,7 @@ class World:
             time: Time,
             events: Events,
             dungeon_point: Coordinates,
-            world_evil: WorldEvilType,
+            world_evil: Evil,
             saved_npcs: SavedNPCs,
             altars_smashed: int,
             is_hardmode: bool,
@@ -158,7 +158,7 @@ class World:
         self.dungeon_point: Coordinates = dungeon_point
         """The Old Man spawn point."""
 
-        self.world_evil: WorldEvilType = world_evil
+        self.world_evil: Evil = world_evil
         """Whether the world has Corruption or Crimson."""
 
         self.saved_npcs: SavedNPCs = saved_npcs
@@ -453,7 +453,7 @@ class World:
         eclipse = f.read_boolean()
 
         dungeon_point = Coordinates(f.read_int4(), f.read_int4())
-        world_evil = WorldEvilType(f.read_boolean())
+        world_evil = Evil(f.read_boolean())
 
         defeated_eye_of_cthulhu = f.read_boolean()  # Possibly. I'm not sure.
         defeated_eater_of_worlds = f.read_boolean()  # Possibly. I'm not sure.
