@@ -8,6 +8,10 @@ from ...utils import FilePacker
 
 
 class FrameImportantArray(WorldVersionedPackable):
+    """
+    Array listing all the block type ids having FrameImportant offsets.
+    """
+
     __slots__ = ("data",)
 
     def __init__(self, *data):
