@@ -1,7 +1,12 @@
-import uuid
+import gzip
 import math
+import pickle
 import sys
+import uuid
+from importlib.metadata import version as get_version
+from pathlib import Path
 from typing import *
+
 from .fileutils import *
 from .enums import *
 from .items import *
@@ -1078,6 +1083,132 @@ class World:
 
         f.file.close()
 
+        return world
+
+    def save_to_cache(self, filename: str, compress: bool = True) -> None:
+        """Save the World object to a cache file for fast loading later.
+
+        This method serializes the entire World object to a file format
+        that can be loaded much faster than re-parsing the original .wld file.
+        
+        The cache format uses pickle serialization with optional gzip compression
+        and includes version metadata to ensure compatibility.
+
+        Using gzip compression results in files roughly 10-20% of the original .wld
+        file size, but adds some overhead to loading and saving.
+
+        Arguments:
+            filename: The path where the cache file should be saved.
+                     Convention: use '.lzd' extension (lihzahrd cache).
+            compress: Whether to use gzip compression (default True).
+                     False = no compression (fastest, larger files).
+                     True = gzip compression (smaller files, slower).
+        
+        Example:
+            >>> world = World.create_from_file("MyWorld.wld")
+            >>> # Compressed (smaller file, moderate speed)
+            >>> world.save_to_cache("MyWorld.lzd")
+            >>> # Uncompressed (larger file, maximum speed)
+            >>> world.save_to_cache("MyWorld.lzd", compress=False)
+            >>> # Later, much faster:
+            >>> world = World.load_from_cache("MyWorld.lzd")
+        
+        Note:
+            The cache file format is specific to this version of lihzahrd.
+            If the library is updated, you may need to regenerate cache files.
+        """
+        # Create directories if they don't exist
+        cache_path = Path(filename)
+        cache_path.parent.mkdir(parents=True, exist_ok=True)
+        
+        # Prepare metadata
+        cache_data = {
+            'lihzahrd_version': get_version('lihzahrd'),
+            'world': self,
+        }
+        
+        # Write with or without compression
+        if compress:
+            with gzip.open(filename, 'wb', compresslevel=6) as f:
+                pickle.dump(cache_data, f, protocol=pickle.HIGHEST_PROTOCOL)
+        else:
+            with open(filename, 'wb') as f:
+                pickle.dump(cache_data, f, protocol=pickle.HIGHEST_PROTOCOL)
+
+    @classmethod
+    def load_from_cache(cls, filename: str) -> "World":
+        """Load a World object from a cache file created by save_to_cache().
+
+        This method is significantly faster than create_from_file() because it
+        directly deserializes the Python objects without parsing the Terraria
+        binary format.
+
+        Arguments:
+            filename: The path to the cache file (typically with '.lzd' extension).
+
+        Returns:
+            World: The deserialized World object.
+
+        Raises:
+            FileNotFoundError: If the cache file doesn't exist.
+            ValueError: If the cache file format is incompatible.
+            OSError: If the file cannot be read.
+            pickle.UnpicklingError: If the cache data is corrupted.
+
+        Example:
+            >>> # First time: parse from .wld file and create cache
+            >>> world = World.create_from_file("MyWorld.wld")
+            >>> world.save_to_cache("MyWorld.lzd", compress=False)  # Fast mode
+            >>> 
+            >>> # Subsequent times: load from cache (much faster)
+            >>> world = World.load_from_cache("MyWorld.lzd")
+
+        Note:
+            Always use the same version of lihzahrd that created the cache file.
+            If you upgrade lihzahrd, regenerate your cache files.
+        """
+        cache_file = Path(filename)
+        if not cache_file.exists():
+            raise FileNotFoundError(f"Cache file not found: {filename}")
+        
+        # Detect if file is gzip-compressed by reading magic bytes
+        with open(filename, 'rb') as f:
+            magic = f.read(2)
+        
+        is_gzipped = (magic == b'\x1f\x8b')  # Gzip magic number
+        
+        # Load from compressed or uncompressed pickle
+        if is_gzipped:
+            with gzip.open(filename, 'rb') as f:
+                cache_data = pickle.load(f)
+        else:
+            with open(filename, 'rb') as f:
+                cache_data = pickle.load(f)
+        
+        # Validate cache format
+        if not isinstance(cache_data, dict):
+            raise ValueError("Invalid cache file format: expected dictionary")
+        
+        if 'lihzahrd_version' not in cache_data:
+            raise ValueError("Invalid cache file format: missing lihzahrd version")
+        
+        cache_lihzahrd_version = cache_data['lihzahrd_version']
+        current_lihzahrd_version = get_version('lihzahrd')
+        if cache_lihzahrd_version != current_lihzahrd_version:
+            raise ValueError(
+                f"Cache was created with lihzahrd {cache_lihzahrd_version}, "
+                f"but you're using {current_lihzahrd_version}. Please regenerate the cache."
+            )
+        
+        if 'world' not in cache_data:
+            raise ValueError("Invalid cache file format: missing world data")
+        
+        world = cache_data['world']
+        
+        # Validate that we got a World object
+        if not isinstance(world, cls):
+            raise ValueError(f"Invalid cache file: expected World object, got {type(world).__name__}")
+        
         return world
 
 

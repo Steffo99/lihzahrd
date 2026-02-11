@@ -37,6 +37,41 @@ It _will_ take a while to process: a small Terraria world contains more than 5 m
 
 Once you have a `World` object, you can use all data present in the save file by accessing [its attributes](http://gh.steffo.eu/lihzahrd/html/world.html).
 
+### Fast loading with caching
+
+Since parsing large world files can take significant time, lihzahrd supports caching parsed worlds for much faster subsequent loads:
+
+```python
+import lihzahrd
+from pathlib import Path
+
+world_path = Path("MyWorld.wld")
+cache_path = world_path.with_suffix(".lzd")  # .lzd = lihzahrd cache
+
+# Check if cache exists
+if cache_path.exists():
+    world = lihzahrd.World.load_from_cache(str(cache_path))  # Fast!
+else:
+    world = lihzahrd.World.create_from_file(str(world_path))  # Slow
+    world.save_to_cache(str(cache_path))  # Save for next time
+```
+
+**Performance:** Loading from cache is typically **5-20x faster** than parsing the original .wld file!
+
+The cache uses pickle serialization (no external dependencies) with optional gzip compression. You can trade file size for even faster loading:
+
+```python
+# Compressed (default): smaller files, moderate speed
+world.save_to_cache("MyWorld.lzd")
+
+# Uncompressed: larger files, maximum speed
+world.save_to_cache("MyWorld.lzd", compress=False)
+```
+
+> [!Note]
+>
+> Cache files are tied to the lihzahrd version that created them. If you upgrade lihzahrd, regenerate your cache files.
+
 > [!Warning]
 > 
 > Maliciously designed Terraria worlds can drain system resources, crash the interpreter, or possibly do other evil things!

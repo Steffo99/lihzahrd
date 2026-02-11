@@ -29,6 +29,72 @@ To open a Terraria world file named ``terra.wld`` located in the current working
 It should take **a few minutes**, depending on the size of the world, and then return a
 :py:class:`World` object.
 
+Fast loading with caching
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Since parsing world files can be slow (especially for large worlds), lihzahrd supports caching parsed worlds for much faster subsequent loads.
+
+**Basic usage:** ::
+
+    import lihzahrd
+    from pathlib import Path
+    
+    world_path = Path("terra.wld")
+    cache_path = world_path.with_suffix(".lzd")  # .lzd = lihzahrd cache
+    
+    # Load from cache if available, otherwise parse and cache
+    if cache_path.exists():
+        world = lihzahrd.World.load_from_cache(str(cache_path))
+    else:
+        world = lihzahrd.World.create_from_file(str(world_path))
+        world.save_to_cache(str(cache_path))
+
+**Performance:** Loading from cache is typically **5-20x faster** than parsing the .wld file!
+
+**Compression options:**
+
+You can choose between compressed (smaller files) or uncompressed (faster loading) caches: ::
+
+    # Compressed (default): smaller files, moderate speed
+    world.save_to_cache("terra.lzd")
+    
+    # Uncompressed: larger files, maximum speed  
+    world.save_to_cache("terra.lzd", compress=False)
+
+**How it works:**
+
+- Uses pickle serialization with optional gzip compression (no external dependencies)
+- Automatically detects compressed vs uncompressed format when loading
+- Includes lihzahrd version metadata for compatibility checking
+
+**Advanced usage with automatic invalidation:** ::
+
+    def load_world_smart(wld_path):
+        """Load world with cache, regenerating if .wld is newer."""
+        cache_path = Path(wld_path).with_suffix('.lzd')
+        
+        if cache_path.exists():
+            wld_time = Path(wld_path).stat().st_mtime
+            cache_time = cache_path.stat().st_mtime
+            
+            if wld_time <= cache_time:
+                return lihzahrd.World.load_from_cache(str(cache_path))
+        
+        # Cache doesn't exist or is outdated
+        world = lihzahrd.World.create_from_file(wld_path)
+        world.save_to_cache(str(cache_path))
+        return world
+
+.. note::
+
+    Cache files are tied to the lihzahrd version that created them.
+    If you upgrade lihzahrd, you should regenerate your cache files.
+
+.. warning::
+
+    Never load cache files from untrusted sources!
+    Pickle files can execute arbitrary code when loaded.
+
 Accessing the world properties
 ------------------------------------
 
