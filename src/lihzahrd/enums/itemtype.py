@@ -5512,5 +5512,18 @@ class ItemType(enum.IntEnum):
     DONT_HURT_NATURE_BOOK_INACTIVE = 5454
     DONT_HURT_COMBO_BOOK_INACTIVE = 5455
 
+    @classmethod
+    def _missing_(cls, value):
+        """Handle unknown item IDs by creating a pseudo-member.
+        
+        This allows the library to work with world files containing items
+        not yet defined in the enum (e.g., from newer Terraria versions or mods).
+        """
+        # Create a pseudo-member for unknown item IDs
+        pseudo_member = int.__new__(cls, value)
+        pseudo_member._name_ = f"UNKNOWN_{value}"
+        pseudo_member._value_ = value
+        return pseudo_member
+
     def __repr__(self):
         return f"{self.__class__.__name__}.{self.name}"
