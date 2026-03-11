@@ -1,0 +1,29 @@
+# https://editorconfig.org
+
+root = true
+
+[*]
+
+# Enforce lf line endings
+end_of_line = lf
+
+# Enforce newline at end of files
+insert_final_newline = true
+
+# Use tabs by default
+indent_style = tab
+
+# Python strongly recommends the usage of 4 spaces as indentation
+[*.py]
+indent_size = 4
+indent_style = space
+
+# reStructuredText works much better with spaces, since elements might require inconsistent lengths of indentation.
+[*.rst]
+indent_size = 4  # Directives would require 3... Would it be better?
+indent_style = space
+
+# YAML does not support tabs, and looks weird with 4 spaces
+[*.yml]
+indent_size = 2
+indent_style = space

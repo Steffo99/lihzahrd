@@ -1,1 +1,7 @@
-*.wld filter=lfs diff=lfs merge=lfs -text
+docs/* -linguist-documentation
+docs/Makefile linguist-vendored
+*.rst linguist-detectable linguist-language=reStructuredText
+src/lihzahrd/terraria/_generate/terraria/data.xml linguist-vendored
+src/lihzahrd/terraria/data/classmembers/blocks.py linguist-generated
+src/lihzahrd/terraria/data/classmembers/items.py linguist-generated
+src/lihzahrd/terraria/data/classmembers/npcs.py linguist-generated

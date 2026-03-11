@@ -1,0 +1,5 @@
+###########
+``journey``
+###########
+
+.. automodule:: lihzahrd.terraria.world.journey

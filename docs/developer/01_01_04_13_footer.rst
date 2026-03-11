@@ -1,0 +1,5 @@
+##########
+``footer``
+##########
+
+.. automodule:: lihzahrd.terraria.world.footer

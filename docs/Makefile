@@ -3,16 +3,22 @@ export SPHINXBUILD   = "sphinx-build"
 export SOURCEDIR     = "."
 export BUILDDIR      = "_build"
 
+export AUTOBUILD     = "sphinx-autobuild"
+export AUTOOPTS      = --watch='../src'
+
 export LATEXMKOPTS   ?= ""
 export LATEXOPTS     ?= "-interaction=nonstopmode"
 
-# Put it first so that "make" without argument is like "make help".
+.PHONY: help dev html clear Makefile
+
 help:
-	@$(SPHINXBUILD) -M help "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS)
+	uv run $(SPHINXBUILD) -M help $(SOURCEDIR) $(BUILDDIR) $(SPHINXOPTS)
 
-.PHONY: help Makefile
+dev:
+	uv run $(AUTOBUILD) $(SOURCEDIR) $(BUILDDIR) $(AUTOOPTS) $(O)
 
-# Catch-all target: route all unknown targets to Sphinx using the new
-# "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).
-%: Makefile
-	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS)
+html:
+	uv run $(SPHINXBUILD) -M $@ $(SOURCEDIR) $(BUILDDIR) $(SPHINXOPTS)
+
+clean:
+	uv run $(SPHINXBUILD) -M $@ $(SOURCEDIR) $(BUILDDIR) $(SPHINXOPTS)

@@ -1,0 +1,5 @@
+##########
+``chests``
+##########
+
+.. automodule:: lihzahrd.terraria.world.chests

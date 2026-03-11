@@ -1,0 +1,18 @@
+// https://code.visualstudio.com/docs/debugtest/tasks
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "black: current file",
+			"type": "shell",
+			"command": "uv run black ${file}",
+			"problemMatcher": []
+		},
+		{
+			"label": "black: workspace",
+			"type": "shell",
+			"command": "uv run black ${workspaceFolder}",
+			"problemMatcher": []
+		},
+	]
+}

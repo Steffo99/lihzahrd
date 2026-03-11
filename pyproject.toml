@@ -1,6 +1,6 @@
 [project]
 name = "lihzahrd"
-version = "3.1.2"
+version = "4.0.0b1"
 description = "Terraria world parser in Python"
 authors = [
     {name = "Stefano Pigozzi", email = "me@steffo.eu"},
@@ -8,8 +8,8 @@ authors = [
 maintainers = [
     {name = "Stefano Pigozzi", email = "me@steffo.eu"},
 ]
-license = "EUPL-1.2"
-license-files = ["LICENSE.txt"]
+license = "AGPL-3.0-or-later"
+license-files = ["LICENSE.md"]
 readme = "README.md"
 keywords = [
     "terraria",
@@ -18,12 +18,10 @@ keywords = [
 ]
 classifiers = [
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.11",
-    "Programming Language :: Python :: 3.12",
-    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
     "Development Status :: 4 - Beta",
 	"Intended Audience :: Developers",
-    "License :: OSI Approved :: European Union Public Licence 1.2 (EUPL 1.2)",
+    "License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)",
     "Natural Language :: English",
     "Topic :: Games/Entertainment",
     "Topic :: Games/Entertainment :: Side-Scrolling/Arcade Games",
@@ -31,13 +29,36 @@ classifiers = [
     "Typing :: Typed",
 ]
 
-requires-python = ">=3.11"
-dependencies = []
+requires-python = ">=3.14"
+dependencies = [
+    "numpy>=2.4.2",
+]
+
+[project.optional-dependencies]
+cli = [
+	"click>=8.3.1",
+]
+
+[project.scripts]
+lihzahrd = "lihzahrd.cli.__main__:main"
 
 [dependency-groups]
 docs = [
-    "Sphinx (>=8.2.3,<9.0.0)",
-    "sphinx-rtd-theme (>=3.0.2, <4.0.0)",
+	"furo>=2025.12.19",
+	"Sphinx>=8.2.3",
+	"sphinx-autobuild>=2025.8.25",
+	"sphinx-rtd-theme>=3.0.2",
+]
+generate = [
+	"beautifulsoup4>=4.14.3",
+	"lxml>=6.0.2",
+]
+lint = [
+    "black>=26.1.0",
+]
+test = [
+	"pytest>=9.0.0",
+	"pytest-cov>=7.0.0",
 ]
 
 [project.urls]
@@ -50,4 +71,12 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [tool.uv]
-default-groups = ["docs"]
+default-groups = ["docs", "test", "lint"]
+
+[tool.pytest]
+log_cli = true
+log_cli_level = "INFO"
+log_format = "%(asctime)s | %(name)56s | %(levelname)8s | %(message)s"
+
+[tool.black]
+line-length = 120

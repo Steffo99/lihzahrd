@@ -1,0 +1,5 @@
+#########
+``enums``
+#########
+
+.. automodule:: lihzahrd.terraria.data.enums

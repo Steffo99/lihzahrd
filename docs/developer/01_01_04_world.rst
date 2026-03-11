@@ -1,0 +1,22 @@
+#########
+``world``
+#########
+
+.. automodule:: lihzahrd.terraria.world
+
+.. toctree::
+	:hidden:
+
+	01_01_04_01_sections
+	01_01_04_02_frame_important
+	01_01_04_03_header
+	01_01_04_04_tiles
+	01_01_04_05_chests
+	01_01_04_06_signs
+	01_01_04_07_characters
+	01_01_04_08_tile_entities
+	01_01_04_09_pressure_plates
+	01_01_04_10_rooms
+	01_01_04_11_bestiary
+	01_01_04_12_journey
+	01_01_04_13_footer

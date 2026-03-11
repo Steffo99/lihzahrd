@@ -1,0 +1,5 @@
+#########
+``rooms``
+#########
+
+.. automodule:: lihzahrd.terraria.world.rooms

@@ -1,0 +1,14 @@
+########
+``data``
+########
+
+.. automodule:: lihzahrd.terraria.data
+
+.. toctree::
+	:hidden:
+
+	01_01_02_01_classenumtype
+	01_01_02_02_classenums
+	01_01_02_03_classmembers
+	01_01_02_04_frameimportant_variant
+	01_01_02_05_enums

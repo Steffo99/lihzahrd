@@ -1,0 +1,5 @@
+#########
+``signs``
+#########
+
+.. automodule:: lihzahrd.terraria.world.signs

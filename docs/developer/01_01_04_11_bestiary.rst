@@ -1,0 +1,5 @@
+############
+``bestiary``
+############
+
+.. automodule:: lihzahrd.terraria.world.bestiary

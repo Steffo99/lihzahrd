@@ -1,3 +1,7 @@
+# PyCharm leaves this stuff around when a .coverage file is imported
+.xml
+*.out.*
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -122,9 +126,3 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
-
-# Terraria worlds
-*.wld
-.idea/
-
-/__main__.py
