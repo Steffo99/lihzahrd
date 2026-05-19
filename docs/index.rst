@@ -71,7 +71,7 @@ Table of contents
 Links
 =====
 
-- `Git forge <https://forge.steffo.eu/steffo/lihzahrd>`_
+- `Git forge <https://g.starshard.space/steffo/lihzahrd>`_
 - `PyPI package <https://pypi.org/project/lihzahrd/>`_
 - `Tipping <https://ko-fi.com/steffo>`_
 - :ref:`genindex`

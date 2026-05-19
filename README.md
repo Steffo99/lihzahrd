@@ -1,5 +1,5 @@
 <div align="center">
-<img alt="" src="https://forge.steffo.eu/steffo/lihzahrd/raw/branch/main/.media/icon-512.png" height="128" style="border-radius: 100%;">
+<img alt="" src="https://g.starshard.space/steffo/lihzahrd/raw/branch/main/.media/icon-512.png" height="128" style="border-radius: 100%;">
 <hgroup>
 <h1>Lihzahrd</h1>
 <p>Terraria world parser in Python</p>
@@ -32,7 +32,7 @@
 	<img alt="Available on PyPI" title="Available on PyPI" src="https://img.shields.io/pypi/v/lihzahrd?label=pypi&color=ffd242" height="30px">
 </a>
 &hairsp;
-<a href="https://forge.steffo.eu/steffo/-/packages/pypi/lihzahrd">
+<a href="https://g.starshard.space/steffo/-/packages/pypi/lihzahrd">
 	<img alt="Available on Forgejo Packages" title="Available on Forgejo Packages" src="https://img.shields.io/badge/forgejo%20packages-latest-ff6600" height="30px">
 </a>
 
@@ -48,18 +48,18 @@
 
 ### Development
 
-<a href="https://forge.steffo.eu/steffo/lihzahrd">
-	<img alt="Code repository" title="Code repository" src="https://img.shields.io/gitea/last-commit/steffo/lihzahrd?gitea_url=https%3A%2F%2Fforge.steffo.eu&color=374351" height="30px">
+<a href="https://g.starshard.space/steffo/lihzahrd">
+	<img alt="Code repository" title="Code repository" src="https://img.shields.io/gitea/last-commit/steffo/lihzahrd?gitea_url=https%3A%2F%2Fg.starshard.space&color=374351" height="30px">
 </a>
 &hairsp;
-<a href="https://forge.steffo.eu/steffo/lihzahrd/releases">
-	<img alt="Releases" title="Releases" src="https://img.shields.io/gitea/v/release/steffo/lihzahrd?gitea_url=https%3A%2F%2Fforge.steffo.eu&label=last+release&color=374351" height="30px">
+<a href="https://g.starshard.space/steffo/lihzahrd/releases">
+	<img alt="Releases" title="Releases" src="https://img.shields.io/gitea/v/release/steffo/lihzahrd?gitea_url=https%3A%2F%2Fg.starshard.space&label=last+release&color=374351" height="30px">
 </a>
 &hairsp;
-<a href="https://forge.steffo.eu/steffo/lihzahrd/issues">
-	<img alt="Issues" title="Issues" src="https://img.shields.io/gitea/issues/open/steffo/lihzahrd?gitea_url=https%3A%2F%2Fforge.steffo.eu&label=issues&color=374351" height="30px">
+<a href="https://g.starshard.space/steffo/lihzahrd/issues">
+	<img alt="Issues" title="Issues" src="https://img.shields.io/gitea/issues/open/steffo/lihzahrd?gitea_url=https%3A%2F%2Fg.starshard.space&label=issues&color=374351" height="30px">
 </a>
 &hairsp;
-<a href="https://forge.steffo.eu/steffo/lihzahrd/pulls">
-	<img alt="Pull requests" title="Pull requests" src="https://img.shields.io/gitea/pull-requests/open/steffo/lihzahrd?gitea_url=https%3A%2F%2Fforge.steffo.eu&color=374351" height="30px">
+<a href="https://g.starshard.space/steffo/lihzahrd/pulls">
+	<img alt="Pull requests" title="Pull requests" src="https://img.shields.io/gitea/pull-requests/open/steffo/lihzahrd?gitea_url=https%3A%2F%2Fg.starshard.space&color=374351" height="30px">
 </a>

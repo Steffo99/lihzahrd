@@ -9,7 +9,7 @@ Lihzahrd is distributed as a Python package `on PyPI`_, and, as a backup, `on St
 	Make sure you have `Python 3.14 or later`_ installed on your system before proceeding!
 
 .. _on PyPI: https://pypi.org/project/lihzahrd/
-.. _on Steffo's code forge: https://forge.steffo.eu/steffo/-/packages/pypi/lihzahrd/
+.. _on Steffo's code forge: https://g.starshard.space/steffo/-/packages/pypi/lihzahrd/
 .. _Python 3.14 or later: https://www.python.org/downloads/
 
 *******************************

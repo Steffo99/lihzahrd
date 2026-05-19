@@ -62,8 +62,8 @@ test = [
 ]
 
 [project.urls]
-Repository = "https://forge.steffo.eu/steffo/lihzahrd/"
-Issues = "https://forge.steffo.eu/steffo/lihzahrd/issues"
+Repository = "https://g.starshard.space/steffo/lihzahrd/"
+Issues = "https://g.starshard.space/steffo/lihzahrd/issues"
 Documentation = "https://artifacts.steffo.eu/steffo/lihzahrd/"
 
 [build-system]

@@ -131,7 +131,7 @@ jobs:
           path: deploy/docs/
       -
         name: "Deploy documentation"
-        uses: https://forge.steffo.eu/steffo/actions-deploy-link@4787279abac0d8dd48beec5d0831cbe9e710c589
+        uses: https://g.starshard.space/steffo/actions-deploy-link@4787279abac0d8dd48beec5d0831cbe9e710c589
         with:
           source: "deploy"
           destination: "/mnt/beta/artifacts/${{ github.repository }}"
