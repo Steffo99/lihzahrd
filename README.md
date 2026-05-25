@@ -43,7 +43,7 @@
 </a>
 &hairsp;
 <a href="https://www.gnu.org/licenses/agpl-3.0.en.html">
-	<img alt="Licensed under EUPL-1.2" title="Licensed under EUPL-1.2" src="https://img.shields.io/badge/license-AGPL--3.0--or--later-a32d2a" height="30px">
+	<img alt="Licensed under the AGPL 3.0 or later" title="Licensed under the AGPL 3.0 or later" src="https://img.shields.io/badge/license-AGPL--3.0--or--later-a32d2a" height="30px">
 </a>
 
 ### Development
