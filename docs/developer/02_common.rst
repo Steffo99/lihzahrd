@@ -158,11 +158,13 @@ Saving a world file
 
 Once you've completed your edits, you can save back the world to a file.
 
+Some care must be taken while modifying the world to not create an invalid world file: for instance, :attr:`WorldHeader.name <lihzahrd.terraria.world.header.world_header.WorldHeader.name>` must match the value of :attr:`WorldFooter.name <lihzahrd.terraria.world.footer.world_footer.WorldFooter.name>`, or else Terraria will refuse to load the file.
+
 Again, you'll need to :func:`open` a binary file object, but this time in write mode, and make a :class:`~lihzahrd.terraria.utils.file_processor.FileProcessor` like before:
 
 .. code-block:: python
     :linenos:
-    :emphasize-lines: 30, 31
+    :emphasize-lines: 25, 31, 32
 
     from lihzahrd.terraria.utils.file_processor import FileProcessor
     from lihzahrd.terraria.world.world import PackWorld
@@ -188,6 +190,7 @@ Again, you'll need to :func:`open` a binary file object, but this time in write 
         print("Your foes are already worthy of the challenge!")
 
     world.header.name.value = f"{world_name} but for Legendary Heroes"
+    world.footer.name.value = world.header.name.value  # Must match the header
     world.header.difficulty.set_master()
     world.header.special_fortheworthy.value = True
     world.header.mode.set_to_hardmode()
@@ -200,7 +203,7 @@ Then, you can :func:`~lihzahrd.terraria.utils.pack.pack.Pack.write` the :class:`
 
 .. code-block:: python
     :linenos:
-    :emphasize-lines: 32, 34, 35
+    :emphasize-lines: 33, 36, 37, 38
 
     from lihzahrd.terraria.utils.file_processor import FileProcessor
     from lihzahrd.terraria.world.world import PackWorld
@@ -226,6 +229,7 @@ Then, you can :func:`~lihzahrd.terraria.utils.pack.pack.Pack.write` the :class:`
         print("Your foes are already worthy of the challenge!")
 
     world.header.name.value = f"{world_name} but for Legendary Heroes"
+    world.footer.name.value = world.header.name.value
     world.header.difficulty.set_master()
     world.header.special_fortheworthy.value = True
     world.header.mode.set_to_hardmode()
@@ -236,6 +240,8 @@ Then, you can :func:`~lihzahrd.terraria.utils.pack.pack.Pack.write` the :class:`
         result = world.write(fp, strict=False)
 
     if not result.valid:
+        print("The saved world has failed coherence checks.")
+        print("It's likely that Terraria will fail to load the save file.")
         exit(2)
 
 
