@@ -10,7 +10,7 @@ on:
 jobs:
   package:
     name: "Build package"
-    runs-on: rookframe
+    runs-on: default
 
     steps:
       -
@@ -30,7 +30,7 @@ jobs:
 
   docs:
     name: "Build documentation"
-    runs-on: rookframe
+    runs-on: default
 
     steps:
       -
@@ -50,7 +50,7 @@ jobs:
     
   publish_forgejo:
     name: "Publish package on Forgejo Packages"
-    runs-on: rookframe
+    runs-on: default
 
     needs:
       - package
@@ -69,11 +69,11 @@ jobs:
           TWINE_NON_INTERACTIVE: "1"
           TWINE_REPOSITORY_URL: "${{ github.server_url }}/api/packages/${{ github.repository_owner }}/pypi"
           TWINE_USERNAME: "${{ github.repository_owner }}"
-          TWINE_PASSWORD: "${{ secrets.FORGEJO_PACKAGES_TOKEN }}"
+          TWINE_PASSWORD: "${{ secrets.FORGE_PACKAGES_TOKEN }}"
     
   publish_testpypi:
     name: "Publish package on Test PyPI"
-    runs-on: rookframe
+    runs-on: default
 
     needs:
       - package
@@ -96,7 +96,7 @@ jobs:
     
   publish_pypi:
     name: "Publish package on PyPI"
-    runs-on: rookframe
+    runs-on: default
 
     needs:
       - package
