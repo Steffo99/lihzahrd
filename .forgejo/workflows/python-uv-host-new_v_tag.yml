@@ -15,7 +15,7 @@ jobs:
     steps:
       -
         name: "Checkout repository"
-        uses: https://code.forgejo.org/actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8
+        uses: https://code.forgejo.org/actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
       -
         name: "Build package"
         run: |-
@@ -35,7 +35,7 @@ jobs:
     steps:
       -
         name: "Checkout repository"
-        uses: https://code.forgejo.org/actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8
+        uses: https://code.forgejo.org/actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
       -
         name: "Build docs"
         run: |-
