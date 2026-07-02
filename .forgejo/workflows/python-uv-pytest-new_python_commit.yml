@@ -1,18 +1,19 @@
 name: "Test with Pytest the Python package using Poetry"
 
 on:
-  push:
-    branches:
-    - "main"
-    paths:
-    - "src/lihzahrd/**"
-    - "pyproject.toml"
-    - "poetry.lock"
-    - ".forgejo/workflows/python-uv-pytest-new_python_commit.yml"
-  pull_request:
-    types:
-    - opened
-    - synchronize
+  # TODO: Uncomment this when ready
+  # push:
+  #   branches:
+  #   - "main"
+  #   paths:
+  #   - "src/lihzahrd/**"
+  #   - "pyproject.toml"
+  #   - "poetry.lock"
+  #   - ".forgejo/workflows/python-uv-pytest-new_python_commit.yml"
+  # pull_request:
+  #   types:
+  #   - opened
+  #   - synchronize
 
 jobs:
   test:

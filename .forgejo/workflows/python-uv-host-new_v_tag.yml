@@ -2,10 +2,11 @@
 ---
 name: "Release using uv a new version of the Python package and deploy docs on a host directory"
 
-on: 
-  push:
-    tags:
-      - 'v*'
+on:
+  # TODO: Uncomment this when ready
+  # push:
+  #   tags:
+  #     - 'v*'
 
 jobs:
   package:
