@@ -22,7 +22,7 @@ jobs:
           uv build --verbose
       -
         name: "Upload package as artifact"
-        uses: https://code.forgejo.org/forgejo/upload-artifact@16871d9e8cfcf27ff31822cac382bbb5450f1e1e
+        uses: https://code.forgejo.org/forgejo/upload-artifact@cb8afe72b42edc798abfb8fcb556cf660d894245
         with:
           name: &package_artifact_name "Package.zip"
           path: dist/
@@ -42,7 +42,7 @@ jobs:
           uv run --group='docs' sphinx-build 'docs/' 'dist/'
       -
         name: "Upload docs as artifact"
-        uses: https://code.forgejo.org/forgejo/upload-artifact@16871d9e8cfcf27ff31822cac382bbb5450f1e1e
+        uses: https://code.forgejo.org/forgejo/upload-artifact@cb8afe72b42edc798abfb8fcb556cf660d894245
         with:
           name: &documentation_artifact_name "Documentation.zip"
           path: dist/
@@ -58,7 +58,7 @@ jobs:
     steps:
       -
         name: "Download package artifact"
-        uses: https://code.forgejo.org/forgejo/download-artifact@d8d0a99033603453ad2255e58720b460a0555e1e
+        uses: https://code.forgejo.org/forgejo/download-artifact@769f970437aa3291b13f35dc23fc87967d7fb19f
         with:
           name: *package_artifact_name
           path: dist/
@@ -81,7 +81,7 @@ jobs:
     steps:
       -
         name: "Download package artifact"
-        uses: https://code.forgejo.org/forgejo/download-artifact@d8d0a99033603453ad2255e58720b460a0555e1e
+        uses: https://code.forgejo.org/forgejo/download-artifact@769f970437aa3291b13f35dc23fc87967d7fb19f
         with:
           name: *package_artifact_name
           path: dist/
@@ -104,7 +104,7 @@ jobs:
     steps:
       -
         name: "Download package artifact"
-        uses: https://code.forgejo.org/forgejo/download-artifact@d8d0a99033603453ad2255e58720b460a0555e1e
+        uses: https://code.forgejo.org/forgejo/download-artifact@769f970437aa3291b13f35dc23fc87967d7fb19f
         with:
           name: *package_artifact_name
           path: dist/
@@ -127,7 +127,7 @@ jobs:
     steps:
       -
         name: "Download docs artifact"
-        uses: https://code.forgejo.org/forgejo/download-artifact@d8d0a99033603453ad2255e58720b460a0555e1e
+        uses: https://code.forgejo.org/forgejo/download-artifact@769f970437aa3291b13f35dc23fc87967d7fb19f
         with:
           name: *documentation_artifact_name
           path: deploy/docs/
