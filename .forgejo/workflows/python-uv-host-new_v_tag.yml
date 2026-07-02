@@ -119,7 +119,7 @@ jobs:
 
   explain:
     name: "Publish documentation via host runner"
-    runs-on: temeria-host
+    runs-on: host-temeria
 
     needs:
       - docs
