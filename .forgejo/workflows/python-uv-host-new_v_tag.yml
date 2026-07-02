@@ -13,6 +13,7 @@ jobs:
     runs-on: default
 
     steps:
+      # TODO: Setup uv
       -
         name: "Checkout repository"
         uses: https://code.forgejo.org/actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
@@ -33,6 +34,7 @@ jobs:
     runs-on: default
 
     steps:
+      # TODO: Setup uv
       -
         name: "Checkout repository"
         uses: https://code.forgejo.org/actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
@@ -56,6 +58,7 @@ jobs:
       - package
 
     steps:
+      # TODO: Setup twine
       -
         name: "Download package artifact"
         uses: https://code.forgejo.org/forgejo/download-artifact@769f970437aa3291b13f35dc23fc87967d7fb19f
@@ -79,6 +82,7 @@ jobs:
       - package
 
     steps:
+      # TODO: Setup twine
       -
         name: "Download package artifact"
         uses: https://code.forgejo.org/forgejo/download-artifact@769f970437aa3291b13f35dc23fc87967d7fb19f
@@ -102,6 +106,7 @@ jobs:
       - package
 
     steps:
+      # TODO: Setup twine
       -
         name: "Download package artifact"
         uses: https://code.forgejo.org/forgejo/download-artifact@769f970437aa3291b13f35dc23fc87967d7fb19f
