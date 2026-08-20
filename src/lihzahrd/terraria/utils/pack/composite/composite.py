@@ -177,7 +177,7 @@ class PackComposite(Pack, metaclass=ABCMeta):
             values.append(result.instance)
 
         # Create the instance from the given values
-        instance = cls(*values)
+        instance = cls(*values, **kwargs)
 
         cls._LOG.debug("Composite instance: %r", instance)
         cls._LOG.debug("Composite validity: %r", valid)

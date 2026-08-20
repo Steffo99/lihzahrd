@@ -30,12 +30,12 @@ class WorldCharacters(PaCo):
 
     # noinspection PyTypeChecker
     @override
-    def __init__(self, *args: Pack):
+    def __init__(self, *args: Pack, **kwargs):
         self.shimmered_npcs: WorldShimmeredNPCsCollection = ...
         self.npcs: WorldNPCCollection = ...
         self.enemies: WorldEnemiesCollection = ...
 
-        super().__init__(*args)
+        super().__init__(*args, **kwargs)
 
     @classmethod
     @override

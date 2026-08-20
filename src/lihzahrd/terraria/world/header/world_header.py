@@ -6,6 +6,7 @@ Submodule containing :class:`.WorldHeader`.
 from logging import getLogger
 from typing import Self, override
 
+from lihzahrd.terraria.common.file_version import FileVersion
 from lihzahrd.terraria.utils.pack.composite.composite import PackComposite as PaCo
 from lihzahrd.terraria.utils.pack.pack import Pack
 from lihzahrd.terraria.utils.pack.primitive.coordinates import PackCoordinatesInt
@@ -669,12 +670,18 @@ class WorldHeader(PaCo):
     secret_dualdungeons: PaCo.Field[Self, SecretSeedActive] = PaCo.Field(SecretSeedActive)
     "If the world uses the secret seed *Dual Dungeons*."
 
+    secret_morelightning: PaCo.Field[Self, SecretSeedActive] = PaCo.Field(SecretSeedActive)
+    "If the world uses the secret seed *Electric Boogaloo*."
+
+    secret_nolightning: PaCo.Field[Self, SecretSeedActive] = PaCo.Field(SecretSeedActive)
+    "If the world uses the secret seed *Calm Before The Storm*."
+
     manifest: PaCo.Field[Self, WorldManifest] = PaCo.Field(WorldManifest)
     "Unknown."
 
     # noinspection PyTypeChecker
     @override
-    def __init__(self, *args: Pack):
+    def __init__(self, *args: Pack, **kwargs):
         self.name: WorldName = ...
         self.generator_seed: WorldGeneratorSeed = ...
         self.generator_version: WorldGeneratorVersion = ...
@@ -862,203 +869,212 @@ class WorldHeader(PaCo):
         self.secret_teams: SecretSeedActive = ...
         self.secret_teams_spawns: SecretTeamsSpawns = ...
         self.secret_dualdungeons: SecretSeedActive = ...
+        self.secret_morelightning: SecretSeedActive = ...
+        self.secret_nolightning: SecretSeedActive = ...
         self.manifest: WorldManifest = ...
 
-        super().__init__(*args)
+        super().__init__(*args, **kwargs)
 
     @classmethod
     @override
-    def _fields(cls, **kwargs) -> list[PaCo.Field[Self, Pack]]:
-        return [
-            cls.name,
-            cls.generator_seed,
-            cls.generator_version,
-            cls.uuid,
-            cls.id,
-            cls.bounds,
-            cls.size,
-            cls.difficulty,
-            cls.special_drunk,
-            cls.special_fortheworthy,
-            cls.special_anniversary,
-            cls.special_dontstarve,
-            cls.special_notthebees,
-            cls.special_remix,
-            cls.special_notraps,
-            cls.special_zenith,
-            cls.special_skyblock,
-            cls.created_on,
-            cls.last_saved_on,
-            cls.moon_style,
-            cls.forest_boundary_a_b,
-            cls.forest_boundary_b_c,
-            cls.forest_boundary_c_d,
-            cls.forest_treetop_a,
-            cls.forest_treetop_b,
-            cls.forest_treetop_c,
-            cls.forest_treetop_d,
-            cls.cavern_boundary_a_b,
-            cls.cavern_boundary_b_c,
-            cls.cavern_boundary_c_d,
-            cls.cavern_background_a,
-            cls.cavern_background_b,
-            cls.cavern_background_c,
-            cls.cavern_background_d,
-            cls.ice_background,
-            cls.jungle_underground_background,
-            cls.hell_background,
-            cls.point_spawn,
-            cls.underground_surface_boundary,
-            cls.cavern_underground_boundary,
-            cls.clock_time,
-            cls.day_time,
-            cls.moon_phase,
-            cls.bloodmoon_ongoing,
-            cls.eclipse_ongoing,
-            cls.point_dungeon,
-            cls.evil,
-            cls.defeated_eyeofcthulhu,
-            cls.defeated_eaterofworlds,
-            cls.defeated_skeletron,
-            cls.defeated_queenbee,
-            cls.defeated_thetwins,
-            cls.defeated_thedestroyer,
-            cls.defeated_skeletronprime,
-            cls.defeated_anymechanicalboss,
-            cls.defeated_plantera,
-            cls.defeated_golem,
-            cls.defeated_kingslime,
-            cls.rescued_goblin,
-            cls.rescued_wizard,
-            cls.rescued_mechanic,
-            cls.defeated_goblinarmy,
-            cls.defeated_clown,
-            cls.defeated_frostlegion,
-            cls.defeated_pirateinvasion,
-            cls.shadoworb_smashed,
-            cls.meteorite_scheduled,
-            cls.shadoworb_count,
-            cls.altar_count,
-            cls.mode,
-            cls.party_doomed,
-            cls.invasion_delay,
-            cls.invasion_power_left,
-            cls.invasion_kind,
-            cls.invasion_position,
-            cls.slimerain_duration,
-            cls.sundial_cooldown,
-            cls.rain_ongoing,
-            cls.rain_duration,
-            cls.rain_strength,
-            cls.ore_cobalt_tier,
-            cls.ore_mythril_tier,
-            cls.ore_adamantite_tier,
-            cls.forest_background_a,
-            cls.corruption_background,
-            cls.jungle_surface_background,
-            cls.snow_background,
-            cls.hallow_background,
-            cls.crimson_background,
-            cls.desert_background,
-            cls.ocean_background,
-            cls.cloud_background_active,
-            cls.cloud_count,
-            cls.wind_speed,
-            cls.fishingquest_completed_by,
-            cls.rescued_angler,
-            cls.fishingquest_goal,
-            cls.rescued_stylist,
-            cls.rescued_taxcollector,
-            cls.rescued_golfer,
-            cls.invasion_power_total,
-            cls.cultists_cooldown,
-            cls.banner_kill_counts,
-            cls.banner_claimable_counts,
-            cls.sundial_running,
-            cls.defeated_dukefishron,
-            cls.defeated_martianmadness,
-            cls.defeated_lunaticcultist,
-            cls.defeated_moonlord,
-            cls.defeated_pumpking,
-            cls.defeated_mourningwood,
-            cls.defeated_icequeen,
-            cls.defeated_santank1,
-            cls.defeated_everscream,
-            cls.defeated_pillar_solar,
-            cls.defeated_pillar_vortex,
-            cls.defeated_pillar_nebula,
-            cls.defeated_pillar_stardust,
-            cls.pillar_solar_present,
-            cls.pillar_vortex_present,
-            cls.pillar_nebula_present,
-            cls.pillar_stardust_present,
-            cls.impendingdoom_approaching,
-            cls.party_center_active,
-            cls.party_spontaneous_active,
-            cls.party_spontaneous_cooldown,
-            cls.party_partecipants,
-            cls.sandstorm_ongoing,
-            cls.sandstorm_duration,
-            cls.sandstorm_severity_current,
-            cls.sandstorm_severity_target,
-            cls.rescued_bartender,
-            cls.defeated_oldonesarmy_a,
-            cls.defeated_oldonesarmy_b,
-            cls.defeated_oldonesarmy_c,
-            cls.mushroom_background,
-            cls.underworld_background,
-            cls.forest_background_b,
-            cls.forest_background_c,
-            cls.forest_background_d,
-            cls.used_advancedcombattechniques_1,
-            cls.lanternnight_spontaneous_cooldown,
-            cls.lanternnight_spontaneous_active,
-            cls.lanternnight_celebration_active,
-            cls.lanternnight_celebration_scheduled,
-            cls.treetops,
-            cls.halloween_ongoing,
-            cls.christmas_ongoing,
-            cls.ore_copper_tier,
-            cls.ore_iron_tier,
-            cls.ore_silver_tier,
-            cls.ore_gold_tier,
-            cls.bought_cat,
-            cls.bought_dog,
-            cls.bought_bunny,
-            cls.defeated_empressoflight,
-            cls.defeated_queenslime,
-            cls.defeated_deerclops,
-            cls.unlocked_slime_nerdy,
-            cls.unlocked_merchant,
-            cls.unlocked_demolitionist,
-            cls.unlocked_partygirl,
-            cls.unlocked_dyetrader,
-            cls.unlocked_truffle,
-            cls.unlocked_armsdealer,
-            cls.unlocked_nurse,
-            cls.unlocked_princess,
-            cls.used_advancedcombattechniques_2,
-            cls.used_peddlerssatchel,
-            cls.unlocked_slime_cool,
-            cls.unlocked_slime_elder,
-            cls.unlocked_slime_clumsy,
-            cls.unlocked_slime_diva,
-            cls.unlocked_slime_surly,
-            cls.unlocked_slime_mystic,
-            cls.unlocked_slime_squire,
-            cls.moondial_running,
-            cls.moondial_cooldown,
-            cls.secret_halloween,
-            cls.secret_christmas,
-            cls.secret_vampirism,
-            cls.secret_purification,
-            cls.meteorshower_remaining,
-            cls.coinrain_remaining,
-            cls.secret_teams,
-            cls.secret_teams_spawns,
-            cls.secret_dualdungeons,
-            cls.manifest,
-        ]
+    def _fields(cls, version: FileVersion = FileVersion.V_1_4_5_5, **kwargs) -> list[PaCo.Field[Self, Pack]]:
+        fields = []
+
+        fields.append(cls.name)
+        fields.append(cls.generator_seed)
+        fields.append(cls.generator_version)
+        fields.append(cls.uuid)
+        fields.append(cls.id)
+        fields.append(cls.bounds)
+        fields.append(cls.size)
+        fields.append(cls.difficulty)
+        fields.append(cls.special_drunk)
+        fields.append(cls.special_fortheworthy)
+        fields.append(cls.special_anniversary)
+        fields.append(cls.special_dontstarve)
+        fields.append(cls.special_notthebees)
+        fields.append(cls.special_remix)
+        fields.append(cls.special_notraps)
+        fields.append(cls.special_zenith)
+        fields.append(cls.special_skyblock)
+        fields.append(cls.created_on)
+        fields.append(cls.last_saved_on)
+        fields.append(cls.moon_style)
+        fields.append(cls.forest_boundary_a_b)
+        fields.append(cls.forest_boundary_b_c)
+        fields.append(cls.forest_boundary_c_d)
+        fields.append(cls.forest_treetop_a)
+        fields.append(cls.forest_treetop_b)
+        fields.append(cls.forest_treetop_c)
+        fields.append(cls.forest_treetop_d)
+        fields.append(cls.cavern_boundary_a_b)
+        fields.append(cls.cavern_boundary_b_c)
+        fields.append(cls.cavern_boundary_c_d)
+        fields.append(cls.cavern_background_a)
+        fields.append(cls.cavern_background_b)
+        fields.append(cls.cavern_background_c)
+        fields.append(cls.cavern_background_d)
+        fields.append(cls.ice_background)
+        fields.append(cls.jungle_underground_background)
+        fields.append(cls.hell_background)
+        fields.append(cls.point_spawn)
+        fields.append(cls.underground_surface_boundary)
+        fields.append(cls.cavern_underground_boundary)
+        fields.append(cls.clock_time)
+        fields.append(cls.day_time)
+        fields.append(cls.moon_phase)
+        fields.append(cls.bloodmoon_ongoing)
+        fields.append(cls.eclipse_ongoing)
+        fields.append(cls.point_dungeon)
+        fields.append(cls.evil)
+        fields.append(cls.defeated_eyeofcthulhu)
+        fields.append(cls.defeated_eaterofworlds)
+        fields.append(cls.defeated_skeletron)
+        fields.append(cls.defeated_queenbee)
+        fields.append(cls.defeated_thetwins)
+        fields.append(cls.defeated_thedestroyer)
+        fields.append(cls.defeated_skeletronprime)
+        fields.append(cls.defeated_anymechanicalboss)
+        fields.append(cls.defeated_plantera)
+        fields.append(cls.defeated_golem)
+        fields.append(cls.defeated_kingslime)
+        fields.append(cls.rescued_goblin)
+        fields.append(cls.rescued_wizard)
+        fields.append(cls.rescued_mechanic)
+        fields.append(cls.defeated_goblinarmy)
+        fields.append(cls.defeated_clown)
+        fields.append(cls.defeated_frostlegion)
+        fields.append(cls.defeated_pirateinvasion)
+        fields.append(cls.shadoworb_smashed)
+        fields.append(cls.meteorite_scheduled)
+        fields.append(cls.shadoworb_count)
+        fields.append(cls.altar_count)
+        fields.append(cls.mode)
+        fields.append(cls.party_doomed)
+        fields.append(cls.invasion_delay)
+        fields.append(cls.invasion_power_left)
+        fields.append(cls.invasion_kind)
+        fields.append(cls.invasion_position)
+        fields.append(cls.slimerain_duration)
+        fields.append(cls.sundial_cooldown)
+        fields.append(cls.rain_ongoing)
+        fields.append(cls.rain_duration)
+        fields.append(cls.rain_strength)
+        fields.append(cls.ore_cobalt_tier)
+        fields.append(cls.ore_mythril_tier)
+        fields.append(cls.ore_adamantite_tier)
+        fields.append(cls.forest_background_a)
+        fields.append(cls.corruption_background)
+        fields.append(cls.jungle_surface_background)
+        fields.append(cls.snow_background)
+        fields.append(cls.hallow_background)
+        fields.append(cls.crimson_background)
+        fields.append(cls.desert_background)
+        fields.append(cls.ocean_background)
+        fields.append(cls.cloud_background_active)
+        fields.append(cls.cloud_count)
+        fields.append(cls.wind_speed)
+        fields.append(cls.fishingquest_completed_by)
+        fields.append(cls.rescued_angler)
+        fields.append(cls.fishingquest_goal)
+        fields.append(cls.rescued_stylist)
+        fields.append(cls.rescued_taxcollector)
+        fields.append(cls.rescued_golfer)
+        fields.append(cls.invasion_power_total)
+        fields.append(cls.cultists_cooldown)
+        fields.append(cls.banner_kill_counts)
+        fields.append(cls.banner_claimable_counts)
+        fields.append(cls.sundial_running)
+        fields.append(cls.defeated_dukefishron)
+        fields.append(cls.defeated_martianmadness)
+        fields.append(cls.defeated_lunaticcultist)
+        fields.append(cls.defeated_moonlord)
+        fields.append(cls.defeated_pumpking)
+        fields.append(cls.defeated_mourningwood)
+        fields.append(cls.defeated_icequeen)
+        fields.append(cls.defeated_santank1)
+        fields.append(cls.defeated_everscream)
+        fields.append(cls.defeated_pillar_solar)
+        fields.append(cls.defeated_pillar_vortex)
+        fields.append(cls.defeated_pillar_nebula)
+        fields.append(cls.defeated_pillar_stardust)
+        fields.append(cls.pillar_solar_present)
+        fields.append(cls.pillar_vortex_present)
+        fields.append(cls.pillar_nebula_present)
+        fields.append(cls.pillar_stardust_present)
+        fields.append(cls.impendingdoom_approaching)
+        fields.append(cls.party_center_active)
+        fields.append(cls.party_spontaneous_active)
+        fields.append(cls.party_spontaneous_cooldown)
+        fields.append(cls.party_partecipants)
+        fields.append(cls.sandstorm_ongoing)
+        fields.append(cls.sandstorm_duration)
+        fields.append(cls.sandstorm_severity_current)
+        fields.append(cls.sandstorm_severity_target)
+        fields.append(cls.rescued_bartender)
+        fields.append(cls.defeated_oldonesarmy_a)
+        fields.append(cls.defeated_oldonesarmy_b)
+        fields.append(cls.defeated_oldonesarmy_c)
+        fields.append(cls.mushroom_background)
+        fields.append(cls.underworld_background)
+        fields.append(cls.forest_background_b)
+        fields.append(cls.forest_background_c)
+        fields.append(cls.forest_background_d)
+        fields.append(cls.used_advancedcombattechniques_1)
+        fields.append(cls.lanternnight_spontaneous_cooldown)
+        fields.append(cls.lanternnight_spontaneous_active)
+        fields.append(cls.lanternnight_celebration_active)
+        fields.append(cls.lanternnight_celebration_scheduled)
+        fields.append(cls.treetops)
+        fields.append(cls.halloween_ongoing)
+        fields.append(cls.christmas_ongoing)
+        fields.append(cls.ore_copper_tier)
+        fields.append(cls.ore_iron_tier)
+        fields.append(cls.ore_silver_tier)
+        fields.append(cls.ore_gold_tier)
+        fields.append(cls.bought_cat)
+        fields.append(cls.bought_dog)
+        fields.append(cls.bought_bunny)
+        fields.append(cls.defeated_empressoflight)
+        fields.append(cls.defeated_queenslime)
+        fields.append(cls.defeated_deerclops)
+        fields.append(cls.unlocked_slime_nerdy)
+        fields.append(cls.unlocked_merchant)
+        fields.append(cls.unlocked_demolitionist)
+        fields.append(cls.unlocked_partygirl)
+        fields.append(cls.unlocked_dyetrader)
+        fields.append(cls.unlocked_truffle)
+        fields.append(cls.unlocked_armsdealer)
+        fields.append(cls.unlocked_nurse)
+        fields.append(cls.unlocked_princess)
+        fields.append(cls.used_advancedcombattechniques_2)
+        fields.append(cls.used_peddlerssatchel)
+        fields.append(cls.unlocked_slime_cool)
+        fields.append(cls.unlocked_slime_elder)
+        fields.append(cls.unlocked_slime_clumsy)
+        fields.append(cls.unlocked_slime_diva)
+        fields.append(cls.unlocked_slime_surly)
+        fields.append(cls.unlocked_slime_mystic)
+        fields.append(cls.unlocked_slime_squire)
+        fields.append(cls.moondial_running)
+        fields.append(cls.moondial_cooldown)
+        fields.append(cls.secret_halloween)
+        fields.append(cls.secret_christmas)
+        fields.append(cls.secret_vampirism)
+        fields.append(cls.secret_purification)
+        fields.append(cls.meteorshower_remaining)
+        fields.append(cls.coinrain_remaining)
+        fields.append(cls.secret_teams)
+        fields.append(cls.secret_teams_spawns)
+        fields.append(cls.secret_dualdungeons)
+
+        if version >= FileVersion.V_1_4_5_7:
+            fields.append(cls.secret_morelightning)
+            fields.append(cls.secret_nolightning)
+
+        fields.append(cls.manifest)
+
+        return fields
 
     def bosses(self) -> list[EnemyDefeated]:
         """

@@ -269,7 +269,7 @@ class PackWorld(Pack):
         sections = __unwrap(WorldSections.read(fp, strict=strict))
         frame_important = __unwrap(WorldFrameImportant.read(fp, strict=strict))
         unknown_file_metadata_bytes = __unwrap(PackUnknown.read(fp, strict=strict, until=sections.header))
-        header = __unwrap(WorldHeader.read(fp, strict=strict))
+        header = __unwrap(WorldHeader.read(fp, strict=strict, version=file_metadata.version))
         unknown_header_bytes = __unwrap(PackUnknown.read(fp, strict=strict, until=sections.tiles))
         if not debug_skip_tiles:
             tiles = __unwrap(
@@ -356,7 +356,7 @@ class PackWorld(Pack):
         __unwrap(self.unknown_file_metadata_bytes.write(fp, strict=strict))
 
         self.sections.header = fp.stream.tell()
-        __unwrap(self.header.write(fp, strict=strict))
+        __unwrap(self.header.write(fp, strict=strict, version=self.file_metadata.version))
         __unwrap(self.unknown_header_bytes.write(fp, strict=strict))
 
         self.sections.tiles = fp.stream.tell()

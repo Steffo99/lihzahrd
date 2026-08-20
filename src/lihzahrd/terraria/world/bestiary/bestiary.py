@@ -31,12 +31,12 @@ class Bestiary(PaCo):
 
     # noinspection PyTypeChecker
     @override
-    def __init__(self, *args: Pack):
+    def __init__(self, *args: Pack, **kwargs):
         self.kills: BestiaryKillsCollection = ...
         self.sightings: BestiarySightingsCollection = ...
         self.chatted_with: BestiaryChattedWithCollection = ...
 
-        super().__init__(*args)
+        super().__init__(*args, **kwargs)
 
     @classmethod
     @override

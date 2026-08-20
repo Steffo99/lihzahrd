@@ -189,6 +189,9 @@ class FileVersion(IntEnum):
     V_1_4_5_5 = 318
     "`Version 1.4.5.5 <https://terraria.wiki.gg/wiki/1.4.5.5>`_."
 
+    V_1_4_5_7 = 325
+    "`Version 1.4.5.5 <https://terraria.wiki.gg/wiki/1.4.5.5>`_."
+
 
 class PackFileVersion(OpComparison[int], PackEnum[FileVersion, int], PackInt):
     """

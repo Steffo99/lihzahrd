@@ -28,11 +28,11 @@ class WorldFooter(PaCo):
 
     # noinspection PyTypeChecker
     @override
-    def __init__(self, *args):
+    def __init__(self, *args, **kwargs):
         self.true: PackTrue = ...
         self.name: WorldName = ...
         self.id: WorldID = ...
-        super().__init__(*args)
+        super().__init__(*args, **kwargs)
 
     @override
     @classmethod
