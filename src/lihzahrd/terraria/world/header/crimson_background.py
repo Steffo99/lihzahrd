@@ -25,7 +25,7 @@ class CrimsonBackgroundEnum(IntEnum):
     CRIMSON_4 = 4
     "Unknown."
 
-    CRIMSON_5 = 4
+    CRIMSON_5 = 5
     "Unknown."
 
 
