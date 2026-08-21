@@ -8,7 +8,7 @@ from lihzahrd._generate.terraria.tiles_generator import TilesGenerator
 MODULE_ROOT: Path = Path(__file__).parent
 PACKAGE_ROOT: Path = MODULE_ROOT.parent.parent
 
-DATA_PATH: Path = MODULE_ROOT / "data.xml"
+TERRAMAP_DATA_PATH: Path = MODULE_ROOT / "terramap_data.xml"
 
 CODE_PATH = PACKAGE_ROOT / "terraria" / "data" / "classmembers"
 TILES_CODE = CODE_PATH / "blocks.py"
@@ -20,7 +20,7 @@ WALLS_CODE = CODE_PATH / "walls.py"
 
 def main():
     logging.basicConfig(level=30, format="%(asctime)s | %(name)56s | %(levelname)8s | %(message)s")
-    with open(DATA_PATH) as file:
+    with open(TERRAMAP_DATA_PATH) as file:
         soup = BeautifulSoup(file, features="lxml-xml")
         generator = TilesGenerator(soup=soup)
         with open(TILES_CODE, mode="w") as code:
