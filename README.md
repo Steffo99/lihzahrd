@@ -6,11 +6,9 @@
 </hgroup>
 </div>
 
-> [!Warning]
+> [!Note]
 >
-> This is a fresh rewrite of Lihzahrd with full read-write support, and is still in beta!
->
-> Please report any bugs or oddities you find.
+> v1.4.5.7 status: waiting for TerraMap to update!
 
 ## Links
 
