@@ -36,13 +36,22 @@ jobs:
       -
         name: "Publish to Forgejo (steffo)"
         run: |-
-          uv publish --index steffo --no-attestations
+          uv publish
+        env:
+          UV_PUBLISH_INDEX: "steffo"
+          UV_PUBLISH_TOKEN: "${{ secrets.FORGE_PACKAGES_TOKEN }}"
+          UV_PUBLISH_NO_ATTESTATIONS: "1"  # Forgejo does not support attestations
       -
         name: "Publish to Test PyPI"
         run: |-
-          uv publish --index testpypi
-      # TODO: Uncomment this when everything else works
-      # -
-      #   name: "Publish to PyPI"
-      #   run: |-
-      #     uv publish --index pypi
+          uv publish
+        env:
+          UV_PUBLISH_INDEX: "testpypi"
+          UV_PUBLISH_TOKEN: "${{ secrets.TESTPYPI_TOKEN }}"
+      -
+        name: "Publish to PyPI"
+        run: |-
+          uv publish
+        env:
+          UV_PUBLISH_INDEX: "pypi"
+          UV_PUBLISH_TOKEN: "${{ secrets.PYPI_TOKEN }}"
