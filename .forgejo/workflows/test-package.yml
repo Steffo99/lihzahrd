@@ -1,4 +1,6 @@
-name: "Test with Pytest the Python package using Poetry"
+%YAML 1.1
+---
+name: "Test the package using uv and pytest"
 
 on:
   # TODO: Uncomment this when ready
@@ -19,17 +21,24 @@ jobs:
   test:
     name: "Run tests"
     runs-on: default
+
+    env:
+      CI: "1"
     
     steps:
       -
         name: "Checkout repository"
         uses: https://code.forgejo.org/actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8
       -
+        name: "Setup uv"
+        uses: https://github.com/astral-sh/setup-uv@v10.0.1  # Immutable tag
+        with:
+          version: "0.12.3"
+          enable-cache: true
+      -
         name: "Run Pytest with coverage"
         run: |-
-          uv run --all-extras --group='test' pytest --cov='${{ vars.PYTHON_PACKAGE }}' --color="yes"
-        env:
-          CI: "1"
+          uv run --all-extras --group='test' pytest --cov='${{ vars.PYTHON_PACKAGE }}' --color='yes'
       -
         name: "Upload coverage artifact"
         uses: https://code.forgejo.org/forgejo/upload-artifact@cb8afe72b42edc798abfb8fcb556cf660d894245

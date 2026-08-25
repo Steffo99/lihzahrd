@@ -1,0 +1,48 @@
+%YAML 1.1
+---
+name: "Build and release a new package version using uv"
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  run:
+    name: "Build and publish package"
+    runs-on: default
+
+    env:
+      CI: "1"
+
+    steps:
+      -
+        name: "Checkout repository"
+        uses: https://code.forgejo.org/actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      -
+        name: "Setup uv"
+        uses: https://github.com/astral-sh/setup-uv@v10.0.1  # Immutable tag
+        with:
+          version: "0.12.3"
+          enable-cache: true
+      -
+        name: "Setup Python"
+        run: |-
+          uv python install
+      -
+        name: "Build package"
+        run: |-
+          uv build
+      -
+        name: "Publish to Star Shard Software Packages"
+        run: |-
+          uv publish --index starshard
+      -
+        name: "Publish to Test PyPI"
+        run: |-
+          uv publish --index testpypi
+      # TODO: Uncomment this when everything else works
+      # -
+      #   name: "Publish to PyPI"
+      #   run: |-
+      #     uv publish --index pypi
