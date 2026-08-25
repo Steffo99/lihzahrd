@@ -1,6 +1,6 @@
 [project]
 name = "lihzahrd"
-version = "4.0.0b6"
+version = "4.0.0b7"
 description = "Terraria world parser in Python"
 authors = [
     {name = "Stefano Pigozzi", email = "me@steffo.eu"},
@@ -87,7 +87,7 @@ explicit = true
 [[tool.uv.index]]
 name = "steffo"
 url = "https://g.starshard.space/api/packages/steffo/pypi/simple"
-publish-url = "https://g.starshard.space/api/packages/steffo/pypi/legacy"
+publish-url = "https://g.starshard.space/api/packages/steffo/pypi"
 explicit = true
 
 [tool.pytest]
