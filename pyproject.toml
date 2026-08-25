@@ -1,6 +1,6 @@
 [project]
 name = "lihzahrd"
-version = "4.0.0b7"
+version = "4.0.0b8"
 description = "Terraria world parser in Python"
 authors = [
     {name = "Stefano Pigozzi", email = "me@steffo.eu"},
@@ -75,13 +75,13 @@ default-groups = ["docs", "test", "lint"]
 
 [[tool.uv.index]]
 name = "pypi"
-url = "https://upload.pypi.org/simple"
-publish-url = "https://upload.pypi.org/legacy"
+url = "https://upload.pypi.org/simple/"
+publish-url = "https://upload.pypi.org/legacy/"
 
 [[tool.uv.index]]
 name = "testpypi"
-url = "https://test.pypi.org/simple"
-publish-url = "https://test.pypi.org/legacy"
+url = "https://test.pypi.org/simple/"
+publish-url = "https://test.pypi.org/legacy/"
 explicit = true
 
 [[tool.uv.index]]
