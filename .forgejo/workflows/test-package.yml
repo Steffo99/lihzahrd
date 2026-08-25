@@ -33,10 +33,10 @@ jobs:
         name: "Run Pytest with coverage"
         run: |-
           uv run --all-extras --group='test' pytest --cov='${{ vars.PYTHON_PACKAGE }}' --color='yes'
+        continue-on-error: true
       -
         name: "Upload coverage artifact"
         uses: https://code.forgejo.org/forgejo/upload-artifact@cb8afe72b42edc798abfb8fcb556cf660d894245
-        if: ${{ true }}
         with:
           name: "Coverage"
           path: .coverage
