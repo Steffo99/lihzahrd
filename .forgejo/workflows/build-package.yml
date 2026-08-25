@@ -36,7 +36,7 @@ jobs:
       -
         name: "Publish to Forgejo (steffo)"
         run: |-
-          uv publish --index steffo
+          uv publish --index steffo --no-attestations
       -
         name: "Publish to Test PyPI"
         run: |-
