@@ -34,9 +34,9 @@ jobs:
         run: |-
           uv build
       -
-        name: "Publish to Star Shard Software Packages"
+        name: "Publish to Forgejo (steffo)"
         run: |-
-          uv publish --index starshard
+          uv publish --index steffo
       -
         name: "Publish to Test PyPI"
         run: |-

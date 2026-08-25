@@ -75,16 +75,19 @@ default-groups = ["docs", "test", "lint"]
 
 [[tool.uv.index]]
 name = "pypi"
-url = "https://upload.pypi.org/simple/"
+url = "https://upload.pypi.org/simple"
+publish-url = "https://upload.pypi.org/legacy"
 
 [[tool.uv.index]]
 name = "testpypi"
-url = "https://test.pypi.org/simple/"
+url = "https://test.pypi.org/simple"
+publish-url = "https://test.pypi.org/legacy"
 explicit = true
 
 [[tool.uv.index]]
-name = "starshard"
-url = "https://g.starshard.space/api/packages/steffo/pypi"
+name = "steffo"
+url = "https://g.starshard.space/api/packages/steffo/pypi/simple"
+publish-url = "https://g.starshard.space/api/packages/steffo/pypi/legacy"
 explicit = true
 
 [tool.pytest]
