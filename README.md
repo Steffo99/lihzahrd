@@ -10,6 +10,10 @@
 >
 > v1.4.5.7 status: waiting for TerraMap to update!
 
+> [!Warning]
+>
+> This library is in beta. It *should* work, but considering the number of corner cases that Terraria worlds have, it might still have some issues.
+
 ## Links
 
 ### Context
