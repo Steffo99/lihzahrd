@@ -2,7 +2,7 @@
 ---
 name: "Build and release a new package version using uv"
 
-on:
+"on":
   push:
     tags:
       - 'v*'
